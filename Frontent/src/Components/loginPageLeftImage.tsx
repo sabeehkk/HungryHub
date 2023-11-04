@@ -9,7 +9,6 @@ function loginPageLeftImage({img}:image) {
         <div className="flex-none hidden md:block rounded-lg">
           {/* <img className='w-full h-full object-cover rounded-s-lg rounded-s-rg' src={img} alt="img" /> */}
           <img className='w-full h-full object-cover rounded-s-lg rounded-r-lg' src={img} alt="img" />
-
         </div>
       );
     }

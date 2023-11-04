@@ -8,7 +8,6 @@ export interface userModel {
     address: string | null | undefined;
     profilePicture: string | null | undefined;
   }
-  
 
 
 export interface userInittalModel {
