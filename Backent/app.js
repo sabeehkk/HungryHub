@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import dbConnect from './config/config.js';
 import userRouter from './routes/userRoutes.js'
 import adminRouter from './routes/adminRoutes.js'
+import restaurentRouter from './routes/restaurentRoutes.js'
 
 const app = express();
 app.use(express.json());
@@ -26,7 +27,7 @@ dbConnect();
 
 app.use('/',userRouter)
 app.use('/admin',adminRouter)  
-
+app.use('/restaurent',restaurentRouter)
 
 const PORT = process.env.PORT ?? 4000;
 app.listen(PORT ,()=>{

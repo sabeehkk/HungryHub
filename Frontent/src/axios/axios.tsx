@@ -4,8 +4,13 @@ import axios from "axios";
 // Define base URL from environment variables
 const VITE_USER_BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URL;
 
+
 // Define role-specific paths
 const userPath = "";
+const adminPath="/admin"
+const restaurentPath ="/restaurent"
+
+
 const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
   const instance = axios.create({
     baseURL: `${VITE_USER_BACKEND_URL}${rolePath}`,
@@ -44,6 +49,7 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
 
 // Create separate instances for each role
 const userAxios = createRoleSpecificAxiosInstance("userToken", userPath);
+const adminAxios = createRoleSpecificAxiosInstance("adminToken",adminPath)
+const restaurentAxios = createRoleSpecificAxiosInstance("restaurentToken",restaurentPath)
 
-
-export { userAxios };
+export { userAxios,adminAxios,restaurentAxios };

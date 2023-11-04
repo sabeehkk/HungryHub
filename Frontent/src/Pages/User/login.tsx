@@ -4,7 +4,7 @@ import UserLogin from '../../Components/User/UserLogin'
 import LoginFrame from '../../Components/loginFrame'
 
 function Login() {
-    const imgUrl:string = 'https://smallbiztrends.com/ezoimgfmt/media.smallbiztrends.com/2023/03/Most-Profitable-Types-of-Restaurants-850x476.png?ezimgfmt=rs:840x470/rscb12/ng:webp/ngcb12'
+    const imgUrl:string = 'https://media-cdn.grubhub.com/image/upload/f_auto,fl_lossy,q_auto,c_crop,g_north_west,h_1400,w_1500/v1656688653/homepage/DfxwD.png '
   return (
     <LoginFrame SidePart={UserLogin} img={imgUrl}/>
   )
