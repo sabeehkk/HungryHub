@@ -48,7 +48,7 @@ export default function Signup() {
               console.log(res.data.message)
               if (res.data.message ==='success'){
                 alert('success');
-                navigate('/login');
+                // navigate('/login');
                 return
               }
               alert(res.data.message);

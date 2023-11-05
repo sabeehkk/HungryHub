@@ -19,7 +19,6 @@ const restaurentSchema = new mongoose.Schema({
     address :{
         type : String,
         trim : true ,
-        required :true ,
     },
      password : {
         type :String ,
