@@ -1,23 +1,20 @@
 import React, {  useState } from 'react'
 import axios from 'axios'
 import {  } from 'react-redux';
-// import {  Link, useNavigate } from "react-router-dom";
 import { USER_API } from '../../Constants/API';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { ErrorMessage } from '../../utils/util';
+
 
 export default function Signup() {
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
-    const [name,setName]=useState('')
-    const [phoneNumber,setPhoneNumber]=useState('')
-    const [errors, setError] = useState<string[]>([]);
+    const [email,setEmail]=useState<string>('')
+    const [password,setPassword]=useState<string>('')
+    const [name,setName]=useState<string>('')
+    const [phoneNumber,setPhoneNumber]=useState<number| string>('')
 
 
     const navigate=useNavigate()
-
-
-    // const user=useSelector((state)=>state.auth)
-    // const navigate = useNavigate()
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
@@ -30,17 +27,18 @@ export default function Signup() {
     phoneNumber,
   });
         if(email.trim() === '' || password.trim() === '' || name.trim() === ''){
-           setError(["Please fill"]);
-          return;
+          return ErrorMessage("Please fill in all the required fields.");
+      }
+      if (phoneNumber !== null && phoneNumber.toString().length !== 10) {
+        return ErrorMessage("Phone number must have exactly 10 digits.");
       }
          if(password.length < 6){
           // setError('password is too weak')
         return;
     }
-    if(phoneNumber.length !== 10){
-      // setError('number is wrong');
-      return;
-  }
+
+
+   
         try{
             axios.post(`${USER_API}/register`,{email,password,name,phoneNumber})
             .then((res)=>{
@@ -61,8 +59,12 @@ export default function Signup() {
         }
     }
   return (
+ 
+
 <div className=" min-h-screen  flex items-center justify-center bg-white ">
+ 
     <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
+    <ToastContainer/>
       <h2 className="my-heading">Signup </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">

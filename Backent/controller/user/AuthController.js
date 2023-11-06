@@ -8,10 +8,17 @@ export const signup = async (req,res)=>{
   console.log('kitttyyyyyyyyyyy'); 
   try{
     const {name, email, phoneNumber, password} = req.body ;
-    const existUser = await userModel.find({email,phoneNumber})
-    if(existUser.length !==0){
-          return res.json({message:'User Already exists'})
+    const existUser = await userModel.findOne({
+      $or: [{ email }, { phoneNumber }],
+    });
+
+    if (existUser) {
+      return res.json({
+        message: "User Already exists",
+        error: true,
+      });
     }
+   
     const hashedPassword = await bcrypt.hash(password,10)
     const user=new userModel({name,email,phoneNumber,password:hashedPassword})
     res.json({message:'success'})
