@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginPageLeftImage from './loginPageLeftImage'
 
+
 type LoginFrameProps = {
     SidePart:React.FC;
     img:string;
@@ -8,7 +9,7 @@ type LoginFrameProps = {
 
 function LoginFrame({SidePart,img}:LoginFrameProps) {
   return (
-    <div className='flex'>
+    <div className='flex mx-20 my-20 ' >
       {/* <div className='w-1/2 m-l' > */}
       <div className="w-1/2 ml-32 mt-36">
 
@@ -18,6 +19,8 @@ function LoginFrame({SidePart,img}:LoginFrameProps) {
       <SidePart/>
       </div>
     </div>
+
+  
   )
 }
 

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 
+
 const restaurentSchema = new mongoose.Schema({
     restaurantName: {
         type :String,

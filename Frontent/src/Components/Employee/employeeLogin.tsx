@@ -5,11 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
  import axios  from "axios";
 
 import { useDispatch } from "react-redux";
-import { restaurentAxios } from "../../axios/axios";
+import { employeeAxios } from "../../axios/axios";
 
 
 
-function RestaurentLogin() {
+function EmployeeLogin() {
 
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
@@ -26,7 +26,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
       return;
   }
   try {
-    await restaurentAxios
+    await employeeAxios
       .post(`/login`, { email, password })
       .then((res) => {
         if (res.data.error) {
@@ -101,7 +101,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 white:bg-gray-800 white:border-gray-700">
       <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-red">
-          Login Restaurent
+          Login Employee
         </h1>
         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
           <div>
@@ -166,4 +166,4 @@ const handleSubmit = async (e: SyntheticEvent)=>{
 }
 // }
 
-export default RestaurentLogin
+export default EmployeeLogin

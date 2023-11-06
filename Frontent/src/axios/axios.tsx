@@ -9,6 +9,7 @@ const VITE_USER_BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URL;
 const userPath = "";
 const adminPath="/admin"
 const restaurentPath ="/restaurent"
+const employeePath ="/employee"
 
 
 const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
@@ -51,5 +52,6 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
 const userAxios = createRoleSpecificAxiosInstance("userToken", userPath);
 const adminAxios = createRoleSpecificAxiosInstance("adminToken",adminPath)
 const restaurentAxios = createRoleSpecificAxiosInstance("restaurentToken",restaurentPath)
+const employeeAxios = createRoleSpecificAxiosInstance('employeeToken',employeePath)
 
-export { userAxios,adminAxios,restaurentAxios };
+export { userAxios,adminAxios,restaurentAxios,employeeAxios };

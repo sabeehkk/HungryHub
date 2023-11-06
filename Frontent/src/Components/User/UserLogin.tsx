@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../redux/user/authSlice";
 import { userAxios } from "../../axios/axios";
 import {ErrorMessage} from '../../utils/util'
+import '../../Pages/User/style.css'
+import Google from '../../Components/googleLogin'
+
 // import userAxios from '../../Axios/UserAxios'
 // import { setCredentials } from "../../Redux/Auth/UserSlice";
 
@@ -44,13 +47,13 @@ const handleSubmit = async (e: SyntheticEvent)=>{
   }
 }
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="bg-white p-8 rounded-lg shadow-md w-96">
-      <h2 className="text-3xl font-semibold mb-4 text-center">Login</h2>
+    <div className=" min-h-screen  flex items-center justify-center bg-white ">
+    <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
+      <h2 className="my-heading">Signing </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="username" className="block text-gray-600">
-            Username:
+          <label htmlFor="username" className="block text-gray-600 font-bold">
+            Username
           </label>
           <input
             type="email"
@@ -64,8 +67,8 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="password" className="block text-gray-600">
-            Password:
+          <label htmlFor="password" className="block text-gray-600 font-bold">
+            Password
           </label>
           <input
             type="password"
@@ -82,11 +85,13 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           <button
             type="submit"
             // className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
-            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-blue-100"
+            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-blue-100"
           >
             Login
           </button>
         </div>
+        <Google/>
+
 
       </form>
     </div>

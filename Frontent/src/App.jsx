@@ -7,11 +7,12 @@ import persistStore from "redux-persist/es/persistStore";
 import UserRoute from "./route/userRoutes";
 import AdminRoute from "./route/adminRoutes";
 import RestaurentRoute from "./route/restaurentRoutes";
+import employeeRoutes from "./route/employeeRoutes";
 
 const persistor = persistStore(store);
 
 function App() {
-  const router = createBrowserRouter([ UserRoute,AdminRoute,RestaurentRoute]);
+  const router = createBrowserRouter([ UserRoute,AdminRoute,RestaurentRoute,employeeRoutes]);
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

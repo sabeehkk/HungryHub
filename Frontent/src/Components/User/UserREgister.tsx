@@ -72,7 +72,24 @@ export default function Signup() {
                 </div>
                 <div className="w-full px-6 py-4 mt-6 overflow-hidden bg-white shadow-md sm:max-w-lg sm:rounded-lg">
                 <form onSubmit={handleSubmit}>
-                        <div>
+
+                <div className="mb-4">
+          <label htmlFor="name" className="block text-gray-600 font-bold">
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-1 focus:border-blue-500"
+
+            placeholder="Enter your name"
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            required
+          />
+        </div>
+                        {/* <div>
                             <label
                                 htmlFor="name"
                                 className="block text-sm font-medium text-gray-700 undefined"
@@ -91,8 +108,10 @@ export default function Signup() {
                                     required
                               />
                             </div>
-                        </div>
-                        <div className="mt-4">
+                        </div> */}
+
+
+                        {/* <div className="mt-4">
                             <label
                                 htmlFor="email"
                                 className="block text-sm font-medium text-gray-700 undefined"
@@ -111,8 +130,25 @@ export default function Signup() {
                                     required
                          />
                             </div>
-                        </div>
-                        <div className="mt-4">
+                        </div> */}
+
+                         <div className="mb-4">
+          <label htmlFor="email" className="block text-gray-600 font-bold">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-1 focus:border-blue-500"
+
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+            required
+          />
+        </div>
+                        {/* <div className="mt-4">
                             <label
                                 htmlFor="password"
                                 className="block text-sm font-medium text-gray-700 undefined"
@@ -131,8 +167,25 @@ export default function Signup() {
                                    required
                               />
                             </div>
-                        </div>
-                        <div className="mt-4">
+                        </div> */}
+                         <div className="mb-4">
+          <label htmlFor="password" className="block text-gray-600 font-bold">
+          Password
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-1 focus:border-blue-500"
+
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e)=>setPassword(e.target.value)}
+            required
+          />
+        </div>
+
+                        {/* <div className="mt-4">
                             <label
                                 htmlFor="phonenumber"
                                 className="block text-sm font-medium text-gray-700 undefined"
@@ -152,7 +205,23 @@ export default function Signup() {
                              />
                             </div>
                         </div>
-                       
+                        */}
+                         <div className="mb-4">
+          <label htmlFor="phonenumber" className="block text-gray-600 font-bold">
+          PhoneNumber
+          </label>
+          <input
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            className="w-full px-4 py-2 border-2 rounded-md focus:outline-none focus:ring-1 focus:border-blue-500"
+
+            placeholder="Enter your phone number"
+            value={phoneNumber}
+            onChange={(e)=>setPhoneNumber(e.target.value)}
+            required
+          />
+        </div>
                       
                         <div className="flex items-center mt-4">
                             <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-600 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">

@@ -1,0 +1,10 @@
+.shadow {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .my-heading {
+  font-size: 1.875rem; /* This is equivalent to 3xl (3 * 0.75rem) */
+  font-weight: 600; /* This is equivalent to "font-semibold" */
+  margin-bottom: 1rem; /* This is equivalent to "mb-4" */
+  text-align: center; /* This is equivalent to "text-center" */
+}

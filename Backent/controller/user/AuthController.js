@@ -22,7 +22,6 @@ export const signup = async (req,res)=>{
   }
 }
 
-
 export const userLogin=async (req,res)=>{
   try {
 
@@ -62,4 +61,16 @@ export const userLogin=async (req,res)=>{
     .status(500)
     .json({message:'internal server error',error:true})
   }
+}
+
+
+
+ export  const googleLogin =async (req,res)=>{
+      try {
+        console.log(req.body);
+        
+
+      } catch (error) {
+        console.log(error.message);
+      }
 }

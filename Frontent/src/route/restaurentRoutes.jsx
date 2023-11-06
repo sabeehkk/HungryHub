@@ -11,6 +11,7 @@ import Home from '../Components/Restaurant/Home'
 //     </>
 //   )
 // };
+
 const RestaurentAuthAppLayout =()=>{
     return <Outlet/>
 };
