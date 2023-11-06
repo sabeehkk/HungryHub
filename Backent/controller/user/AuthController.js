@@ -68,7 +68,40 @@ export const userLogin=async (req,res)=>{
  export  const googleLogin =async (req,res)=>{
       try {
         console.log(req.body);
-        
+        const {email,family_name,given_name}=req.body;
+        const result = await userModel.findOne({email:email})
+        if(result){
+          if(result.status===false){
+            return res.status(400).json({
+              message:"User Account Blocked: Please contact customer support for further assistance",
+                  error:true,
+            });
+          }
+
+          const token=jwt.sign(
+            {user:result._id,role:"user"},
+            process.env.JWT_SECRET,
+            {expiresIn:"1h"}
+          );
+          return res.json({message:"success",token,userData:result})
+        }
+
+        const userSchema=new userModel({
+          email,
+          name:given_name
+        })
+
+        const response=await userSchema.save();
+
+        const userData = await userModel.findOne({ email })
+
+        const token = jwt.sign(
+          { user: userData._id, role: "user" },
+          process.env.JWT_SECRET,
+          { expiresIn: "1h" }
+        );
+        return res.json({ message: "success", token, userData });
+
 
       } catch (error) {
         console.log(error.message);
