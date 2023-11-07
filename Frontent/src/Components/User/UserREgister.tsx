@@ -64,8 +64,9 @@ export default function Signup() {
 <div className=" min-h-screen  flex items-center justify-center bg-white ">
  
     <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
-    <ToastContainer/>
-      <h2 className="my-heading">Signup </h2>
+    <ToastContainer toastClassName="toast" position="top-center" autoClose={5000} />
+
+      <h2 className="my-heading">User Signup </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-600 font-bold">

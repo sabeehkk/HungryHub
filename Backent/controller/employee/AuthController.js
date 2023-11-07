@@ -44,6 +44,10 @@ export const login=async (req,res)=>{
         
         const isPasswordVerified = bcrypt.compareSync(password,employeeData.password)
 
+        if (!isPasswordVerified) {
+            return res.status(400).json({ message: "Invalid Password", error: true });
+          }
+      
         const token=jwt.sign(
             {employee:email,role:"employee"},
             process.env.JWT_SECRET,
@@ -52,9 +56,9 @@ export const login=async (req,res)=>{
             )
             return res.json({message:"success",token,employeeData})
         
-    } catch (error) {
-        console.error(error)
-    return res.status(500).json({ message: "Internal server error", error: true });
-
-    }
+     } catch (error) {
+     return res
+     .status(500)
+     .json({message:'internal server error',error:true})
+   }
 }

@@ -1,3 +1,8 @@
+
+
+
+
+
 import React from 'react'
 // import LoginFrame from '../../Components'
 import UserLogin from '../../Components/User/UserLogin'
@@ -9,5 +14,4 @@ function Login() {
     <LoginFrame SidePart={UserLogin} img={imgUrl}/>
   )
 }
-
 export default Login

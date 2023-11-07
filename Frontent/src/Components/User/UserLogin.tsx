@@ -1,6 +1,6 @@
 import  {  useState,SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+  
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../redux/user/authSlice";
@@ -13,7 +13,7 @@ import Google from '../../Components/googleLogin'
 // import { setCredentials } from "../../Redux/Auth/UserSlice";
 
 function UserLogin() {
-
+  
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
   // const [err,setErr]=useState("")
@@ -91,7 +91,6 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           </button>
         </div>
         <Google/>
-
 
       </form>
     </div>

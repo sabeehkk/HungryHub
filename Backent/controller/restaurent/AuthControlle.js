@@ -8,15 +8,16 @@ export const signup =async (req,res)=>{
     try{
         console.log(req.body);
         const {name, email, phoneNumber, password} = req.body ;
-        const existEmployee = await restaurentModel.find({email,phoneNumber})
-        if(existEmployee.length !==0){
-              return res.json({message:'User Already exists'})
+        const existRestorent = await restaurentModel.find({email,phoneNumber})
+        if(existRestorent.length !==0){
+              return res.json({message:'Restaurent Already exists'})
         }
         const hashedPassword = await bcrypt.hash(password,10)
-        const employee=new restaurentModel({name:name,email,phoneNumber,password:hashedPassword})
+        const restaurent=new restaurentModel({restaurantName:name,email,phoneNumber,password:hashedPassword})
+        console.log('restaurentttt',restaurent);
         res.json({message:'success'})
     
-        await employee.save()
+        await restaurent.save()
       }catch(error){
           console.log(error.message);
       }
@@ -26,32 +27,43 @@ export const signup =async (req,res)=>{
 
 export const login=async (req,res)=>{
     try {
-        console.log('restaurent dataaaaa',req.body);
 
+        console.log('Restaurentdataaaaaaaa',req.body)
         const {email,password}=req.body;
-        const restaurentData =await restaurentModel.findOne({email})
+        const restaurentData=await restaurentModel.findOne({email})
         console.log(restaurentData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
-        // if(!adminData){
-        //     return res.json({message:'invalid email or password '})
-        // }
-        // const isPasswordCorrect=await bcrypt.compare(password,adminData.password)
-        // if(!isPasswordCorrect){
-        //     return res.json({message:'password is incorrect'})
-        // }
 
-        const isPasswordVerified = bcrypt.compareSync(password,restaurentData.password)
-
+        if (!restaurentData) {
+          return res.status(400).json({
+            message: "Invalid email address or email not found",
+            error: true,
+          });
+        }
+    
+ 
+      //  if (restaurentData.status === false) {
+      //    return res.status(400).json({
+      //      message:
+      //        "User Account Blocked: Please contact customer support for further assistance",
+      //      error: true,
+      //    });
+      //  }
+        const isPasswordVerified = bcrypt.compareSync(password, restaurentData.password);
+        if (!isPasswordVerified) {
+          return res.status(400).json({ message: "Invalid Password", error: true });
+        }
+    
         const token=jwt.sign(
-            {restaurent:email,role:"restaurent"},
-            process.env.JWT_SECRET,
-            {expiresIn:"1h"}
-        
-            )
-            return res.json({message:"success",token,restaurentData})
-        
-    } catch (error) {
-        console.error(error)
-    return res.status(500).json({ message: "Internal server error", error: true });
-
-    }
+         {restaurent:email,role:"restaurent"},
+         process.env.JWT_SECRET,
+         {expiresIn:"1h"}
+        );
+        console.log('tokennnnn',token);
+        return res.json({message:"success",token,restaurentData})
+ 
+   } catch (error) {
+     return res
+     .status(500)
+     .json({message:'internal server error',error:true})
+   }
 }

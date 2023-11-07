@@ -10,7 +10,6 @@ type LoginFrameProps = {
 function LoginFrame({SidePart,img}:LoginFrameProps) {
   return (
     <div className='flex mx-20 my-20 ' >
-      {/* <div className='w-1/2 m-l' > */}
       <div className="w-1/2 ml-32 mt-36">
 
       <LoginPageLeftImage img={img}/>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Login from '../Components/Admin/adminLOgin'
-// import Home from '../Components/Admin/adminHome'
+import Home from '../Components/Admin/adminHome'
 // import AdminFrame '../Components/'
  
 // const AdminAppLayout = () => {
@@ -20,6 +20,7 @@ import Login from '../Components/Admin/adminLOgin'
  const AdminRoute={
     path:"/admin",
     element:<AdminLoginLayout/>,
+
     errorElement:<h1>Error</h1>,
     children:[
       {
@@ -30,6 +31,14 @@ import Login from '../Components/Admin/adminLOgin'
           </>
         )
       },
+      {
+        path:'/admin',
+        element:(
+          <>
+          <Home/>
+          </>
+        )
+      }
       // {
       //   path:"/admin",
       //   element:<AdminAppLayout/>,

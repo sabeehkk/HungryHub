@@ -1,27 +1,28 @@
 import React from 'react'
 import { Outlet } from "react-router-dom";
-import Signup from '../Components/Restaurant/Signup'
-import Login from '../Components/Restaurant/Login'
+import Signup from '../Pages/Restaurent/signup'
+import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
 
-// const RestaurentAppLayout=()=> {
-//   return (
-//     <>
-//     <Outlet/>
-//     </>
-//   )
-// };
+//  
+
 
 const RestaurentAuthAppLayout =()=>{
-    return <Outlet/>
+        return  <Outlet/> 
 };
+// const RestaurentLayout =()=>{
+//     return (
+//         <>
+//         </>
+//     )
+// }
 
-const RestaurentRoute ={
+const RestaurentRoute = {   
     path:'/restaurent',
     element :<RestaurentAuthAppLayout/>,
     children : [
         {
-            path :'login',
+            path :'login',   
             element : (
                 <>
                 <Login/>
@@ -34,7 +35,7 @@ const RestaurentRoute ={
                 <>
                 <Signup/>
                 </>
-            )
+            ),
         },
         {
             path:'/restaurent',
@@ -44,6 +45,29 @@ const RestaurentRoute ={
                 </>
             )
         }
+     
+        // {
+        //     path:"/restaurent",
+        //     element:<RestaurentAppLayout/>,
+        //     children:[
+        //         {
+        //             path:"/restaurent",
+        //             element:(
+        //                 <>
+        //                 <Home/>
+        //                 </>
+        //             )
+        //         }
+        //     ]
+        // },
+       
+            
+            // element:(
+            //     <>
+            //     <Home/>
+            //     </>
+            // )
+       
         //   {
         //     path:'/restaurent',
         //     elem

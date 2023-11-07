@@ -8,16 +8,18 @@ export const login=async (req,res)=>{
         console.log(req.body);
         const adminData =await adminModel.findOne({email})
         console.log(adminData,'admindataaaaaaaaaaaaaaaaaaaaaaa');
-        // if(!adminData){
-        //     return res.json({message:'invalid email or password '})
-        // }
-        // const isPasswordCorrect=await bcrypt.compare(password,adminData.password)
-        // if(!isPasswordCorrect){
-        //     return res.json({message:'password is incorrect'})
-        // }
+        if (!adminData) {
+            return res.status(400).json({
+              message: "Invalid email address or email not found",
+              error: true,
+            });
+          }
+      
 
         const isPasswordVerified = bcrypt.compareSync(password,adminData.password)
-
+        if (!isPasswordVerified) {
+            return res.status(400).json({ message: "Invalid Password", error: true });
+          }
         const token=jwt.sign(
             {admin:email,role:"admin"},
             process.env.JWT_SECRET,

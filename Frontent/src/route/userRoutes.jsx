@@ -6,6 +6,7 @@ import Login from '../Pages/User/login'
 import Home from '../Components/User/HomePage'
 import IsLogout from '../middleware/user/isLogout'
 import UserLogout from '../Pages/User/userLogout'
+
 const UserAppLayout = () => {
   return (
     <>
@@ -47,8 +48,9 @@ const UserRoute={
     )
    },
    {
-    path:"/",
+    path:"/",    
     element:<UserAppLayout/>,
+    
     children:[
       {
         path:"/",
