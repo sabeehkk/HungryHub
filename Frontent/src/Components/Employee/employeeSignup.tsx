@@ -10,7 +10,7 @@ export default function EmployeeSignup() {
   const [password,setPassword]=useState('')
   const [name,setName]=useState('')
   const [phoneNumber,setPhoneNumber] = useState('')
-  const [errors,setError]=useState<string[]>([])
+  // const [errors,setError]=useState<string[]>([])
 
   const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ export default function EmployeeSignup() {
   phoneNumber,
 });
       if(email.trim() === '' || password.trim() === '' || name.trim() === ''){
-         setError(["Please fill"]);
+        //  setError(["Please fill"]);
         return;
     }
        if(password.length < 6){
@@ -69,7 +69,7 @@ return (
             type="text"
             id="name"
             name="name"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter your name"
             value={name}
             onChange={(e)=>setName(e.target.value)}
@@ -84,7 +84,7 @@ return (
             type="email"
             id="email"
             name="email"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter your email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
@@ -99,7 +99,7 @@ return (
             type="password"
             id="password"
             name="password"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter your Password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
@@ -114,7 +114,7 @@ return (
             type="tel"
             id="phoneNumber"
             name="phoneNumber"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter Phone Number"
             value={phoneNumber}
             onChange={(e)=>setPhoneNumber(e.target.value)}

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Login from '../Components/Admin/adminLOgin'
+// import Login from '../Components/Admin/adminLOgin'
+// import Login from '../Pages/Admin/adminLogin'
+import Login from '../Components/Admin/adminLOgin';
 import Home from '../Components/Admin/adminHome'
 // import AdminFrame '../Components/'
  
@@ -12,19 +14,18 @@ import Home from '../Components/Admin/adminHome'
 //   );
 // };
 
- const AdminLoginLayout = ()=>{
-    return  <Outlet/>
- }    
 
+
+ const AdminAuthAppLayout =()=>{
+  return <Outlet/>
+ };
 
  const AdminRoute={
     path:"/admin",
-    element:<AdminLoginLayout/>,
-
-    errorElement:<h1>Error</h1>,
+    element:<AdminAuthAppLayout/>,
     children:[
       {
-        path:'login',
+        path:"login",
         element:(
           <>
           <Login/>
@@ -39,25 +40,9 @@ import Home from '../Components/Admin/adminHome'
           </>
         )
       }
-      // {
-      //   path:"/admin",
-      //   element:<AdminAppLayout/>,
-      //   children:[
-      //     {
-      //       path:'/admin',
-      //       element:<Home/>
-      //     }
-      //   ]
-      // }
     ]
  }
 
-// const AdminAppLayout=()=> {
-//   return (
-//     <>
-//       <Frame/>
-//     </>
-//   )
-// }
+
 
 export default AdminRoute

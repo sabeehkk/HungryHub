@@ -1,8 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import Signup from '../Components/Employee/employeeSignup'
+// import Signup from '../Components/Employee/employeeSignup'
+import Signup from '../Pages/Employee/Signup'
 import Home from '../Components/Employee/employeeHome'
-import Login from '../Components/Employee/employeeLogin'
+import Login from '../Pages/Employee/login'
 
 const EmployeeAuthAppLayout = () =>{
     return <Outlet/>

@@ -1,6 +1,6 @@
 import  {  useState,SyntheticEvent } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {ErrorMessage} from '../../utils/util';
 
  import axios  from "axios";
@@ -58,7 +58,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             type="email"
             id="email"
             name="email"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter your email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
@@ -73,7 +73,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             type="password"
             id="password"
             name="password"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+            className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
             placeholder="Enter your password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
