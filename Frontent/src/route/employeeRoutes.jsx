@@ -4,6 +4,17 @@ import { Outlet } from 'react-router-dom'
 import Signup from '../Pages/Employee/Signup'
 import Home from '../Components/Employee/employeeHome'
 import Login from '../Pages/Employee/login'
+import Navbar from '../Components/navbar'
+
+const EmpoloyeeAppLayout =()=>{
+    return (
+        <>
+        <Navbar/>
+      <Outlet/>
+        </>
+      
+    )
+}
 
 const EmployeeAuthAppLayout = () =>{
     return <Outlet/>
@@ -32,12 +43,14 @@ const EmployeeRoutes = {
         },
         {
             path:'/employee',
-            element:(
-                <>
-                <Home/>
-                </>
-            )
-        },
+            element:<EmpoloyeeAppLayout/>,
+            children:[
+                {
+                    path:"home",
+                    element:<Home/>
+                }
+            ]
+        }
        
     ]
 }

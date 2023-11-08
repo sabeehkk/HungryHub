@@ -3,8 +3,17 @@ import { Outlet } from "react-router-dom";
 import Signup from '../Pages/Restaurent/signup'
 import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
-
+import Navbar from '../Components/navbar';
 //  
+const RestaurantAppLayout = ()=>{
+    return (
+            <>
+           <Navbar/>
+            <Outlet/>
+            </>
+    )
+    
+}
 
 
 const RestaurentAuthAppLayout =()=>{
@@ -39,49 +48,16 @@ const RestaurentRoute = {
         },
         {
             path:'/restaurent',
-            element:(
-                <>
-                <Home/>
-                </>
-            )
+            element:<RestaurantAppLayout/>,
+            children:[
+                {
+                    path:"home",
+                    element:<Home/>
+                }
+            ]
         }
      
-        // {
-        //     path:"/restaurent",
-        //     element:<RestaurentAppLayout/>,
-        //     children:[
-        //         {
-        //             path:"/restaurent",
-        //             element:(
-        //                 <>
-        //                 <Home/>
-        //                 </>
-        //             )
-        //         }
-        //     ]
-        // },
-       
-            
-            // element:(
-            //     <>
-            //     <Home/>
-            //     </>
-            // )
-       
-        //   {
-        //     path:'/restaurent',
-        //     elem
-        //   }
-        // {
-        //     path:'/restaurent',
-        //     element:<RestaurentAppLayout/>,
-        //     children:[
-        //         {
-        //             path:'/restaurent',
-        //             element : <Home/>
-        //         }
-        //     ]
-        // },
+      
     ]
 }
 

@@ -6,10 +6,12 @@ import Login from '../Pages/User/login'
 import Home from '../Components/User/HomePage'
 import IsLogout from '../middleware/user/isLogout'
 import UserLogout from '../Pages/User/userLogout'
+import Navbar from '../Components/navbar'
 
 const UserAppLayout = () => {
   return (
     <>
+    <Navbar/>
       <Outlet />
     </>
   );

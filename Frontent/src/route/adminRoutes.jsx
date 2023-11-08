@@ -1,21 +1,9 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-// import Login from '../Components/Admin/adminLOgin'
-// import Login from '../Pages/Admin/adminLogin'
-import Login from '../Components/Admin/adminLOgin';
+
+import Login from '../Pages/Admin/adminLogin';
 import Home from '../Components/Admin/adminHome'
-// import AdminFrame '../Components/'
- 
-// const AdminAppLayout = () => {
-//   return (
-//     <>
-//       <Outlet />
-//     </>
-//   );
-// };
-
-
-
+import UserList from '../Components/Admin/usersList'
  const AdminAuthAppLayout =()=>{
   return <Outlet/>
  };
@@ -37,6 +25,14 @@ import Home from '../Components/Admin/adminHome'
         element:(
           <>
           <Home/>
+          </>
+        )
+      },
+      {
+        path:"users",
+        element:(
+          <>
+        <UserList/>
           </>
         )
       }
