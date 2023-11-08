@@ -21,10 +21,14 @@ const authSlice = createSlice({
         adminLoggedIn : (state,action:PayloadAction<AdminData>)=>{
             state.admin = action.payload;
             state.success=true;
+        },
+        logout:(state)=>{
+            state.admin=null,
+            state.success=false
         }
     },
 })
 
-export const {adminLoggedIn}=authSlice.actions
+export const {adminLoggedIn,logout}=authSlice.actions
 
 export default  authSlice.reducer

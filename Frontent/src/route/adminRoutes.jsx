@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom'
 import Login from '../Pages/Admin/adminLogin';
 import Home from '../Components/Admin/adminHome'
 import UserList from '../Components/Admin/usersList'
+import IsLogout from '../middleware/admin/isLogout';
 
  const AdminAuthAppLayout =()=>{
   return <Outlet/>
@@ -26,6 +27,14 @@ import UserList from '../Components/Admin/usersList'
         element:(
           <>
           <Home/>
+          </>
+        )
+      },
+      {
+        path:'logout',
+        element:(
+          <>
+          <IsLogout/>
           </>
         )
       },

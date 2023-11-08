@@ -83,7 +83,6 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         <div className="text-center">
           <button
             type="submit"
-            // className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
             className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-blue-100"
           >
             Login
