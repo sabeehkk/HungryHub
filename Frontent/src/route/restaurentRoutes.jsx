@@ -4,6 +4,7 @@ import Signup from '../Pages/Restaurent/signup'
 import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
 import Navbar from '../Components/navbar';
+import IsLogout from '../middleware/restaurent/isLogged'
 //  
 const RestaurantAppLayout = ()=>{
     return (
@@ -12,19 +13,11 @@ const RestaurantAppLayout = ()=>{
             <Outlet/>
             </>
     )
-    
 }
-
 
 const RestaurentAuthAppLayout =()=>{
         return  <Outlet/> 
 };
-// const RestaurentLayout =()=>{
-//     return (
-//         <>
-//         </>
-//     )
-// }
 
 const RestaurentRoute = {   
     path:'/restaurent',
@@ -47,6 +40,14 @@ const RestaurentRoute = {
             ),
         },
         {
+          path:'logout',
+          element:(
+            <>
+            <IsLogout/>
+            </>
+          )
+        },
+        {
             path:'/restaurent',
             element:<RestaurantAppLayout/>,
             children:[
@@ -56,8 +57,6 @@ const RestaurentRoute = {
                 }
             ]
         }
-     
-      
     ]
 }
 

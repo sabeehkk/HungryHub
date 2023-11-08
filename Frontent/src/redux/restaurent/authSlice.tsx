@@ -21,11 +21,15 @@ const authSlice = createSlice({
         restaurentLoggedIn : (state,action:PayloadAction<RestaurentData>)=>{
             state.restaurent = action.payload;
             state.success=true;
+        },
+        logout:(state)=>{
+            state.restaurent=null;
+            state.success=false
         }
     },
 })
 
-export const {restaurentLoggedIn}=authSlice.actions
+export const {restaurentLoggedIn,logout}=authSlice.actions
 
 export default  authSlice.reducer
 

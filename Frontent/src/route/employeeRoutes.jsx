@@ -42,6 +42,13 @@ const EmployeeRoutes = {
             )
         },
         {
+           path:'logout',
+           element: (
+            <>
+            </>
+           )
+        },
+        {
             path:'/employee',
             element:<EmpoloyeeAppLayout/>,
             children:[
