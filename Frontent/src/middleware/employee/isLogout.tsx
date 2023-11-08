@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function IsLogout() {
-    const {success}=useSelector((state:any)=>state.restaurentAuth)
+    const {success}=useSelector((state:any)=>state.employeeAuth)
 
     const navigate = useNavigate()
     
     useEffect(()=>{
-        navigate('/restaurent/home')
+        navigate('/employee/login') 
     },[success])
   return null
     

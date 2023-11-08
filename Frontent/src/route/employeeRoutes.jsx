@@ -5,6 +5,8 @@ import Signup from '../Pages/Employee/Signup'
 import Home from '../Components/Employee/employeeHome'
 import Login from '../Pages/Employee/login'
 import Navbar from '../Components/navbar'
+import IsLogout from '../middleware/employee/isLogout';
+
 
 const EmpoloyeeAppLayout =()=>{
     return (
@@ -45,6 +47,7 @@ const EmployeeRoutes = {
            path:'logout',
            element: (
             <>
+            <IsLogout/>
             </>
            )
         },

@@ -4,7 +4,6 @@ interface EmployeeState {
     employee :EmployeeData | null ;
     success : boolean;
 }
-
 interface EmployeeData {
     email:string;
 }
@@ -21,10 +20,14 @@ const authSlice =createSlice({
         employeeLoggedIn :(state,action:PayloadAction<EmployeeData>)=>{
                 state.employee =action.payload;
                 state.success =true ;
+        },
+        logout:(state)=>{
+            state.employee=null
+            state.success=false
         }
     },
 })
 
-export const {employeeLoggedIn}=authSlice.actions
+export const {employeeLoggedIn,logout}=authSlice.actions
 
 export default authSlice.reducer
