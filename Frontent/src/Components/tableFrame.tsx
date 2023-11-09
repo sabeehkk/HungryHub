@@ -31,65 +31,73 @@ function TabelFrame({
     <div className="h-screen w-full bg-gray-100 p-4">
       <div className="max-w-screen-lg mx-auto p-4 shadow-lg rounded-lg bg-white">
         <div className="w-full h-12 bg-gray-100 shadow-md flex items-center justify-between px-4">
-          <h1 className="text-xl font-bold text-gray-800">{heading} Management</h1>
+          <h1 className="ml-80 text-xl font-bold text-gray-800">{heading} Management</h1>
           <div className="flex items-center">
-            <input
+            {/* <input
               type="text"
               className="rounded-full bg-gray-300 py-1 px-2 text-gray-800"
               placeholder="Search"
-            />
+            /> */}
           </div>
         </div>
 
         <table className="w-full mt-4">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Status</th>
-              <th className="px-4 py-2">Action</th>
-            </tr>
-          </thead>
+  <thead>
+    <tr className="bg-gray-200">
+      <th className="px-4 py-2">#</th>
+      <th className="px-4 py-2">Name</th>
+      <th className="px-4 py-2">Action</th>
+      <th className="px-4 py-2">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {data &&
+      data.map((item, index) => (
+        <tr className="hover:bg-gray-100" key={item._id}>
+          <td className="px-4 py-2 text-center">{index + 1}</td>
+          <td className="p-4 border-b border-gray-200">{item.name || ""}</td>
+          <td className="text-center">
+            <div className="flex items-center">
+              <div className={`h-2.5 w-2.5 rounded-full ${item.status ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
+              {item.status ? 'Online' : 'Offline'}
+            </div>
+          </td>
+          <td className="text-center">
+            <div className="flex items-center justify-center">
+              {item.status === true ? (
+                <button
+                  onClick={() => handleClick(item._id, "block", "")}
+                  className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-red-500 shadow-md hover:bg-red-400"
+                >
+                  BLOCK
+                </button>
+              ) : item.status === false ? (
+                <button
+                  onClick={() => handleClick(item._id, "unblock", "")}
+                  className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-green-500 shadow-md hover:bg-green-400"
+                >
+                  UNBLOCK
+                </button>
+              ) : null}
+              <Link
+                className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-blue-500 shadow-md hover:bg-blue-400"
+                to={`/admin/${role}/${item._id}/more-details`}
+              >
+                MORE
+              </Link>
+            </div>
+          </td>
+        </tr>
+      ))}
+  </tbody>
+</table>
 
-          <tbody>
-            {data &&
-              data.map((item, index) => (
-                <tr className="hover:bg-gray-100" key={item._id}>
-                  <td className="px-4 py-2 text-center">{index + 1}</td>
-                  <td className="px-4 py-2">{item.name || ""}</td>
-                  <td className="px-4 py-2 text-center">
-                    {item.status === true ? "Active" : "Inactive"}
-                  </td>
-                  <td className="text-center">
-                    <div className="flex items-center justify-center">
-                      {item.status === true ? (
-                        <button
-                          onClick={() => handleClick(item._id, "block", "")}
-                          className="bg-red-500 text-white p-2 rounded-full m-2"
-                        >
-                          BLOCK
-                        </button>
-                      ) : item.status === false ? (
-                        <button
-                          onClick={() => handleClick(item._id, "unblock", "")}
-                          className="bg-green-500 text-white p-2 rounded-full m-2"
-                        >
-                          UNBLOCK
-                        </button>
-                      ) : null}
 
-                      <Link
-                        className="bg-blue-500 text-white p-2 rounded-full m-2"
-                        to={`/admin/${role}/${item._id}/more-details`}
-                      >
-                        MORE
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <Pagination
+          currentPage={currentPage}
+          filterPagination={filterPagination}
+          size={size}
+        />
       </div>
     </div>
   );
