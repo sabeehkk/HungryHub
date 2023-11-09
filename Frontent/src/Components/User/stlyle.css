@@ -1,0 +1,6 @@
+/* styles.css */
+
+.shared-style {
+    @apply bg-red-500 text-white p-1.5 rounded-full text-xs;
+  }
+  

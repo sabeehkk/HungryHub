@@ -1,6 +1,10 @@
 import adminModel from '../../models/admin.js'
+import userModel from '../../models/user.js'
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken';
+
+const LIMIT = 10;
+
 
 export const login=async (req,res)=>{
     try {
@@ -35,40 +39,68 @@ export const login=async (req,res)=>{
     }
 }
 
-// export const UserData=async (req,res)=>{
-//   try {
-//       console.log(req.headers);
-//       const userData=await userModel.find({})
-//       const userCount = await userModel.countDocuments({});
-//       const blockedUserCount=await userModel.countDocuments({status:false})
-//       res.json({userData,userCount,blockedUserCount})
-//   } catch (error){
-//       console.log(error.message);
-//    }
-// }
- 
-export const action =async(req,res)=>{
-  const id = req.query.id;
-  const status = req.query.status;
-  await userModel.updateOne({_id: id}, {$set: {status: status}})
-  .then((result)=>{
-      res.json({message:'success'});
-  })
-  .catch((error)=>{
-      console.log(error);
-  })
-}
-
-
-export const DeleteUser = async (req, res)=>{o
+export const userList = async (req, res) => {
   try {
-      const id = req.body.id;
-      const result = await userModel.deleteOne({_id:id});
-      if (result.deletedCount === 1){
-          return res.json({message:'User deleted successfully'});
-      }
-      return res.json({message: 'An error occurred'});
+    const PAGE = req?.query?.page
+      ? req.query.page >= 1
+        ? req.query.page
+        : 1
+      : 1;
+    const SKIP = (PAGE - 1) * LIMIT;
+
+    const userData = await userModel
+      .find()
+      .sort({ _id: -1 })
+      .skip(SKIP)
+      .limit(LIMIT);
+      
+    const TotalSize = await userModel.countDocuments();
+    const size = Math.ceil(TotalSize / LIMIT);
+
+    return res.json({ message: "success", userData, size });
   } catch (error) {
-      console.log(error);
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: true });
   }
-}
+};
+
+export const userUnblock = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let result = await userModel.updateOne(
+      { _id: id },
+      { $set: { status: true } }
+    );
+
+    if (result.modifiedCount > 0) {
+      return res.json({ message: "Success" });
+    }
+    return res.status(404).json({ message: "User not found", error: true });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: true });
+  }
+};
+
+export const userBlock = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let result = await userModel.updateOne(
+      { _id: id },
+      { $set: { status: false } }
+    );
+    if (result.modifiedCount > 0) {
+      return res.json({ message: "Success" });
+    }
+    return res.status(404).json({ message: "User not found", error: true });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: true });
+  }
+};

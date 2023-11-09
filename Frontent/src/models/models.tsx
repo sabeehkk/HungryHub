@@ -32,5 +32,8 @@ export interface userInittalModel {
     heading :string | null;
     data:AdminSideRestaurentModel[]| null ;
     handleAction:(id:string,status:string,message:string)=>void;
-    role:string;
+    role: string;
+    filterPagination: (val: number) => void;
+    currentPage: number;
+    size: number;
   }
