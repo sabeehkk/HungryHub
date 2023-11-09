@@ -112,3 +112,15 @@ export const userLogin=async (req,res)=>{
         console.log(error.message);
       }
 }
+
+const Action =async(req,res)=>{
+  const id = req.query.id;
+  const status = req.query.status;
+  await userModel.updateOne({_id: id}, {$set: {status: status}})
+  .then((result)=>{
+      res.json({message:'success'});
+  })
+  .catch((error)=>{
+      console.log(error);
+  })
+}

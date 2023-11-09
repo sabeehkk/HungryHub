@@ -12,4 +12,6 @@ const router =express.Router()
 router.post('/register',signup)
 router.post('/login',userLogin)
 router.post('/googleLogin',googleLogin)
+
+
 export default router   

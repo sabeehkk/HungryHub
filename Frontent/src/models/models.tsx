@@ -17,13 +17,14 @@ export interface userInittalModel {
   }
 
   export interface AdminSideRestaurentModel {
-      firstName : string;
-      lastName : string;
+    _id:string;
+      name : string;
       email:string ;
       phoneNumber : number| string 
       place:string|null | undefined ;
       address :string |null |undefined ;
       profilePicture : string | null | undefined ;
+      status:boolean
   }
   
 

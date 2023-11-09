@@ -58,3 +58,17 @@ export const action =async(req,res)=>{
       console.log(error);
   })
 }
+
+
+export const DeleteUser = async (req, res)=>{o
+  try {
+      const id = req.body.id;
+      const result = await userModel.deleteOne({_id:id});
+      if (result.deletedCount === 1){
+          return res.json({message:'User deleted successfully'});
+      }
+      return res.json({message: 'An error occurred'});
+  } catch (error) {
+      console.log(error);
+  }
+}

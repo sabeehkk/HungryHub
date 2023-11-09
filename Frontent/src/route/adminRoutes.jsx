@@ -3,10 +3,10 @@ import { Outlet } from 'react-router-dom'
 
 import Login from '../Pages/Admin/adminLogin';
 import Home from '../Components/Admin/adminHome'
-import UserList from '../Components/Admin/usersList'
+import UserList from '../Components/tableFrame'
 import IsLogout from '../middleware/admin/isLogout';
 
- const AdminAuthAppLayout =()=>{
+ const AdminAuthAppLayout =()=>{ 
   return <Outlet/>
  };
 
