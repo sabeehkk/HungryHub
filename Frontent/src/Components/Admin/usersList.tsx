@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
-import { useDispatch } from 'react-redux'
-import { addUsers } from '../../redux/admin/userSlice'
-
+// import { useDispatch } from 'react-redux'
+// import { addUsers } from '../../redux/admin/userSlice'
+import TableFrame from '../tableFrame'
 
 
 function UsersList() {
@@ -67,7 +67,6 @@ function UsersList() {
             <span className="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Inactive</span>
           </td>
         </tr>
-        {/* Add more rows here */}
       </tbody>
     </table>
   </div>

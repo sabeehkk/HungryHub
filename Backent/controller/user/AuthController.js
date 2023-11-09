@@ -70,11 +70,9 @@ export const userLogin=async (req,res)=>{
   }
 }
 
-
-
  export  const googleLogin =async (req,res)=>{
       try {
-        console.log(req.body);
+        console.log(req.body);   
         const {email,family_name,given_name}=req.body;
         const result = await userModel.findOne({email:email})
         if(result){
