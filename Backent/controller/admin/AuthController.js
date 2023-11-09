@@ -34,3 +34,27 @@ export const login=async (req,res)=>{
 
     }
 }
+
+// export const UserData=async (req,res)=>{
+//   try {
+//       console.log(req.headers);
+//       const userData=await userModel.find({})
+//       const userCount = await userModel.countDocuments({});
+//       const blockedUserCount=await userModel.countDocuments({status:false})
+//       res.json({userData,userCount,blockedUserCount})
+//   } catch (error){
+//       console.log(error.message);
+//    }
+// }
+ 
+export const action =async(req,res)=>{
+  const id = req.query.id;
+  const status = req.query.status;
+  await userModel.updateOne({_id: id}, {$set: {status: status}})
+  .then((result)=>{
+      res.json({message:'success'});
+  })
+  .catch((error)=>{
+      console.log(error);
+  })
+}
