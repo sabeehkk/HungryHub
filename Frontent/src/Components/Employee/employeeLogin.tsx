@@ -35,7 +35,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(employeeLoggedIn(res.data.employeeData));
-        navigate("/employee");
+        navigate("/employee/home");
       })
   } catch (error) {
     console.log(error);

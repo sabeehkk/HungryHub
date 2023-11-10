@@ -25,6 +25,7 @@ export interface userInittalModel {
       address :string |null |undefined ;
       profilePicture : string | null | undefined ;
       status:boolean
+      item:string;
   }
   
 

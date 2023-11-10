@@ -42,7 +42,7 @@ export default function Signup() {
               console.log(res.data.message)
               if (res.data.message ==='success'){
                 alert('success');
-                navigate('/login');
+                navigate('/restaurent/login');
                 return
               }
               alert(res.data.message);
@@ -62,6 +62,7 @@ export default function Signup() {
 
       <h2 className="my-heading">Restaurent Signup </h2>
       <form onSubmit={handleSubmit}>
+        
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-600 font-bold">
           Name
@@ -133,7 +134,6 @@ export default function Signup() {
         </div>
         {/* <Google/> */}
 
-
       </form>
       <div className="mt-4 ml-8 text-grey-600">
                         Already have an account?{" "}
@@ -145,8 +145,6 @@ export default function Signup() {
                     </div>
     </div>
   </div>
-
-       
   )
 }
 
