@@ -28,7 +28,11 @@ const restaurentSchema = new mongoose.Schema({
      profilePicture : {
         type :String ,
         default : null
-     }
+     },
+     status:{
+        type:Boolean,
+        default:true,
+    },
 })
 
 // module.exports  =restaurentSchema

@@ -13,8 +13,8 @@ router.patch('/users/:id/unblock',userUnblock)
 router.patch('/users/:id/block',userBlock)
 
 router.get('/restaurents',restaurentList)
-router.path('/restaurents/:id/unblock',restaurentUnblock)
-router.patch('/users/:id/block',restaurentBlock)
+router.patch('/restaurents/:id/unblock',restaurentUnblock)
+router.patch('/restaurents/:id/block',restaurentBlock)
 
 router.get('/employees',employeeList)
 router.patch('/employees/:id/unblock',employeeUnblock)

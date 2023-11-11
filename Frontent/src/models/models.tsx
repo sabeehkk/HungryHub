@@ -48,7 +48,6 @@ export interface userInittalModel {
       item:string;
   }
   
-
   export interface AdminSideTableFrameProps{
     heading :string | null;
     data:AdminSideRestaurentModel[]| null ;

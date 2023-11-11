@@ -9,14 +9,14 @@ import jwt from 'jsonwebtoken'
 export const signup = async (req,res)=>{
      console.log(req.body);
      try{
-      console.log(req.body);
-      const {name:restaurantName, email, phoneNumber, password} = req.body ;
+      console.log('employeeedataassssssssss',req.body);
+      const {name, email, phoneNumber, password} = req.body ;
       const existUser = await employeeModel.find({email,phoneNumber})
       if(existUser.length !==0){
             return res.json({message:'User Already exists'})
       }
       const hashedPassword = await bcrypt.hash(password,10)
-      const user=new employeeModel({restaurantName,email,phoneNumber,password:hashedPassword})
+      const user=new employeeModel({name,email,phoneNumber,password:hashedPassword})
       res.json({message:'success'})
   
       await user.save()
@@ -30,8 +30,9 @@ export const login=async (req,res)=>{
         console.log('employee dataaaaa',req.body);
 
         const {email,password}=req.body;
-        const employeeData =await employeeModel.findOne({email})
+        const employeeData =await employeeModel.findOne({email,status:true  })
         console.log('employedataaaaaaa',employeeData);
+        
         // console.log(employeeData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
         // if(!adminData){
         //     return res.json({message:'invalid email or password '})

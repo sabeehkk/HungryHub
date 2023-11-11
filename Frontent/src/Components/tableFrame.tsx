@@ -99,7 +99,7 @@ function TabelFrame({
        
           <img className="w-20 h-20 rounded-full" src= 'https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg?w=2000' alt="" /> 
           <div className="ml-4">
-            <h2 className="text-xl font-semibold">{actionData.name||actionData.restaurantName}</h2>
+            <h2 className="text-xl font-semibold">{actionData.name||actionData.restaurantName }</h2>
           </div>
         </div>
 
@@ -109,6 +109,7 @@ function TabelFrame({
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Name: {actionData.name||actionData.restaurantName}</p>
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Email: Cait Genevieve   {actionData.email}</p>
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Phone Number: {actionData.phoneNumber}</p>
+                                <p className="text-black-500 dark:text-black text-lg font-semibold">Phone Number: {actionData.profilePicture}</p>
                                
                        </div>
                         </div>

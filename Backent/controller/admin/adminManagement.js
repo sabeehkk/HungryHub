@@ -39,6 +39,7 @@ export const restaurentList = async (req, res) => {
   
 export const restaurentUnblock = async (req, res) => {
     try {
+      console.log('unblockkingg');
       const id = req.params.id;
       let result = await restaurentModel.updateOne(
         { _id: id },
@@ -59,6 +60,7 @@ export const restaurentUnblock = async (req, res) => {
   
   export const restaurentBlock = async (req, res) => {
     try {
+      console.log('blockingg');
       const id = req.params.id;
       let result = await restaurentModel.updateOne(
         { _id: id },
@@ -92,7 +94,7 @@ export const employeeList = async (req, res) => {
         .sort({ _id: -1 })
         .skip(SKIP)
         .limit(LIMIT);
-        console.log('employeedataaaaaaaaaaaa',employeeData);
+        // console.log('employeedataaaaaaaaaaaa',employeeData);
         
       const TotalSize = await employeeModel.countDocuments();
       const size = Math.ceil(TotalSize / LIMIT);
