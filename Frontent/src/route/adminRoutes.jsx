@@ -5,6 +5,8 @@ import Login from '../Pages/Admin/adminLogin';
 import Home from '../Components/Admin/adminHome'
 import UserList from '../Pages/Admin/usersList'
 import IsLogout from '../middleware/admin/isLogout';
+import RestaurentList from '../Pages/Admin/restaurentList'
+import EmployeeList from '../Pages/Admin/employeeList'
 
  const AdminAuthAppLayout =()=>{ 
   return <Outlet/>
@@ -45,7 +47,23 @@ import IsLogout from '../middleware/admin/isLogout';
         <UserList/>
           </>
         )
-      }
+      },
+      {
+        path:"restaurents",
+        element:(
+          <>
+            <RestaurentList/>
+          </>
+        )
+      },
+    {
+      path:"employees",
+      element:(
+        <>
+        <EmployeeList/>
+        </>
+      )
+    }
     ]
  }
 

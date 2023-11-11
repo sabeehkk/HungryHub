@@ -14,16 +14,9 @@ const userListSlice =createSlice({
     reducers:{
      
         addUsers: (state, action:PayloadAction<UserData[]>) => {
-            state.users=action.payload;
-            // const updates = state.user.map((user) => {
-            //     if (user._id === action.payload.id) {
-            //         user.status = action.payload.status
-            //     }
-            //     return user;
-            // })
-            // state.users = state.FilterData = updates;
+              state.users=action.payload;
+           
         },
-        
     },
 });
 

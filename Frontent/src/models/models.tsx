@@ -9,6 +9,26 @@ export interface UserData {
     profilePicture: string | null | undefined;
     status:boolean;
   }
+  export interface RestaurentData {
+    _id:string;
+    restaurentName: string;
+   email: string;
+   phoneNumber: number | string | null | undefined;
+   place: string | null | undefined;
+   address: string | null | undefined;
+   profilePicture: string | null | undefined;
+   status:boolean;
+ }
+  export interface EmployeeData {
+    _id:string;
+    name: string;
+   email: string;
+   phoneNumber: number | string | null | undefined;
+   place: string | null | undefined;
+   address: string | null | undefined;
+   profilePicture: string | null | undefined;
+   status:boolean;
+ }
 
 
 export interface userInittalModel {

@@ -41,6 +41,7 @@ export const login=async (req,res)=>{
 
 export const userList = async (req, res) => {
   try {
+    console.log('userlistt');
     const PAGE = req?.query?.page
       ? req.query.page >= 1
         ? req.query.page
