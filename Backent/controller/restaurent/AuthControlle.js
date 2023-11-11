@@ -41,13 +41,13 @@ export const login=async (req,res)=>{
         }
     
  
-      //  if (restaurentData.status === false) {
-      //    return res.status(400).json({
-      //      message:
-      //        "User Account Blocked: Please contact customer support for further assistance",
-      //      error: true,
-      //    });
-      //  }
+       if (restaurentData.status === false) {
+         return res.status(400).json({
+           message:
+             "User Account Blocked by Admin",
+           error: true,
+         });
+       }
         const isPasswordVerified = bcrypt.compareSync(password, restaurentData.password);
         if (!isPasswordVerified) {
           return res.status(400).json({ message: "Invalid Password", error: true });

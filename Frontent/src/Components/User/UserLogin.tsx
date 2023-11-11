@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../redux/user/authSlice";
 import { userAxios } from "../../axios/axios";
-import {ErrorMessage} from '../../utils/util'
+// import {ErrorMessage} from '../../utils/util'
 import '../../Pages/User/style.css'
 import Google from '../../Components/googleLogin'
 
@@ -16,7 +16,7 @@ function UserLogin() {
   
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-  // const [err,setErr]=useState("")
+  const [err,setErr]=useState("")
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -25,16 +25,18 @@ const handleSubmit = async (e: SyntheticEvent)=>{
   e.preventDefault();
   console.log('formdata',email,password)
   if(email ==='' || password===''){
-      // setErr('Please fill in all fields')
+      setErr('Please fill in all fields')
       return;
   }
   try {
     await userAxios
       .post(`/login`, { email, password })
       .then((res) => {
-        if (res.data.error) {
-          return ErrorMessage(res.data.message)
-        }
+        alert(res.data.message)
+        // if (res.data.error) {
+        //   // return ErrorMessage(res.data.message)
+        //   setErr(res.data.message);
+        // }
         localStorage.setItem("userToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
@@ -90,7 +92,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           </button>
         </div>
         <Google/>
-
+        {err && <p className='text-red-600 text-center mt-2'>{err} &nbsp;</p>}
       </form>
     </div>
   </div>

@@ -30,18 +30,21 @@ export const login=async (req,res)=>{
         console.log('employee dataaaaa',req.body);
 
         const {email,password}=req.body;
-        const employeeData =await employeeModel.findOne({email,status:true  })
+        const employeeData =await employeeModel.findOne({email})
         console.log('employedataaaaaaa',employeeData);
         
-        // console.log(employeeData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
-        // if(!adminData){
-        //     return res.json({message:'invalid email or password '})
-        // }
-        // const isPasswordCorrect=await bcrypt.compare(password,adminData.password)
-        // if(!isPasswordCorrect){
-        //     return res.json({message:'password is incorrect'})
-        // }
-
+        console.log(employeeData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
+        if(!employeeData){
+            return res.json({message:'invalid email or password '})
+        }
+        if (employeeData.status === false) {
+            return res.status(400).json({
+              message:
+                "User Account Blocked by Admin",
+              error: true,
+            });
+          }
+     
         
         const isPasswordVerified = bcrypt.compareSync(password,employeeData.password)
 
@@ -51,9 +54,11 @@ export const login=async (req,res)=>{
       
         const token=jwt.sign(
             {employee:email,role:"employee"},
+
             process.env.JWT_SECRET,
+
             {expiresIn:"1h"}
-        
+
             )
             return res.json({message:"success",token,employeeData})
         

@@ -109,7 +109,7 @@ function TabelFrame({
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Name: {actionData.name||actionData.restaurantName}</p>
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Email: Cait Genevieve   {actionData.email}</p>
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">Phone Number: {actionData.phoneNumber}</p>
-                                <p className="text-black-500 dark:text-black text-lg font-semibold">Phone Number: {actionData.profilePicture}</p>
+                                <p className="text-black-500 dark:text-black text-lg font-semibold">Phone Number: {actionData.status}</p>
                                
                        </div>
                         </div>
