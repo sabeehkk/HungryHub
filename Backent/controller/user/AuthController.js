@@ -105,13 +105,13 @@ export const userLogin=async (req,res)=>{
         );
         return res.json({ message: "success", token, userData });
 
-
+    
       } catch (error) {
         console.log(error.message);
       }
 }
 
-const Action =async(req,res)=>{
+const Action =async(req,res)=>{ b
   const id = req.query.id;
   const status = req.query.status;
   await userModel.updateOne({_id: id}, {$set: {status: status}})
