@@ -55,7 +55,7 @@ export const login=async (req,res)=>{
        if (restaurentData.status === false) {
          return res.status(400).json({
            message:
-             "User Account Blocked by Admin",
+             " Admin-initiated account block",
            error: true,
          });
        }

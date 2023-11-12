@@ -10,7 +10,7 @@ function Navbar() {
         <li><a href="#" className="text-white hover:text-yellow-200">Home</a></li>
         <li><a href="#" className="text-white hover:text-yellow-200">Menu</a></li>
         <li><a href="#" className="text-white hover:text-yellow-200">About Us</a></li>
-        <li><a href="#" className="text-white hover:text-yellow-200">Contact</a></li>
+        <li><a href="/logout" className="text-white hover:text-yellow-200">Logout</a></li>
       </ul>
     </div>
   </nav>

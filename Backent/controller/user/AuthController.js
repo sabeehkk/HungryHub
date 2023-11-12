@@ -45,7 +45,7 @@ export const userLogin=async (req,res)=>{
       if (userData.status === false) {
         return res.status(400).json({
           message:
-          "User Account Blocked by Admin",
+          "Admin-initiated account block",
           error: true,
         });
       }

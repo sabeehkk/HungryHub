@@ -47,7 +47,6 @@ export default function EmployeeSignup() {
           console.log(res.data);
           console.log(res.data.message);
           if (res.data.message === "success") {
-            alert("success");
             navigate("/employee/login");
             SuccessMessage(res.data.message);
             return;

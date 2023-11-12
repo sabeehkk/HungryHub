@@ -13,7 +13,7 @@ export const signup = async (req,res)=>{
       const {name, email, phoneNumber, password} = req.body ;
       const existUser = await employeeModel.find({email,phoneNumber})
       if(existUser.length !==0){
-            return res.json({message:'User Already exists'})
+            return res.json({message:'Employee Already exists'})
       }
       const hashedPassword = await bcrypt.hash(password,10)
       const user=new employeeModel({name,email,phoneNumber,password:hashedPassword})
@@ -47,7 +47,7 @@ export const login=async (req,res)=>{
         if (employeeData.status === false) {
             return res.status(400).json({
               message:
-                "User Account Blocked by Admin",
+                " Admin-initiated account block ",
               error: true,
             });
           }
