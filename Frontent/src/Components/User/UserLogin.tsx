@@ -1,22 +1,19 @@
 import  {  useState,SyntheticEvent } from "react";
 import {  useNavigate } from "react-router-dom";
-  
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../redux/user/authSlice";
 import { userAxios } from "../../axios/axios";
-// import {ErrorMessage} from '../../utils/util'
 import '../../Pages/User/style.css'
 import Google from '../../Components/googleLogin'
-
-// import userAxios from '../../Axios/UserAxios'
-// import { setCredentials } from "../../Redux/Auth/UserSlice";
+import { ErrorMessage,SuccessMessage } from "../../utils/util";
+import { data } from "autoprefixer";
 
 function UserLogin() {
   
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-  const [err,setErr]=useState("")
+  // const [err,setErr]=useState<string>("")
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -25,27 +22,36 @@ const handleSubmit = async (e: SyntheticEvent)=>{
   e.preventDefault();
   console.log('formdata',email,password)
   if(email ==='' || password===''){
-      setErr('Please fill in all fields')
-      return;
+      ErrorMessage('Please fill in all fields')
+             return;
   }
   try {
     await userAxios
       .post(`/login`, { email, password })
       .then((res) => {
-        alert(res.data.message)
-        // if (res.data.error) {
-        //   // return ErrorMessage(res.data.message)
-        //   setErr(res.data.message);
+
+        console.log('inside then',res.data);
+        // if(res.data.message=="success"){
+        //   SuccessMessage(success.message)
+        //   console.log('kitty');
+          
         // }
+
         localStorage.setItem("userToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(userLoggedIn(res.data.userData));
         navigate("/");
+        SuccessMessage(res.data.message)
       })
   } catch (error) {
-    console.log(error);
+    // alert(error.message)
+     
+    if(error){
+      ErrorMessage(error.message)
+    }
+    
   }
 }
   return (
@@ -86,18 +92,16 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         <div className="text-center">
           <button
             type="submit"
-            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-blue-100"
+            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-500"
           >
             Login
           </button>
         </div>
         <Google/>
-        {err && <p className='text-red-600 text-center mt-2'>{err} &nbsp;</p>}
       </form>
     </div>
   </div>
   )
 }
-// }
 
 export default UserLogin

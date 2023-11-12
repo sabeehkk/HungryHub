@@ -2,8 +2,7 @@ import userModel from '../../models/user.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-export const signup = async (req,res)=>{
-  console.log('kitttyyyyyyyyyyy'); 
+export const signup = async (req,res)=>{  
   try{
     const {name, email, phoneNumber, password} = req.body ;
     const existUser = await userModel.findOne({
@@ -22,6 +21,7 @@ export const signup = async (req,res)=>{
     res.json({message:'success'})
 
     await user.save()
+
   }catch(error){
       console.log(error.message);
   }
@@ -45,7 +45,7 @@ export const userLogin=async (req,res)=>{
       if (userData.status === false) {
         return res.status(400).json({
           message:
-            "User Account Blocked: Please contact customer support for further assistance",
+          "User Account Blocked by Admin",
           error: true,
         });
       }
