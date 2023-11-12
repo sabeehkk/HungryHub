@@ -37,7 +37,7 @@ export const userLogin=async (req,res)=>{
 
        if (!userData) {
         return res.status(400).json({
-          message: "Invalid email address or email not found",
+          message: "Invalid email address or password",
           error: true,
         });
       }

@@ -5,18 +5,28 @@ import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
 import Navbar from '../Components/navbar';
 import IsLogout from '../middleware/restaurent/isLogged'
+import { ToastContainer,toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 //  
 const RestaurantAppLayout = ()=>{
     return (
             <>
            <Navbar/>
             <Outlet/>
+            <ToastContainer/>
+
             </>
     )
 }
 
 const RestaurentAuthAppLayout =()=>{
-        return  <Outlet/> 
+    return( 
+        <>
+      <Outlet />
+      <ToastContainer/>
+      </>
+      )
 };
 
 const RestaurentRoute = {   

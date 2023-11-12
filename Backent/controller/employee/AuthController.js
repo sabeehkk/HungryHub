@@ -34,9 +34,16 @@ export const login=async (req,res)=>{
         console.log('employedataaaaaaa',employeeData);
         
         console.log(employeeData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
-        if(!employeeData){
-            return res.json({message:'invalid email or password '})
+        // if(!employeeData){
+        //     return res.json({message:'invalid email or password '})
+        // }
+        if (!employeeData) {
+          return res.status(400).json({
+            message: "Invalid email address or password",
+            error: true,
+          });
         }
+
         if (employeeData.status === false) {
             return res.status(400).json({
               message:

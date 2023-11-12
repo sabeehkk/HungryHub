@@ -1,11 +1,11 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-// import Signup from '../Components/Employee/employeeSignup'
 import Signup from '../Pages/Employee/Signup'
 import Home from '../Components/Employee/employeeHome'
 import Login from '../Pages/Employee/login'
 import Navbar from '../Components/navbar'
 import IsLogout from '../middleware/employee/isLogout';
+import { ToastContainer,toast } from "react-toastify";
 
 
 const EmpoloyeeAppLayout =()=>{
@@ -13,13 +13,19 @@ const EmpoloyeeAppLayout =()=>{
         <>
         <Navbar/>
       <Outlet/>
+    <ToastContainer/>
+
         </>
-      
     )
 }
 
 const EmployeeAuthAppLayout = () =>{
-    return <Outlet/>
+    return( 
+        <>
+      <Outlet />
+      <ToastContainer/>
+      </>
+      )
 };
 
 const EmployeeRoutes = {

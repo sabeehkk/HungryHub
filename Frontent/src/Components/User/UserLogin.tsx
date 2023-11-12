@@ -13,7 +13,6 @@ function UserLogin() {
   
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-  // const [err,setErr]=useState<string>("")
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -31,12 +30,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
       .then((res) => {
 
         console.log('inside then',res.data);
-        // if(res.data.message=="success"){
-        //   SuccessMessage(success.message)
-        //   console.log('kitty');
-          
-        // }
-
+      
         localStorage.setItem("userToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
@@ -47,9 +41,9 @@ const handleSubmit = async (e: SyntheticEvent)=>{
       })
   } catch (error) {
     // alert(error.message)
-     
     if(error){
       ErrorMessage(error.message)
+      
     }
     
   }

@@ -8,10 +8,21 @@ export const signup =async (req,res)=>{
     try{
         console.log(req.body);
         const {name, email, phoneNumber, password} = req.body ;
-        const existRestorent = await restaurentModel.find({email,phoneNumber})
-        if(existRestorent.length !==0){
-              return res.json({message:'Restaurent Already exists'})
+        // const existRestorent = await restaurentModel.find({email,phoneNumber})
+        // if(existRestorent.length !==0){
+        //       return res.json({message:'Restaurent Already exists'})
+        // }
+        const existUser = await restaurentModel.findOne({
+          $or: [{ email }, { phoneNumber }],
+        });
+
+        if (existUser) {
+          return res.json({
+            message: "Restaurent Already exists",
+            error: true,
+          });
         }
+
         const hashedPassword = await bcrypt.hash(password,10)
         const restaurent=new restaurentModel({restaurantName:name,email,phoneNumber,password:hashedPassword})
         console.log('restaurentttt',restaurent);

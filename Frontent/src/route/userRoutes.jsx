@@ -26,7 +26,6 @@ const UserAuthAppLayout = () => {
     <>
   <Outlet />
   <ToastContainer/>
-
   </>
   )
 };

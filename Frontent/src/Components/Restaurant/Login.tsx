@@ -3,8 +3,7 @@ import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { restaurentAxios } from "../../axios/axios";
-
-import {ErrorMessage} from '../../utils/util'
+import {ErrorMessage,SuccessMessage} from '../../utils/util'
 import '../../Pages/User/style.css'
 import { restaurentLoggedIn } from "../../redux/restaurent/authSlice";
 
@@ -13,7 +12,6 @@ function RestaurentLogin() {
   
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-  // const [err,setErr]=useState("")
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -22,26 +20,31 @@ const handleSubmit = async (e: SyntheticEvent)=>{
   e.preventDefault();
   console.log('formdata',email,password)
   if(email ==='' || password===''){
-      // setErr('Please fill in all fields')
-      return;
+      ErrorMessage("Please fill All fields")
+       return;
   }
   try {
     await restaurentAxios
       .post(`/login`, { email, password })
       .then((res) => {
-        if (res.data.error) {
-          return ErrorMessage(res.data.message)
-        }
+       
         localStorage.setItem("userToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(restaurentLoggedIn(res.data.restaurentData));
         navigate("/restaurent/home");
+        SuccessMessage(res.data.message)
       })
   } catch (error) {
     console.log(error);
+    // alert(error.message)
+    ErrorMessage(error.message)
+
+    // if(error){
+    // }
   }
+ 
 }
   return (
     <div className=" min-h-screen  flex items-center justify-center bg-white ">
@@ -81,7 +84,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         <div className="text-center">
           <button
             type="submit"
-            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-blue-100"
+            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-500"
           >
             Login
           </button>
