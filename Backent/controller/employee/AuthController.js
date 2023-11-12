@@ -17,6 +17,7 @@ export const signup = async (req,res)=>{
       }
       const hashedPassword = await bcrypt.hash(password,10)
       const user=new employeeModel({name,email,phoneNumber,password:hashedPassword})
+
       res.json({message:'success'})
   
       await user.save()
@@ -28,7 +29,6 @@ export const signup = async (req,res)=>{
 export const login=async (req,res)=>{
     try {
         console.log('employee dataaaaa',req.body);
-
         const {email,password}=req.body;
         const employeeData =await employeeModel.findOne({email})
         console.log('employedataaaaaaa',employeeData);

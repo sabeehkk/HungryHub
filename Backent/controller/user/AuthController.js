@@ -81,6 +81,7 @@ export const userLogin=async (req,res)=>{
             });
           }
 
+          
           const token=jwt.sign(
             {user:result._id,role:"user"},
             process.env.JWT_SECRET,
