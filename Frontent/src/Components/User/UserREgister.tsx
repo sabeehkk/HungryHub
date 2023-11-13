@@ -38,9 +38,7 @@ export default function Signup() {
         .post(`${USER_API}/register`, { email, password, name, phoneNumber })
         .then((res) => {
           console.log(res.data);
-          // console.log(res.data.message)
           if (res.data.message === "success") {
-            // alert('success');
             navigate("/login");
             SuccessMessage(res.data.message);
             return;

@@ -21,10 +21,10 @@ const restaurentSchema = new mongoose.Schema({
         type : String,
         trim : true ,
     },
-     password : {
-        type :String ,
-        require : true
-     },
+    //  password : {
+    //     type :String ,
+    //     require : true
+    //  },
      profilePicture : {
         type :String ,
         default : null

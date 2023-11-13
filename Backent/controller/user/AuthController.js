@@ -60,7 +60,6 @@ export const userLogin=async (req,res)=>{
         {expiresIn:"1h"}
        );
        return res.json({message:"success",token,userData})
-
   } catch (error) {
     return res
     .status(500)

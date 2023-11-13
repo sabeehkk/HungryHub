@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Signup from '../Pages/Employee/Signup'
 import Home from '../Components/Employee/employeeHome'
 import Login from '../Pages/Employee/login'
-import Navbar from '../Components/navbar'
+import Navbar from '../Pages/Employee/employeeNavbar'
 import IsLogout from '../middleware/employee/isLogout';
 import { ToastContainer,toast } from "react-toastify";
 

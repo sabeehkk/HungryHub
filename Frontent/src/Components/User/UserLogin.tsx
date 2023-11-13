@@ -1,5 +1,4 @@
 import  {  useState,SyntheticEvent } from "react";
-import {  useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { userLoggedIn } from "../../redux/user/authSlice";
@@ -8,6 +7,8 @@ import '../../Pages/User/style.css'
 import Google from '../../Components/googleLogin'
 import { ErrorMessage,SuccessMessage } from "../../utils/util";
 import { data } from "autoprefixer";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function UserLogin() {
   
@@ -90,6 +91,15 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           >
             Login
           </button>
+          <div className="text-sm md:flex md:justify-between mt-2">
+              
+              <Link
+                to="/signup"
+                className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"
+              >
+                Create your HungryHub account
+              </Link>
+            </div>
         </div>
         <Google/>
       </form>

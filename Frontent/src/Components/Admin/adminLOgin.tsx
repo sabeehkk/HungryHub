@@ -1,7 +1,7 @@
 import  {  useState,SyntheticEvent } from "react";
 
 import { useNavigate } from "react-router-dom";
-import {ErrorMessage} from '../../utils/util';
+import {ErrorMessage,SuccessMessage} from '../../utils/util';
 
  import axios  from "axios";
 
@@ -15,7 +15,6 @@ function AdminLogin() {
 
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-  // const [err,setErr]=useState("")
 
   const dispatch=useDispatch()
   const navigate=useNavigate()
@@ -24,7 +23,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
   e.preventDefault();
   console.log('formdata',email,password)
   if(email ==='' || password===''){
-      // setErr('Please fill in all fields')
+    ErrorMessage('Please fill in all fields')
       return;
   }
   try {
@@ -40,15 +39,17 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         ] = `Bearer ${res.data.token}`;
         dispatch(adminLoggedIn(res.data.AdminData));
         navigate("/admin");
+        SuccessMessage(res.data.message)
       })
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    ErrorMessage(error.message)
   }
 }
   return (
    <div className=" min-h-screen  flex items-center justify-center bg-white ">
     <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
-      <h2 className="my-heading">Login Admin </h2>
+      <h2 className="my-heading"> Admin Login </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="username" className="block text-gray-600 font-bold">
@@ -83,7 +84,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         <div className="text-center">
           <button
             type="submit"
-            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-blue-100"
+            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
           >
             Login
           </button>

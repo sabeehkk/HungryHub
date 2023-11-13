@@ -1,10 +1,10 @@
 import { useState, SyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { employeeAxios } from "../../axios/axios";
 import { employeeLoggedIn } from "../../redux/employee/authSlice";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
+import { Link, useNavigate } from "react-router-dom";
 
 function EmployeeLogin() {
   const [email, setEmail] = useState<string>("");
@@ -82,6 +82,15 @@ function EmployeeLogin() {
             >
               Login
             </button>
+            <div className="text-sm md:flex md:justify-between mt-2">
+              
+              <Link
+                to="/employee/signup"
+                className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"
+              >
+                Create your Employee account
+              </Link>
+            </div>
           </div>
         </form>
       </div>

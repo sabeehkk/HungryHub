@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 import Signup from '../Pages/Restaurent/signup'
 import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
-import Navbar from '../Components/navbar';
 import IsLogout from '../middleware/restaurent/isLogged'
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar  from '../Pages/Restaurent/restaurentNavbar';
 
 //  
 const RestaurantAppLayout = ()=>{

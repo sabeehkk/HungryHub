@@ -46,7 +46,7 @@ export default function Signup() {
           console.log(res.data);
           console.log(res.data.message);
           if (res.data.message === "success") {
-            alert("success");
+            // alert("success");
             navigate("/restaurent/login");
             SuccessMessage(res.data.message);
             return;
@@ -145,7 +145,7 @@ export default function Signup() {
         <div className="mt-4 ml-8 text-grey-600">
           Already have an account?{" "}
           <span>
-            <a className="text-blue-600 hover:underline" href="/login">
+            <a className="text-blue-600 hover:underline" href="/restaurent/login">
               Log in
             </a>
           </span>

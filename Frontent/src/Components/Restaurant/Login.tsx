@@ -1,5 +1,6 @@
 import  {  useState,SyntheticEvent } from "react";
-import {  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { restaurentAxios } from "../../axios/axios";
@@ -88,6 +89,15 @@ const handleSubmit = async (e: SyntheticEvent)=>{
           >
             Login
           </button>
+          <div className="text-sm md:flex md:justify-between mt-2">
+              
+              <Link
+                to="/restaurent/signup"
+                className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"
+              >
+                Create your Partner account
+              </Link>
+            </div>
         </div>
       </form>
     </div>

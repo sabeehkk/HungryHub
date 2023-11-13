@@ -6,10 +6,21 @@ import Home from '../Components/Admin/adminHome'
 import UserList from '../Pages/Admin/usersList'
 import IsLogout from '../middleware/admin/isLogout';
 import RestaurentList from '../Pages/Admin/restaurentList'
-import EmployeeList from '../Pages/Admin/employeeList'
+import EmployeeList from '../Pages/Admin/employeeList';
+import Navbar from '../Components/Admin/adminNavbar';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
  const AdminAuthAppLayout =()=>{ 
-  return <Outlet/>
+  return(
+  <>
+  {/* <AdminNavbar/> */}
+  <Navbar/>
+  <Outlet/>
+  <ToastContainer/>
+
+  </> 
+  )
  };
 
  const AdminRoute={

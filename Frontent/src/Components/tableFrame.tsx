@@ -5,11 +5,11 @@ import Pagination from "../Components/pagination";
 import { Button, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 
-
 import {
   AdminSideRestaurentModel,
   AdminSideTableFrameProps,
 } from "../models/models";
+import { usersData } from "../api/adminApi";
 
 function TabelFrame({
   heading,
@@ -34,19 +34,15 @@ function TabelFrame({
   };
   const handleModalButtonClick = (item, role) => {
     setActionData(item);
-    // Navigate to the desired page
     setShowModal(true);
 
-    // navigate(`/admin/${role}/${item._id}/more-details`);
-
-    // Close the modal if needed
   };
 
   return (
     <div className="h-screen w-full bg-blue-200 p-8">
       <div className="max-w-screen-md mx-auto p-8 shadow-md rounded-lg bg-blue-100">
         <div className="w-full h-16 bg-blue-300 shadow-lg flex items-center justify-between px-6">
-          <h1 className="ml-80 text-xl font-bold text-gray-800">
+          <h1 className="ml-60 text-xl font-bold text-gray-800">
             {heading} Management
           </h1>
           <div className="flex items-center"></div>
@@ -57,8 +53,9 @@ function TabelFrame({
             <tr className="bg-gray-200">
               <th className="px-4 py-2">#</th>
               <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Action</th>
               <th className="px-4 py-2">Status</th>
+
+              <th className="px-4 py-2">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -73,8 +70,8 @@ function TabelFrame({
                           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                             {/*header*/}
                             <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                              <h3 className="text-3xl font-semibold text-center mx-auto">
-                                Details
+                              <h3 className="text-3xl ml-60 font-semibold text-center mx-auto">
+                               More Details
                               </h3>
                               <button
                                 className="p-1 ml-auto border-0 text-black opacity-100 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -88,20 +85,9 @@ function TabelFrame({
                             {/*body*/}
 
                             <h5></h5>
-                            <div className="flex items-center">
-                              <img
-                                className="w-20 h-20 rounded-full"
-                                src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg?w=2000"
-                                alt=""
-                              />
-                              <div className="ml-4">
-                                <h2 className="text-xl font-semibold">
-                                  {actionData.name || actionData.restaurantName}
-                                </h2>
-                              </div>
-                            </div>
+                           
 
-                            <div className="relative p-6 flex-auto">
+                            {/* <div className="relative p-6 flex-auto">
                               <div className="mb-4">
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">
                                   Name:{" "}
@@ -113,11 +99,56 @@ function TabelFrame({
                                 <p className="text-black-500 dark:text-black text-lg font-semibold">
                                   Phone Number: {actionData.phoneNumber}
                                 </p>
-                                <p className="text-black-500 dark:text-black text-lg font-semibold">
-                                  Phone Number: {actionData.status}
-                                </p>
+                               
                               </div>
-                            </div>
+                            </div> */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div className="flex justify-center items-center">
+  <img
+    src={
+      usersData?.profilePicture ||
+      "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png"
+    }
+    alt="User"
+    className="h-16 w-16 md:h-20 md:w-20 rounded-full"
+  />
+</div>
+
+
+            <div className="flex-col justify-center my-5">
+              <p className="text-lg mb-2">
+                Name:{" "}
+                <span className="font-semibold">
+                {actionData.name || actionData.restaurantName}
+                </span>
+              </p>
+              <p className="text-lg mb-2">
+                Email: <span className="font-semibold">{actionData?.email}</span>
+              </p>
+              <p className="text-lg mb-2">
+                Phone Number:{" "}
+                <span className="font-semibold">{actionData?.phoneNumber}</span>
+              </p>
+            
+              {/* <p className="text-lg mb-2">
+                Address: <span className="font-semibold">{user?.address}</span>
+              </p> */}
+              {/* <p className="text-lg mb-2">
+                Age:{" "}
+                <span className="font-semibold">
+                  {user?.age ? user?.age : "Not Updated"}
+                </span>
+              </p> */}
+            </div>
+            <div className="flex-col justify-center my-5">
+              <p className="text-lg mb-2">
+                Created At:{" "}
+                {actionData?.createdAt
+                  ? new Date(actionData?.createdAt).toLocaleDateString()
+                  : ""}
+              </p>
+            </div>
+          </div>
 
                             {/*footer*/}
                             <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
