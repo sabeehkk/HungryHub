@@ -1,3 +1,5 @@
+import User from '../Components/tableFrame'
+
 import { useState } from "react";
 const App = () => {
   const [open, setOpen] = useState(true);
@@ -19,8 +21,8 @@ const App = () => {
           open ? "w-72" : "w-20 "
         } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
       >
-        <img
-          src="./src/assets/control.png"
+        <img         
+          src="./src/assets/control.png"     
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
            border-2 rounded-full  ${!open && "rotate-180"}`}
           onClick={() => setOpen(!open)}
@@ -58,6 +60,7 @@ const App = () => {
         </ul>
       </div>
       <div className="h-screen flex-1 p-7">
+        <User/>
         <h1 className="text-2xl font-semibold ">Home Page</h1>
       </div>
     </div>
