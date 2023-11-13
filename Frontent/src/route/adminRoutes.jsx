@@ -3,19 +3,18 @@ import { Outlet } from 'react-router-dom'
 
 import Login from '../Pages/Admin/adminLogin';
 import Home from '../Components/Admin/adminHome'
-import UserList from '../Pages/Admin/usersList'
+import UserList from '../Components/adminNavbar'
 import IsLogout from '../middleware/admin/isLogout';
 import RestaurentList from '../Pages/Admin/restaurentList'
 import EmployeeList from '../Pages/Admin/employeeList';
-import Navbar from '../Components/Admin/adminNavbar';
+// import Navbar from '../Components/adminNavbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
  const AdminAuthAppLayout =()=>{ 
   return(
   <>
-  {/* <AdminNavbar/> */}
-  <Navbar/>
+  {/* <Navbar/> */}
   <Outlet/>
   <ToastContainer/>
 
