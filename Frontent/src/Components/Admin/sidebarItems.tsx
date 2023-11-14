@@ -1,4 +1,3 @@
-import Userlist from '../Pages/Admin/usersList'
 
 import { useState } from "react";
 const App = () => {
@@ -59,10 +58,7 @@ const App = () => {
           ))}
         </ul>
       </div>
-      <div className="h-screen flex-1 p-7">
-        <Userlist/>
-        <h1 className="text-2xl font-semibold ">Home Page</h1>
-      </div>
+     
     </div>
   );
 };

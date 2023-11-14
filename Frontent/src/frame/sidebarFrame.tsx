@@ -1,9 +1,11 @@
 import React from 'react'
 
-function sidebarFrame() {
+const SidebarFrame=({Items})=> {
   return (
-    <div>sidebarFrame</div>
+    <div>
+      <Items/>
+      sidebarFrame</div>
   )
 }
 
-export default sidebarFrame
+export default SidebarFrame
