@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Pagination from "../Components/pagination";
 import { Button, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../Components/adminNavbar";
+import Navbar from "./adminSidebar";
 
 import {
   AdminSideRestaurentModel,
