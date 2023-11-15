@@ -70,7 +70,7 @@ const App = () => {
                 <img
                   src={`${Menu.src}`}
                   alt="User"
-                  className=" md:h-9 md:w-9 rounded-full"
+                  className=" md:h-7 md:w-9 rounded-full"
                 />
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}

@@ -1,13 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Login from '../Pages/Admin/adminLogin';
-// import Home from '../Components/Admin/adminHome'
-// import UserList from '../Components/adminSidebar'
 import IsLogout from '../middleware/admin/isLogout';
 import RestaurentList from '../Pages/Admin/restaurentList'
 import EmployeeList from '../Pages/Admin/employeeList';
 import UsersList from '../Pages/Admin/usersList'
-// import Navbar from '../Components/adminSidebar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminFrame from '../Components/Admin/adminFrame'
@@ -18,16 +15,12 @@ const AdminAppLayout = ()=>{
     <>
     <ToastContainer/>
     <AdminFrame/>
-    
     </>
   )
 }
  const AdminAuthAppLayout =()=>{ 
   return(
-  <>
   <Outlet/>
-  <ToastContainer/>
-  </> 
   )
  };
 
@@ -41,7 +34,7 @@ const AdminAppLayout = ()=>{
           <>
           <Login/>
           </>
-        )
+        ),
       },
       {
         path:'logout',

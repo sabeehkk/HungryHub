@@ -7,6 +7,7 @@ import IsLogout from '../middleware/user/isLogout'
 import UserLogout from '../Pages/User/userLogout'
 import Navbar from '../Components/navbar'
 import { ToastContainer,toast } from "react-toastify";
+import OtpVerification from '../Components/User/otpVerification'
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -60,6 +61,14 @@ const UserRoute={
     )
    },
    {
+      path :'otp',
+      element:(
+        <>
+        <OtpVerification/>
+        </>
+      )
+   },
+   {
     path:"/",    
     element:<UserAppLayout/>,
     
@@ -70,6 +79,7 @@ const UserRoute={
       }
     ]
    },
+
   ]
 }
 
