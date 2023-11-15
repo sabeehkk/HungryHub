@@ -1,7 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { render } from "react-dom";
+import { verifyOtp } from "../../api/userApi";
+import axios from "axios";
 
-const App = () => {
+
+const OtpVerification = () => {
   const inputRef = useRef({});
   const [otp, setOtp] = useState({
     digitone: "",
@@ -21,10 +24,16 @@ const App = () => {
   const handleSumbit=(otp)=>{
     const result = Object.values(otp).join("");
   console.log(result,'final result');
+  try {
+     verifyOtp(otp)
+  } catch (error) {
+    console.log(error);
+    
+  }
+  // verifyOtp(otp)
 
   }
   
-
   const pasteText = (event) => {
     const pastedText = event.clipboardData.getData("text");
     const fieldValues = {};
@@ -32,7 +41,6 @@ const App = () => {
       fieldValues[keys] = pastedText[index];
       inputRef.current[5].focus();
     });
-    // console.log(fieldValues);
     setOtp(fieldValues);
   };
 
@@ -74,7 +82,9 @@ const App = () => {
       />
     ));
   };
+
   console.log(otp);
+  
   return (
     <div className="flex min-h-screen flex-col justify-center bg-gray-50 py-12">
       <div className="bg-white p-6 shadow-xl mx-auto w-full max-w-md rounded-2xl">
@@ -87,18 +97,16 @@ const App = () => {
               <p>We have sent a code to your email ba**@dipainhouse.com</p>
             </div>
           </div>
-
           <div>
             <form action="" className="flex flex-row">
               <div className="flex flex-col space-y-16">
                 <div className="flex flex-row space-x-4">{renderInput()}</div>
                 <div className="flex flex-col space-y-1 space-x-">
                   <div>
-                    <button type="button" onClick={()=>handleSumbit(otp)} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm">
+                    <button type="button" onClick={()=>handleSumbit(otp)} className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-3 bg-blue-700 border-none text-white text-sm shadow-sm">
                       Verify Account
                     </button>
                   </div>
-
                   <div className="flex flex-row items-center justify-center text-center text-sm font-medium space-x-1 text-gray-500">
                     <p>Didn't receive code?</p>{" "}
                     <a
@@ -119,5 +127,4 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
+export default OtpVerification;

@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import axios from "axios";
 import {} from "react-redux";
@@ -5,17 +7,26 @@ import { USER_API } from "../../Constants/API";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
+import   OtpPage from '../User/otpVerification'
+
+import { SignupApi, signupVerify } from "../../api/userApi";
 
 export default function Signup() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
+  const [otpComponent,setOtpComponent]=useState<boolean> (false)
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleOtpComponent =()=>{
+    setOtpComponent(!otpComponent)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
 
     console.log("Form Data:", {
       name,
@@ -23,6 +34,7 @@ export default function Signup() {
       password,
       phoneNumber,
     });
+
     if (email.trim() === "" || password.trim() === "" || name.trim() === "") {
       return ErrorMessage("Please fill in all the required fields.");
     }
@@ -33,29 +45,86 @@ export default function Signup() {
       ErrorMessage("password is too weak");
       return;
     }
-    try {
-      axios
-        .post(`${USER_API}/register`, { email, password, name, phoneNumber })
-        .then((res) => {
-          console.log(res.data);
-          if (res.data.message === "success") {
-            navigate("/login");
-            SuccessMessage(res.data.message);
-            return;
-          }
-          ErrorMessage(res.data.message);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } catch (error) {
-      console.log(error);
+    setOtpComponent(true)
+    const result = await signupVerify(email, phoneNumber);
+    if (result) {
+      handleOtpComponent();
+      sendSignupData()
+    }
+    const userData ={
+      email,
+   password,
+      name,
+     phoneNumber
+}
+
+
+const response =await SignupApi(userData)
+console.log(response.data,'ithaan original data');
+
+    if(response.data.message=="success"){
+      SuccessMessage("signup successful")
+      return navigate("/login")
     }
   };
-  return (
+
+    // const result =await signupVerify(email,phoneNumber)
+    // console.log(result,'reesullttt');
+
+  
+  
+
+  const sendSignupData = async () => {
+    setOtpComponent(false)
+
+    const userData ={
+          email,
+       password,
+          name,
+         phoneNumber
+    }
+
+  const response =await SignupApi(userData)
+        if(response.data.message=="success"){
+          SuccessMessage("signup successful")
+          return navigate("/login")
+        }
+  }
+
+
+
+
+
+  //   try {
+  //     axios
+  //       .post(`${USER_API}/register`, { email, password, name, phoneNumber })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         if (res.data.message === "success") {
+  //           navigate("/login");
+  //           SuccessMessage(res.data.message);
+  //           return;
+  //         }
+  //         ErrorMessage(res.data.message);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+
+
+  // }
+
+
+
+
+  return otpComponent ? <OtpPage/> : (
     <div className=" min-h-screen  flex items-center justify-center bg-white ">
       <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
         <ToastContainer
+        
           toastClassName="toast"
           position="top-center"
           autoClose={5000}

@@ -12,17 +12,17 @@ const Navbar =()=> {
       </div>
 
       <nav id="nav-items" className="space-x-4 md:block hidden">
-        <Link to={'/'} className="text-gray-950 hover:text-white">
-          HOME
-        </Link>
-        <Link to={'/restaurent/signup'} className="text-gray-950 hover:text-white">
-          Become A Partner
-        </Link>
-        <Link to={'/employee/signup'} className="text-gray-950 hover:text-white">
-          Work With Us
-        </Link>
-        
-      </nav>
+  <Link to={'/'} className="text-gray-950 hover:text-white font-semibold text-xl">
+    HOME
+  </Link>
+  <Link to={'/restaurent/signup'} className="text-gray-950 hover:text-white font-semibold text-xl">
+    Become A Partner
+  </Link>
+  <Link to={'/employee/signup'} className="text-gray-950 hover:text-white font-semibold text-xl">
+    Work With Us
+  </Link>
+</nav>
+
     <div className="md:flex hidden items-center ">
 
       {success ? 
