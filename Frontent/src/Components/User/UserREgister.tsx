@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import axios from "axios";
 import {} from "react-redux";
@@ -7,26 +5,32 @@ import { USER_API } from "../../Constants/API";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
-import   OtpPage from '../User/otpVerification'
-
+import OtpPage from "../User/otpVerification";
+import { userAxios } from "../../axios/axios";
 import { SignupApi, signupVerify } from "../../api/userApi";
+
+export const verifyOtp = async (otp) => {
+  console.log(otp.data);
+  try {
+      const response = await userAxios.post(`/verifyOtp`, otp);
+      console.log("Backend Response:", response.data);
+      return response;
+  } catch (error) {
+      console.error("Error from Backend:", error);
+      throw error; 
+  }
+};
 
 export default function Signup() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
-  const [otpComponent,setOtpComponent]=useState<boolean> (false)
+  const [otpComponent, setOtpComponent] = useState<boolean>(false);
 
   const navigate = useNavigate();
-
-  const handleOtpComponent =()=>{
-    setOtpComponent(!otpComponent)
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
 
     console.log("Form Data:", {
       name,
@@ -45,86 +49,39 @@ export default function Signup() {
       ErrorMessage("password is too weak");
       return;
     }
-    setOtpComponent(true)
+    setOtpComponent(true);
     const result = await signupVerify(email, phoneNumber);
     if (result) {
-      handleOtpComponent();
-      sendSignupData()
+      console.log('result have');
     }
-    const userData ={
+ }
+  const handleSumbit=async(otp)=>{
+    const result = Object.values(otp).join("");
+  console.log(result,'register finallresult');
+  try {
+    const result=await verifyOtp(otp)
+    console.log(result);
+    if(result.data.message=='success'){
+      navigate('/login')
+      SuccessMessage('user created successfully')
+    const userData = {
       email,
-   password,
+      password,
       name,
-     phoneNumber
-}
-
-
-const response =await SignupApi(userData)
-console.log(response.data,'ithaan original data');
-
-    if(response.data.message=="success"){
-      SuccessMessage("signup successful")
-      return navigate("/login")
+      phoneNumber,
+    };
+     await SignupApi(userData)
     }
-  };
-
-    // const result =await signupVerify(email,phoneNumber)
-    // console.log(result,'reesullttt');
-
-  
-  
-
-  const sendSignupData = async () => {
-    setOtpComponent(false)
-
-    const userData ={
-          email,
-       password,
-          name,
-         phoneNumber
-    }
-
-  const response =await SignupApi(userData)
-        if(response.data.message=="success"){
-          SuccessMessage("signup successful")
-          return navigate("/login")
-        }
+  } catch (error) {
+    console.log(error);
   }
-
-
-
-
-
-  //   try {
-  //     axios
-  //       .post(`${USER_API}/register`, { email, password, name, phoneNumber })
-  //       .then((res) => {
-  //         console.log(res.data);
-  //         if (res.data.message === "success") {
-  //           navigate("/login");
-  //           SuccessMessage(res.data.message);
-  //           return;
-  //         }
-  //         ErrorMessage(res.data.message);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-
-
-  // }
-
-
-
-
-  return otpComponent ? <OtpPage/> : (
+  }
+  return otpComponent ? (
+    <OtpPage handleSumbit={handleSumbit}/>
+  ) : (
     <div className=" min-h-screen  flex items-center justify-center bg-white ">
       <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
         <ToastContainer
-        
           toastClassName="toast"
           position="top-center"
           autoClose={5000}
@@ -194,13 +151,11 @@ console.log(response.data,'ithaan original data');
           <div className="text-center">
             <button
               type="submit"
-              // className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105"
               className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-teal-500 rounded-md hover:bg-teal-600 focus:outline-none focus:bg-teal-600"
             >
               Register
             </button>
           </div>
-          {/* <Google/> */}
         </form>
         <div className="mt-4 ml-8 text-grey-600">
           Already have an account?{" "}

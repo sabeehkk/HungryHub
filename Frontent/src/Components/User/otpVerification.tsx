@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { render } from "react-dom";
-import { verifyOtp } from "../../api/userApi";
+import { verifyOtp } from "../../Components/User/UserREgister";
 import axios from "axios";
 
 
-const OtpVerification = () => {
+const OtpVerification = ({handleSumbit}) => {
   const inputRef = useRef({});
   const [otp, setOtp] = useState({
     digitone: "",
@@ -14,27 +14,13 @@ const OtpVerification = () => {
     digitFive: "",
     digitSix: "",
   });
-
   useEffect(() => {
     inputRef.current[0].focus();
     inputRef.current[0].addEventListener("paste", pasteText);
-    return () => inputRef.current[0].removeEventListener("paste", pasteText);
+    // return () => inputRef.current[0].removeEventListener("paste", pasteText);
   }, [] );   
-
-  const handleSumbit=(otp)=>{
-    const result = Object.values(otp).join("");
-  console.log(result,'final result');
-  try {
-     verifyOtp(otp)
-  } catch (error) {
-    console.log(error);
-    
-  }
-  // verifyOtp(otp)
-
-  }
   
-  const pasteText = (event) => {
+  const pasteText = (event:any) => {
     const pastedText = event.clipboardData.getData("text");
     const fieldValues = {};
     Object.keys(otp).forEach((keys, index) => {
@@ -44,7 +30,7 @@ const OtpVerification = () => {
     setOtp(fieldValues);
   };
 
-  const handleChange = (event, index) => {
+  const handleChange = (event:any, index:any) => {
     const { name, value } = event.target;
 
     if (/[a-z]/gi.test(value)) return;
@@ -60,7 +46,7 @@ const OtpVerification = () => {
   };
   console.log(inputRef.current);
 
-  const handleBackspace = (event, index) => {
+  const handleBackspace = (event:any, index:any) => {
     if (event.key === "Backspace") {
       if (index > 0) {
         inputRef.current[index - 1].focus();
@@ -82,9 +68,7 @@ const OtpVerification = () => {
       />
     ));
   };
-
   console.log(otp);
-  
   return (
     <div className="flex min-h-screen flex-col justify-center bg-gray-50 py-12">
       <div className="bg-white p-6 shadow-xl mx-auto w-full max-w-md rounded-2xl">

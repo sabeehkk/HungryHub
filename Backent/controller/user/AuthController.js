@@ -8,6 +8,7 @@ let copyOtp;
 
 export const signup = async (req,res)=>{  
   try{
+    console.log(req.body);
     const {name, email, phoneNumber, password} = req.body ;
     const existUser = await userModel.findOne({
       $or: [{ email }, { phoneNumber }],
