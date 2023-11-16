@@ -2,20 +2,29 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Signup from '../Pages/User/UserRegister'
 import Login from '../Pages/User/login'
-import Home from '../Components/User/HomePage'
+// import Home from '../Components/User/HomePage'
 import IsLogout from '../middleware/user/isLogout'
 import UserLogout from '../Pages/User/userLogout'
-import Navbar from '../Components/navbar'
+// import Navbar from '../Components/navbar'
 import { ToastContainer,toast } from "react-toastify";
-import OtpVerification from '../Components/User/otpVerification'
-
+import OtpVerification from '../Components/User/otpVerification';
+import UserNavbar from '../Components/User/userNavbar';
+import Hero from '../Components/User/hero'
+import HeadlineCards from  '../Components/User/headlineCards.tsx'
+import Food from '../Components/User/food.tsx'
 import 'react-toastify/dist/ReactToastify.css';
 
 const UserAppLayout = () => {
   return (
     <>
 
-    <Navbar/>
+    {/* <Navbar/> */}
+    <UserNavbar/>
+    <Hero/>
+    <HeadlineCards/>
+    <Food/>
+
+
       <Outlet />
     <ToastContainer/>
 
@@ -75,7 +84,7 @@ const UserRoute={
     children:[
       {
         path:"/",
-        element:<Home/>
+        // element:<Home/>
       }
     ]
    },

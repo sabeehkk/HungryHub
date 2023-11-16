@@ -12,12 +12,12 @@ import { SignupApi, signupVerify } from "../../api/userApi";
 export const verifyOtp = async (otp) => {
   console.log(otp.data);
   try {
-      const response = await userAxios.post(`/verifyOtp`, otp);
-      console.log("Backend Response:", response.data);
-      return response;
+    const response = await userAxios.post(`/verifyOtp`, otp);
+    console.log("Backend Response:", response.data);
+    return response;
   } catch (error) {
-      console.error("Error from Backend:", error);
-      throw error; 
+    console.error("Error from Backend:", error);
+    throw error;
   }
 };
 
@@ -52,32 +52,38 @@ export default function Signup() {
     setOtpComponent(true);
     const result = await signupVerify(email, phoneNumber);
     if (result) {
-      console.log('result have');
+      console.log("result have");
     }
- }
-  const handleSumbit=async(otp)=>{
+  };
+  const handleSumbit = async (otp) => {
     const result = Object.values(otp).join("");
-  console.log(result,'register finallresult');
-  try {
-    const result=await verifyOtp(otp)
-    console.log(result);
-    if(result.data.message=='success'){
-      navigate('/login')
-      SuccessMessage('user created successfully')
-    const userData = {
-      email,
-      password,
-      name,
-      phoneNumber,
-    };
-     await SignupApi(userData)
+    console.log(result, "register finallresult");
+    try {
+      const result = await verifyOtp(otp);
+      console.log(result.data,'resulttt');
+      alert(result.data)
+      if (result.data.message == "success") {
+        navigate("/login");
+        SuccessMessage("user created successfully");
+        const userData = {
+          email,
+          password,
+          name,
+          phoneNumber,
+        };
+        await SignupApi(userData);
+      }if(result.data.message==error){
+        console.log(error.message)
+      }
+    } catch (error) {
+      // console.log(error);
+  //  alert(error.message)
+  ErrorMessage(error.message)
+
     }
-  } catch (error) {
-    console.log(error);
-  }
-  }
+  };
   return otpComponent ? (
-    <OtpPage handleSumbit={handleSumbit}/>
+    <OtpPage handleSumbit={handleSumbit} />
   ) : (
     <div className=" min-h-screen  flex items-center justify-center bg-white ">
       <div className="bg-white p-6 rounded-lg shadow w-96 mb-24">
