@@ -90,7 +90,7 @@ const UserRoute={
     )
    },
    {
-    path:'/editProfile',
+    path:'/profile/edit',
     element:(
       <>
       <UserNavbar/>

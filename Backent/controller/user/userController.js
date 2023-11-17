@@ -11,3 +11,16 @@ export const userProfile =async(req,res)=>{
 }
 
 
+export const updateProfile = async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const data = req.body;
+  
+      await userSchema.updateOne({ _id: userId }, data);
+  
+      return res.json({ message: "success" });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };

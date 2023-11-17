@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
 
 function userProfile() {
   const { user } = useSelector((state: any) => state.userAuth);
+  const dispatch = useDispatch();
 
+
+  useEffect(() => {
+    
+      const data = user
+      dispatch(setProfile(data));
+      // setSelectedImage(null);
+    
+  }, []);
   return (
     <>
 

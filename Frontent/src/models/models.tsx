@@ -1,7 +1,6 @@
 export interface UserData {
      _id:string;
      name: string;
-    lastName: string;
     email: string;
     phoneNumber: number | string | null | undefined;
     place: string | null | undefined;
@@ -57,6 +56,7 @@ export interface userInittalModel {
     currentPage: number;
     size: number;
   }
+  
   export interface profileEditModal {
     private _id(
       data: {

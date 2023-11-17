@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { ErrorMessage, SuccessMessage,validateEmail } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
-// import { updateProfileData } from "../../api/userApi";
-// import { updateData } from "../../redux/user/authSlice";
-import { useDispatch } from "react-redux";
+import { updateProfileData } from "../../api/userApi";
+import { updateData } from "../../redux/user/authSlice";
+import { useDispatch ,} from "react-redux";
 import { profileEditModal } from "../../models/models";
 
 const EditProfile = ({ data }) => {
+
   const [user, setUser] = useState<profileEditModal>({
     _id: data?._id || "",
     name: data?.lastName || "",
@@ -18,6 +19,7 @@ const EditProfile = ({ data }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -52,9 +54,7 @@ const EditProfile = ({ data }) => {
       );
     }
 
-    if (phoneNumber.length != 10) {
-      return ErrorMessage("Please check your license");
-    }
+   
     const data = {
       name,
       email,
@@ -77,13 +77,13 @@ const EditProfile = ({ data }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {/** Input Fields */}
           <div>
-            <label htmlFor="firstName" className="text-gray-600">
+            <label htmlFor="name" className="text-gray-600">
               First Name
             </label>
             <input
               type="text"
-              id="firstName"
-              name="firstName"
+              id="name"
+              name="name"
               value={user?.name}
               onChange={handleInputChange}
               className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
