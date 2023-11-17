@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setProfile } from "../../redux/user/authSlice";
 
 function userProfile() {
+  const { user } = useSelector((state: any) => state.userAuth);
+
   return (
     <div className="h-full mt-16 shadow-xl mr-16 ml-16">
       <div className="flex items-center justify-center">
@@ -42,7 +46,7 @@ function userProfile() {
                   id="username"
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="text"
-                  value="Jane Name"
+                  value={user.name}
                 />
               </div>
             </div>
@@ -55,11 +59,20 @@ function userProfile() {
                 id="email"
                 className="border-1  rounded-r px-4 py-2 w-full"
                 type="email"
-                value="example@example.com"
+                value={user.email}
               />
-              <span className="text-gray-600 pt-4 block opacity-70">
-                Personal login information of your account
-              </span>
+            </div>
+            <div className="pb-4">
+              <label className="font-semibold text-gray-700 block pb-1">
+                Mobile Number
+              </label>
+              <input
+                disabled
+                id="email"
+                className="border-1  rounded-r px-4 py-2 w-full"
+                type="email"
+                value={user.phoneNumber}
+              />
             </div>
           </div>
         </div>

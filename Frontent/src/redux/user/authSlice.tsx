@@ -18,9 +18,13 @@ const INITTAL_STATE: userInittalModel = {
       logout:(state)=>{
         state.user=null;
         state.success=false
+      },
+      setProfile:(state,action:any)=>{
+        const data ={...state.user,...action.payload};
+        state.user=data
       }
     },
   });
-  export const { userLoggedIn,logout } =
+  export const { userLoggedIn,logout,setProfile } =
   authSlice.actions;
 export default authSlice.reducer;
