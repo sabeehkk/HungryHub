@@ -57,3 +57,19 @@ export interface userInittalModel {
     currentPage: number;
     size: number;
   }
+  export interface profileEditModal {
+    private _id(
+      data: {
+        name: string;
+        email: string;
+        phoneNumber: string | number;
+        address: string;
+      },
+      _id: any
+    ): unknown;
+    name: string;
+
+    email: string;
+    phoneNumber: string | number | null | undefined;
+    place: string | null | undefined;
+  }

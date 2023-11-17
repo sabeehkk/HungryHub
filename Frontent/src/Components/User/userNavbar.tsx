@@ -4,6 +4,8 @@ import {BsFillCartFill} from 'react-icons/bs'
 import {TbTruckDelivery} from 'react-icons/tb'
 import  {FaUserFriends,FaWallet} from 'react-icons/fa'
 import {MdFavorite,MdHelp} from 'react-icons/md'
+import { Link } from 'react-router-dom';
+
 const UserNavbar=()=> {
   const [nav,setNav]=useState(false)
   return (
@@ -36,26 +38,43 @@ const UserNavbar=()=> {
        {nav ?<div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'>
            </div> : ''}
 
+           <div className={nav ? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300 ':'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300 '}>
+  <AiOutlineClose onClick={() => setNav(!nav)} size={30} className='absolute right-4 top-4 cursor-pointer'/>
+  <h2 className='text-2xl p-4'>Hungry <span className='font-bold'>Hub</span></h2>
+  <nav>
+    <ul className='flex flex-col p-4 text-gray-800'>
+      <li className='text-xl py-4 flex gap-x-2 items-center'>
+        <Link to="/employee/signup">
+          <TbTruckDelivery size={25} className='mr-4' />
+          Orders
+        </Link>
+      </li>
+      <li className='text-xl py-4 flex items-center'>
+        <Link to="/employee/login">
+          <MdFavorite size={25} className='mr-4 flex'/>
+          Favorites
+        </Link>
+      </li>
+      <li className='text-xl py-4 flex items-center'>
+        <FaWallet size={25} className='mr-4'/>
+        Wallet
+      </li>
+      <li className='text-xl py-4 flex items-center'>
+        <MdHelp size={25} className='mr-4'/>
+        Help
+      </li>
+      <li className='text-xl py-4 flex items-center'>
+        <FaUserFriends size={25} className='mr-4'/>
+        Invite Friends
+      </li>
+    </ul>
+  </nav>
+</div>
+
            
                  {/* {Side drawer menu} */}
-        <div className={nav ? 'fixed top-0 left-0 w-[300px] h-screen bg-white z-10 duration-300 ':'fixed top-0 left-[-100%] w-[300px] h-screen bg-white z-10 duration-300 '}>
-          <AiOutlineClose onClick={()=>setNav(!nav)} size={30} className='absolute right-4 top-4 cursor-pointer'/>
-          <h2 className='text-2xl p-4'>Hungry <span className='font-bold'>Hub</span>
+       
 
-          </h2>
-          <nav>
-            <ul className='flex flex-col p-4 text-gray-800'>
-              <li className='text-xl py-4 flex'><TbTruckDelivery size={25} className='mr-4'/>Orders</li>
-              <li className='text-xl py-4 flex'><MdFavorite size={25} className='mr-4'/>Favorites</li>
-              <li className='text-xl py-4 flex'><FaWallet size={25} className='mr-4'/>Wallet</li>
-              <li className='text-xl py-4 flex'><MdHelp size={25} className='mr-4'/>Help</li>
-              {/* <li className='text-xl py-4 flex'><AiFillTag size={25} className='mr-4'/>Promotions</li> */}
-              {/* <li className='text-xl py-4 flex'><BsFillSave size={25} className='mr-4'/>Best Ones</li> */}
-              <li className='text-xl py-4 flex'><FaUserFriends size={25} className='mr-4'/>Invite Friends</li>
-            </ul>
-          </nav>
-
-        </div>
     </div>
   )
 }
