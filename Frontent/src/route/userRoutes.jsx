@@ -12,6 +12,7 @@ import UserNavbar from '../Components/User/userNavbar';
 import Hero from '../Components/User/hero'
 import HeadlineCards from  '../Components/User/headlineCards.tsx'
 import Food from '../Components/User/food.tsx'
+import Profile from '../Components/User/userProfile.tsx'
 import 'react-toastify/dist/ReactToastify.css';
 
 const UserAppLayout = () => {
@@ -78,6 +79,15 @@ const UserRoute={
       )
    },
    {
+    path:'/profile',
+    element:(
+     <>
+      <UserNavbar/>
+      <Profile/>
+     </>
+    )
+   },
+   {
     path:"/",    
     element:<UserAppLayout/>,
     
@@ -88,7 +98,6 @@ const UserRoute={
       }
     ]
    },
-  
 
   ]
 }

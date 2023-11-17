@@ -3,14 +3,14 @@ import axios from "axios"
 
 
 export const verifyOtp = async (otp) => {
-  console.log(otp.data);
   
   try {
       const response = await userAxios.post(`/verifyOtp`, otp);
-      console.log("Backend Response:", response.data);
+      // console.log("Backend Response:", response.data);
       return response;
   } catch (error) {
       console.error("Error from Backend:", error);
+      
       throw error; 
   }
 };
