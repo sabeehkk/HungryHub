@@ -14,6 +14,7 @@ import HeadlineCards from  '../Components/User/headlineCards.tsx'
 import Food from '../Components/User/food.tsx'
 import Profile from '../Components/User/userProfile.tsx'
 import EditProfile from '../Pages/User/profileEdit.tsx'
+import ChangePassword from '../Components/User/editPassword.tsx'
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,11 +27,8 @@ const UserAppLayout = () => {
     <Hero/>
     <HeadlineCards/>
     <Food/>
-
-
       <Outlet />
     <ToastContainer/>
-
     </>
   );
 };
@@ -89,6 +87,7 @@ const UserRoute={
      </>
     )
    },
+ 
    {
     path:'/profile/edit',
     element:(
@@ -98,11 +97,18 @@ const UserRoute={
       </>
     )
    },
-
+   {
+    path:'/profile/editPassword',
+    element:(
+      <>
+      <UserNavbar/>
+       <ChangePassword/>
+      </>
+    )
+   },
    {
     path:"/",    
     element:<UserAppLayout/>,
-    
     children:[
       {
         path:"/",
@@ -110,7 +116,6 @@ const UserRoute={
       }
     ]
    },
-
   ]
 }
 

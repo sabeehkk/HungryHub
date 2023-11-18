@@ -11,7 +11,7 @@ import {
 
 import {
     updateProfile,
-    userProfile
+    updatePassword
 }  from '../controller/user/userController.js'
 
 import VerifyToken from '../middleware/jwtUserVerification.js'
@@ -23,5 +23,6 @@ router.post('/googleLogin',googleLogin)
 router.post('/signupVerify',verifySignup)
 router.post('/verifyOtp',verifyOtp)
 router.patch('/profile/:userId/edit',updateProfile)
+router.patch('/profile/:userId/editPassword',updatePassword)
 
 export default router   
