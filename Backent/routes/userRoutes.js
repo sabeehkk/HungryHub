@@ -24,7 +24,6 @@ router.post("/signupVerify", verifySignup);
 router.post("/verifyOtp", verifyOtp);
 router.patch("/profile/:userId/edit", updateProfile);
 router.patch("/profile/:userId/editPassword", updatePassword);
-
 router.patch("/profile/:userId/edit/profilePhoto", updateProfilePhoto);
 
 export default router;
