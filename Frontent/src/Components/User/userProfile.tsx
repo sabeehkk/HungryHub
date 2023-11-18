@@ -1,17 +1,42 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
+
+import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
+
 import { Link } from "react-router-dom";
+
+const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg"
 
 function userProfile() {
   const { user } = useSelector((state: any) => state.userAuth);
+  
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const fileInputRef = useRef(null);
+
   const dispatch = useDispatch();
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const result = await profileUploadCloudinery(file);
+
+      const response = result && (await updateProfileImage(user?._id, result));
+      response && setSelectedImage(result);
+    }
+  };
+
   useEffect(() => {
-    const data = user;
-    dispatch(setProfile(data));
-    // setSelectedImage(null);
-  }, []);
+    if (selectedImage) {
+      console.log(selectedImage,'selected imageee');
+      
+      const data = { profilePicture: selectedImage };
+      dispatch(setProfile(data));
+      setSelectedImage(null);
+    }
+  }, [selectedImage, setProfile]);
+
   return (
     <>
       <div
@@ -153,11 +178,24 @@ function userProfile() {
               This information is secret so be careful
             </span>
             <div className="w-full p-8 mx-2 flex justify-center">
-              <img
+            <input
+              type="file"
+              accept="image/*"
+              style={{ display: "none" }}
+              ref={fileInputRef}
+              onChange={handleImageUpload}
+            />
+            <img
+              className="mx-auto rounded-full h-24 w-24 object-cover cursor-pointer"
+              src={user?.profilePicture ? user.profilePicture : demoImage}
+              alt={`${user.firstName} ${user.lastName}`}
+              onClick={() => fileInputRef.current.click()}
+            />
+              {/* <img
                 className="max-w-xs w-32 items-center border rounded-full"
                 src="https://startitindia.com/Uploads/1552200708454494651.jpg"
                 alt=""
-              />
+              /> */}
             </div>
           </div>
 

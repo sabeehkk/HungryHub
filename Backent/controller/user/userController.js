@@ -49,3 +49,35 @@ export const updateProfile = async (req, res) => {
       return res.status(500).json({ message: "Internal Server Error" });
     }
   };
+
+  export const Imagetesting =async (req,res)=>{
+         try {
+              console.log(req.body,'hiii');
+         } catch (error) {
+          
+         }
+  }
+
+  export const updateProfilePhoto = async (req, res) => {
+    try {
+      console.log(req.body,req.params,'datasassaaaaaaaas');
+      const { userId } = req.params;
+      const { url } = req.body;
+  
+      if (!userId || !url) {
+        return res
+          .status(400)
+          .json({ message: "User ID or Profile Picture is missing" });
+      }
+  
+      await userModel.updateOne(
+        { _id: userId },
+        { $set: { profilePicture: url } }
+      );
+  
+      return res.json({ message: "success" });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
+  };

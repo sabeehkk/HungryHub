@@ -60,6 +60,7 @@ const EditProfile = ({ data }) => {
       phoneNumber,
      
     };
+    
 
     const response = await updateProfileData(data, user?._id);
     if (response) {
@@ -72,6 +73,7 @@ const EditProfile = ({ data }) => {
   return (
     <div className="max-w-screen-lg mx-auto p-4">
       <h1 className="text-2xl font-semibold mb-4">Edit Profile</h1>
+      
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {/** Input Fields */}

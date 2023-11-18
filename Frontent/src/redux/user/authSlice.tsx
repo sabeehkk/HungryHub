@@ -1,18 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { userInittalModel, userModel } from "../../models/models";
-
+import { userInittalModel, UserData } from "../../models/models";
 
 const INITTAL_STATE: userInittalModel = {
     user: null,
     success: false,
   };
   
-  
   const authSlice = createSlice({
     name: "user",
     initialState: INITTAL_STATE,
     reducers: {
-      userLoggedIn: (state, action: PayloadAction<userModel>) => {
+      userLoggedIn: (state, action: PayloadAction<UserData>) => {
         state.user = action.payload;
         state.success = true;
       },
@@ -24,12 +22,14 @@ const INITTAL_STATE: userInittalModel = {
         const data ={...state.user,...action.payload};
         state.user=data
       },
-      updateData:(state,action:PayloadAction<userModel>)=>{
+      updateData:(state,action:PayloadAction<UserData>)=>{
         const data={...state.user,...action.payload};
         state.user=data;
       }
     },
   });
+
   export const { userLoggedIn,logout,setProfile,updateData } =
   authSlice.actions;
 export default authSlice.reducer;
+   

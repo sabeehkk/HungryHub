@@ -15,7 +15,7 @@ import Food from '../Components/User/food.tsx'
 import Profile from '../Components/User/userProfile.tsx'
 import EditProfile from '../Pages/User/profileEdit.tsx'
 import ChangePassword from '../Components/User/editPassword.tsx'
-
+import ImageUpdateDemo from '../Components/User/imageUpdateDemo.tsx'
 import 'react-toastify/dist/ReactToastify.css';
 
 const UserAppLayout = () => {
@@ -107,11 +107,21 @@ const UserRoute={
     )
    },
    {
+    path:'/profile/editPicture',
+    element:(
+      <>
+      <UserNavbar/>
+      <ImageUpdateDemo/>
+      </>
+    )
+   },
+   {
     path:"/",    
     element:<UserAppLayout/>,
     children:[
       {
         path:"/",
+         
         // element:<Home/>
       }
     ]
