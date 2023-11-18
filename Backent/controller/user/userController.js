@@ -50,13 +50,7 @@ export const updateProfile = async (req, res) => {
     }
   };
 
-  export const Imagetesting =async (req,res)=>{
-         try {
-              console.log(req.body,'hiii');
-         } catch (error) {
-          
-         }
-  }
+
 
   export const updateProfilePhoto = async (req, res) => {
     try {

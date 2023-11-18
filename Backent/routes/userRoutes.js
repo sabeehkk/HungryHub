@@ -12,7 +12,6 @@ import {
 import {
     updateProfile,
     updatePassword,
-    Imagetesting,
     updateProfilePhoto
 }  from '../controller/user/userController.js'
 import upload from '../middleware/multer.js'
@@ -26,7 +25,6 @@ router.post('/signupVerify',verifySignup)
 router.post('/verifyOtp',verifyOtp)
 router.patch('/profile/:userId/edit',updateProfile)
 router.patch('/profile/:userId/editPassword',updatePassword)
-router.post('/UserProfileEdit',Imagetesting)
 
 router.patch("/profile/:userId/edit/profilePhoto", updateProfilePhoto);
 
