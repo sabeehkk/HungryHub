@@ -24,7 +24,7 @@ function EditPassword() {
       !password.newPassword ||
       !password.confirmPassword
     ) {
-      return ErrorMessage("Please fill in all fields");
+      return ErrorMessage("Please fill all fields");
     }
 
     if (password?.newPassword !== password?.confirmPassword) {
@@ -35,7 +35,8 @@ function EditPassword() {
         "Current Password and New Password cannot be the same. Please enter a new password."
       );
     }
-    const response = await updatePassword(user?._id, password);
+    const response = await updatePassword(user?._id, password)
+         
     if (response) {
       SuccessMessage("Your Password has been successfully updated");
       navigate("/profile");

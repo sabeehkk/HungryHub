@@ -4,7 +4,7 @@ import LoginFrame from '../../Components/loginFrame';
 
 
 function RestaurentLogin() {
-  const imgUrl:string = 'https://png.pngtree.com/thumb_back/fw800/background/20230714/pngtree-3d-render-of-food-delivery-image_3857591.jpg'
+  const imgUrl:string = 'https://thumbs.dreamstime.com/z/senior-couple-eating-salad-restaurant-table-isolated-white-background-senior-couple-eating-salad-restaurant-table-144580304.jpg?w=992'
   return (
     <LoginFrame SidePart={UserLogin} img={imgUrl}/>
   )

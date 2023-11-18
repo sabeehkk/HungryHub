@@ -50,9 +50,9 @@ const UserNavbar=()=> {
         </Link>
       </li>
       <li className='text-xl py-4 flex items-center'>
-        <Link to="/employee/login">
+        <Link to="/profile">
           <MdFavorite size={25} className='mr-4 flex'/>
-          Favorites
+          Profile
         </Link>
       </li>
       <li className='text-xl py-4 flex items-center'>

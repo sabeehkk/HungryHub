@@ -13,7 +13,6 @@ import {
   updatePassword,
   updateProfilePhoto,
 } from "../controller/user/userController.js";
-import upload from "../middleware/multer.js";
 import VerifyToken from "../middleware/jwtUserVerification.js";
 const router = express.Router();
 

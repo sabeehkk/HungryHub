@@ -188,7 +188,7 @@ function userProfile() {
             <img
               className="mx-auto rounded-full h-24 w-24 object-cover cursor-pointer"
               src={user?.profilePicture ? user.profilePicture : demoImage}
-              alt={`${user.firstName} ${user.lastName}`}
+              alt={`${user.name} `}
               onClick={() => fileInputRef.current.click()}
             />
               {/* <img
