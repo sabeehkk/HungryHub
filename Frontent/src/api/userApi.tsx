@@ -35,27 +35,27 @@ export const updatePassword = async (userId, data) => {
   return response.data.message == "success" ? true : false;
 };
 
-export const profileUploadCloudinery = async (img)=>{
+export const profileUploadCloudinery = async (img) => {
   const presetKey = import.meta.env.VITE_PRESETKEY;
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
 
-  const formData= new FormData()
-    formData.append("file",img)
-    formData.append("upload_preset",presetKey)
-    formData.append("cloud_name",cloudName)
+  const formData = new FormData();
+  formData.append("file", img);
+  formData.append("upload_preset", presetKey);
+  formData.append("cloud_name", cloudName);
 
-    const response = await axios.post(
-      import.meta.env.VITE_CLOUDINERY_API,
-      formData
-    );
-    if (response.status === 200) {
-      console.log(response.data);
-      
-      return response.data.url;
-    } else {
-      return ErrorMessage("Failed to upload the image");
-    }
-}
+  const response = await axios.post(
+    import.meta.env.VITE_CLOUDINERY_API,
+    formData
+  );
+  if (response.status === 200) {
+    console.log(response.data);
+
+    return response.data.url;
+  } else {
+    return ErrorMessage("Failed to upload the image");
+  }
+};
 
 export const updateProfileImage = async (userId, url) => {
   await userAxios.patch(`/profile/${userId}/edit/profilePhoto`, { url: url });
