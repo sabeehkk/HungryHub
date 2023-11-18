@@ -9,14 +9,14 @@ import { profileEditModal } from "../../models/models";
 const EditProfile = ({ data }) => {
 
   const [user, setUser] = useState<profileEditModal>({
-    _id: data?._id || "",
-    name: data?.lastName || "",
+    _id: data?._id || "",       
+    name: data?.name || "",   
     email: data?.email || "",
     phoneNumber: data?.phoneNumber || "",
     place: data?.place || "",
   
   });
-
+     
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,7 +29,6 @@ const EditProfile = ({ data }) => {
     e.preventDefault();
     const {
       name,
-    
       email,
       phoneNumber,
      
@@ -50,7 +49,7 @@ const EditProfile = ({ data }) => {
 
     if (typeof phoneNumber === "string" && phoneNumber.trim().length !== 10) {
       return ErrorMessage(
-        "The phone number is not valid; please check your phone number"
+        "The phone number is not valid"
       );
     }
 
@@ -77,7 +76,7 @@ const EditProfile = ({ data }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {/** Input Fields */}
           <div>
-            <label htmlFor="name" className="text-gray-600">
+            <label htmlFor="name" className="text-black font-bold">
               First Name
             </label>
             <input
@@ -86,12 +85,12 @@ const EditProfile = ({ data }) => {
               name="name"
               value={user?.name}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
             />
           </div>
-        
+
           <div>
-            <label htmlFor="email" className="text-gray-600">
+            <label htmlFor="email" className="text-black font-bold">
               Email
             </label>
             <input
@@ -100,11 +99,11 @@ const EditProfile = ({ data }) => {
               name="email"
               value={user?.email}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
             />
           </div>
           <div>
-            <label htmlFor="phoneNumber" className="text-gray-600">
+            <label htmlFor="phoneNumber" className="text-black font-bold">
               Phone Number
             </label>
             <input
@@ -115,18 +114,15 @@ const EditProfile = ({ data }) => {
               maxLength={10}
               value={user?.phoneNumber}
               onChange={handleInputChange}
-              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
             />
           </div>
-         
-        
-       
          
         </div>
 
         <button
           type="submit"
-          className="mt-4 bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-400"
+          className="mt-4 ml-64 bg-teal-500 text-white p-2 rounded hover:bg-teal-300 focus:outline-none justify-end focus:ring focus:border-blue-400"
         >
           Save Changes
         </button>

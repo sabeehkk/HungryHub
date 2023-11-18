@@ -7,6 +7,7 @@ const INITTAL_STATE: userInittalModel = {
     success: false,
   };
   
+  
   const authSlice = createSlice({
     name: "user",
     initialState: INITTAL_STATE,

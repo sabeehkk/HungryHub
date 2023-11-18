@@ -13,7 +13,7 @@ import Hero from '../Components/User/hero'
 import HeadlineCards from  '../Components/User/headlineCards.tsx'
 import Food from '../Components/User/food.tsx'
 import Profile from '../Components/User/userProfile.tsx'
-import EditProfile from '../Components/User/editProfile.tsx'
+import EditProfile from '../Pages/User/profileEdit.tsx'
 
 import 'react-toastify/dist/ReactToastify.css';
 

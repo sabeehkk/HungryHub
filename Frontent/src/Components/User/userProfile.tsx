@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
+import { Link } from 'react-router-dom';
+
 
 function userProfile() {
   const { user } = useSelector((state: any) => state.userAuth);
@@ -16,7 +18,6 @@ function userProfile() {
   }, []);
   return (
     <>
-
 
 <div
       id="crud-modal"
@@ -118,7 +119,7 @@ function userProfile() {
                 <textarea
                   id="description"
                   rows="4"
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400 focus:ring-blue-500 focus:border-blue-500"
+                  className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500"
                   placeholder="Write product description here"
                 ></textarea>
               </div>
@@ -168,12 +169,12 @@ function userProfile() {
 
         <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
           <div className="flex justify-end">
-            <a
-              href="#"
-              className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
-            >
-              Edit
-            </a>
+          <Link
+    to="/profile/edit"
+    className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
+  >
+    Edit
+  </Link>
           </div>
 
           <div className="rounded  shadow p-6">

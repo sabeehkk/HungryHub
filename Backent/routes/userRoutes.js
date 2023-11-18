@@ -10,6 +10,7 @@ import {
 
 
 import {
+    updateProfile,
     userProfile
 }  from '../controller/user/userController.js'
 
@@ -21,7 +22,6 @@ router.post('/login',userLogin)
 router.post('/googleLogin',googleLogin)
 router.post('/signupVerify',verifySignup)
 router.post('/verifyOtp',verifyOtp)
-router.get('/userData',userProfile)
-
+router.patch('/profile/:userId/edit',updateProfile)
 
 export default router   

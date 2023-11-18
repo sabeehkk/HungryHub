@@ -13,10 +13,11 @@ export const userProfile =async(req,res)=>{
 
 export const updateProfile = async (req, res) => {
     try {
+      console.log(req.body);
       const { userId } = req.params;
       const data = req.body;
   
-      await userSchema.updateOne({ _id: userId }, data);
+      await userModel.updateOne({ _id: userId }, data);
   
       return res.json({ message: "success" });
     } catch (error) {
