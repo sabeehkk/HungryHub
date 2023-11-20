@@ -1,17 +1,17 @@
 // src/components/ProductAddingPage.tsx
 import axios from 'axios';
+import { useSelector } from "react-redux";
+
 import React, { useState } from 'react';
 import { RESTAURENT_API } from '../../Constants/API';
 import { restaurentAxios } from '../../axios/axios';
 import { ErrorMessage,SuccessMessage } from '../../utils/util';
-const ProductAddingPage: React.FC = () => {
-  const [productName, setProductName] = useState('');
-  const [description,setDescription]=useState('')
-  const [productPrice, setProductPrice] = useState('');
-  const [images,setImages] = useState([]);
-  const [category,setCategory]=useState('')
-  const [errors,setErrors]=useState(false);
-  const [categories,setCategories]=useState([])
+import Button from '../../assets/button';
+import { useNavigate } from 'react-router-dom';
+
+// const ProductAddingPage: React.FC = () => {
+
+
 
 //   const handleProductSubmit = async() => {
 //     const data ={ productPrice,productImage,productName}
@@ -29,7 +29,24 @@ const ProductAddingPage: React.FC = () => {
 //    }
 //     // RESTAURENT_API.post(data)
 // };
-    const addProduct=()=>{
+    const AddProduct:React.FC = () => {
+
+
+      const [productName, setProductName] = useState('');
+      const [description,setDescription]=useState('')
+      const [productPrice, setProductPrice] = useState('');
+      const [images,setImages] = useState([]);
+      const [category,setCategory]=useState('')
+      const [errors,setErrors]=useState(false);
+      const [categories,setCategories]=useState([])
+    
+      const navigate=useNavigate()
+    
+      const restaurant = useSelector((state) => state.restaurentAuth);
+      const restId =restaurant._id ;
+    
+    
+
       if(productName.trim().length===0||description.trim().length===0||category.trim().length===0){
             setErrors(true)
       }else{
@@ -40,7 +57,7 @@ const ProductAddingPage: React.FC = () => {
           images
         })
       }
-    }
+    
 
   return (
     <div className="p-10">
@@ -104,10 +121,10 @@ const ProductAddingPage: React.FC = () => {
             Price:
           </label>
   
-          {!validPrice() && errors && (
+          {/* {!validPrice() && errors && (
             <p className="text-red-500 text-sm">{"Invalid Price"}</p>
-          )}
-          {variants.map((variant, index) => (
+          )} */}
+          {/* {variants.map((variant, index) => (
             <div key={index} className="border rounded-sm md:w-3/5 w-full">
               <input
                 type="text"
@@ -115,8 +132,8 @@ const ProductAddingPage: React.FC = () => {
                 value={variant.name}
                 onChange={(e) => handleVariantNameChange(e, index)}
                 className="md:border-r-4 rounded-sm md:w-1/2 bg-gray-300 py-1 w-full"
-              />
-              <input
+              /> */}
+              {/* <input
                 type="number"
                 placeholder="Variant Price"
                 value={variant.price}
@@ -141,8 +158,8 @@ const ProductAddingPage: React.FC = () => {
                 Remove Variant
               </button>
             </div>
-          ))}
-          <button className="text-green-600" onClick={addVariant}>Add Variant</button>
+          ))} */}
+          {/* <button className="text-green-600" onClick={addVariant}>Add Variant</button> */}
 
         </div>
         <div className="md:w-1/2">
@@ -197,4 +214,4 @@ const ProductAddingPage: React.FC = () => {
   );
 };
 
-export default ProductAddingPage;
+export default AddProduct;
