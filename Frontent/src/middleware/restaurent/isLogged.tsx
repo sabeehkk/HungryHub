@@ -20,11 +20,13 @@ function IsLogged(){
 
     useEffect(()=>{
         const token = localStorage.getItem("restaurentToken")
+        console.log(token);
+        
         if(!token){
             dispatch(logout())
             navigate("/restaurent/login")
         }
-    })
+    },[])
     return null   
 }
 

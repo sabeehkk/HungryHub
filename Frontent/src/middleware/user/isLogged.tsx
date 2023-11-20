@@ -9,6 +9,7 @@ function IsLogged() {
     const dispatch = useDispatch()
 
     useEffect(()=>{
+        
         if(!success){
             navigate('/login')
         }

@@ -4,7 +4,6 @@ import Signup from '../Pages/User/UserRegister'
 import Login from '../Pages/User/login'
 // import Home from '../Components/User/HomePage'
 import IsLogout from '../middleware/user/isLogout'
-import UserLogout from '../Pages/User/userLogout'
 // import Navbar from '../Components/navbar'
 import { ToastContainer,toast } from "react-toastify";
 import OtpVerification from '../Components/User/otpVerification';
@@ -17,16 +16,13 @@ import EditProfile from '../Pages/User/profileEdit.tsx'
 import ChangePassword from '../Components/User/editPassword.tsx'
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorPage from '../Components/errorPage.tsx'
+import IsLogged from '../middleware/user/isLogged.tsx'
+import Logout from '../Pages/User/userLogout.tsx'
 
 const UserAppLayout = () => {
   return (
     <>
-
     {/* <Navbar/> */}
-    <UserNavbar/>
-    <Hero/>
-    <HeadlineCards/>
-    <Food/>
       <Outlet />
     <ToastContainer/>
     </>
@@ -67,7 +63,7 @@ const UserRoute={
     element:(
       <>
       <IsLogout/>
-      <UserLogout/>
+      <Logout/>
       </>
     )
    },
@@ -83,6 +79,7 @@ const UserRoute={
     path:'/profile',
     element:(
      <>
+       <IsLogged/>
       <UserNavbar/>
       <Profile/>
      </>
@@ -114,8 +111,14 @@ const UserRoute={
     children:[
       {
         path:"/",
-         
-        // element:<Home/>
+       element:(
+        <>
+        <UserNavbar/>
+        <Hero/>
+        <HeadlineCards/>
+        <Food/>  
+      </>
+       )
       }
     ]
    },

@@ -10,9 +10,7 @@ function Home() {
    <Link to="/restaurent/logout" className="mt-3">Logout</Link>
    </div>
    </>
-  
   )
 }
-
 
 export default Home
