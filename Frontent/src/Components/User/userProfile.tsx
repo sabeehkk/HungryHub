@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg"
 
 function userProfile() {
+  
   const { user } = useSelector((state: any) => state.userAuth);
   
   const [selectedImage, setSelectedImage] = useState(null);
@@ -33,9 +34,9 @@ function userProfile() {
       
       const data = { profilePicture: selectedImage };
       dispatch(setProfile(data));
-      setSelectedImage(null);
+      setSelectedImage(null );
     }
-  }, [selectedImage, setProfile]);
+  }, [selectedImage, setProfile])
 
   return (
     <>

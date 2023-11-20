@@ -12,6 +12,7 @@ import UserNavbar from "../Components/User/userNavbar";
 import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
 import IsLogged from "../middleware/restaurent/isLogged";
+import ProductAdd from '../Components/Restaurant/productAdding.tsx'
 
 const RestaurantAppLayout = () => {
   return (
@@ -80,18 +81,19 @@ const RestaurentRoute = {
             </>
           ),
         },
+         {
+    path:'addFood',
+    element:(
+        <>
+        <UserNavbar/>
+        <ProductAdd/>
+        </>
+    ),
+},
       ],
     },
   ],
 };
 export default RestaurentRoute;
 
-//  {
-//     path:'addFood',
-//     element:(
-//         <>
-//         <UserNavbar/>
-//         <FoodAdd/>
-//         </>
-//     ),
-// },
+

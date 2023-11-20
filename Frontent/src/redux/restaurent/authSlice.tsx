@@ -3,7 +3,7 @@ import { PayloadAction,createSlice } from "@reduxjs/toolkit";
 interface RestaurentState {
     restaurent:RestaurentData | null;
     success : boolean;
-}
+  }
 
 interface RestaurentData{
     email:string;
