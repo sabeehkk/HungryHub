@@ -16,6 +16,7 @@ import Profile from '../Components/User/userProfile.tsx'
 import EditProfile from '../Pages/User/profileEdit.tsx'
 import ChangePassword from '../Components/User/editPassword.tsx'
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorPage from '../Components/errorPage.tsx'
 
 const UserAppLayout = () => {
   return (
@@ -42,6 +43,7 @@ const UserAuthAppLayout = () => {
 
 const UserRoute={
   path:'/',
+  errorElement: <ErrorPage path={"/"} />,
   element:<UserAuthAppLayout/>,
   children:[
     {

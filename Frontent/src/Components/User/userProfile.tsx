@@ -186,7 +186,7 @@ function userProfile() {
               onChange={handleImageUpload}
             />
             <img
-              className="mx-auto rounded-full h-24 w-24 object-cover cursor-pointer"
+              className="mx-auto rounded-full h-32 w-32 object-cover cursor-pointer"
               src={user?.profilePicture ? user.profilePicture : demoImage}
               alt={`${user.name} `}
               onClick={() => fileInputRef.current.click()}

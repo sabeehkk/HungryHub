@@ -3,10 +3,15 @@ import { Outlet } from "react-router-dom";
 import Signup from '../Pages/Restaurent/signup'
 import Login from '../Pages/Restaurent/login'
 import Home from '../Components/Restaurant/Home'
-import IsLogout from '../middleware/restaurent/isLogged'
+import IsLogout from '../middleware/restaurent/isLogout.tsx'
 import { ToastContainer,toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar  from '../Pages/Restaurent/restaurentNavbar';
+import FoodAdd from '../Components/Restaurant/foodAdding'
+import UserNavbar from  '../Components/User/userNavbar'
+import ErrorPage from '../Components/errorPage.tsx'
+import Logout from '../Pages/Restaurent/logout.tsx'
+import IsLogged from '../middleware/restaurent/isLogged';
 
 //  
 const RestaurantAppLayout = ()=>{
@@ -23,7 +28,6 @@ const RestaurantAppLayout = ()=>{
 const RestaurentAuthAppLayout =()=>{
     return( 
         <>
-      <Outlet />
       <ToastContainer/>
       </>
       )
@@ -31,12 +35,15 @@ const RestaurentAuthAppLayout =()=>{
 
 const RestaurentRoute = {   
     path:'/restaurent',
-    element :<RestaurentAuthAppLayout/>,
+  errorElement: <ErrorPage path={"/restaurent"} />,
+
+    element :<RestaurantAppLayout/>,
     children : [
         {
             path :'login',   
             element : (
                 <>
+                <IsLogout/>
                 <Login/>
                 </>
             )
@@ -45,7 +52,17 @@ const RestaurentRoute = {
             path:'signup',
             element:(
                 <>
+                <IsLogout/>
                 <Signup/>
+                </>
+            ),
+        },
+        {
+            path:'addFood',
+            element:(
+                <>
+                <UserNavbar/>
+                <FoodAdd/>
                 </>
             ),
         },
@@ -53,13 +70,14 @@ const RestaurentRoute = {
           path:'logout',
           element:(
             <>
-            <IsLogout/>
+            <IsLogged/>
+            <Logout/>
             </>
           )
         },
         {
             path:'/restaurent',
-            element:<RestaurantAppLayout/>,
+            element:<RestaurentAuthAppLayout/>,
             children:[
                 {
                     path:"home",

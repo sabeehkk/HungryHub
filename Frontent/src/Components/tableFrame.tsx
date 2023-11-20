@@ -6,6 +6,8 @@ import { Button, Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./adminSidebar";
 
+const demoImage="https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png"
+
 import {
   AdminSideRestaurentModel,
   AdminSideTableFrameProps,
@@ -113,8 +115,8 @@ function TabelFrame({
                                     <div className="flex justify-center items-center">
                                       <img
                                         src={
-                                          usersData?.profilePicture ||
-                                          "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png"
+                                          actionData?.profilePicture? actionData.profilePicture:demoImage
+                                          
                                         }
                                         alt="User"
                                         className="h-16 w-16 md:h-20 md:w-20 rounded-full"
@@ -140,6 +142,7 @@ function TabelFrame({
                                         <span className="font-semibold">
                                           {actionData?.phoneNumber}
                                         </span>
+                                       
                                       </p>
                                     </div>
                                     <div className="flex-col justify-center my-5">
@@ -184,8 +187,8 @@ function TabelFrame({
                             <img
                               className="h-10 w-10 rounded-full"
                               src={
-                                item.image ||
-                                "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png"
+                                item?.profilePicture? item.profilePicture:demoImage
+                                
                               }
                               alt=""
                             />

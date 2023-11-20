@@ -6,6 +6,7 @@ import Login from '../Pages/Employee/login'
 import Navbar from '../Pages/Employee/employeeNavbar'
 import IsLogout from '../middleware/employee/isLogout';
 import { ToastContainer,toast } from "react-toastify";
+import ErrorPage from '../Components/errorPage.tsx'
 
 
 const EmpoloyeeAppLayout =()=>{
@@ -30,6 +31,8 @@ const EmployeeAuthAppLayout = () =>{
 
 const EmployeeRoutes = {
     path :'/employee',
+  errorElement: <ErrorPage path={"/employee"} />,
+
     element : <EmployeeAuthAppLayout/>,
     
     children : [

@@ -9,7 +9,10 @@ function IsLogout() {
     const navigate = useNavigate()
     
     useEffect(()=>{
+      if(success){
         navigate('/restaurent/home')
+
+      }
     },[success])
   return null
     

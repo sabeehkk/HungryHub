@@ -9,6 +9,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AdminFrame from '../Components/Admin/adminFrame'
 import Home from '../Pages/Admin/home'
+import ErrorPage from '../Components/errorPage.tsx'
 
 const AdminAppLayout = ()=>{
   return (
@@ -26,6 +27,8 @@ const AdminAppLayout = ()=>{
 
  const AdminRoute={
     path:"/admin",
+  errorElement: <ErrorPage path={"/admin"} />,
+
     element:<AdminAuthAppLayout/>,
     children:[
       {
