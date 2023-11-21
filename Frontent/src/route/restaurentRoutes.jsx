@@ -12,7 +12,8 @@ import UserNavbar from "../Components/User/userNavbar";
 import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
 import IsLogged from "../middleware/restaurent/isLogged";
-import ProductAdd from '../Components/Restaurant/productAdding.tsx'
+import ProductAdd from "../Components/Restaurant/productAdding.tsx";
+// import Category from "../Components/Restaurant/category.tsx";
 
 const RestaurantAppLayout = () => {
   return (
@@ -28,7 +29,6 @@ const RestaurentAuthAppLayout = () => {
     <>
       <Navbar />
       <Outlet />
-
       <ToastContainer />
     </>
   );
@@ -81,19 +81,25 @@ const RestaurentRoute = {
             </>
           ),
         },
-         {
-    path:'addProduct',
-    element:(
-        <>
-        <UserNavbar/>
-        <ProductAdd/>
-        </>
-    ),
-},
+        {
+          path: "addProduct",
+          element: (
+            <>
+              <UserNavbar />
+              <ProductAdd />
+            </>
+          ),
+        },
+        // {
+        //   path:"addCategory",
+        //   element :(
+        //     <>
+        //     <Category/>
+        //     </>
+        //   )
+        // }
       ],
     },
   ],
 };
 export default RestaurentRoute;
-
-

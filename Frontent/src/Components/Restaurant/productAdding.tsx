@@ -7,6 +7,7 @@ import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
 import { uploadFoodImage } from "../../api/restaurentApi";
 
+
 const AddProduct: React.FC = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -40,11 +41,9 @@ const AddProduct: React.FC = () => {
       setImages(filesArray);
     }
   };
-
   const handleImageUpload = async (images: any) => {
     if (!images || images.length === 0) return [];
     const url: string[] = [];
-
     for (let i = 0; i < images.length; i++) {
       const img = images[i];
       const data = await uploadFoodImage(img);
@@ -55,8 +54,7 @@ const AddProduct: React.FC = () => {
 
   useEffect(() => {
     if (selectedImage) {
-      // Handle the selected image as needed, e.g., update state or send it to the backend
-      console.log(selectedImage, "selected image");
+      console.log(selectedImage,"selected imagee")
       setSelectedImage(null);
     }
   }, [selectedImage]);

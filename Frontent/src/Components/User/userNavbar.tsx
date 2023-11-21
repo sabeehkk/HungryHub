@@ -43,27 +43,29 @@ const UserNavbar=()=> {
   <h2 className='text-2xl p-4'>Hungry <span className='font-bold'>Hub</span></h2>
   <nav>
     <ul className='flex flex-col p-4 text-gray-800'>
+   
       <li className='text-xl py-4 flex gap-x-2 items-center'>
-        <Link to="/employee/signup">
-          <TbTruckDelivery size={25} className='mr-4' />
-          Orders
-        </Link>
-      </li>
-      <li className='text-xl py-4 flex items-center'>
-        <Link to="/profile">
-          <MdFavorite size={25} className='mr-4 flex'/>
+  <Link to="/restaurent/home" className="flex items-center">
+    <TbTruckDelivery size={25} className='mr-4' />
+    Partner with HungryHub
+  </Link>
+</li>
+    
+      <li className='text-xl py-4 flex gap-x-2 items-center'>
+        <Link to="/profile" className='flex items-center'>
+          <MdFavorite size={25} className='mr-4'/>
           Profile
         </Link>
       </li>
-      <li className='text-xl py-4 flex items-center'>
+      <li className='text-xl py-4 flex gap-x-2 items-center'>
         <FaWallet size={25} className='mr-4'/>
         Wallet
       </li>
-      <li className='text-xl py-4 flex items-center'>
+      <li className='text-xl py-4 flex gap-x-2 items-center'>
         <MdHelp size={25} className='mr-4'/>
         Help
       </li>
-      <li className='text-xl py-4 flex items-center'>
+      <li className='text-xl py-4 flex gap-x-2 items-center'>
         <FaUserFriends size={25} className='mr-4'/>
         Invite Friends
       </li>
