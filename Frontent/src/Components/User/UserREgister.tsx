@@ -10,6 +10,7 @@ import { userAxios } from "../../axios/axios";
 import { SignupApi, signupVerify } from "../../api/userApi";
 
 export const verifyOtp = async (otp) => {
+  
   console.log(otp.data);
   try {
     const response = await userAxios.post(`/verifyOtp`, otp);
@@ -61,7 +62,6 @@ export default function Signup() {
     try {
       const result = await verifyOtp(otp);
       console.log(result.data,'resulttt');
-      alert(result.data)
       if (result.data.message == "success") {
         navigate("/login");
         SuccessMessage("user created successfully");
@@ -73,12 +73,12 @@ export default function Signup() {
         };
         await SignupApi(userData);
       }if(result.data.message==error){
-        console.log(error.message)
+        console.log(error?.message)
       }
     } catch (error) {
-      // console.log(error);
+      console.log(error);
   //  alert(error.message)
-  ErrorMessage(error.message)
+   ErrorMessage(errormessage)
 
     }
   };
