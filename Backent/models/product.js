@@ -2,20 +2,22 @@ import mongoose, { mongo } from 'mongoose'
 
 
 const productSchema = new mongoose.Schema({
-    name: {
+
+  productName: {
       type: String,
-      required: true,
-    },
+      // required: true,
+     },
     restaurent_id: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Restaurent',
     },
-    descripttion: {
+    description: {
       type: String,
       required: true,
     },
     category:{
-      type:mongoose.Schema.Types.ObjectId,
+      // type:mongoose.Schema.Types.ObjectId,
+      type:String,
       ref:'Category'
     },
     price:{
@@ -24,7 +26,7 @@ const productSchema = new mongoose.Schema({
     images: [{
       type: String
     }],
-    
+
     isDeleted:{
       type:Boolean,
       default:false

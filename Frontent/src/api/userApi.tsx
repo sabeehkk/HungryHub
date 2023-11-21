@@ -36,13 +36,11 @@ export const updatePassword = async (userId, data) => {
 };
 
 export const profileUploadCloudinery = async (img) => {
+
   console.log('profileUploadCloudinery api is running');
-  
   const presetKey = import.meta.env.VITE_PRESETKEY ;
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
-
   const formData = new FormData();
-  
   formData.append("file", img);
   formData.append("upload_preset", presetKey);
   formData.append("cloud_name", cloudName);

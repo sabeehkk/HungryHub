@@ -2,8 +2,8 @@ import axios from "axios";
 import { ErrorMessage } from "../utils/util";
 import { restaurentAxios } from "../axios/axios";
 
-
 export const uploadFoodImage = async (img) => {
+  
     const presetKey = import.meta.env.VITE_PRESETKEY;
     const cloudName = import.meta.env.VITE_CLOUD_NAME;
   

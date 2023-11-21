@@ -22,10 +22,7 @@ interface Item {
     //     const [productName,setProductName] = useState<Item[]>([])
     //     const [category,setCategory]=useState<Item[]>([])
     //     const [images,setImages]=useState([])
-
-
     // }
-
   return (
     
     <div className="p-10">

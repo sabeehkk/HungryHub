@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { restaurentAxios } from "../../axios/axios";
-// import { ErrorMessage, SuccessMessage } from "../../utils/util";
+import { ErrorMessage, SuccessMessage } from "../../utils/util";
 // import Button from "../../assets/button";
 import { useNavigate } from "react-router-dom";
 import { uploadFoodImage } from "../../api/restaurentApi";
@@ -41,7 +41,6 @@ const AddProduct: React.FC = () => {
     }
   };
 
-
   const handleImageUpload = async (images: any) => {
     if (!images || images.length === 0) return [];
     const url: string[] = [];
@@ -69,19 +68,23 @@ const AddProduct: React.FC = () => {
       setErrors(true);
     } else {
       console.log("inside else");
-   
+
       const FormData = {
         productName,
         description,
         productPrice,
         category,
         images: urlImages,
+        restId
       };
 
       restaurentAxios
         .post("/addProduct", FormData)
         .then((response) => {
-          console.log(response.data);
+          if(response.data.message=="success"){
+            SuccessMessage('product added successfully')
+            navigate('/restaurent/home')
+          }
         })
         .catch((error) => {
           console.error(error);
@@ -194,9 +197,7 @@ const AddProduct: React.FC = () => {
               Add Product
             </button>
           </div>
-          <div className="pt-3 ">
-           
-          </div>
+          <div className="pt-3 "></div>
         </div>
       </div>
     </div>
