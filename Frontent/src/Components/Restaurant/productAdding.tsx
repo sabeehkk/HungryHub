@@ -1,64 +1,97 @@
-// src/components/ProductAddingPage.tsx
-import axios from 'axios';
+import axios from "axios";
 import { useSelector } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+import { restaurentAxios } from "../../axios/axios";
+// import { ErrorMessage, SuccessMessage } from "../../utils/util";
+// import Button from "../../assets/button";
+import { useNavigate } from "react-router-dom";
+import { uploadFoodImage } from "../../api/restaurentApi";
 
-import React, { useState } from 'react';
-import { RESTAURENT_API } from '../../Constants/API';
-import { restaurentAxios } from '../../axios/axios';
-import { ErrorMessage,SuccessMessage } from '../../utils/util';
-import Button from '../../assets/button';
-import { useNavigate } from 'react-router-dom';
+const AddProduct: React.FC = () => {
+  const [productName, setProductName] = useState("");
+  const [description, setDescription] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [images, setImages] = useState([]);
+  const [category, setCategory] = useState("");
+  const [errors, setErrors] = useState(false);
+  const [categories, setCategories] = useState([]);
 
-// const ProductAddingPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const restaurant = useSelector((state) => state.restaurentAuth);
+  console.log(
+    restaurant.restaurent.restaurantName,
+    "restarueeeeeeeeentttttttttt"
+  );
+  let result = restaurant.restaurent;
+
+  console.log(result, "restuultt");
+
+  const fileInputRef = useRef(null);
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const restId = result._id;
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = event.target.files;
+    if (fileList) {
+      const filesArray = Array.from(fileList);
+      setImages(filesArray);
+    }
+  };
 
 
+  const handleImageUpload = async (images: any) => {
+    if (!images || images.length === 0) return [];
+    const url: string[] = [];
 
-//   const handleProductSubmit = async() => {
-//     const data ={ productPrice,productImage,productName}
+    for (let i = 0; i < images.length; i++) {
+      const img = images[i];
+      const data = await uploadFoodImage(img);
+      url.push(data);
+    }
+    return url;
+  };
 
-//     console.log(data,'finall');
-    
-//    try {
-//     axios
-//     .post(`${RESTAURENT_API}/addFood`, {
-//         productName,productImage,productPrice
-//     })
-      
-//    } catch (error) {
-//        console.log(error)
-//    }
-//     // RESTAURENT_API.post(data)
-// };
-    const AddProduct:React.FC = () => {
+  useEffect(() => {
+    if (selectedImage) {
+      // Handle the selected image as needed, e.g., update state or send it to the backend
+      console.log(selectedImage, "selected image");
+      setSelectedImage(null);
+    }
+  }, [selectedImage]);
 
+  const addProduct = async () => {
+    const urlImages = await handleImageUpload(images);
+    console.log("image url ", urlImages);
+    if (productName.trim().length === 0 || description.trim().length === 0) {
+      setErrors(true);
+    } else {
+      console.log("inside else");
+   
+      const FormData = {
+        productName,
+        description,
+        productPrice,
+        category,
+        images: urlImages,
+      };
 
-      const [productName, setProductName] = useState('');
-      const [description,setDescription]=useState('')
-      const [productPrice, setProductPrice] = useState('');
-      const [images,setImages] = useState([]);
-      const [category,setCategory]=useState('')
-      const [errors,setErrors]=useState(false);
-      const [categories,setCategories]=useState([])
-    
-      const navigate=useNavigate()
-    
-      const restaurant = useSelector((state) => state.restaurentAuth);
-      const restId =restaurant._id ;
-    
-    
-
-      if(productName.trim().length===0||description.trim().length===0||category.trim().length===0){
-            setErrors(true)
-      }else{
-        restaurentAxios.post("/addProduct",{
-          name:productName,
-          description,
-          category,
-          images
+      restaurentAxios
+        .post("/addProduct", FormData)
+        .then((response) => {
+          console.log(response.data);
         })
-      }
-    
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  };
 
+  const handleImages = (e) => {
+    setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
+  };
   return (
     <div className="p-10">
       <div className="md:flex p-4">
@@ -75,7 +108,21 @@ import { useNavigate } from 'react-router-dom';
             onChange={(e) => {
               setProductName(e.target.value);
             }}
-            required
+            // required
+            className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+          />
+          <label htmlFor="category" className="block font-medium">
+            Category:
+          </label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+            // required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           />
           <label htmlFor="description" className="block font-medium">
@@ -84,83 +131,36 @@ import { useNavigate } from 'react-router-dom';
           {!description.trim().length && errors && (
             <p className="text-red-500 text-sm">{"Description is required"}</p>
           )}
-          <textarea
+          <input
+            type="text"
             id="description"
             name="description"
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            required
+            // required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 h-32 w-full"
           />
 
-          <label htmlFor="category" className="block font-medium">
-            Category:
-          </label>
           {!category.trim().length && errors && (
             <p className="text-red-500 text-sm">{"Select a Category"}</p>
           )}
-          <select
-            id="category"
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required
-            className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>   
-            ))}
-          </select>
 
           <label htmlFor="price" className="block font-medium">
             Price:
           </label>
-  
-          {/* {!validPrice() && errors && (
-            <p className="text-red-500 text-sm">{"Invalid Price"}</p>
-          )} */}
-          {/* {variants.map((variant, index) => (
-            <div key={index} className="border rounded-sm md:w-3/5 w-full">
-              <input
-                type="text"
-                placeholder="Variant Name"
-                value={variant.name}
-                onChange={(e) => handleVariantNameChange(e, index)}
-                className="md:border-r-4 rounded-sm md:w-1/2 bg-gray-300 py-1 w-full"
-              /> */}
-              {/* <input
-                type="number"
-                placeholder="Variant Price"
-                value={variant.price}
-                onChange={(e) => handleVariantPriceChange(e, index)}
-                className="border rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
-              />
-              <input
-                type="number"
-                placeholder="Offer (%)"
-                value={variant.offer}
-                onChange={(e) => handleVariantOfferChange(e, index)}
-                className="md:border-r-4 rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
-              />
-              <input
-                type="number"
-                placeholder="Offer Price"
-                value={variant.offerPrice}
-                readOnly
-                className="border rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
-              />
-              <button className="text-cherry-Red" onClick={() => removeVariant(index)}>
-                Remove Variant
-              </button>
-            </div>
-          ))} */}
-          {/* <button className="text-green-600" onClick={addVariant}>Add Variant</button> */}
-
+          <input
+            type="number"
+            id="price"
+            name="price"
+            value={productPrice}
+            onChange={(e) => {
+              setProductPrice(e.target.value);
+            }}
+            // required
+            className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+          />
         </div>
         <div className="md:w-1/2">
           <label htmlFor="restId" className="block font-medium">
@@ -175,38 +175,27 @@ import { useNavigate } from 'react-router-dom';
           />
 
           <div className="custom-file mt-3 h-52 items-center justify-center bg-gray-300 md:w-3/5 w-full">
-            <label htmlFor="profImage" className="">
-              <img
-                className="h-52 object-cover w-full"
-                src={imagePreviewUrl && imagePreviewUrl }
-                alt=""
-              />
-            </label>
+            <label htmlFor="profImage" className=""></label>
             <input
               className="form-control custom-file-input"
               name="file"
               multiple
               type="file"
               id="fileInput"
-              required
-              ref={fileInputRef}
-              onChange={handleFileChange}
+              onChange={handleImages}
             />
           </div>
           <div className="pt-10">
-            <Button
-              value={"Addproduct"}
+            <button
+              className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
               onClick={addProduct}
-              className="md:w-3/5 w-full"
-            />
+            >
+              Add Product
+            </button>
           </div>
           <div className="pt-3 ">
-            <button
-              onClick={() => navigate("/restaurant/category")}
-              className="btn-primary md:w-3/5 w-full p-1 rounded-sm"
-            >
-              Manage Categories
-            </button>
+           
           </div>
         </div>
       </div>

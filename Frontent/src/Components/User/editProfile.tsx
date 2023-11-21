@@ -14,7 +14,6 @@ const EditProfile = ({ data }) => {
     email: data?.email || "",
     phoneNumber: data?.phoneNumber || "",
     place: data?.place || "",
-  
   });
      
   const navigate = useNavigate();
@@ -31,10 +30,9 @@ const EditProfile = ({ data }) => {
       name,
       email,
       phoneNumber,
-     
     }: profileEditModal = user;
 
-    // if (
+    // if ( 
     //   !name ||
     //   !email ||
     //   !phoneNumber ||

@@ -36,10 +36,13 @@ export const updatePassword = async (userId, data) => {
 };
 
 export const profileUploadCloudinery = async (img) => {
-  const presetKey = import.meta.env.VITE_PRESETKEY;
+  console.log('profileUploadCloudinery api is running');
+  
+  const presetKey = import.meta.env.VITE_PRESETKEY ;
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
 
   const formData = new FormData();
+  
   formData.append("file", img);
   formData.append("upload_preset", presetKey);
   formData.append("cloud_name", cloudName);
@@ -50,7 +53,6 @@ export const profileUploadCloudinery = async (img) => {
   );
   if (response.status === 200) {
     console.log(response.data);
-
     return response.data.url;
   } else {
     return ErrorMessage("Failed to upload the image");
@@ -61,3 +63,30 @@ export const updateProfileImage = async (userId, url) => {
   await userAxios.patch(`/profile/${userId}/edit/profilePhoto`, { url: url });
   return true;
 };
+
+export const productImageUploadCloudinary = async (images)=>{
+    console.log(images,'api calling');
+  const presetKey = import.meta.env.VITE_PRESETKEY;
+  const cloudName = import.meta.env.VITE_CLOUD_NAME;
+  const formData = new FormData();
+
+  for(let i=0;i<images.length;i++){
+      formData.append("file",images[i]);
+      formData.append("upload_preset",presetKey)
+      formData.append("cloud_name",cloudName)
+       }
+  try {
+    const response = await axios.post(
+      import.meta.env.VITE_CLOUDINERY_API,
+      formData
+    );
+
+    if (response.status === 200) {
+      return response.data.urls; // Assuming Cloudinary returns an array of URLs for multiple images
+    } else {
+      throw new Error("Failed to upload the images");
+    }
+  } catch (error) {
+    throw new Error("Failed to upload the images");
+  }
+}  

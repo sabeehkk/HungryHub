@@ -21,9 +21,10 @@ const productSchema = new mongoose.Schema({
     price:{
       type:Number
     },
-    images:{
-      type: String,
-    },
+    images: [{
+      type: String
+    }],
+    
     isDeleted:{
       type:Boolean,
       default:false

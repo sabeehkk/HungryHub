@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
 
-import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
+import { profileUploadCloudinery, updateProfileImage} from "../../api/userApi";
 
 import { Link } from "react-router-dom";
 
@@ -28,7 +28,7 @@ function userProfile() {
     }
   };
 
-  useEffect(() => {
+      useEffect(() => {
     if (selectedImage) {
       console.log(selectedImage,'selected imageee');
       

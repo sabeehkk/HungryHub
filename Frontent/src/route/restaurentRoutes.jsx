@@ -36,7 +36,7 @@ const RestaurentAuthAppLayout = () => {
 
 const RestaurentRoute = {
   path: "/restaurent",
-  errorElement: <ErrorPage path={"/restaurent"} />,
+  // errorElement: <ErrorPage path={"/restaurent"} />,
 
   element: <RestaurantAppLayout />,
   children: [
@@ -82,7 +82,7 @@ const RestaurentRoute = {
           ),
         },
          {
-    path:'addFood',
+    path:'addProduct',
     element:(
         <>
         <UserNavbar/>
