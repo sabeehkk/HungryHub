@@ -32,16 +32,24 @@ const AddProduct: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const restId = result._id;
+  console.log(restId,'restiddd');
+  
   const categoryData = async ()=>{
+    console.log('inside categoryData');
+    
     // const {data}= await restaurentAxios.get(`/getCategory?id=${restId}`)
-    const { data } = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    const data = response.data
     console.log(data, 'categorydatas');
-
     if(data){
-      console.log(data,'categorydatas');
-      
       setCategories(data.categoryData)
     }
+
+    // if(data){
+    //   console.log(data,'categorydatas');
+      
+    //   setCategories(data.categoryData)
+    // }
   }
 
   useEffect(()=>{
@@ -129,7 +137,22 @@ const AddProduct: React.FC = () => {
           <label htmlFor="category" className="block font-medium">
             Category:
           </label>
-          <input
+          <select
+            id="category"
+            name="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+            className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+          >
+            <option value="">Select a category</option>
+            {categories.map((category) => (
+              <option key={category._id} value={category._id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          {/* <input
             type="text"
             id="category"
             name="category"
@@ -139,7 +162,7 @@ const AddProduct: React.FC = () => {
             }}
             // required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-          />
+          /> */}
           <label htmlFor="description" className="block font-medium">
             Description:
           </label>

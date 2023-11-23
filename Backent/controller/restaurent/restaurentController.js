@@ -69,12 +69,17 @@ export const getCategories = async (req,res)=>{
       is_deleted:false,
       restaurent:id
     })
+    console.log(id,'restaiddd');
     console.log(categoryData,'categorydatas');
+    res.status(200).json({
+      status: 'success',
+      categoryData
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       status: 'error',
-      
+
       message: 'Internal Server Error'
     });
   }
