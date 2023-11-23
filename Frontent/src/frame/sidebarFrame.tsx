@@ -4,7 +4,7 @@ const SidebarFrame=({Items})=> {
   return (
     <div>
       <Items/>
-      sidebarFrame</div>
+      </div>
   )
 }
 

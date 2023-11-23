@@ -7,9 +7,10 @@ import EmployeeList from '../Pages/Admin/employeeList';
 import UsersList from '../Pages/Admin/usersList'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminFrame from '../Components/Admin/adminFrame'
-import Home from '../Pages/Admin/home'
-import ErrorPage from '../Components/errorPage.tsx'
+import AdminFrame from '../Components/Admin/adminFrame' 
+import Home from '../Pages/Admin/home' 
+import ErrorPage from '../Components/errorPage.tsx' 
+
 
 const AdminAppLayout = ()=>{
   return (
@@ -19,15 +20,18 @@ const AdminAppLayout = ()=>{
     </>
   )
 }
- const AdminAuthAppLayout =()=>{ 
+
+ const AdminAuthAppLayout = () => { 
   return(
   <Outlet/>
   )
- };
+ }
 
- const AdminRoute={
+
+ const AdminRoute = {
     path:"/admin",
-  errorElement: <ErrorPage path={"/admin"} />,
+  errorElement: < ErrorPage path={"/admin"} />,
+
 
     element:<AdminAuthAppLayout/>,
     children:[
@@ -66,6 +70,7 @@ const AdminAppLayout = ()=>{
         },
         {
           path:"restaurents",
+
           element:(
             <>
               <RestaurentList/>
