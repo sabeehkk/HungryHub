@@ -7,7 +7,8 @@ import {
 import {
     // ProductAdd,
     ProductList,
-    addProduct
+    addProduct,
+    addCategory
 
 }from '../controller/restaurent/restaurentController.js'
 
@@ -18,6 +19,6 @@ router.post('/login',login)
 // router.post('/addFood',ProductAdd)
 router.get('/productList',ProductList)
 router.post('/addProduct',addProduct)
-
+router.post('/addCategory',addCategory)
 
 export default router

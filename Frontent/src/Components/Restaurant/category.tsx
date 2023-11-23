@@ -1,20 +1,50 @@
-// src/App.tsx
+import React,{useState,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { restaurentAxios } from "../../axios/axios";
 
-import React from 'react';
-import ProductForm from './components/ProductForm';
 
-const App: React.FC = () => {
-  const handleProductSubmit = (product: { name: string; category: string }) => {
-    // Handle the submission logic here (e.g., send data to your server)
-    console.log('Product submitted:', product);
-  };
+const CategoryModal = ({showModal})=>{
+  const [categoryName,setCategoryName]= useState("");
+
+  const restaurent = useSelector((state)=>state.restaurentAuth)
+  console.log(restaurent,'restaurent details in category page');
+  
+const restId = restaurent.restaurent._id ;
+console.log(restId);
+
+  const handleAddCategory = ()=>{   
+      restaurentAxios.post("/addCategory",{categoryName,restId})
+      .then((response)=>{       
+      })
+  }
 
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold text-center my-4">Online Food Ordering System</h1>
-      <ProductForm onSubmit={handleProductSubmit} />
-    </div>
-  );
-};
+    <div className="modal-body p-3">
+            <label htmlFor="categoryName" className="block mb-2">
+              Category Name:
+            </label>
+             <input
+              type="text"
+              id="categoryName"
+              value={categoryName}
+              onChange={(e)=>{
+                setCategoryName(e.target.value)
+              }}
+              className="w-full p-2 border border-gray-300"
+              />
+            
+            <button
+              onClick={handleAddCategory}
+              className="bg-green-600 text-off-White mt-2 p-1 rounded-sm"
+            >
+              Add Category
+            </button>
+          </div>
+  )  
+}
 
-export default App;
+export default CategoryModal
+
+
+

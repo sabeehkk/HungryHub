@@ -1,34 +1,63 @@
 // import restaurentModel from '../../models/restaurent.js'
-import ProductModel  from '../../models/product.js';
+import ProductModel from "../../models/product.js";
+import CategoryModel from "../../models/category.js";
 
+export const addProduct = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { productName, description, productPrice, category, images, restId } =
+      req.body;
 
-export const addProduct =async(req,res)=>{
-    try {
-        console.log(req.body);
-        const {productName, description,productPrice,category, images,restId}=req.body
+    const newProduct = new ProductModel({
+      productName,
+      restaurent_id: restId,
+      price: productPrice,
+      category,
+      images,
+      description,
+    });
 
-        const newProduct = new ProductModel({
-            productName,
-            restaurent_id: restId,
-            price:productPrice,
-            category,
-            images,
-            description
-                  })
+    await newProduct.save();
+    res.json({ message: "success" });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-                  await newProduct.save()
-                  res.json({message:'success'})
-    } catch (error) {
-        console.log(error);
+export const ProductList = async (req, res) => {
+  try {
+    const data = await ProductModel.find();
+    console.log(data);
+    res.json({ data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const addCategory = async (req, res) => {
+  try {
+    console.log(req.body);
+    const { categoryName, restId } = req.body;
+    const existCategory = await CategoryModel.findOne({
+      name: categoryName,
+      restaurent: restId,
+    });
+    if (existCategory) {
+      res.status(400).send({
+        error: true,
+        message: "Category already exists",
+      });
+      console.log("category alere exist");
+    } else {
+      const newCategory = new CategoryModel({
+        name: categoryName,
+        restaurent: restId,
+      });
+      await newCategory.save();
+      return res.json({ message: "success" });
     }
-}
-
-export const ProductList = async (req,res)=>{
-      try {
-          const data = await ProductModel.find()
-          console.log(data);
-           res.json({data})
-      } catch (error) {
-        console.log(error.message);
-      }
-}
+  } catch (error) {
+    return res.status(500).json({ message: "Internal Server Error" });
+    console.log(error.message);
+  }
+};

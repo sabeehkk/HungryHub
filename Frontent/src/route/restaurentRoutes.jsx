@@ -9,11 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Pages/Restaurent/restaurentNavbar";
 import FoodAdd from "../Components/Restaurant/foodAdding";
 import UserNavbar from "../Components/User/userNavbar";
-import ErrorPage from "../Components/errorPage.tsx";
+// import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
 import IsLogged from "../middleware/restaurent/isLogged";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
-// import Category from "../Components/Restaurant/category.tsx";
+import Category from "../Components/Restaurant/category.tsx";
 
 const RestaurantAppLayout = () => {
   return (
@@ -90,14 +90,14 @@ const RestaurentRoute = {
             </>
           ),
         },
-        // {
-        //   path:"addCategory",
-        //   element :(
-        //     <>
-        //     <Category/>
-        //     </>
-        //   )
-        // }
+        {
+          path:"addCategory",
+          element :(
+            <>
+            <Category/>
+            </>
+          )
+        }
       ],
     },
   ],
