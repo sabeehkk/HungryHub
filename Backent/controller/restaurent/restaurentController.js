@@ -61,3 +61,20 @@ export const addCategory = async (req, res) => {
     console.log(error.message);
   }
 };
+
+export const getCategories = async (req,res)=>{
+  try {
+    const {id} =req.query
+    const categoryData =await CategoryModel.find({
+      is_deleted:false,
+      restaurent:id
+    })
+    console.log(categoryData,'categorydatas');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal Server Error'
+    });
+  }
+}

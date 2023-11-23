@@ -7,7 +7,6 @@ import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
 import { uploadFoodImage } from "../../api/restaurentApi";
 
-
 const AddProduct: React.FC = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -33,6 +32,21 @@ const AddProduct: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const restId = result._id;
+  const categoryData = async ()=>{
+    // const {data}= await restaurentAxios.get(`/getCategory?id=${restId}`)
+    const { data } = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    console.log(data, 'categorydatas');
+
+    if(data){
+      console.log(data,'categorydatas');
+      
+      setCategories(data.categoryData)
+    }
+  }
+
+  useEffect(()=>{
+    categoryData();
+  },[]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
@@ -54,7 +68,7 @@ const AddProduct: React.FC = () => {
 
   useEffect(() => {
     if (selectedImage) {
-      console.log(selectedImage,"selected imagee")
+      console.log(selectedImage, "selected imagee");
       setSelectedImage(null);
     }
   }, [selectedImage]);
@@ -73,15 +87,15 @@ const AddProduct: React.FC = () => {
         productPrice,
         category,
         images: urlImages,
-        restId
+        restId,
       };
 
       restaurentAxios
         .post("/addProduct", FormData)
         .then((response) => {
-          if(response.data.message=="success"){
-            SuccessMessage('product added successfully')
-            navigate('/restaurent/home')
+          if (response.data.message == "success") {
+            SuccessMessage("product added successfully");
+            navigate("/restaurent/home");
           }
         })
         .catch((error) => {

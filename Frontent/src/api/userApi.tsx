@@ -2,17 +2,18 @@ import { userAxios } from "../axios/axios";
 import axios from "axios";
 import { ErrorMessage } from "../utils/util";
 
-export const verifyOtp = async (otp) => {
-  try {
-    const response = await userAxios.post(`/verifyOtp`, otp);
-    // console.log("Backend Response:", response.data);
-    return response;
-  } catch (error) {
-    console.error("Error from Backend:", error);
+// export const verifyOtp = async (otp) => {
+//   try {
+//     const response = await userAxios.post(`/verifyOtp`, otp);
+//     // console.log("Backend Response:", response.data);
+//     return response;
+//   } catch (error) {
+//     // console.error("Error from Backend:", error);
+//     ErrorMessage(error)    
 
-    throw error;
-  }
-};
+//     throw error;
+//   }
+// };
 
 export const SignupApi = async (userdata) => {
   return await userAxios.post(`/register`, userdata);

@@ -10,13 +10,26 @@ import { userAxios } from "../../axios/axios";
 import { SignupApi, signupVerify } from "../../api/userApi";
 
 export const verifyOtp = async (otp) => {
-  
+  if (
+    !otp ||
+    !otp.digitone ||
+    !otp.digitTwo ||
+    !otp.digitThree ||
+    !otp.digitFour ||
+    !otp.digitFive ||
+    !otp.digitSix
+  ) {
+    const validationError = new Error("Please provide all OTP digits");
+    ErrorMessage(validationError.message);
+    throw validationError;
+  }
   console.log(otp.data);
   try {
     const response = await userAxios.post(`/verifyOtp`, otp);
     console.log("Backend Response:", response.data);
     return response;
   } catch (error) {
+    ErrorMessage(error.message)
     console.error("Error from Backend:", error);
     throw error;
   }
@@ -76,7 +89,7 @@ export default function Signup() {
         console.log(error?.message)
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
   //  alert(error.message)
    ErrorMessage(errormessage)
 
