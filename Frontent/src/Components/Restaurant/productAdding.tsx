@@ -32,29 +32,22 @@ const AddProduct: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const restId = result._id;
-  console.log(restId,'restiddd');
-  
-  const categoryData = async ()=>{
-    console.log('inside categoryData');
-    
-    // const {data}= await restaurentAxios.get(`/getCategory?id=${restId}`)
+  console.log(restId, "restiddd");
+
+  const categoryData = async () => {
+    console.log("inside categoryData");
+
     const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
-    const data = response.data
-    console.log(data, 'categorydatas');
-    if(data){
-      setCategories(data.categoryData)
+    const data = response.data;
+    console.log(data, "categorydatas");
+    if (data) {
+      setCategories(data.categoryData);
     }
+  };
 
-    // if(data){
-    //   console.log(data,'categorydatas');
-      
-    //   setCategories(data.categoryData)
-    // }
-  }
-
-  useEffect(()=>{
+  useEffect(() => {
     categoryData();
-  },[]);
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = event.target.files;
@@ -131,7 +124,7 @@ const AddProduct: React.FC = () => {
             onChange={(e) => {
               setProductName(e.target.value);
             }}
-            // required
+            required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           />
           <label htmlFor="category" className="block font-medium">
@@ -152,17 +145,7 @@ const AddProduct: React.FC = () => {
               </option>
             ))}
           </select>
-          {/* <input
-            type="text"
-            id="category"
-            name="category"
-            value={category}
-            onChange={(e) => {
-              setCategory(e.target.value);
-            }}
-            // required
-            className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-          /> */}
+
           <label htmlFor="description" className="block font-medium">
             Description:
           </label>
@@ -177,7 +160,7 @@ const AddProduct: React.FC = () => {
             onChange={(e) => {
               setDescription(e.target.value);
             }}
-            // required
+            required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 h-32 w-full"
           />
 
@@ -196,7 +179,7 @@ const AddProduct: React.FC = () => {
             onChange={(e) => {
               setProductPrice(e.target.value);
             }}
-            // required
+            required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           />
         </div>
@@ -220,6 +203,7 @@ const AddProduct: React.FC = () => {
               multiple
               type="file"
               id="fileInput"
+              required
               onChange={handleImages}
             />
           </div>

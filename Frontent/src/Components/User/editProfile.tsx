@@ -32,13 +32,13 @@ const EditProfile = ({ data }) => {
       phoneNumber,
     }: profileEditModal = user;
 
-    // if ( 
-    //   !name ||
-    //   !email ||
-    //   !phoneNumber ||
-    // ) {
-    //   return ErrorMessage("Please fill all fields");
-    // }
+    if ( 
+      !name ||
+      !email ||
+      !phoneNumber 
+    ) {
+      return ErrorMessage("Please fill all fields");
+    }
     const emailResult = validateEmail(email);
 
     if (!emailResult) {
