@@ -16,9 +16,8 @@ const productSchema = new mongoose.Schema({
       required: true,
     },
     category:{
-      // type:mongoose.Schema.Types.ObjectId,
-      type:String,
-      ref:'Category'
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'category'
     },
     price:{
       type:Number

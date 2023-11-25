@@ -66,29 +66,28 @@ function userProfile() {
 
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
             <div className="flex justify-end">
-            <button
-            onClick={toggleDropdown}
-            className="px-2 py-2 mr-10  hover:bg-gray-100 rounded-full absolute "
-          >
-            <AiOutlineEdit size={25} />
-          </button>
-          {isDropdownOpen && (
-  <div className="absolute right-0 mt-2">
-    <Link
-      to="/profile/edit"
-      className="block px-4 py-2 text-left w-full max-w-[130px] mt-9 pr-3 mr-22 text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block"
-    >
-      Edit Profile
-    </Link>
-    <Link
-      to="/profile/editPassword"
-      className="ml-0 block px-4 py-2 text-left w-full max-w-[140px] text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block mt-2"
-    >
-      Edit Password
-    </Link>
-  </div>
-)}
-            
+              <button
+                onClick={toggleDropdown}
+                className="px-2 py-2 mr-10  hover:bg-gray-100 rounded-full absolute "
+              >
+                <AiOutlineEdit size={25} />
+              </button>
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2">
+                  <Link
+                    to="/profile/edit"
+                    className="block px-4 py-2 text-left w-full max-w-[130px] mt-9 pr-3 mr-22 text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block"
+                  >
+                    Edit Profile
+                  </Link>
+                  <Link
+                    to="/profile/editPassword"
+                    className="ml-0 block px-4 py-2 text-left w-full max-w-[140px] text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block mt-2"
+                  >
+                    Edit Password
+                  </Link>
+                </div>
+              )}
             </div>
             <div className="rounded  shadow p-6">
               <div className="pb-6">

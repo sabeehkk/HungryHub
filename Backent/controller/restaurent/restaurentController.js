@@ -64,7 +64,9 @@ export const addCategory = async (req, res) => {
 
 export const getCategories = async (req,res)=>{
   try {
+    console.log('inside get category');
     const {id} =req.query
+    console.log(id,'query iddd');
     const categoryData =await CategoryModel.find({
       is_deleted:false,
       restaurent:id
@@ -110,5 +112,22 @@ export const getRestaurentProducts = async (req,res)=>{
         success:false,
         message:"internal server Error"
       })
+    }
+}
+
+export const getProductData =async (req,res)=>{
+    try {
+      console.log(req.query);
+      const {id } =req.query ;
+      const foundProduct = await ProductModel.findOne({_id:id}).populate('category')
+      console.log(foundProduct,'foundproductttttt');
+      if(foundProduct){
+        res.status(200).send({success:true,product:foundProduct})
+      }else{
+        res.status(400).send({success:false,message:"product not found"})
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({success:false,message:"internal server error"})
     }
 }

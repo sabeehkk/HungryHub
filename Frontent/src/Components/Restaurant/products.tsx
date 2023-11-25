@@ -26,7 +26,7 @@ function Products() {
   useEffect(() => {
     restaurentAxios.get(`/getRestaurentProduct?id=${restaurant_id}`).then((response) => {
       setProduct(response.data.productData);
-      console.log(response.data);
+      console.log(response.data,'productDataaaaaaa');
       
     });
   }, [is_deleted]);
@@ -96,11 +96,9 @@ function Products() {
                     DESCRIPTION
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
-                    RATE
+                    Price
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
-                    PRICE
-                  </th>
+               
                   <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
                     Actions
                   </th>
@@ -123,14 +121,12 @@ function Products() {
                     <td className="px-6 py-2 whitespace-nowrap">
                       {item.price}
                     </td>
-                    <td className="px-6 py-2 whitespace-nowrap">
-                      {item.category}
-                    </td>
+                  
                     <td className="px-6 py-2 whitespace-nowrap">
                       { <div className="flex justify-between">
                         <button
                           className="text-yellow hover:text-orange-500"
-                          onClick={() => navigate(`/restaurant/editproduct/${item._id}`)}
+                          onClick={() => navigate(`/restaurent/editProduct/${item._id}`)}
                         >
                           Edit Menu
                         </button>

@@ -15,7 +15,8 @@ import IsLogged from "../middleware/restaurent/isLogged";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
 import Category from "../Components/Restaurant/category.tsx";
 import RestaurentFrame from '../Components/Restaurant/restaurentFrame.tsx'
-import Products from  '../Components/Restaurant/products.tsx'
+import Products from  '../Components/Restaurant/products.tsx';
+import EditProduct from '../Components/Restaurant/editProduct.tsx'
 const RestaurantAppLayout = () => {
   return (
     <>     
@@ -108,7 +109,11 @@ const RestaurentRoute = {
             <Products/>
               </>
             )
-          }
+          },
+          {
+            path:"editProduct/:productId",
+            element: <EditProduct/>
+        }
       ],
     },
   ],

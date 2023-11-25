@@ -1,74 +1,33 @@
-import axios from "axios";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
-import React, { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { restaurentAxios } from "../../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
-// import Button from "../../assets/button";
-import { useNavigate } from "react-router-dom";
-import { uploadFoodImage } from "../../api/restaurentApi";
 
-const AddProduct: React.FC = () => {
-  const [productName, setProductName] = useState("");
-  const [description, setDescription] = useState("");
-  const [productPrice, setProductPrice] = useState("");
-  const [images, setImages] = useState([]);
-  const [category, setCategory] = useState("");
-  const [errors, setErrors] = useState(false);
-  const [categories, setCategories] = useState([]);
-
-  const navigate = useNavigate();
-
-  const restaurant = useSelector((state) => state.restaurentAuth);
-  console.log(
-    restaurant.restaurent.restaurantName,
-    "restarueeeeeeeeentttttttttt"
-  );
-  let result = restaurant.restaurent;
-
-  console.log(result, "restuultt");
-
+const EditProduct = () => {
   const fileInputRef = useRef(null);
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const navigate = useNavigate();
+  const { productId } = useParams();
 
-  const restId = result._id;
-  console.log(restId, "restiddd");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [productPrice, setProductPrice] = useState("");
 
-  const categoryData = async () => {
-    console.log("inside categoryData");
+  const [images, setImages] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [errors, setErrors] = useState(false);
 
-    const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
-    const data = response.data;
-    console.log(data, "categorydatas");
-    if (data) {
-      setCategories(data.categoryData);
-    }
-  };
+  const restaurent = useSelector((state) => state.restaurentAuth);
+  const restId = restaurent.restaurent._id;
+  console.log(restId,'restidd');
+  
 
   useEffect(() => {
     categoryData();
   }, []);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = event.target.files;
-    if (fileList) {
-      const filesArray = Array.from(fileList);
-      setImages(filesArray);
-    }
-  };
-  const handleImageUpload = async (images: any) => {
-    if (!images || images.length === 0) return [];
-    if (images.length < 4) {
-      return ErrorMessage("Please upload at least 4 images");
-    }
-    const url: string[] = [];
-    for (let i = 0; i < images.length; i++) {
-      const img = images[i];
-      const data = await uploadFoodImage(img);
-      url.push(data);
-    }
-    return url;
-  };
   const handleImages = (e) => {
     if (e.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
@@ -76,17 +35,28 @@ const AddProduct: React.FC = () => {
     setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
   };
 
-  useEffect(() => {
-    if (selectedImage) {
-      console.log(selectedImage, "selected imagee");
-      setSelectedImage(null);
+  const categoryData = async () => {
+    console.log("inside categoryData");
+
+    const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    const data = response.data;
+    console.log(data, "edit product Category datasssssss");
+    if (data) {
+      setCategories(data.categoryData);
     }
-  }, [selectedImage]);
+  };
+
+  useEffect(() => {
+    restaurentAxios.get(`/editProduct?id=${productId}`).then((response) => {
+      console.log(response, "responseDatassss");
+      setName(response.data.product.productName);
+    });
+  });
 
   const addProduct = async () => {
     
     if (
-      productName.trim() === "" ||
+      name.trim() === "" ||
       description.trim() === "" ||
       productPrice.trim() === "" ||
       !category
@@ -99,12 +69,12 @@ const AddProduct: React.FC = () => {
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
    
-    if (productName.trim().length === 0 || description.trim().length === 0) {
+    if (name.trim().length === 0 || description.trim().length === 0) {
       setErrors(true);
     } else {
       console.log("inside else");
       const FormData = {
-        productName,
+        name,
         description,
         productPrice,
         category,
@@ -125,22 +95,21 @@ const AddProduct: React.FC = () => {
     }
   };
 
-
   return (
     <div className="p-10">
       <div className="md:flex p-4">
         <div className="md:w-1/2 leading-6">
           <label className="block font-medium">Product Name:</label>
-          {!productName.trim().length && errors && (
+          {!name.trim().length && errors && (
             <p className="text-red-500 text-sm">{"Product Name is required"}</p>
           )}
           <input
             type="text"
             id="name"
             name="name"
-            value={productName}
+            value={name}
             onChange={(e) => {
-              setProductName(e.target.value);
+              setName(e.target.value);
             }}
             required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
@@ -242,4 +211,4 @@ const AddProduct: React.FC = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;
