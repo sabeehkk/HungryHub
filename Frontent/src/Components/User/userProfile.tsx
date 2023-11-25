@@ -3,16 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
 import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
 import { Link } from "react-router-dom";
+import { AiOutlineEdit } from "react-icons/ai";
+
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 
 function userProfile() {
   const { user } = useSelector((state: any) => state.userAuth);
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen);
+  };
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -33,8 +40,6 @@ function userProfile() {
 
   return (
     <>
-      
-
       <div className="h-full mt-16 shadow-xl mr-16 ml-16">
         <div className="flex items-center justify-center">
           <span className="text-xl font-extrabold block">User Profile</span>
@@ -42,9 +47,6 @@ function userProfile() {
 
         <div className="border-b-2 block md:flex">
           <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
-            <span className="text-gray-600">
-              This information is secret so be careful
-            </span>
             <div className="w-full p-8 mx-2 flex justify-center">
               <input
                 type="file"
@@ -59,36 +61,34 @@ function userProfile() {
                 alt={`${user.name} `}
                 onClick={() => fileInputRef.current.click()}
               />
-              {/* <img
-                className="max-w-xs w-32 items-center border rounded-full"
-                src="https://startitindia.com/Uploads/1552200708454494651.jpg"
-                alt=""
-              /> */}
             </div>
           </div>
 
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
             <div className="flex justify-end">
-              <Link
-                to="/profile/edit"
-                className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
-              >
-                Edit
-              </Link>
-              <Link
-                to="/logout"
-                className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
-              >
-                Logout
-              </Link>
-            </div>
-            <div className="flex justify-end ">
-              <Link
-                to="/profile/editPassword"
-                className="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800"
-              >
-                Change Password
-              </Link>
+            <button
+            onClick={toggleDropdown}
+            className="px-2 py-2 mr-10  hover:bg-gray-100 rounded-full absolute "
+          >
+            <AiOutlineEdit size={25} />
+          </button>
+          {isDropdownOpen && (
+  <div className="absolute right-0 mt-2">
+    <Link
+      to="/profile/edit"
+      className="block px-4 py-2 text-left w-full max-w-[130px] mt-9 pr-3 mr-22 text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block"
+    >
+      Edit Profile
+    </Link>
+    <Link
+      to="/profile/editPassword"
+      className="ml-0 block px-4 py-2 text-left w-full max-w-[140px] text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block mt-2"
+    >
+      Edit Password
+    </Link>
+  </div>
+)}
+            
             </div>
             <div className="rounded  shadow p-6">
               <div className="pb-6">
