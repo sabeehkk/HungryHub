@@ -11,7 +11,8 @@ import {
     addCategory,
     getCategories,
     getRestaurentProducts,
-    getProductData
+    getProductData,
+    updateProduct
 
 }from '../controller/restaurent/restaurentController.js'
 
@@ -26,5 +27,6 @@ router.post('/addCategory',addCategory)
 router.get('/getCategory',getCategories)
 router.get('/getRestaurentProduct',getRestaurentProducts)
 router.get('/editProduct',getProductData)
+router.patch('/updateProduct',updateProduct)
 
 export default router

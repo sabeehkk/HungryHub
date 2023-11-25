@@ -3,12 +3,13 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { restaurentAxios } from "../../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
+import { uploadFoodImage } from "../../api/restaurentApi";
 
 const EditProduct: React.FC = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
-  const [name, setName] = useState("");
+  const [productName, setProductName] = useState('');
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -45,39 +46,60 @@ const EditProduct: React.FC = () => {
   useEffect(() => {
     restaurentAxios.get(`/editProduct?id=${productId}`).then((response) => {
       console.log(response, "responseDatassss");
-      setName(response.data.product.productName);
-    });
-  });
+      setProductName(response.data.product.productName);
+      setDescription(response.data.product.description)
+      setCategory(response.data.product.category.name)
+      setProductPrice(response.data.product.price)
+      // setImages(response.data.product.images)
+      setImages(response.data.product.images)
+    }).catch((error)=>{
+      console.log(error);
+    })
+  },[]);
+  const handleImageUpload = async (images: any) => {
+    if (!images || images.length === 0) return [];
+    // if (images.length < 4) {
+    //   return ErrorMessage("Please upload at least 4 images");
+    // }
+    const url: string[] = [];
+    for (let i = 0; i < images.length; i++) {
+      const img = images[i];
+      const data = await uploadFoodImage(img);
+      url.push(data);
+    }
+    return url;
+  };
 
-  const addProduct = async () => {
+  const editProduct = async () => {
     if (
-      name.trim() === "" ||
+      productName.trim() === "" ||
       description.trim() === "" ||
-      productPrice.trim() === "" ||
+      !productPrice,
       !category
     ) {
       return ErrorMessage("Please Fill All Field");
     }
-    if (images.length < 4) {
-      return ErrorMessage("Please upload at least 4 images");
-    }
+    // if (images.length < 4) {
+    //   return ErrorMessage("Please upload at least 4 images");
+    // }
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
 
-    if (name.trim().length === 0 || description.trim().length === 0) {
+    if (productName.trim().length === 0 || description.trim().length === 0) {
       setErrors(true);
     } else {
       console.log("inside else");
       const FormData = {
-        name,
+        productName,
         description,
         productPrice,
         category,
         images: urlImages,
         restId,
+        productId
       };
       restaurentAxios
-        .post("/addProduct", FormData)
+        .patch("/updateProduct", FormData)
         .then((response) => {
           if (response.data.message == "success") {
             SuccessMessage("product added successfully");
@@ -95,16 +117,16 @@ const EditProduct: React.FC = () => {
       <div className="md:flex p-4">
         <div className="md:w-1/2 leading-6">
           <label className="block font-medium">Product Name:</label>
-          {!name.trim().length && errors && (
+          {!productName.trim().length && errors && (
             <p className="text-red-500 text-sm">{"Product Name is required"}</p>
           )}
           <input
             type="text"
             id="name"
             name="name"
-            value={name}
+            value={productName}
             onChange={(e) => {
-              setName(e.target.value);
+              setProductName(e.target.value);
             }}
             required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
@@ -186,15 +208,15 @@ const EditProduct: React.FC = () => {
               id="fileInput"
               required
               onChange={handleImages}
-              min={4}
-              max={5}
+              // min={1}
+              // max={5}
             />
           </div>
           <div className="pt-10">
             <button
               className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
-              onClick={addProduct}
+              onClick={editProduct}
             >
               Add Product
             </button>

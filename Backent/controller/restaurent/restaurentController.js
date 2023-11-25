@@ -72,7 +72,7 @@ export const getCategories = async (req,res)=>{
       restaurent:id
     })
     console.log(id,'restaiddd');
-    console.log(categoryData,'categorydatas');
+    // console.log(categoryData,'categorydatas');
     res.status(200).json({
       status: 'success',
       categoryData
@@ -94,7 +94,7 @@ export const getRestaurentProducts = async (req,res)=>{
         isDeleted:false,
         restaurent_id:restId,
       })
-      console.log(productData,'productDatas');
+      // console.log(productData,'productDatas');
       if(productData.length>0){
         res.status(200).send({
           success:true,
@@ -120,7 +120,7 @@ export const getProductData =async (req,res)=>{
       console.log(req.query);
       const {id } =req.query ;
       const foundProduct = await ProductModel.findOne({_id:id}).populate('category')
-      console.log(foundProduct,'foundproductttttt');
+      // console.log(foundProduct,'foundproductttttt');
       if(foundProduct){
         res.status(200).send({success:true,product:foundProduct})
       }else{
@@ -130,4 +130,20 @@ export const getProductData =async (req,res)=>{
       console.log(error);
       res.status(500).send({success:false,message:"internal server error"})
     }
+}
+
+export const updateProduct = async (req,res)=>{
+     try {
+        console.log(req.body);
+        const {productName,description,productPrice,category,images,productId}=req.body
+        await ProductModel.updateOne({_id:productId},
+          {
+            $set:{
+            productName,description,category,images,price
+          }
+        }
+       ).then
+     } catch (error) {
+      console.log(error);
+     }
 }
