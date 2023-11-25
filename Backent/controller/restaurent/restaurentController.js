@@ -84,3 +84,31 @@ export const getCategories = async (req,res)=>{
     });
   }
 }
+
+export const getRestaurentProducts = async (req,res)=>{
+    try {
+      const restId = req.query.id ;
+      const productData = await ProductModel.find({
+        isDeleted:false,
+        restaurent_id:restId,
+      })
+      console.log(productData,'productDatas');
+      if(productData.length>0){
+        res.status(200).send({
+          success:true,
+          productData
+        })
+      }else{
+        res.status(404).send({
+          success:false,
+          message:"Product Not Available"
+        })
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({
+        success:false,
+        message:"internal server Error"
+      })
+    }
+}

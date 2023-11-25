@@ -9,7 +9,8 @@ import {
     ProductList,
     addProduct,
     addCategory,
-    getCategories
+    getCategories,
+    getRestaurentProducts
 
 }from '../controller/restaurent/restaurentController.js'
 
@@ -22,5 +23,6 @@ router.get('/productList',ProductList)
 router.post('/addProduct',addProduct)
 router.post('/addCategory',addCategory)
 router.get('/getCategory',getCategories)
+router.get('/getRestaurentProduct',getRestaurentProducts)
 
 export default router

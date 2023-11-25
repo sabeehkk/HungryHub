@@ -21,11 +21,12 @@ const EditProfile = ({ data }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUser({ ...user, [name]: value } );
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
+
     const {
       name,
       email,
@@ -41,7 +42,7 @@ const EditProfile = ({ data }) => {
     }
     const emailResult = validateEmail(email);
 
-    if (!emailResult) {
+    if (!emailResult) { 
       return ErrorMessage(" Email address is incorrect");
     }
 
@@ -50,7 +51,6 @@ const EditProfile = ({ data }) => {
         "The phone number is not valid"
       );
     }
-
    
     const data = {
       name,
@@ -58,7 +58,6 @@ const EditProfile = ({ data }) => {
       phoneNumber,
      
     };
-    
 
     const response = await updateProfileData(data, user?._id);
     if (response) {

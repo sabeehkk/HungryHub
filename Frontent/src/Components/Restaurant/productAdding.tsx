@@ -58,6 +58,9 @@ const AddProduct: React.FC = () => {
   };
   const handleImageUpload = async (images: any) => {
     if (!images || images.length === 0) return [];
+    if (images.length < 4) {
+      return ErrorMessage("Please upload at least 4 images");
+    }
     const url: string[] = [];
     for (let i = 0; i < images.length; i++) {
       const img = images[i];
@@ -65,6 +68,12 @@ const AddProduct: React.FC = () => {
       url.push(data);
     }
     return url;
+  };
+  const handleImages = (e) => {
+    if (e.length < 4) {
+      return ErrorMessage("Please upload at least 4 images");
+    }
+    setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
   };
 
   useEffect(() => {
@@ -75,13 +84,27 @@ const AddProduct: React.FC = () => {
   }, [selectedImage]);
 
   const addProduct = async () => {
+    
+    if (
+      productName.trim() === "" ||
+      description.trim() === "" ||
+      productPrice.trim() === "" ||
+      category.trim() === ""
+    ) {
+      return ErrorMessage("Please Fill All Field");
+    }
+    if (images.length < 4) {
+      return ErrorMessage("Please upload at least 4 images");
+    }
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
+    // if (images.length !== 4) {
+    //   return ErrorMessage("Please Upload exactly 4 Images");
+    // }
     if (productName.trim().length === 0 || description.trim().length === 0) {
       setErrors(true);
     } else {
       console.log("inside else");
-
       const FormData = {
         productName,
         description,
@@ -89,8 +112,7 @@ const AddProduct: React.FC = () => {
         category,
         images: urlImages,
         restId,
-      };
-
+      } ;
       restaurentAxios
         .post("/addProduct", FormData)
         .then((response) => {
@@ -105,9 +127,7 @@ const AddProduct: React.FC = () => {
     }
   };
 
-  const handleImages = (e) => {
-    setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
-  };
+
   return (
     <div className="p-10">
       <div className="md:flex p-4">
@@ -140,7 +160,7 @@ const AddProduct: React.FC = () => {
           >
             <option value="">Select a category</option>
             {categories.map((category) => (
-              <option key={category._id} value={category._id}>
+              <option key={category._id} value={category.name}>
                 {category.name}
               </option>
             ))}
@@ -163,7 +183,6 @@ const AddProduct: React.FC = () => {
             required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 h-32 w-full"
           />
-
           {!category.trim().length && errors && (
             <p className="text-red-500 text-sm">{"Select a Category"}</p>
           )}
@@ -205,6 +224,8 @@ const AddProduct: React.FC = () => {
               id="fileInput"
               required
               onChange={handleImages}
+              min={4}
+              max={5}
             />
           </div>
           <div className="pt-10">
