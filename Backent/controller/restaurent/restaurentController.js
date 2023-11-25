@@ -142,8 +142,21 @@ export const updateProduct = async (req,res)=>{
             productName,description,category,images,price
           }
         }
-       ).then
+       ).then(()=>{
+        res.status(200).send({
+          success:true,
+          message:"Product Editted Successfully"
+        })
+       }).catch((err)=>{
+        res.status(404).send({
+          success:false,
+          message:"something went wrong"
+        })
+       })
      } catch (error) {
-      console.log(error);
+      res.status(500).send({
+        success:false,
+        message:"internal server error"
+      })
      }
 }
