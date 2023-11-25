@@ -4,9 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { restaurentAxios } from "../../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 
-const EditProduct = () => {
-  const fileInputRef = useRef(null);
-
+const EditProduct: React.FC = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
@@ -14,15 +12,14 @@ const EditProduct = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [productPrice, setProductPrice] = useState("");
-
   const [images, setImages] = useState("");
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState(false);
+  const fileInputRef = useRef(null);
 
   const restaurent = useSelector((state) => state.restaurentAuth);
   const restId = restaurent.restaurent._id;
-  console.log(restId,'restidd');
-  
+  console.log(restId, "restidd");
 
   useEffect(() => {
     categoryData();
@@ -37,7 +34,6 @@ const EditProduct = () => {
 
   const categoryData = async () => {
     console.log("inside categoryData");
-
     const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
     const data = response.data;
     console.log(data, "edit product Category datasssssss");
@@ -54,7 +50,6 @@ const EditProduct = () => {
   });
 
   const addProduct = async () => {
-    
     if (
       name.trim() === "" ||
       description.trim() === "" ||
@@ -68,7 +63,7 @@ const EditProduct = () => {
     }
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
-   
+
     if (name.trim().length === 0 || description.trim().length === 0) {
       setErrors(true);
     } else {
@@ -80,7 +75,7 @@ const EditProduct = () => {
         category,
         images: urlImages,
         restId,
-      } ;
+      };
       restaurentAxios
         .post("/addProduct", FormData)
         .then((response) => {
