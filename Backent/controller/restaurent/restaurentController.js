@@ -139,7 +139,7 @@ export const updateProduct = async (req,res)=>{
         await ProductModel.updateOne({_id:productId},
           {
             $set:{
-            productName,description,category,images,price
+            productName,description,category,images,price:productPrice
           }
         }
        ).then(()=>{
@@ -154,6 +154,7 @@ export const updateProduct = async (req,res)=>{
         })
        })
      } catch (error) {
+      console.log(error);
       res.status(500).send({
         success:false,
         message:"internal server error"
