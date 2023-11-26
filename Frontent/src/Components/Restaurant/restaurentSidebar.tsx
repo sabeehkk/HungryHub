@@ -26,6 +26,11 @@ const App = () => {
       src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
       url: "/restaurent/addProduct",
     },
+    {
+      title: "Menu Items ",
+      src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
+      url: "/restaurent/products",
+    },
 
     { title: "Setting", src: "Setting" },
   ];

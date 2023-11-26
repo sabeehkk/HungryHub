@@ -9,7 +9,7 @@ const EditProduct: React.FC = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
-  const [productName, setProductName] = useState('');
+  const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [productPrice, setProductPrice] = useState("");
@@ -44,18 +44,21 @@ const EditProduct: React.FC = () => {
   };
 
   useEffect(() => {
-    restaurentAxios.get(`/editProduct?id=${productId}`).then((response) => {
-      console.log(response, "responseDatassss");
-      setProductName(response.data.product.productName);
-      setDescription(response.data.product.description)
-      setCategory(response.data.product.category.name)
-      setProductPrice(response.data.product.price)
-      // setImages(response.data.product.images)
-      setImages(response.data.product.images)
-    }).catch((error)=>{
-      console.log(error);
-    })
-  },[]);
+    restaurentAxios
+      .get(`/editProduct?id=${productId}`)
+      .then((response) => {
+        console.log(response, "responseDatassss");
+        setProductName(response.data.product.productName);
+        setDescription(response.data.product.description);
+        setCategory(response.data.product.category.name);
+        setProductPrice(response.data.product.price);
+        // setImages(response.data.product.images)
+        setImages(response.data.product.images);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
   const handleImageUpload = async (images: any) => {
     if (!images || images.length === 0) return [];
     // if (images.length < 4) {
@@ -72,10 +75,8 @@ const EditProduct: React.FC = () => {
 
   const editProduct = async () => {
     if (
-      productName.trim() === "" ||
-      description.trim() === "" ||
-      !productPrice,
-      !category
+      (productName.trim() === "" || description.trim() === "" || !productPrice,
+      !category)
     ) {
       return ErrorMessage("Please Fill All Field");
     }
@@ -96,7 +97,7 @@ const EditProduct: React.FC = () => {
         category,
         images: urlImages,
         restId,
-        productId
+        productId,
       };
       restaurentAxios
         .patch("/updateProduct", FormData)
