@@ -16,19 +16,20 @@ function Products() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const restaurant = useSelector((state) => state.restaurentAuth);
-  console.log(restaurant,'restaurent details');
-  
+  console.log(restaurant, "restaurent details");
+
   const restaurant_id = restaurant.restaurent._id;
-  console.log(restaurant_id,'restIddd');
-  
+  console.log(restaurant_id, "restIddd");
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    restaurentAxios.get(`/getRestaurentProduct?id=${restaurant_id}`).then((response) => {
-      setProduct(response.data.productData);
-      console.log(response.data,'productDataaaaaaa');
-      
-    });
+    restaurentAxios
+      .get(`/getRestaurentProduct?id=${restaurant_id}`)
+      .then((response) => {
+        setProduct(response.data.productData);
+        console.log(response.data, "productDataaaaaaa");
+      });
   }, [is_deleted]);
 
   const itemsPerPage = 5;
@@ -37,49 +38,50 @@ function Products() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = product.slice(startIndex, endIndex);
-   console.log(currentItems,'currentItemssss');
-   
+  console.log(currentItems, "currentItemssss");
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-//   const deletProduct = async (proId) => {
-//     const result = await Swal.fire({
-//       title: "Do you really want to delete this product?",
-//       icon: "warning",
-//       showCancelButton: true,
-//       confirmButtonText: "Yes, delete it!",
-//       cancelButtonText: "No, cancel",
-//     });
-//     if (result.isConfirmed) {
-//         restaurentAxios.patch("/deletproduct", { proId })
-//         .then((response) => {
-//           if (response.data.success) {
-//             toast.success(response.data.message, {
-//               position: toast.POSITION.TOP_CENTER,
-//               autoClose: 3000,
-//             });
-//             setDeleted(!is_deleted)
-//           } else {
-//             toast.error(response.data.message, {
-//               position: toast.POSITION.TOP_CENTER,
-//               autoClose: 3000,
-//             });
-//           }
-//         })
-//         .catch((err) => {
-//           toast.error(err.response.data.message, {
-//             position: toast.POSITION.TOP_CENTER,
-//             autoClose: 3000,
-//           });
-//         });
-//     } else {
-//       toast.error("Cancelled", {
-//         position: toast.POSITION.TOP_CENTER,
-//         autoClose: 3000,
-//       });
-//     }
-//   };
+  const deletProduct = async (proId) => {
+    const result = await Swal.fire({
+      title: "Do you really want to delete this product?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel",
+    });
+    if (result.isConfirmed) {
+      restaurentAxios
+        .patch("/deleteProduct", { proId })
+        .then((response) => {
+          if (response.data.success) {
+            toast.success(response.data.message, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            });
+            setDeleted(!is_deleted);
+          } else {
+            toast.error(response.data.message, {
+              position: toast.POSITION.TOP_CENTER,
+              autoClose: 3000,
+            });
+          }
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 3000,
+          });
+        });
+    } else {
+      toast.error("Cancelled", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 3000,
+      });
+    }
+  };
 
   return (
     <div className="p-10 w-full">
@@ -98,7 +100,7 @@ function Products() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
                     Price
                   </th>
-               
+
                   <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
                     Actions
                   </th>
@@ -121,25 +123,27 @@ function Products() {
                     <td className="px-6 py-2 whitespace-nowrap">
                       {item.price}
                     </td>
-                  
+
                     <td className="px-6 py-2 whitespace-nowrap">
-                      { <div className="flex justify-between">
-                        <button
-                          className="text-yellow hover:text-orange-500"
-                          onClick={() => navigate(`/restaurent/editProduct/${item._id}`)}
-                        >
-                          Edit Menu
-                        </button>
-                        {/* <button
-                          className="text-red-600 hover:text-red-900"
-                          onClick={() => deletProduct(item._id)}
-                        >
-                          Delete
-                        </button> */}
-                      </div>
+                      {
+                        <div className="flex justify-between">
+                          <button
+                            className="text-yellow hover:text-orange-500"
+                            onClick={() =>
+                              navigate(`/restaurent/editProduct/${item._id}`)
+                            }
+                          >
+                            Edit Menu
+                          </button>
+                          <button
+                            className="px-6 py-2 text-red-600 hover:text-red-900"
+                            onClick={() => deletProduct(item._id)}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       }
                     </td>
-
                   </tr>
                 ))}
               </tbody>

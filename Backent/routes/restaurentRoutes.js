@@ -12,7 +12,8 @@ import {
     getCategories,
     getRestaurentProducts,
     getProductData,
-    updateProduct
+    updateProduct,
+    deleteProduct
 
 }from '../controller/restaurent/restaurentController.js'
 
@@ -28,5 +29,6 @@ router.get('/getCategory',getCategories)
 router.get('/getRestaurentProduct',getRestaurentProducts)
 router.get('/editProduct',getProductData)
 router.patch('/updateProduct',updateProduct)
+router.patch('/deleteProduct',deleteProduct)
 
 export default router

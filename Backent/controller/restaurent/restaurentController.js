@@ -161,3 +161,47 @@ export const updateProduct = async (req,res)=>{
       })
      }
 }
+
+export const deleteProduct =async(req,res)=>{
+     try {
+       console.log(req.body);
+       const {proId} = req.body ;
+
+       const productToDelete = await ProductModel.findOne({ _id: proId });
+
+    // Check if the product was found
+    if (!productToDelete) {
+      console.log('product not found');
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+      });
+    }
+
+     const result =  await ProductModel.updateOne(
+        {_id:proId},
+        {$set:{
+          isDeleted:true,
+        },
+      }
+       )
+       .then(()=>{
+        res.status(200).send({
+          success:true,
+          message:"product Deleted "
+        })
+       }).catch(()=>{
+        res.status(404).send({
+          success:false,
+          message:"something went wrong"
+        })
+       })
+     } catch (error) {
+      res.status(500).send({
+        success:false,
+        message:"Internal server error" ,
+      })
+      console.log(error);
+     }
+
+}
