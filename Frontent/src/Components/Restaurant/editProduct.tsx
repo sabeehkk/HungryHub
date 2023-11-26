@@ -52,7 +52,6 @@ const EditProduct: React.FC = () => {
         setDescription(response.data.product.description);
         setCategory(response.data.product.category.name);
         setProductPrice(response.data.product.price);
-        // setImages(response.data.product.images)
         setImages(response.data.product.images);
       })
       .catch((error) => {
@@ -74,12 +73,20 @@ const EditProduct: React.FC = () => {
   };
 
   const editProduct = async () => {
-    if (
-      (productName.trim() === "" || description.trim() === "" || !productPrice,
-      !category)
-    ) {
-      return ErrorMessage("Please Fill All Field");
+    console.log('inside editproduct');
+    if(productName.trim() === ""){
+      return ErrorMessage("Please Fill ProductName");
     }
+    if(description.trim() === ""){
+      return ErrorMessage("Please Fill Description");
+    }
+    if(!productPrice){
+      return ErrorMessage("Please Fill Product Price");
+    }
+    if(!categoryData){
+      return ErrorMessage("Please Fill Product Price");
+    }
+   
     // if (images.length < 4) {
     //   return ErrorMessage("Please upload at least 4 images");
     // }
@@ -215,11 +222,11 @@ const EditProduct: React.FC = () => {
           </div>
           <div className="pt-10">
             <button
-              className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
               onClick={editProduct}
             >
-              Add Product
+              Edit Product
             </button>
           </div>
           <div className="pt-3 "></div>
