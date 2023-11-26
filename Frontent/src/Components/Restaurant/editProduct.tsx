@@ -16,7 +16,9 @@ const EditProduct: React.FC = () => {
   const [images, setImages] = useState("");
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState(false);
-  const fileInputRef = useRef(null);
+  const [correntCat, setCorrentCat] = useState()
+
+  // const fileInputRef = useRef(null);
 
   const restaurent = useSelector((state) => state.restaurentAuth);
   const restId = restaurent.restaurent._id;
@@ -50,7 +52,8 @@ const EditProduct: React.FC = () => {
         console.log(response, "responseDatassss");
         setProductName(response.data.product.productName);
         setDescription(response.data.product.description);
-        setCategory(response.data.product.category.name);
+        setCategory(response.data.product.category._id);
+        setCorrentCat(response.data.product.category.name)
         setProductPrice(response.data.product.price);
         setImages(response.data.product.images);
       })
@@ -150,7 +153,7 @@ const EditProduct: React.FC = () => {
             required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           >
-            <option value="">Select a category</option>
+            <option value="">{correntCat}</option>
             {categories.map((category) => (
               <option key={category._id} value={category._id}>
                 {category.name}
