@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Button from "../../assets/Button";
 
 import { restaurentAxios } from "../../axios/axios";
+import PAgination from "../../Components/pagination";
 
 import Pagination from "../../assets/pagination";
 
@@ -14,6 +15,8 @@ function Products() {
   const [product, setProduct] = useState([]);
   const [is_deleted, setDeleted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [size, setSize] = useState(1);
+  const [page, setPage] = useState(1);
 
   const restaurant = useSelector((state) => state.restaurentAuth);
   console.log(restaurant, "restaurent details");
@@ -38,6 +41,7 @@ function Products() {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = product.slice(startIndex, endIndex);
+
   console.log(currentItems, "currentItemssss");
 
   const handlePageChange = (page) => {
@@ -81,6 +85,9 @@ function Products() {
         autoClose: 3000,
       });
     }
+  };
+  const filterPagination = (value) => {
+    setPage(value);
   };
 
   return (
@@ -156,15 +163,15 @@ function Products() {
               className={"w-40"}
             />
           </div>
-          <div className="float-right mr-3 mt-3">
-            <Pagination
+          <div className="float-center  mt-3">
+            <PAgination
               currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
+              filterPagination={filterPagination}
+              size={size}
             />
           </div>
         </div>
-        <div></div>
+       
       </div>
     </div>
   );
