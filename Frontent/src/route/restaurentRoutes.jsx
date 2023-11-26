@@ -15,7 +15,7 @@ import Navbar from "../Pages/Restaurent/restaurentNavbar";
 import Logout from "../Pages/Restaurent/logout.tsx";
 import IsLogged from "../middleware/restaurent/isLogged";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
-import Category from "../Components/Restaurant/category.tsx";
+// import Category from "../Components/Restaurant/category.tsx";
 import RestaurentFrame from '../Components/Restaurant/restaurentFrame.tsx'
 import Products from  '../Components/Restaurant/products.tsx';
 import EditProduct from '../Components/Restaurant/editProduct.tsx'
@@ -95,14 +95,14 @@ const RestaurentRoute = {
             </>
           ),
         },
-        {
-          path:"addCategory",
-          element :(
-            <>
-            <Category/>
-            </>
-          )
-        },
+        // {
+        //   path:"addCategory",
+        //   element :(
+        //     <>
+        //     <Category/>
+        //     </>
+        //   )
+        // },
           {
             path:"products",
             element: (

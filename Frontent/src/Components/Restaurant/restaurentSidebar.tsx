@@ -19,7 +19,7 @@ const App = () => {
       title: "Category",
       src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
       gap: true,
-      url: "/restaurent/addCategory",
+      url: "/restaurent/categoryAddingModal",
     },
     {
       title: "Add Menu Items ",
