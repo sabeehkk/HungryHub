@@ -7,9 +7,11 @@ import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
 import { ToastContainer, toast } from "react-toastify" ;
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Pages/Restaurent/restaurentNavbar";
+
 // import FoodAdd from "../Components/Restaurant/foodAdding";
 // import UserNavbar from "../Components/User/userNavbar";
 // import ErrorPage from "../Components/errorPage.tsx";
+
 import Logout from "../Pages/Restaurent/logout.tsx";
 import IsLogged from "../middleware/restaurent/isLogged";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
@@ -17,13 +19,14 @@ import Category from "../Components/Restaurant/category.tsx";
 import RestaurentFrame from '../Components/Restaurant/restaurentFrame.tsx'
 import Products from  '../Components/Restaurant/products.tsx';
 import EditProduct from '../Components/Restaurant/editProduct.tsx'
+import CategoryModal from "../Components/Restaurant/categoryList.tsx";
+// import 
+
 const RestaurantAppLayout = () => {
   return (
     <>     
       <Outlet />
-
       <ToastContainer />  
-
     </>   
   ) ;
 } ;
@@ -32,7 +35,6 @@ const RestaurentAuthAppLayout = () => {
   return (
     <>
       <RestaurentFrame/>  
-
       <ToastContainer />
 
     </>
@@ -42,7 +44,6 @@ const RestaurentAuthAppLayout = () => {
 const RestaurentRoute = {
   path: "/restaurent",
   // errorElement: <ErrorPage path={"/restaurent"} />,
-
   element: <RestaurantAppLayout />,
   children: [
     {
@@ -113,7 +114,11 @@ const RestaurentRoute = {
           {
             path:"editProduct/:productId",
             element: <EditProduct/>
-        }
+        },
+        {
+            path:"categoryAddingModal",
+            element:<CategoryModal/>
+        },
       ],
     },
   ],
