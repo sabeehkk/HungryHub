@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { restaurentAxios } from "../../axios/axios";
+import { ErrorMessage } from "../../utils/util";
 
 
 const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, editMode }) => {
@@ -28,7 +29,7 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
   const handleAddCategory = () => {
     if (categoryName.trim() !== "") {
       if (editMode && categoryId) {
-        restaurentAxios.patch('/editcategory',{ categoryName, categoryId, restId })
+        restaurentAxios.patch('/editCategory',{ categoryName, categoryId, restId })
        .then((response) => {
         console.log(response);
         toast.success(response.data.message, {
@@ -40,13 +41,11 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
       })
       .catch((err) => {
         console.log(err);
-        toast.error(err.response?.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
+       return ErrorMessage(err.message)
+    
       });
       } else {
-        restaurentAxios.post("/addcategory", { categoryName, restId, image })
+        restaurentAxios.post("/addCategory", { categoryName, restId })
           .then((response) => {
             toast.success(response.data.message, {
               position: toast.POSITION.TOP_CENTER,
@@ -57,10 +56,8 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
           })
           .catch((err) => {
             console.log(err);
-            toast.error(err.response?.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
+            return ErrorMessage(err.message)
+           
           });
       }
     } else {

@@ -205,3 +205,78 @@ export const deleteProduct =async(req,res)=>{
      }
 
 }
+
+export const editCategory= async(req,res)=>{
+  try {
+    const { categoryName, image, categoryId, restId } = req.body
+    console.log(req.body);
+    const existCategory = await CategoryModel.findOne({
+      name: categoryName,
+      restaurent: restId,
+    });
+    console.log(existCategory,'category exist');
+    if(existCategory){
+      const existId = existCategory._id.toString()
+      console.log(existId,'exist isddddddddd');
+      if(existId === categoryId){
+        console.log('not matching');
+        await CategoryModel.updateOne({_id:categoryId},{$set:{
+          image,
+        }})
+        res.status(200).send({
+          success:true,
+          message:"Category edited success"
+        })
+        
+      }else{
+        console.log('else is working');
+        res.status(400).send({
+          success:false,
+          message:"Category already exists"
+      })
+      }
+    }else{await CategoryModel.updateOne({_id:categoryId},{
+      $set:{
+        name:categoryName,
+        
+      }
+    })
+    res.status(200).send({
+      success:true,
+      message:"Category edited success"
+    })}
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message:"Server Error"
+    })
+  }
+}
+
+export const deleteCategory = async(req,res)=>{
+  try {
+    console.log(req.body);
+    const { catId } = req.body
+    const isProduct = await ProductModel.find({'category._id':catId})
+    if (isProduct.length > 0) {
+      return res.status(409).send({
+        message: 'Category has associated products. Do you want to delete the products and the category?',
+        confirmationRequired: true
+      });
+    }
+    await CategoryModel.updateOne({_id:catId},{$set:{
+      is_deleted:true
+    }})
+    res.status(200).send({
+      success:true,
+      message:"Category Deleted"
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message:"Server error"
+    })
+  }
+}

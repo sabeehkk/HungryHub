@@ -5,16 +5,18 @@ import Swal from "sweetalert2";
 import { restaurentAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
 import CategoryModal from "../../Components/Restaurant/categoryModal";
+import { ErrorMessage, SuccessMessage } from "../../utils/util";
 
 const CategoryList = () => {
-  const [categories, setCategories] = useState([]);
-  const [is_deleted, setDeleted] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [editMode, setEditMode] = useState(false);
+
+  const [categories, setCategories] = useState([]) ;
+  const [is_deleted, setDeleted] = useState(false) ;
+  const [showModal, setShowModal] = useState(false) ;
+  const [editMode, setEditMode] = useState(false) ;
   const [categoryId, setCategoryId] = useState();
   const [categoryToEdit, setCategoryToEdit] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 5 ;
   const totalPages = Math.ceil(categories.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -70,32 +72,31 @@ const CategoryList = () => {
     });
     if (result.isConfirmed) {
       restaurentAxios
-        .patch("/deletcategory", { catId })
+        .patch("/deleteCategory", { catId })
         .then((response) => {
           if (response.data.success) {
-            toast.success(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
+            return SuccessMessage(response.data.message)
+            console.log(response.data);
+            alert(response.data.message)
+            
+            // toast.success(response.data.message, {
+            //   position: toast.POSITION.TOP_CENTER,
+            //   autoClose: 1500,
+            // });
             setDeleted(!is_deleted);
           } else {
-            toast.error(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
+           return ErrorMessage(response.data.message)
+          
           }
         })
         .catch((err) => {
-          toast.error(err.response.data.message, {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 1500,
-          });
+            // alert(err.message);
+          return ErrorMessage(err.data.message)
+            
+      
         });
     } else {
-      toast.error("Cancelled", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-      });
+     return ErrorMessage('')
     }
   };
 
@@ -130,15 +131,7 @@ const CategoryList = () => {
                             {item.name}
                           </div>
                         </td>
-                        <td className="px-6 py-2">
-                          <div className="flex items-center justify-center h-full">
-                            <img
-                              className="w-24 h-20"
-                              src={item?.image}
-                              alt={item.name}
-                            />
-                          </div>
-                        </td>
+
                         <td className="px-6 py-2">
                           <div className="flex items-center justify-center h-full">
                             <button
@@ -176,7 +169,7 @@ const CategoryList = () => {
                             <button
                               className="text-yellow hover:text-orange-500"
                               onClick={() => {
-                                editCategory(item._id, item.name, item.image);
+                                editCategory(item._id, item.name);
                               }}
                             >
                               Edit
@@ -201,7 +194,6 @@ const CategoryList = () => {
             >
               Add Categories
             </button>
-
             <CategoryModal
               showModal={showModal}
               closeModal={closeModal}
