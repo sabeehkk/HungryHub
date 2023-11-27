@@ -128,7 +128,7 @@ const EditProduct: React.FC = () => {
     <div className="text-center ">
       <h2 className="text-4xl font-bold italic text-black">
 
-          {"Add Your Food Details"}</h2>
+          {"Edit Your Food Details"}</h2>
       </div>
     <div className="p-10">
       <div className="md:flex p-4">

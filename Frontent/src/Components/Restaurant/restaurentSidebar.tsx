@@ -41,7 +41,7 @@ const App = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex sticky top-0">
       <div
         className={` ${
           open ? "w-72" : "w-20 "
