@@ -91,118 +91,89 @@ const CategoryList = () => {
   };
 
   return (
-    <div className="p-10 w-full">
-      <div className="border">
-        <div className="h-full w-full">
-          <div className="w-full overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
-              <thead>
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
-                    #
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
-                    CATEGORY
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider"></th>
+    <div className="p-10 w-full bg-gray-200">
+    <div className="border rounded-md overflow-hidden shadow-md">
+      <div className="w-full overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 bg-white">
+          <thead className="bg-table-blue text-off-white">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                #
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+                CATEGORY
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"></th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {currentItems.length !== 0 ? (
+              currentItems.map((item, ind) => (
+                <tr key={item._id} className="transition-all hover:bg-gray-100">
+                  <td className="px-6 py-4">
+                    <div className="flex items-center font-semibold">
+                      {(currentPage - 1) * itemsPerPage + ind + 1}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">{item.name}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-4">
+                      <button
+                        className="text-yellow hover:text-orange-500"
+                        onClick={() => {
+                          editCategory(item._id, item.name, item.image);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="text-red-600 hover:text-red-900"
+                        onClick={() => deleteCategory(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200 border">
-                {currentItems.length !== 0
-                  ? currentItems.map((item, ind) => (
-                      <tr key={item._id}>
-                        <td className="px-6 py-2">
-                          <div className="flex items-end font-semibold">
-                            {(currentPage - 1) * itemsPerPage + ind + 1}
-                          </div>
-                        </td>
-                        <td className="px-6 py-2">
-                          <div className="flex items-center h-full">
-                            {item.name}
-                          </div>
-                        </td>
-
-                        <td className="px-6 py-2">
-                          <div className="flex items-center justify-center h-full">
-                            <button
-                              className="text-yellow hover:text-orange-500"
-                              onClick={() => {
-                                editCategory(item._id, item.name, item.image);
-                              }}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="text-red-600 hover:text-red-900 ml-4"
-                              onClick={() => deleteCategory(item._id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : currentItems?.map((item, ind) => (
-                      <tr key={item._id}>
-                        <td className="px-6 py-2">
-                          <div className="flex items-end font-semibold">
-                            {(currentPage - 1) * itemsPerPage + ind + 1}
-                          </div>
-                        </td>
-                        <td className="px-6 py-2">
-                          <div className="flex items-center h-full">
-                            {item.name}
-                          </div>
-                        </td>
-                        <td className="px-6 py-2">
-                          <div className="flex items-center justify-center h-full">
-                            <button
-                              className="text-yellow hover:text-orange-500"
-                              onClick={() => {
-                                editCategory(item._id, item.name);
-                              }}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="text-red-600 hover:text-red-900 ml-4"
-                              onClick={() => deleteCategory(item._id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="pt-3 ">
-            <button
-              onClick={openModal}
-              className="btn-primary md:w-3/5 w-full p-1 rounded-sm"
-            >
-              Add Categories
-            </button>
-            <CategoryModal
-              showModal={showModal}
-              closeModal={closeModal}
-              categoryId={categoryId}
-              categoryToEdit={categoryToEdit}
-              editMode={editMode}
-            />
-          </div>
-          <div className="float-right mr-3 mt-3">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          </div>
-        </div>
-        <div></div>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="text-center py-4">
+                  No categories found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      <div className="p-4 bg-table-blue">
+        <button
+          onClick={openModal}
+          className="btn-primary w-full p-2 rounded-md text-center text-off-white"
+        >
+          Add Categories
+        </button>
+        <CategoryModal
+          showModal={showModal}
+          closeModal={closeModal}
+          categoryId={categoryId}
+          categoryToEdit={categoryToEdit}
+          editMode={editMode}
+        />
+      </div>
+      <div className="float-right mr-4 mt-4">
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
+  </div>
+  
+  
   );
 };
 
