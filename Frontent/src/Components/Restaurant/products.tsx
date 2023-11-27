@@ -21,7 +21,7 @@ function Products() {
   const restaurant = useSelector((state) => state.restaurentAuth);
   console.log(restaurant, "restaurent details");
 
-  const restaurant_id = restaurant.restaurent._id;
+  const restaurant_id = restaurant.restaurent?._id;
   console.log(restaurant_id, "restIddd");
 
   const navigate = useNavigate();
@@ -156,13 +156,13 @@ function Products() {
               </tbody>
             </table>
           </div>
-          <div className="pt-10">
+          {/* <div className="pt-10">
             <Button
               onClick={() => navigate("/restaurant/addproduct")}
               value={"Add Menu"}
               className={"w-40"}
             />
-          </div>
+          </div> */}
           <div className="float-center  mt-3">
             <PAgination
               currentPage={currentPage}

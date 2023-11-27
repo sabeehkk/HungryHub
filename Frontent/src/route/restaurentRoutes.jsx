@@ -39,7 +39,7 @@ const RestaurentAuthAppLayout = () => {
 
 const RestaurentRoute = {
   path: "/restaurent",
-  errorElement: <ErrorPage path={"/restaurent"} />,
+  // errorElement: <ErrorPage path={"/restaurent"} />,
   element: <RestaurantAppLayout />,
   children: [
     {
@@ -86,7 +86,7 @@ const RestaurentRoute = {
           path: "addProduct",
           element: (
             <>
-            <IsLogged/>
+               <IsLogged/>
               <ProductAdd />
             </>
           ),
@@ -96,25 +96,27 @@ const RestaurentRoute = {
             path:"products",
             element: (
               <>
-              <IsLogged/>
-            <Products/>
+              <IsLogged/>,
+               <Products/>
               </>
             )
           },
           {
             path:"editProduct/:productId",
-          
             element:(
               <>
               <IsLogged/>
              <EditProduct/>
               </>
             )
-
         },
         {
             path:"categoryAddingModal",
-            element:<CategoryModal/>
+            element:(
+              <>
+            <CategoryModal/>
+              </>
+            )
         },
       ],
     },
