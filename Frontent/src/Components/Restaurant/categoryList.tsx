@@ -91,6 +91,12 @@ const CategoryList = () => {
   };
 
   return (
+    <>
+    <div className="text-center ">
+    <h2 className="text-4xl font-bold italic text-black">
+
+        {"Category List"}</h2>
+    </div>
     <div className="p-10 w-full bg-gray-200">
     <div className="border rounded-md overflow-hidden shadow-md">
       <div className="w-full overflow-x-auto">
@@ -100,10 +106,12 @@ const CategoryList = () => {
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                 #
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">
                 CATEGORY
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"></th>
+              <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
@@ -172,7 +180,7 @@ const CategoryList = () => {
       </div>
     </div>
   </div>
-  
+  </>
   
   );
 };
