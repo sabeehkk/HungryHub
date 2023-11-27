@@ -13,10 +13,10 @@ const EditProduct: React.FC = () => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [productPrice, setProductPrice] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState(false);
-  const [correntCat, setCorrentCat] = useState()
+  const [correntCat, setCorrentCat] = useState();
 
   // const fileInputRef = useRef(null);
 
@@ -53,7 +53,7 @@ const EditProduct: React.FC = () => {
         setProductName(response.data.product.productName);
         setDescription(response.data.product.description);
         setCategory(response.data.product.category._id);
-        setCorrentCat(response.data.product.category.name)
+        setCorrentCat(response.data.product.category.name);
         setProductPrice(response.data.product.price);
         setImages(response.data.product.images);
       })
@@ -76,23 +76,23 @@ const EditProduct: React.FC = () => {
   };
 
   const editProduct = async () => {
-    console.log('inside editproduct');
-    if(productName.trim() === ""){
+    console.log("inside editproduct");
+    if (productName.trim() === "") {
       return ErrorMessage("Please Fill ProductName");
     }
-    if(description.trim() === ""){
+    if (description.trim() === "") {
       return ErrorMessage("Please Fill Description");
     }
-    if(!productPrice){
+    if (!productPrice) {
       return ErrorMessage("Please Fill Product Price");
     }
-    if(!categoryData){
+    if (!categoryData) {
       return ErrorMessage("Please Fill Product Price");
     }
-   
-    // if (images.length < 4) {
-    //   return ErrorMessage("Please upload at least 4 images");
-    // }
+
+    if (images.length < 4) {
+      return ErrorMessage("Please upload at least 4 images");
+    }
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
 
@@ -209,8 +209,39 @@ const EditProduct: React.FC = () => {
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           />
 
+<div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
+  <div className="flex flex-wrap">
+    {images.map((image, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={image}
+            alt={`Product Image ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+  <input
+    className="form-control custom-file-input"
+    name="file"
+    multiple
+    type="file"
+    id="fileInput"
+    required
+    onChange={handleImages}
+    min={1}
+    max={5}
+  />
+</div>
+
+{/* 
           <div className="custom-file mt-3 h-52 items-center justify-center bg-gray-300 md:w-3/5 w-full">
-            <label htmlFor="profImage" className=""></label>
+            <label htmlFor="profImage" className="">
+            <img className="h-52 object-cover w-full" src={images[0]} alt="" />
+
+            </label>
             <input
               className="form-control custom-file-input"
               name="file"
@@ -219,10 +250,10 @@ const EditProduct: React.FC = () => {
               id="fileInput"
               required
               onChange={handleImages}
-              // min={1}
-              // max={5}
+              min={1}
+              max={5}
             />
-          </div>
+          </div> */}
           <div className="pt-10">
             <button
               className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
