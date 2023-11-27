@@ -91,6 +91,11 @@ function Products() {
   };
 
   return (
+    <>    <div className="text-center ">
+    <h2 className="text-4xl font-bold italic text-black">
+
+        {"Menu Items"}</h2>
+    </div>
     <div className="p-10 w-full">
       <div className="border">
         <div className="h-full w-full">
@@ -173,6 +178,8 @@ function Products() {
         </div>
       </div>
     </div>
+    </>
+
   );
 }
 
