@@ -4,7 +4,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 function Header({Iteams}) {
     const [sideButton, setSideButton] = useState(false);
     return (
-      <div className="h-16 top-0 sticky z-10 bg-white shadow-lg shadow-gray-200 mb-5 ">
+      <div className="h-16 top-0 sticky z-10 bg- shadow-lg shadow-gray-200 mb-5 ">
           <div className='md:hidden block fixed top-2 left-2'>
           <AiOutlineMenu
             size={30}
