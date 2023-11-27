@@ -1,9 +1,10 @@
 import React,{useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import {logout} from '../../redux/restaurent/authSlice'
 import { useNavigate } from 'react-router-dom'
 
-function Logout() {
+import {logout} from '../../redux/restaurent/authSlice'
+
+const Logout=()=> {
 
      const dispatch=useDispatch()
      const navigate=useNavigate()

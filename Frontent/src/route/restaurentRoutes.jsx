@@ -3,47 +3,43 @@ import { Outlet } from "react-router-dom";
 import Signup from "../Pages/Restaurent/signup";
 import Login from "../Pages/Restaurent/login";
 import Home from "../Components/Restaurant/Home" ;
-import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
 import { ToastContainer, toast } from "react-toastify" ;
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Pages/Restaurent/restaurentNavbar";
-
 // import FoodAdd from "../Components/Restaurant/foodAdding";
 // import UserNavbar from "../Components/User/userNavbar";
-// import ErrorPage from "../Components/errorPage.tsx";
-
+import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
-import IsLogged from "../middleware/restaurent/isLogged";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
 // import Category from "../Components/Restaurant/category.tsx";
 import RestaurentFrame from '../Components/Restaurant/restaurentFrame.tsx'
 import Products from  '../Components/Restaurant/products.tsx';
 import EditProduct from '../Components/Restaurant/editProduct.tsx'
 import CategoryModal from "../Components/Restaurant/categoryList.tsx";
-// import 
+import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
+import IsLogged from "../middleware/restaurent/isLogged";
 
 const RestaurantAppLayout = () => {
   return (
-    <>     
+     <>     
       <Outlet />
       <ToastContainer />  
-    </>   
+     </>   
   ) ;
 } ;
 
 const RestaurentAuthAppLayout = () => {
   return (
-    <>
+     <>
       <RestaurentFrame/>  
       <ToastContainer />
-
-    </>
+     </>
   );
 };
 
 const RestaurentRoute = {
   path: "/restaurent",
-  // errorElement: <ErrorPage path={"/restaurent"} />,
+  errorElement: <ErrorPage path={"/restaurent"} />,
   element: <RestaurantAppLayout />,
   children: [
     {
@@ -64,7 +60,6 @@ const RestaurentRoute = {
         </>
       ),
     },
-
     {
       path: "logout",
       element: (
@@ -74,7 +69,6 @@ const RestaurentRoute = {
         </>
       ),
     },
-
     {
       path: "/restaurent",
       element: <RestaurentAuthAppLayout />,
@@ -83,6 +77,7 @@ const RestaurentRoute = {
           path: "home",
           element: (
             <>
+            <IsLogged/>
               <Home />
             </>
           ),
@@ -91,29 +86,31 @@ const RestaurentRoute = {
           path: "addProduct",
           element: (
             <>
+            <IsLogged/>
               <ProductAdd />
             </>
           ),
         },
-        // {
-        //   path:"addCategory",
-        //   element :(
-        //     <>
-        //     <Category/>
-        //     </>
-        //   )
-        // },
+   
           {
             path:"products",
             element: (
               <>
+              <IsLogged/>
             <Products/>
               </>
             )
           },
           {
             path:"editProduct/:productId",
-            element: <EditProduct/>
+          
+            element:(
+              <>
+              <IsLogged/>
+             <EditProduct/>
+              </>
+            )
+
         },
         {
             path:"categoryAddingModal",
@@ -124,3 +121,14 @@ const RestaurentRoute = {
   ],
 };
 export default RestaurentRoute;
+
+
+
+     // {
+        //   path:"addCategory",
+        //   element :(
+        //     <>
+        //     <Category/>
+        //     </>
+        //   )
+        // },

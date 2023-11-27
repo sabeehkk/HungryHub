@@ -8,12 +8,9 @@ import {ErrorMessage,SuccessMessage} from '../../utils/util'
 import '../../Pages/User/style.css'
 import { restaurentLoggedIn } from "../../redux/restaurent/authSlice";
 
-
 function RestaurentLogin() {
-  
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-
   const dispatch=useDispatch()
   const navigate=useNavigate()
       
@@ -28,8 +25,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
     await restaurentAxios
       .post(`/login`, { email, password })
       .then((res) => {
-       
-        localStorage.setItem("userToken", res.data.token);
+        localStorage.setItem("restaurentToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
@@ -39,13 +35,8 @@ const handleSubmit = async (e: SyntheticEvent)=>{
       })
   } catch (error) {
     console.log(error);
-    // alert(error.message)
     ErrorMessage(error.message)
-
-    // if(error){
-    // }
   }
- 
 }
   return (
     <div className=" min-h-screen  flex items-center justify-center bg-white ">
