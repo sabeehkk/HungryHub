@@ -213,7 +213,13 @@ const AddProduct: React.FC = () => {
             />
 
             <div className="custom-file mt-3 h-52 items-center justify-center bg-gray-300 md:w-3/5 w-full">
-              <label htmlFor="profImage" className=""></label>
+              <label htmlFor="profImage" className="">
+              <img
+                className="h-52 object-cover w-full"
+                src={imagePreviewUrl && imagePreviewUrl }
+                alt=""
+              />
+              </label>
               <input
                 className="form-control custom-file-input"
                 name="file"
