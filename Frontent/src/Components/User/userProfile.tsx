@@ -58,7 +58,7 @@ function userProfile() {
               <img
                 className="mx-auto rounded-full h-32 w-32 object-cover cursor-pointer"
                 src={user?.profilePicture ? user.profilePicture : demoImage}
-                alt={`${user.name} `}
+                alt={`${user?.name} `}
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
@@ -100,7 +100,7 @@ function userProfile() {
                     id="username"
                     className="border-1  rounded-r px-4 py-2 w-full"
                     type="text"
-                    value={user.name}
+                    value={user?.name}
                   />
                 </div>
               </div>
@@ -113,7 +113,7 @@ function userProfile() {
                   id="email"
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="email"
-                  value={user.email}
+                  value={user?.email}
                 />
               </div>
               <div className="pb-4">
@@ -125,7 +125,7 @@ function userProfile() {
                   id="email"
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="email"
-                  value={user.phoneNumber}
+                  value={user?.phoneNumber}
                 />
               </div>
             </div>

@@ -46,7 +46,7 @@ const CategoryList = () => {
 
   const restaurant = useSelector((state) => state.restaurentAuth);
   let result = restaurant.restaurent;
-  const restId = result._id;
+  const restId = result?._id;
 
   const categoryData = async () => {
     console.log("inside categoryData");

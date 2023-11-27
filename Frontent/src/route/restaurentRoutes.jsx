@@ -114,6 +114,7 @@ const RestaurentRoute = {
             path:"categoryAddingModal",
             element:(
               <>
+              <IsLogged/>
             <CategoryModal/>
               </>
             )

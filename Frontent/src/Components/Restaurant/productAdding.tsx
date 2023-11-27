@@ -19,16 +19,13 @@ const AddProduct: React.FC = () => {
   const navigate = useNavigate();
 
   const restaurant = useSelector((state) => state.restaurentAuth);
-  console.log(
-    restaurant.restaurent.restaurantName,
-    "restarueeeeeeeeentttttttttt"
-  );
+ 
 
   let result = restaurant.restaurent;
   console.log(result, "restuultt");
   const fileInputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
-  const restId = result._id;
+  const restId = result?._id;
   console.log(restId, "restiddd");
   const categoryData = async () => {
     console.log("inside categoryData");

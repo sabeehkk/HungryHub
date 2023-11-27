@@ -10,7 +10,7 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
   const [categoryName, setCategoryName] = useState("")
 
   const restaurent = useSelector((state)=>state.restaurentAuth)
-  const restId = restaurent.restaurent._id ;
+  const restId = restaurent.restaurent?._id ;
 
   const handleCategoryNameChange = (e) => {
       setCategoryName(e.target.value);
