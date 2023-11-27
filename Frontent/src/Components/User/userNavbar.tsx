@@ -4,6 +4,11 @@ import { BsFillCartFill } from "react-icons/bs";
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaUserFriends, FaWallet } from "react-icons/fa";
 import { MdFavorite, MdHelp } from "react-icons/md";
+import { MdExitToApp } from "react-icons/md";
+import { MdGroupAdd } from "react-icons/md";
+
+
+
 import { Link } from "react-router-dom";
 
 const UserNavbar = () => {
@@ -66,8 +71,8 @@ const UserNavbar = () => {
           <ul className="flex flex-col p-4 text-gray-800">
             <li className="text-xl py-4 flex gap-x-2 items-center">
               <Link to="/restaurent/home" className="flex items-center">
-                <TbTruckDelivery size={25} className="mr-4" />
-                Partner with HungryHub
+                <FaUserFriends size={25} className="mr-4" />
+                   Become a Partner
               </Link>
             </li>
 
@@ -87,12 +92,14 @@ const UserNavbar = () => {
               Help
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
-              <FaUserFriends size={25} className="mr-4" />
-              Invite Friends
+            <Link to="/employee/login" className="flex items-center">
+            <TbTruckDelivery size={25} className="mr-4" />
+            Join With Us
+              </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
               <Link to="/logout" className="flex items-center">
-                <MdFavorite size={25} className="mr-4" />
+                <MdExitToApp size={25} className="mr-4" />
                 Logout
               </Link>
             </li>
