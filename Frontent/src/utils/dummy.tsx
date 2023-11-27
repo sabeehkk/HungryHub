@@ -15,7 +15,7 @@ const AddProduct: React.FC = () => {
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState(false);
   const [categories, setCategories] = useState([]);
-   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -23,7 +23,7 @@ const AddProduct: React.FC = () => {
 
   let result = restaurant.restaurent;
   console.log(result, "restuultt");
-  const fileInputRef = useRef(null);
+//   const fileInputRef = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const restId = result?._id;
   console.log(restId, "restiddd");
@@ -42,13 +42,13 @@ const AddProduct: React.FC = () => {
     categoryData();
   }, []);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = event.target.files;
-    if (fileList) {
-      const filesArray = Array.from(fileList);
-      setImages(filesArray);
-    }
-  };
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const fileList = event.target.files;
+  //   if (fileList) {
+  //     const filesArray = Array.from(fileList);
+  //     setImages(filesArray);
+  //   }
+  // };
   const handleImageUpload = async (images: any) => {
     if (!images || images.length === 0) return [];
     if (images.length < 4) {
@@ -63,6 +63,7 @@ const AddProduct: React.FC = () => {
     return url;
   };
   const handleImages = (e) => {
+       // {alredy defined codess below}
     if (e.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
