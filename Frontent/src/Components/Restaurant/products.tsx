@@ -103,18 +103,21 @@ function Products() {
             <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
               <thead>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 font-bold py-3 text-left text-xs  text-off-White uppercase tracking-wider">
                     PRODUCT
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     DESCRIPTION
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     Price
                   </th>
 
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     Actions
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
+                    Delete
                   </th>
                 </tr>
               </thead>
@@ -147,6 +150,14 @@ function Products() {
                           >
                             Edit Menu
                           </button>
+                          
+                        </div>
+                      }
+                    </td>
+                    <td className="px-6 py-2 whitespace-nowrap">
+                      {
+                        <div className="flex justify-between">
+                         
                           <button
                             className="px-6 py-2 text-red-600 hover:text-red-900"
                             onClick={() => deletProduct(item._id)}
