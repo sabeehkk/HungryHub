@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import { restaurentAxios } from "../../axios/axios";
-import { ErrorMessage } from "../../utils/util";
+import { ErrorMessage, SuccessMessage } from "../../utils/util";
 
 
 const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, editMode }) => {
@@ -26,45 +26,71 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
     setCategoryName(categoryToEdit)
   },[editMode])
 
-  const handleAddCategory = () => {
-    if (categoryName.trim() !== "") {
-      if (editMode && categoryId) {
-        restaurentAxios.patch('/editCategory',{ categoryName, categoryId, restId })
-       .then((response) => {
-        console.log(response);
-        toast.success(response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
-        closeModal();
-        setCategoryName("");
-      })
-      .catch((err) => {
-        console.log(err);
-       return ErrorMessage(err.message)
+  const handleAddCategory =async (e) => {
+             e.preventDefault()
+    console.log('IT IS WORKING');
     
-      });
+    if (categoryName.trim() !== "") {
+      // const sabeeh =10
+      if (editMode && categoryId) {
+       const result=await restaurentAxios.patch('/editCategory',{ categoryName, categoryId, restId })
+        //  console.log(result,'result datas');
+        //  console.log(result.data.success,'result datas');
+         
+       if (result) {
+        
+        if (result.data.success === false) {
+          // alert(result.data.message);
+
+        }
+        // if (result.data.message === false) {
+        //   const errorMessage = result.data.message; // Get the error message from the response
+        //   ErrorMessage(errorMessage); // Pass the error message to your function
+        // }
+          // console.log(result,'resultttttttt')
+
+          // alert('hloooo')
+       closeModal();
+
+          return SuccessMessage('Category edited')
+
+       }
+
+      //  .then((response) => {
+      //   console.log(response.data,'thennnnnn');
+      //   alert(response.data)
+        
+       
+        setCategoryName("");
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      //  return ErrorMessage(err.message)
+    
+      // });
       } else {
-        restaurentAxios.post("/addCategory", { categoryName, restId })
-          .then((response) => {
-            toast.success(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
-            closeModal();
-            setCategoryName("");
-          })
-          .catch((err) => {
-            console.log(err);
-            return ErrorMessage(err.message)
-           
-          });
+        // console.log('its working')
+        const sabeeh =10
+                
+        restaurentAxios.post("/addCategory", { categoryName, restId, sabeeh })
+        .then((response) => {
+          // console.log(response.data.message, 'response messageeeee');
+          closeModal();
+          setCategoryName("");
+
+          return SuccessMessage('category created')
+        })
+        .catch((error) => {
+          console.error("Error adding category:", error);
+          // Handle the error, e.g., show an error toast or log the error message
+          closeModal();
+
+          return ErrorMessage("Category Already exist");
+        });
       }
     } else {
-      toast.error("Please enter category name", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-      });
+     return ErrorMessage('Please enter category name')
+   
     }
   };
   
@@ -125,7 +151,7 @@ const CategoryModal = ({ showModal, closeModal, categoryId, categoryToEdit, edit
                   name="categoryName"
                   value={categoryName}
                   onChange={handleCategoryNameChange}
-                  placeholder={"Add New " }
+                  placeholder={"Add New category" }
                   className="block w-full mt-1 p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 focus:ring focus:ring-opacity-50"
                   required
                 />

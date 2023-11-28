@@ -9,6 +9,7 @@ const EditProduct: React.FC = () => {
   const navigate = useNavigate();
   const { productId } = useParams();
 
+
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -17,6 +18,8 @@ const EditProduct: React.FC = () => {
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState(false);
   const [correntCat, setCorrentCat] = useState();
+  const [previewImages, setPreviewImages] = useState([]);
+
 
   // const fileInputRef = useRef(null);
 
@@ -32,8 +35,20 @@ const EditProduct: React.FC = () => {
     if (e.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
-    setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
+    const newImages = ([...e.target.files]); // Use ... to spread the files into the array
+    setImages(newImages);
+    const imagePreviews = [];
+    for (const image of newImages) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreviews.push(e.target.result);
+        // Assuming setPreviewImages is a state setter for image previews
+        setPreviewImages([...imagePreviews.slice(0,4)]);
+      };
+      reader.readAsDataURL(image);
+    }
   };
+
 
   const categoryData = async () => {
     console.log("inside categoryData");
@@ -80,15 +95,16 @@ const EditProduct: React.FC = () => {
     if (productName.trim() === "") {
       return ErrorMessage("Please Fill ProductName");
     }
+    if (category.trim() === "") {
+      return ErrorMessage("Please Fill category");
+    }
     if (description.trim() === "") {
       return ErrorMessage("Please Fill Description");
     }
     if (!productPrice) {
       return ErrorMessage("Please Fill Product Price");
     }
-    if (!categoryData) {
-      return ErrorMessage("Please Fill Product Price");
-    }
+  
 
     if (images.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
@@ -112,9 +128,11 @@ const EditProduct: React.FC = () => {
       restaurentAxios
         .patch("/updateProduct", FormData)
         .then((response) => {
-          if (response.data.message == "success") {
-            SuccessMessage("product added successfully");
-            navigate("/restaurent/home");
+          console.log(response.data);
+          
+          if (response.data.success) {
+            SuccessMessage(response.data.message);
+            navigate("/restaurent/products");
           }
         })
         .catch((error) => {
@@ -224,6 +242,19 @@ const EditProduct: React.FC = () => {
             className="h-52 object-cover w-full rounded-md"
             src={image}
             alt={`Product Image ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+  <div className="flex flex-wrap">
+    {previewImages.map((preview, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={preview}
+            alt={`Preview ${index + 1}`}
           />
         </label>
       </div>

@@ -23,12 +23,12 @@ const App = () => {
     },
     {
       title: "Add Menu Items ",
-      src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
+      src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
       url: "/restaurent/addProduct",
     },
     {
       title: "Menu Items ",
-      src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
+      src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
       url: "/restaurent/products",
     },
     {
@@ -37,7 +37,7 @@ const App = () => {
       url: "/restaurent/logout",
     },
 
-    { title: "Setting", src: "Setting" },
+    // { title: "Setting", src: "Setting" },
   ];
 
   return (

@@ -15,7 +15,7 @@ const AddProduct: React.FC = () => {
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState(false);
   const [categories, setCategories] = useState([]);
-   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+   const [previewImages, setPreviewImages] = useState([]);
 
   const navigate = useNavigate();
 
@@ -63,11 +63,27 @@ const AddProduct: React.FC = () => {
     return url;
   };
   const handleImages = (e) => {
-    if (e.length < 4) {
+    if (e.target.files.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
-    setImages([...images, ...e.target.files]); // Use ... to spread the files into the array
+
+    const newImages = [...images, ...Array.from(e.target.files)];
+    setImages(newImages);
+
+    // Image preview
+    const imagePreviews = [];
+    for (const image of newImages) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        imagePreviews.push(e.target.result);
+        // Assuming setPreviewImages is a state setter for image previews
+        setPreviewImages([...imagePreviews.slice(0,4)]);
+      };
+      reader.readAsDataURL(image);
+    }
+   
   };
+  
 
   useEffect(() => {
     if (selectedImage) {
@@ -77,14 +93,20 @@ const AddProduct: React.FC = () => {
   }, [selectedImage]);
 
   const addProduct = async () => {
-    if (
-      productName.trim() === "" ||
-      description.trim() === "" ||
-      productPrice.trim() === "" ||
-      !category
-    ) {
-      return ErrorMessage("Please Fill All Field");
+    if (productName.trim() === "") {
+      return ErrorMessage("Please Fill ProductName");
     }
+    if (category.trim() === "") {
+      return ErrorMessage("Please Fill category");
+    }
+    if (description.trim() === "") {
+      return ErrorMessage("Please Fill Description");
+    }
+    if (productPrice.trim() === "") {
+      return ErrorMessage("Please Fill product price");
+    }
+   
+
     if (images.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
@@ -213,26 +235,41 @@ const AddProduct: React.FC = () => {
               className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
             />
 
-            <div className="custom-file mt-3 h-52 items-center justify-center bg-gray-300 md:w-3/5 w-full">
-              <label htmlFor="profImage" className="">
-              <img
-                className="h-52 object-cover w-full"
-                src={imagePreviewUrl && imagePreviewUrl }
-                alt=""
-              />
-              </label>
-              <input
-                className="form-control custom-file-input"
-                name="file"
-                multiple
-                type="file"
-                id="fileInput"
-                required
-                onChange={handleImages}
-                min={4}
-                max={5}
-              />
-            </div>
+<div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
+  <div className="flex flex-wrap">
+    {previewImages.map((preview, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={preview}
+            alt={`Preview ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+  {previewImages.length > 0 && (
+    <label htmlFor="profImage" className="w-1/4 p-2 block relative">
+      {/* <img
+        className="h-52 object-cover w-full rounded-md"
+        // src={previewImages[0]}
+        // alt={`Preview 1`}
+      /> */}
+    </label>
+  )}
+  <input
+    className="form-control custom-file-input"
+    name="file"
+    multiple
+    type="file"
+    id="fileInput"
+    required
+    onChange={handleImages}
+    min={1}
+    max={4}
+  />
+</div>
             <div className="pt-10">
               <button
                 className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

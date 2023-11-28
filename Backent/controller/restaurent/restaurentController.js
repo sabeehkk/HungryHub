@@ -36,18 +36,19 @@ export const ProductList = async (req, res) => {
 
 export const addCategory = async (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body,'req,bodyyyy');
+    console.log('ADD CATEGORY IS WORKING');
     const { categoryName, restId } = req.body;
     const existCategory = await CategoryModel.findOne({
       name: categoryName,
       restaurent: restId,
     });
     if (existCategory) {
+      console.log("category alere exist")
       res.status(400).send({
         error: true,
         message: "Category already exists",
       });
-      console.log("category alere exist");
     } else {
       const newCategory = new CategoryModel({
         name: categoryName,
@@ -223,14 +224,14 @@ export const editCategory= async(req,res)=>{
         await CategoryModel.updateOne({_id:categoryId},{$set:{
           image,
         }})
-        res.status(200).send({
+        res.status(200).json({
           success:true,
           message:"Category edited success"
         })
         
       }else{
         console.log('else is working');
-        res.status(400).send({
+        res.status.json({
           success:false,
           message:"Category already exists"
       })
@@ -241,13 +242,13 @@ export const editCategory= async(req,res)=>{
         
       }
     })
-    res.status(200).send({
+    res.status(200).json({
       success:true,
       message:"Category edited success"
     })}
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"Server Error"
     })
