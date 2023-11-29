@@ -1,5 +1,7 @@
 import axios from "axios"
 import { adminAxios } from "../axios/axios"
+import Swal from "sweetalert2";
+import { ErrorMessage, SuccessMessage } from "../utils/util";
 
 
 export const usersData = async (page) => {
@@ -33,9 +35,27 @@ export const restaurentsData = async (page) => {
 };
 
 export const restaurentActionAPI = async (id, action)=>{
-  await adminAxios.patch(`/restaurents/${id}/${action}`);
+  const result = await Swal.fire({
+    title: "Do you really want to delete this product?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel",
+  });
+  if (result.isConfirmed) {
+  
+  await adminAxios.patch(`/restaurents/${id}/${action}`)
+     .then((response)=>{
+        if(response.data.message){
+          return SuccessMessage(response.data.message)
+        }
+     }).catch((err)=>{
+        return ErrorMessage(err.message)
+     })
+}else{
+ return ErrorMessage("Cancelled!!")
 }
-
+}
 export const employeesData = async (page) => {
   const response = await adminAxios.get(`/employees`, {
     params: {

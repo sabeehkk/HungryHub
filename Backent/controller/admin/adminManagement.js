@@ -47,7 +47,7 @@ export const restaurentUnblock = async (req, res) => {
       );
   
       if (result.modifiedCount > 0) {
-        return res.json({ message: "Success" });
+        return res.json({ message: "restaurent un blocked" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
@@ -67,7 +67,7 @@ export const restaurentUnblock = async (req, res) => {
         { $set: { status: false } }
       );
       if (result.modifiedCount > 0) {
-        return res.json({ message: "Success" });
+        return res.json({ message: "Restaurent Blocked" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
