@@ -15,20 +15,21 @@ export const usersData = async (page) => {
 };
 
 export const userActionAPI = async (id, action) => {
-  const result =await SwalAlert()
+  const result = await SwalAlert();
   if (result.isConfirmed) {
-  await adminAxios.patch(`/users/${id}/${action}`)
-  .then((response) => {
-    if (response.data.message) {
-      return SuccessMessage(response.data.message);
-    }
-  })
-  .catch((err) => {
-    return ErrorMessage(err.message);
-  });
-}else{
-  return ErrorMessage("Cancelled!!");
-}
+    await adminAxios
+      .patch(`/users/${id}/${action}`)
+      .then((response) => {
+        if (response.data.message) {
+          return SuccessMessage(response.data.message);
+        }
+      })
+      .catch((err) => {
+        return ErrorMessage(err.message);
+      });
+  } else {
+    return ErrorMessage("Cancelled!!");
+  }
 };
 
 export const restaurentsData = async (page) => {
@@ -44,7 +45,7 @@ export const restaurentsData = async (page) => {
 };
 
 export const restaurentActionAPI = async (id, action) => {
-   const result =await SwalAlert()
+  const result = await SwalAlert();
   if (result.isConfirmed) {
     await adminAxios
       .patch(`/restaurents/${id}/${action}`)
@@ -61,7 +62,6 @@ export const restaurentActionAPI = async (id, action) => {
   }
 };
 export const employeesData = async (page) => {
-  
   const response = await adminAxios.get(`/employees`, {
     params: {
       page,
@@ -74,16 +74,19 @@ export const employeesData = async (page) => {
 };
 
 export const employeesActionAPI = async (id, action) => {
-  const result =await SwalAlert()
+  const result = await SwalAlert();
   if (result.isConfirmed) {
-
-  await adminAxios.patch(`/employees/${id}/${action}`)
-  .then((response) => {
-    if (response.data.message) {
-      return SuccessMessage(response.data.message);
-    }
-  })
-  .catch((err) => {
-    return ErrorMessage(err.message);
-  });
+    await adminAxios
+      .patch(`/employees/${id}/${action}`)
+      .then((response) => {
+        if (response.data.message) {
+          return SuccessMessage(response.data.message);
+        }
+      })
+      .catch((err) => {
+        return ErrorMessage(err.message);
+      });
+  } else {
+    return ErrorMessage("Cancelled!!");
+  }
 };

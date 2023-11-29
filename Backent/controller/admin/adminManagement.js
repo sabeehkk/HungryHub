@@ -116,7 +116,7 @@ export const employeeUnblock = async (req, res) => {
       );
   
       if (result.modifiedCount > 0) {
-        return res.json({ message: "Success" });
+        return res.json({ message: "Employee Unblocked!!" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
@@ -135,7 +135,7 @@ export const employeeUnblock = async (req, res) => {
         { $set: { status: false } }
       );
       if (result.modifiedCount > 0) {
-        return res.json({ message: "Success" });
+        return res.json({ message: "Employee Blocked!!!" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
