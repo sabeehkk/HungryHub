@@ -84,7 +84,7 @@ export const getCategories = async (req,res)=>{
     .sort({ _id: -1 })
     .skip(SKIP)
     .limit(LIMIT);
-    const TotalSize = await CategoryModel.countDocuments();
+    const TotalSize = await CategoryModel.countDocuments({is_deleted:false});
     const size = Math.ceil(TotalSize / LIMIT);
     res.status(200).json({
       status: 'success',

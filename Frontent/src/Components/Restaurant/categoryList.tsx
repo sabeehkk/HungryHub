@@ -61,14 +61,17 @@ const CategoryList = () => {
   let result = restaurant.restaurent;
   const restId = result?._id;
 
-  const categoryData = async (page) => {
+  const categoryData = async () => {
     console.log("inside categoryData");
-    const response = await restaurentAxios.get(`/getCategory?id=${restId}`,{params:{page,}});
+    const response = await restaurentAxios.get(`/getCategory?id=${restId}`,{params:{page}});
     const data = response.data;
     console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
-      setSize(data.size)
+      // setSize(data.size)
+      const newSize = data.size < 1 ? 1 : data.size;
+
+  setSize(newSize); 
     }
   };
 
@@ -83,7 +86,9 @@ const CategoryList = () => {
             navigate("/restaurent/categoryAddingModal");
             return SuccessMessage(response.data.message);
             console.log(response.data);
-            setDeleted(!is_deleted);
+            // setDeleted(!is_deleted);.
+            setDeleted((prevDeleted) => !prevDeleted);
+
           } else {
             closeModal();
             return ErrorMessage(response.data.message);
@@ -185,11 +190,7 @@ const CategoryList = () => {
             />
           </div>
           <div className="float-center  mt-3">
-            {/* <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        /> */}
+       
             <PAgination
               filterPagination={filterPagination}
               currentPage={currentPage}
