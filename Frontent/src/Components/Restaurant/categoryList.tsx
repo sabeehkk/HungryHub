@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { restaurentAxios } from "../../axios/axios";
-import Pagination from "../../assets/pagination";
+// import Pagination from "../../assets/pagination";
 import CategoryModal from "../../Components/Restaurant/categoryModal";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import PAgination from "../../Components/pagination";
@@ -83,23 +83,19 @@ const CategoryList = () => {
             console.log(response.data);
             setDeleted(!is_deleted);
           } else {
-      closeModal()
+            closeModal();
 
             return ErrorMessage(response.data.message);
           }
         })
         .catch((err) => {
-          // alert(err.message);
-      closeModal()
-          
+          closeModal();
+
           return ErrorMessage(err.data.message);
-          // alert('hai')
         });
     } else {
-      closeModal()
-      return ErrorMessage("");
-      // alert('hai')
-
+      closeModal();
+      return ErrorMessage("canceled!!");
     }
   };
   const filterPagination = (value) => {

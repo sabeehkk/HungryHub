@@ -5,7 +5,7 @@ import employeeModel from '../../models/employee.js'
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 
-const LIMIT=10
+const LIMIT=7
 
 //RESTAURENT MANAGEMENT----
 export const restaurentList = async (req, res) => {

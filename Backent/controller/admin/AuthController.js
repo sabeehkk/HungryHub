@@ -3,7 +3,7 @@ import userModel from '../../models/user.js'
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken';
 
-const LIMIT = 10;
+const LIMIT = 6;
 
 
 export const login=async (req,res)=>{

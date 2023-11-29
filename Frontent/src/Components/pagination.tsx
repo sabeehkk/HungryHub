@@ -1,7 +1,7 @@
 import React from "react";
 
 const Pagination = ({ size, filterPagination, currentPage }) => {
-  const limit = 3;
+  const limit = 1;
   return (
     <>
   <div className="flex justify-center items-center py-4">
