@@ -1,6 +1,5 @@
 import axios from "axios";
 import { adminAxios } from "../axios/axios";
-import Swal from "sweetalert2";
 import { ErrorMessage, SuccessMessage } from "../utils/util";
 import { SwalAlert } from "../utils/util";
 export const usersData = async (page) => {
@@ -16,7 +15,20 @@ export const usersData = async (page) => {
 };
 
 export const userActionAPI = async (id, action) => {
-  await adminAxios.patch(`/users/${id}/${action}`);
+  const result =await SwalAlert()
+  if (result.isConfirmed) {
+  await adminAxios.patch(`/users/${id}/${action}`)
+  .then((response) => {
+    if (response.data.message) {
+      return SuccessMessage(response.data.message);
+    }
+  })
+  .catch((err) => {
+    return ErrorMessage(err.message);
+  });
+}else{
+  return ErrorMessage("Cancelled!!");
+}
 };
 
 export const restaurentsData = async (page) => {
@@ -49,6 +61,7 @@ export const restaurentActionAPI = async (id, action) => {
   }
 };
 export const employeesData = async (page) => {
+  
   const response = await adminAxios.get(`/employees`, {
     params: {
       page,
@@ -61,5 +74,16 @@ export const employeesData = async (page) => {
 };
 
 export const employeesActionAPI = async (id, action) => {
-  await adminAxios.patch(`/employees/${id}/${action}`);
+  const result =await SwalAlert()
+  if (result.isConfirmed) {
+
+  await adminAxios.patch(`/employees/${id}/${action}`)
+  .then((response) => {
+    if (response.data.message) {
+      return SuccessMessage(response.data.message);
+    }
+  })
+  .catch((err) => {
+    return ErrorMessage(err.message);
+  });
 };

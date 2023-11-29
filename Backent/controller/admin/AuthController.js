@@ -78,7 +78,7 @@ export const userUnblock = async (req, res) => {
     );
 
     if (result.modifiedCount > 0) {
-      return res.json({ message: "Success" });
+      return res.json({ message: "User Unblocked!!!" });
     }
     return res.status(404).json({ message: "User not found", error: true });
   } catch (error) {
@@ -97,7 +97,7 @@ export const userBlock = async (req, res) => {
       { $set: { status: false } }
     );
     if (result.modifiedCount > 0) {
-      return res.json({ message: "Success" });
+      return res.json({ message: "user Blocked!!!" });
     }
     return res.status(404).json({ message: "User not found", error: true });
   } catch (error) {
