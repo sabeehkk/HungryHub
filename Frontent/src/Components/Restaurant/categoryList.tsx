@@ -18,10 +18,9 @@ const CategoryList = () => {
   const [categoryToEdit, setCategoryToEdit] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
-  // const totalPages = Math.ceil(categories.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentItems = categories.slice(startIndex, endIndex);
+  const currentItems = categories.slice();
+  const [totalCategories, setTotalCategories] = useState(0);
+
 
 
   const [size, setSize] = useState(1);
@@ -68,6 +67,8 @@ const CategoryList = () => {
     console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
+      setTotalCategories(data.size);
+
       // setSize(data.size)
       const newSize = data.size < 1 ? 1 : data.size;
 
@@ -75,32 +76,30 @@ const CategoryList = () => {
     }
   };
 
- 
   const deleteCategory = async (catId) => {
     const result = await SwalAlert();
     if (result.isConfirmed) {
-      restaurentAxios
-        .patch("/deleteCategory", { catId })
-        .then((response) => {
-          if (response.data.success) {
-            navigate("/restaurent/categoryAddingModal");
-            return SuccessMessage(response.data.message);
-            console.log(response.data);
-            // setDeleted(!is_deleted);.
-            setDeleted((prevDeleted) => !prevDeleted);
-
-          } else {
-            closeModal();
-            return ErrorMessage(response.data.message);
-          }
-        })
-        .catch((err) => {
+      try {
+        const response = await restaurentAxios.patch("/deleteCategory", { catId });
+        if (response.data.success) {
+          // Update the categories state by filtering out the deleted category
+          setCategories((prevCategories) =>
+            prevCategories.filter((category) => category._id !== catId)
+          );
+  
+          navigate("/restaurent/categoryAddingModal");
+          SuccessMessage(response.data.message);
+        } else {
           closeModal();
-          return ErrorMessage(err.data.message);
-        });
+          ErrorMessage(response.data.message);
+        }
+      } catch (err) {
+        closeModal();
+        ErrorMessage(err.data.message);
+      }
     } else {
       closeModal();
-      return ErrorMessage("canceled!!");
+      ErrorMessage("Canceled!!");
     }
   };
 
