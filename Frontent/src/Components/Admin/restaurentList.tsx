@@ -8,8 +8,8 @@ function RestaurentListTable() {
   const [restaurentsList, setRestaurentList] = useState([]);
   const [update, setUpdate] = useState(" ");
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
-  const [size, setSize] = useState(1);
+  const [page, setPage] = useState(1) ;
+  const [size, setSize] = useState(1)  ;
 
   useEffect(() => {
     getRestaurentData();
