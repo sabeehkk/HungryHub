@@ -5,8 +5,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { FaUserFriends, FaWallet } from "react-icons/fa";
 import { MdFavorite, MdHelp } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
-import { MdGroupAdd } from "react-icons/md";
-
+import { MdHome } from "react-icons/md";
 
 
 import { Link } from "react-router-dom";
@@ -95,6 +94,12 @@ const UserNavbar = () => {
             <Link to="/employee/login" className="flex items-center">
             <TbTruckDelivery size={25} className="mr-4" />
             Join With Us
+              </Link>
+            </li>
+            <li className="text-xl py-4 flex gap-x-2 items-center">
+            <Link to="/" className="flex items-center">
+            <MdHome size={25} className="mr-4" />
+                 Home
               </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
