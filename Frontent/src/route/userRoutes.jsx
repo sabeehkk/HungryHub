@@ -18,6 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ErrorPage from "../Components/errorPage.tsx";
 import IsLogged from "../middleware/user/isLogged.tsx";
 import Logout from "../Pages/User/userLogout.tsx";
+import Footer from '../Components/User/footer.tsx'
 
 const UserAppLayout = () => {
   return (
@@ -33,6 +34,8 @@ const UserAuthAppLayout = () => {
     <>
       <Outlet />
       <ToastContainer />
+      <Footer/>
+
     </>
   );
 };

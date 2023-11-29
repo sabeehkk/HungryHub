@@ -39,8 +39,9 @@ export const addCategory = async (req, res) => {
     console.log(req.body,'req,bodyyyy');
     console.log('ADD CATEGORY IS WORKING');
     const { categoryName, restId } = req.body;
+    const lowerCaseCategoryName = categoryName.toLowerCase() ;
     const existCategory = await CategoryModel.findOne({
-      name: categoryName,
+      name: lowerCaseCategoryName,
       restaurent: restId,
     });
     if (existCategory) {
@@ -51,7 +52,7 @@ export const addCategory = async (req, res) => {
       });
     } else {
       const newCategory = new CategoryModel({
-        name: categoryName,
+        name: lowerCaseCategoryName,
         restaurent: restId,
       });
       await newCategory.save();
@@ -87,7 +88,6 @@ export const getCategories = async (req,res)=>{
     });
   }
 }
-
 export const getRestaurentProducts = async (req,res)=>{
     try {
       const restId = req.query.id ;
