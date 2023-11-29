@@ -46,7 +46,6 @@ const CategoryList = () => {
     activeEditMode();
     openModal();
   };
-
   const restaurant = useSelector((state) => state.restaurentAuth);
   let result = restaurant.restaurent;
   const restId = result?._id;
@@ -84,13 +83,11 @@ const CategoryList = () => {
             setDeleted(!is_deleted);
           } else {
             closeModal();
-
             return ErrorMessage(response.data.message);
           }
         })
         .catch((err) => {
           closeModal();
-
           return ErrorMessage(err.data.message);
         });
     } else {
@@ -101,7 +98,6 @@ const CategoryList = () => {
   const filterPagination = (value) => {
     setPage(value);
   };
-
   return (
     <>
       <div className="text-center ">
@@ -172,12 +168,6 @@ const CategoryList = () => {
             </table>
           </div>
           <div className="p-4 bg-table-blue">
-            {/* <button
-          onClick={openModal}
-          className="btn-primary w-full p-2 rounded-md text-center text-off-white"
-        >
-          Add Categories
-        </button> */}
             <button
               className="ml-64 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
