@@ -2,6 +2,7 @@ import axios from "axios";
 import { adminAxios } from "../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../utils/util";
 import { SwalAlert } from "../utils/util";
+
 export const usersData = async (page) => {
   const response = await adminAxios.get(`/users`, {
     params: {

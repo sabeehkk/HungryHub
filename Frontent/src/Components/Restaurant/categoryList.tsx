@@ -50,23 +50,29 @@ const CategoryList = () => {
     activeEditMode();
     openModal();
   };
+  const filterPagination = (value) => {
+    setPage(value);
+  };
+  useEffect(() => {
+    categoryData();
+  }, [is_deleted, showModal,page]);
+
   const restaurant = useSelector((state) => state.restaurentAuth);
   let result = restaurant.restaurent;
   const restId = result?._id;
 
-  const categoryData = async () => {
+  const categoryData = async (page) => {
     console.log("inside categoryData");
-    const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    const response = await restaurentAxios.get(`/getCategory?id=${restId}`,{params:{page,}});
     const data = response.data;
     console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
+      setSize(data.size)
     }
   };
-  useEffect(() => {
-    categoryData();
-  }, [is_deleted, showModal]);
 
+ 
   const deleteCategory = async (catId) => {
     const result = await SwalAlert();
     if (result.isConfirmed) {
@@ -92,9 +98,7 @@ const CategoryList = () => {
       return ErrorMessage("canceled!!");
     }
   };
-  const filterPagination = (value) => {
-    setPage(value);
-  };
+
   return (
     <>
       <div className="text-center ">
@@ -187,8 +191,9 @@ const CategoryList = () => {
           onPageChange={handlePageChange}
         /> */}
             <PAgination
-              currentPage={currentPage}
               filterPagination={filterPagination}
+              currentPage={currentPage}
+
               size={size}
             />
           </div>

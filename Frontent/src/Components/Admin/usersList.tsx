@@ -17,7 +17,6 @@ function UserListTable() {
 
   const getUserData = async () => {
     const { userData, size } = await usersData(page);
-
     setUserList(userData);
     setSize(size);
     setUpdate("");

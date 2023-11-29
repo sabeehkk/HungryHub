@@ -1,6 +1,8 @@
 // import restaurentModel from '../../models/restaurent.js'
 import ProductModel from "../../models/product.js";
 import CategoryModel from "../../models/category.js";
+const LIMIT=6
+
 
 export const addProduct = async (req, res) => {
   try {
@@ -67,17 +69,26 @@ export const addCategory = async (req, res) => {
 export const getCategories = async (req,res)=>{
   try {
     console.log('inside get category');
+    const PAGE = req?.query?.page
+    ? req.query.page >= 1
+      ? req.query.page
+      : 1
+    : 1;
+    const SKIP = (PAGE - 1) * LIMIT;
     const {id} =req.query
     console.log(id,'query iddd');
     const categoryData =await CategoryModel.find({
       is_deleted:false,
       restaurent:id
     })
-    console.log(id,'restaiddd');
-    // console.log(categoryData,'categorydatas');
+    .sort({ _id: -1 })
+    .skip(SKIP)
+    .limit(LIMIT);
+    const TotalSize = await CategoryModel.countDocuments();
+    const size = Math.ceil(TotalSize / LIMIT);
     res.status(200).json({
       status: 'success',
-      categoryData
+      categoryData,size
     });
   } catch (error) {
     console.error(error);
