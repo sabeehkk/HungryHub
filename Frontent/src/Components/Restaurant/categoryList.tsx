@@ -21,8 +21,6 @@ const CategoryList = () => {
   const currentItems = categories.slice();
   const [totalCategories, setTotalCategories] = useState(0);
 
-
-
   const [size, setSize] = useState(1);
   const [page, setPage] = useState(1);
 
@@ -54,7 +52,7 @@ const CategoryList = () => {
   };
   useEffect(() => {
     categoryData();
-  }, [is_deleted, showModal,page]);
+  }, [is_deleted, showModal, page]);
 
   const restaurant = useSelector((state) => state.restaurentAuth);
   let result = restaurant.restaurent;
@@ -62,7 +60,9 @@ const CategoryList = () => {
 
   const categoryData = async () => {
     console.log("inside categoryData");
-    const response = await restaurentAxios.get(`/getCategory?id=${restId}`,{params:{page}});
+    const response = await restaurentAxios.get(`/getCategory?id=${restId}`, {
+      params: { page },
+    });
     const data = response.data;
     console.log(data, "categorydatas");
     if (data) {
@@ -72,7 +72,7 @@ const CategoryList = () => {
       // setSize(data.size)
       const newSize = data.size < 1 ? 1 : data.size;
 
-  setSize(newSize); 
+      setSize(newSize);
     }
   };
 
@@ -80,13 +80,15 @@ const CategoryList = () => {
     const result = await SwalAlert();
     if (result.isConfirmed) {
       try {
-        const response = await restaurentAxios.patch("/deleteCategory", { catId });
+        const response = await restaurentAxios.patch("/deleteCategory", {
+          catId,
+        });
         if (response.data.success) {
           // Update the categories state by filtering out the deleted category
           setCategories((prevCategories) =>
             prevCategories.filter((category) => category._id !== catId)
           );
-  
+
           navigate("/restaurent/categoryAddingModal");
           SuccessMessage(response.data.message);
         } else {
@@ -189,11 +191,9 @@ const CategoryList = () => {
             />
           </div>
           <div className="float-center  mt-3">
-       
             <PAgination
               filterPagination={filterPagination}
               currentPage={currentPage}
-
               size={size}
             />
           </div>
