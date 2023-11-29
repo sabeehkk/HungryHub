@@ -4,14 +4,16 @@ import { setProfile } from "../../redux/user/authSlice";
 import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
+import Loading from '../../Components/loading'
 
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 
-function userProfile() {
+const userProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [load,setLoad] = useState(true)
 
   const fileInputRef = useRef(null);
 
@@ -37,9 +39,15 @@ function userProfile() {
       setSelectedImage(null);
     }
   }, [selectedImage, setProfile]);
+  
+  useEffect(()=>{
+    setLoad(false);
+  },[])
 
-  return (
-    <>
+  return load ? (
+      <Loading/>
+  ) : ( 
+    
       <div className="h-full mt-16 shadow-xl mr-16 ml-16">
         <div className="flex items-center justify-center">
           <span className="text-xl font-extrabold block">User Profile</span>
@@ -132,7 +140,7 @@ function userProfile() {
           </div>
         </div>
       </div>
-    </>
+   
   );
 }
 

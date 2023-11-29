@@ -13,7 +13,9 @@ import {
   updatePassword,
   updateProfilePhoto,
 } from "../controller/user/userController.js";
+
 import VerifyToken from "../middleware/jwtUserVerification.js";
+
 const router = express.Router();
 
 router.post("/register", signup);
@@ -21,8 +23,9 @@ router.post("/login", userLogin);
 router.post("/googleLogin", googleLogin);
 router.post("/signupVerify", verifySignup);
 router.post("/verifyOtp", verifyOtp);
-router.patch("/profile/:userId/edit", updateProfile);
-router.patch("/profile/:userId/editPassword", updatePassword);
-router.patch("/profile/:userId/edit/profilePhoto", updateProfilePhoto);
+
+router.patch("/profile/:userId/edit",VerifyToken, updateProfile);
+router.patch("/profile/:userId/editPassword",VerifyToken, updatePassword);
+router.patch("/profile/:userId/edit/profilePhoto",VerifyToken, updateProfilePhoto);
 
 export default router;
