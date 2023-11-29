@@ -23,7 +23,10 @@ const AdminAppLayout = ()=>{
 
  const AdminAuthAppLayout = () => { 
   return(
-  <Outlet/>
+    <>
+    <Outlet />
+    <ToastContainer />
+  </>
   )
  }
 

@@ -30,6 +30,8 @@ const handleSubmit = async (e: SyntheticEvent)=>{
     await adminAxios
       .post(`/login`, { email, password })
       .then((res) => {
+        console.log(res.data);
+        
         if (res.data.error) {
           return ErrorMessage(res.data.message)
         }
@@ -42,7 +44,8 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         SuccessMessage(res.data.message)
       })
   } catch (error) {
-    // console.log(error);
+    console.log(error);
+    // alert(error.message)
     ErrorMessage(error.message)
   }
 }
@@ -63,7 +66,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="mb-4">
@@ -78,7 +81,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="text-center">

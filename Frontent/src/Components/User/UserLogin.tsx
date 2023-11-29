@@ -66,7 +66,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="mb-4">
@@ -81,7 +81,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            required
+            // required
           />
         </div>
         <div className="text-center">
