@@ -17,12 +17,15 @@ const CategoryList = () => {
   const [categoryId, setCategoryId] = useState();
   const [categoryToEdit, setCategoryToEdit] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(categories.length / itemsPerPage);
+  const itemsPerPage = 6;
+  // const totalPages = Math.ceil(categories.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = categories.slice(startIndex, endIndex);
+
+
   const [size, setSize] = useState(1);
+  const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
   const handlePageChange = (page) => {
@@ -65,15 +68,13 @@ const CategoryList = () => {
   }, [is_deleted, showModal]);
 
   const deleteCategory = async (catId) => {
-  const result = await SwalAlert();
-
+    const result = await SwalAlert();
     if (result.isConfirmed) {
       restaurentAxios
         .patch("/deleteCategory", { catId })
         .then((response) => {
           if (response.data.success) {
             navigate("/restaurent/categoryAddingModal");
-
             return SuccessMessage(response.data.message);
             console.log(response.data);
             setDeleted(!is_deleted);
