@@ -39,7 +39,6 @@ export const restaurentList = async (req, res) => {
   
 export const restaurentUnblock = async (req, res) => {
     try {
-      console.log('unblockkingg');
       const id = req.params.id;
       let result = await restaurentModel.updateOne(
         { _id: id },
@@ -47,7 +46,7 @@ export const restaurentUnblock = async (req, res) => {
       );
   
       if (result.modifiedCount > 0) {
-        return res.json({ message: "restaurent un blocked" });
+        return res.json({ message: "restaurent Un blocked!!" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
@@ -60,14 +59,13 @@ export const restaurentUnblock = async (req, res) => {
   
   export const restaurentBlock = async (req, res) => {
     try {
-      console.log('blockingg');
       const id = req.params.id;
       let result = await restaurentModel.updateOne(
         { _id: id },
         { $set: { status: false } }
       );
       if (result.modifiedCount > 0) {
-        return res.json({ message: "Restaurent Blocked" });
+        return res.json({ message: "Restaurent Blocked!!" });
       }
       return res.status(404).json({ message: "User not found", error: true });
     } catch (error) {
