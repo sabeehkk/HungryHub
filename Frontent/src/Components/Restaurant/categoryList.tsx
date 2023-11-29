@@ -7,6 +7,7 @@ import { restaurentAxios } from "../../axios/axios";
 import CategoryModal from "../../Components/Restaurant/categoryModal";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import PAgination from "../../Components/pagination";
+import { SwalAlert } from "../../utils/util";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -64,13 +65,8 @@ const CategoryList = () => {
   }, [is_deleted, showModal]);
 
   const deleteCategory = async (catId) => {
-    const result = await Swal.fire({
-      title: "Do you really want to delete this product?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel",
-    });
+  const result = await SwalAlert();
+
     if (result.isConfirmed) {
       restaurentAxios
         .patch("/deleteCategory", { catId })
