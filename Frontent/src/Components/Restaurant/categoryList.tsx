@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import { restaurentAxios } from "../../axios/axios";
-// import Pagination from "../../assets/pagination";
 import CategoryModal from "../../Components/Restaurant/categoryModal";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import PAgination from "../../Components/pagination";
@@ -19,8 +17,6 @@ const CategoryList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
   const currentItems = categories.slice();
-  const [totalCategories, setTotalCategories] = useState(0);
-
   const [size, setSize] = useState(1);
   const [page, setPage] = useState(1);
 
@@ -67,11 +63,7 @@ const CategoryList = () => {
     console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
-      setTotalCategories(data.size);
-
-      // setSize(data.size)
       const newSize = data.size < 1 ? 1 : data.size;
-
       setSize(newSize);
     }
   };
@@ -84,7 +76,6 @@ const CategoryList = () => {
           catId,
         });
         if (response.data.success) {
-          // Update the categories state by filtering out the deleted category
           setCategories((prevCategories) =>
             prevCategories.filter((category) => category._id !== catId)
           );
@@ -104,7 +95,6 @@ const CategoryList = () => {
       ErrorMessage("Canceled!!");
     }
   };
-
   return (
     <>
       <div className="text-center ">

@@ -101,16 +101,27 @@ export const getCategories = async (req,res)=>{
 }
 export const getRestaurentProducts = async (req,res)=>{
     try {
+      const PAGE = req?.query?.page
+    ? req.query.page >= 1
+      ? req.query.page
+      : 1
+    : 1;
+    const SKIP = (PAGE - 1) * LIMIT;
       const restId = req.query.id ;
       const productData = await ProductModel.find({
         isDeleted:false,
         restaurent_id:restId,
       })
+      .sort({ _id: -1 })
+      .skip(SKIP)
+      .limit(LIMIT);
+      const TotalSize = await ProductModel.countDocuments({isDeleted:false});
+      const size = Math.ceil(TotalSize / LIMIT);
       // console.log(productData,'productDatas');
       if(productData.length>0){
         res.status(200).send({
           success:true,
-          productData
+          productData,size
         })
       }else{
         res.status(404).send({
