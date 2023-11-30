@@ -14,7 +14,7 @@ const VerifyToken = async (req,res,next)=>{
 
     const tokenWithoutBearer = token.replace('Bearer ', '');
     console.log(tokenWithoutBearer,'token without bearerrrrrrrrrrrr');
-    jwt.verify(tokenWithoutBearer, process.env.JWT_SECRET,async (err, decoded) => {
+    jwt.verify(tokenWithoutBearer, process.env.JWT_SECRET,async (err,decoded) => {
         if (err) {
           return res.status(401).json({ message: 'Unauthorized' });
         }
@@ -22,7 +22,7 @@ const VerifyToken = async (req,res,next)=>{
         if(!decoded.role ==='user'){
             return res.status(401).json({ message: 'Unauthorized' });
         }
-        console.log(decoded.user)
+        console.log(decoded.user,'DECODED USER')
         const userData = await userModel.findOne({_id:decoded.user, status: true} );
         console.log(decoded.user, 'usss', userData)
         if(!userData){
