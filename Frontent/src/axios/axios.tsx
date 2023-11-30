@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ErrorMessage } from "../utils/util";
 // import { ErrorMessage } from "../utils/utils";
 
 // Define base URL from environment variables
@@ -32,11 +33,17 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
     (error) => {
     //   ErrorMessage(error.response.data.message);
       if (
+        
         (error.response.status === 401 &&
           error.response.data.message === "Unauthorized") ||
         error.response.data.message ===
           "Access Denied: Your account has been temporarily blocked"
+          
       ) {
+        return ErrorMessage(error.response.data.message)
+        console.log('axios is working')
+    
+
         localStorage.removeItem(tokenName);
       } else if (error.response.status === 500) {
         console.error("Internal Server Error:", error.response.data);

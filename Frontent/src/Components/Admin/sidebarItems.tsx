@@ -9,7 +9,6 @@ const App = () => {
       src: "https://cdn-icons-png.flaticon.com/512/5974/5974636.png",
       url: "/admin/home",
     },
-
     {
       title: "User Management",
       src: "https://cdn-icons-png.flaticon.com/512/560/560277.png",
@@ -26,7 +25,11 @@ const App = () => {
       src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
       url: "/admin/employees",
     },
-
+    {
+      title: "Logout ",
+      src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
+      url: "/admin/logout",
+    },
     { title: "Setting", src: "Setting" },
   ];
 
