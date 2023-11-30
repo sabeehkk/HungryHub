@@ -7,8 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 import { logout } from "../../redux/admin/authSlice";
 
-function IsLogged(){
+const IsLogged=()=>{
     const {success} = useSelector((state:any)=> state.adminAuth);
+    console.log(success,'sucess datas in is logged');
+    
     const navigate = useNavigate();
     const dispatch = useDispatch()
 

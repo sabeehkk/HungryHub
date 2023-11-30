@@ -35,7 +35,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         if (res.data.error) {
           return ErrorMessage(res.data.message)
         }
-        localStorage.setItem("adminToken", res.data.token);
+        localStorage.setItem("adminToken", res.data?.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
@@ -45,7 +45,6 @@ const handleSubmit = async (e: SyntheticEvent)=>{
       })
   } catch (error) {
     console.log(error);
-    // alert(error.message)
     ErrorMessage(error.message)
   }
 }

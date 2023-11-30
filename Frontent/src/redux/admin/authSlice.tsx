@@ -19,12 +19,20 @@ const authSlice = createSlice({
     initialState:INITTAL_STATE,
     reducers:{
         adminLoggedIn : (state,action:PayloadAction<AdminData>)=>{
+            
             state.admin = action.payload;
             state.success=true;
+            console.log(state.admin,'logged admin');
+            console.log(state.success,' admin state sucess or false');
+
         },
-        logout:(state)=>{
+        logout : (state)=>{
+            
             state.admin=null,
             state.success=false
+            console.log(state.admin,'stateee admin');
+            console.log(state.success,'admin state sucess or false');
+
         }
     },
 })

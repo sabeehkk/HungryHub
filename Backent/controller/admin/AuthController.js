@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 
 const LIMIT = 6;
 
-
 export const login=async (req,res)=>{
     try {
       console.log(req.body);
@@ -20,7 +19,6 @@ export const login=async (req,res)=>{
               error: true,
             });
           }
-      
 
         const isPasswordVerified = bcrypt.compareSync(password,adminData.password)
         if (!isPasswordVerified) {
@@ -30,7 +28,6 @@ export const login=async (req,res)=>{
             {admin:email,role:"admin"},
             process.env.JWT_SECRET,
             {expiresIn:"1h"}
-        
             )
             return res.json({message:"success",token,adminData})
         
