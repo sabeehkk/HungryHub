@@ -14,7 +14,7 @@ const employeePath ="/employee"
 
 
 const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
-  const instance = axios.create({ 
+  const instance = axios.create({
     baseURL: `${VITE_USER_BACKEND_URL}${rolePath}`,
     timeout: 5000,
     headers: {
@@ -42,7 +42,6 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
       ) {
         return ErrorMessage(error.response.data.message)
         console.log('axios is working')
-    
 
         localStorage.removeItem(tokenName);
       } else if (error.response.status === 500) {

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { useNavigate } from 'react-router-dom';
 
-function IsLogout() {
+const IsLogout=()=> {
     const {success}=useSelector((state:any)=>state.adminAuth)
     const navigate = useNavigate()
     useEffect(()=>{
