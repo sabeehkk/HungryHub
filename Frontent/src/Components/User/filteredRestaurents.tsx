@@ -15,7 +15,7 @@ const FilteredRestaurents=()=> {
  
     const {catName}= useParams() ;
 
-    console.log(restaurants,'restaruent information');
+    // console.log(restaurants.restaurent,'restaruent information');
     
 
     useEffect(()=>{
@@ -34,7 +34,7 @@ const FilteredRestaurents=()=> {
         cateName = catName
       }
       userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response)=>{
-        console.log('RestaurentDatas',response.data);
+        console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
         
         setrestaurants(response.data)
       });
@@ -93,6 +93,7 @@ const FilteredRestaurents=()=> {
           <div className="text-3xl font-semibold mb-4 flex items-center justify-center"></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {restaurants?.restaurants?.map((item) => (
+        // console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
               
               <div
                 key={item._id}
@@ -102,13 +103,13 @@ const FilteredRestaurents=()=> {
                 <div className="flex items-center justify-between">
                   <img
                     // src={item.restaurant.Image}
-                    alt={item.restaurantName}
+                    alt={item.name}
                     className="w-full h-44"
                   />
                 </div>
                 <div className="flex justify-between px-5 pb-5">
                   <h4 className="text-xl font-bold mt-2">
-                    {item.restaurantName}
+                    {item?.restaurant?.restaurantName}
                   </h4>
                   <h4 className="text-xl font-bold mt-3 ml-auto mr-1">
                     {/* {ratingsMap[item.restaurant._id] !== undefined ? (

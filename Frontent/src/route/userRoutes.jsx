@@ -43,7 +43,7 @@ const UserAuthAppLayout = () => {
 
 const UserRoute = {
   path: "/",
-  errorElement: <ErrorPage path={"/"} />,
+  // errorElement: <ErrorPage path={"/"} />,
   element: <UserAuthAppLayout />,
   children: [
     {
