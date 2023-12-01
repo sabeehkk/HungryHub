@@ -18,7 +18,7 @@ import {
     deleteCategory
 
 }from '../controller/restaurent/restaurentController.js'
-import VerifyToken from '../middleware/jwtRestaurentVerification.js'
+import VerifyToken from '../middleware/jwtRestaurentVerification.js'    
 
 const router =express.Router()
 

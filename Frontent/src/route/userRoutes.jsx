@@ -19,6 +19,7 @@ import ErrorPage from "../Components/errorPage.tsx";
 import IsLogged from "../middleware/user/isLogged.tsx";
 import Logout from "../Pages/User/userLogout.tsx";
 import Footer from '../Components/User/footer.tsx'
+import FilteredRestaurent from '../Components/User/filteredRestaurents.tsx'
 
 const UserAppLayout = () => {
   return (
@@ -125,6 +126,16 @@ const UserRoute = {
         },
       ],
     },
+    {
+      path:"/filterShops",
+      element:(
+        <>
+              <UserNavbar />
+
+        <FilteredRestaurent/>
+        </>
+      )
+    }
   ],
 };
 

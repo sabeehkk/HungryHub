@@ -13,6 +13,10 @@ import {
   updatePassword,
   updateProfilePhoto,
 } from "../controller/user/userController.js";
+import {
+  getCategories,
+  getRestWithCategory
+} from '../controller/user/restaurent.js'
 
 import VerifyToken from "../middleware/jwtUserVerification.js";
 
@@ -28,4 +32,6 @@ router.patch("/profile/:userId/edit",VerifyToken, updateProfile);
 router.patch("/profile/:userId/editPassword",VerifyToken, updatePassword);
 router.patch("/profile/:userId/edit/profilePhoto",VerifyToken, updateProfilePhoto);
 
+router.get('/getCategoryies',getCategories)
+router.get('/getcatRestaurents',getRestWithCategory)
 export default router;
