@@ -25,16 +25,16 @@ const router =express.Router()
 router.post('/register',signup)  
 router.post('/login',login)
 // router.post('/addFood',ProductAdd)
-router.get('/productList',VerifyToken,ProductList)
-router.post('/addProduct',VerifyToken,addProduct)
-router.post('/addCategory',VerifyToken,addCategory)
-router.get('/getCategory',VerifyToken,getCategories)
-router.patch('/editCategory',VerifyToken,editCategory);
-router.patch('/deleteCategory',VerifyToken,deleteCategory)
+router.get('/productList',ProductList)
+router.post('/addProduct',addProduct)
+router.post('/addCategory',addCategory)
+router.get('/getCategory',getCategories)
+router.patch('/editCategory',editCategory);
+router.patch('/deleteCategory',deleteCategory)
 
-router.get('/getRestaurentProduct',VerifyToken,getRestaurentProducts)
-router.get('/editProduct',VerifyToken,getProductData)
-router.patch('/updateProduct',VerifyToken,updateProduct)
-router.patch('/deleteProduct',VerifyToken,deleteProduct)
+router.get('/getRestaurentProduct',getRestaurentProducts)
+router.get('/editProduct',getProductData)
+router.patch('/updateProduct',updateProduct)
+router.patch('/deleteProduct',deleteProduct)
 
 export default router
