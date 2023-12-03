@@ -135,7 +135,7 @@ function Cart() {
                       {item.variant}
                     </td>
                     <td className="px-6 py-2 whitespace-nowrap">
-                      <div className="border border-lime-50 items-center justify-between flex">
+                    <div className="border border-lime-50 items-center justify-between flex">
                         <button
                           className="bg-slate-200 pl-3"
                           onClick={() => {
@@ -243,7 +243,7 @@ function Cart() {
             <br />
             <div>
             <button
-            value="Proceed to checkout"
+            value="Proceed to checkout"   
             onClick={() => {
                 updateTotal(total, grandTotal);
             }}

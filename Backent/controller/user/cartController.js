@@ -119,11 +119,12 @@ export const addToCart =async (req,res)=>{
 }
 
 export const getCart = async (req,res)=>{
-  console.log('inside cart');
   try {
+  console.log(req.query,'inside cart')
+
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
-    // console.log(cartData,'cartDatass');
+    console.log(cartData,'cartDatass');
     if(cartData){
       res.status(200).send({
         success:true,
@@ -145,7 +146,9 @@ export const getCart = async (req,res)=>{
 }
 
 export const changeQuantity =  async(req,res)=>{
+  console.log('inside Change quantity');
   try {
+    console.log(req.body);
     const {itemId, cartId, action, variant} = req.body
     const product = await ProductModel.findOne({ _id: itemId });
     const vrIndx = product.variants.findIndex(
@@ -180,6 +183,7 @@ export const changeQuantity =  async(req,res)=>{
 }
 
 export const cartTotal = async (req,res)=>{
+  console.log(req.body);
   try {
     const { cartId, amount, grandTotal } = req.body
     await CartModel.updateOne({_id:cartId},{

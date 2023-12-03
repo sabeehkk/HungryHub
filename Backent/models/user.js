@@ -31,11 +31,12 @@ const userSchema =new mongoose.Schema({
        latitude:{
         type:Number
       },
-      address: {
-        type: String,
-        trim: true,
-        require: true,
-      },
+      Address: [{
+        street: {type:String},
+        city: {type:String},
+        state: {type:String},
+        postalCode: {type:String},
+        }],
    
       status: {
         type: Boolean,

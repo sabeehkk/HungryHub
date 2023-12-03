@@ -22,7 +22,8 @@ import Footer from '../Components/User/footer.tsx'
 import FilteredRestaurent from '../Components/User/filteredRestaurents.tsx'
 import MenuPage from '../Components/User/menu.tsx';
 import CartPage from '../Components/User/cart.tsx'
-import DummyPage from '../utils/dummy.tsx'
+import DummyCart from '../utils/cartDupe.tsx'
+import CheckoutPage from '../Components/User/checkout.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -157,11 +158,21 @@ const UserRoute = {
       )
     },
     {
-      path:"/dummy",
+      path:"/checkout",
       element:(
         <>
          <UserNavbar/>
-        <DummyPage/>
+         <CheckoutPage/>
+        </>
+       
+      )
+    },
+    {
+      path:"/CartPage",
+      element:(
+        <>
+         <UserNavbar/>
+        <DummyCart/>
         </>
        
       )

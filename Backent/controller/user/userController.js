@@ -73,3 +73,65 @@ export const updateProfilePhoto = async (req, res) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const addAddress = async(req,res)=>{
+  try {
+    console.log(req.body);
+    const id = req.body.id;
+    const userAddress = await userModel.findOne({ _id: id });
+    if (userAddress.Address.length < 3) {
+      await userModel.updateOne(
+        { _id: id },
+        {
+          $push: {
+            Address: req.body.address,
+          },
+        }
+      )
+        .then(() => {
+          res.status(201).send({
+            success: true,
+            message: "Address added success",
+          });
+        })
+        .catch(() => {
+          res.status(200).send({
+            success: false,
+            message: "something went wrong",
+          });
+        });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "Max Address Limit is 3",
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "server error",
+    });
+  }
+}
+
+export const getUserData =async (req,res)=>{
+  try {
+    const user = await userModel.findById(req.query.id);
+    if (user) {
+      res.status(200).send({
+        success: true,
+        user,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "User data Not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "server error",
+    });
+  }
+}
