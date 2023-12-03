@@ -152,7 +152,7 @@ const AddProduct: React.FC = () => {
     if (!variants || variants.length === 0) {
       return ErrorMessage("Please add at least one variant");
     }
-    if (!variants.some((variant) => variant.price !== null && variant.price.trim() !== "")) {
+    if (!variants.some((variant) => variant.price !== null )) {
       return ErrorMessage("At least one variant should have a non-null price");
     }
    

@@ -154,7 +154,7 @@ const EditProduct: React.FC = () => {
        if (!variants || variants.length === 0) {
       return ErrorMessage("Please add at least one variant");
     }
-    if (!variants.some((variant) => variant.price !== 'string' && variant.price.trim() !== "")) {
+    if (!variants.some((variant) => variant.price !== 'string' )) {
       return ErrorMessage("At least one variant should have a non-null price");
     }
   

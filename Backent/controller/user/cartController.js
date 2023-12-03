@@ -3,14 +3,18 @@ import ProductModel from '../../models/product.js'
 
 
 export const addToCart =async (req,res)=>{
-    console.log(req.body);
+    console.log(req.body,'incoming datas in Add To Cart');
     const { productId, userId ,selectedVariant } = req.body;
     try {
       const product = await ProductModel.findOne({ _id: productId }); 
-      console.log(product,'finded product');
+
+      // console.log(product,'finded product');
       const userCart = await CartModel.findOne({ user: userId });
       console.log(userCart,'usercart find details');
+
       if (userCart) {
+        console.log(userCart.restaurantId,'inside equalsssss both are matching');
+           
         if(product.restaurent_id.equals(userCart.restaurantId)){
         const proExist = userCart.items.findIndex(
             (item) => item.productId == productId
@@ -74,7 +78,7 @@ export const addToCart =async (req,res)=>{
         await CartModel.updateOne(
           { user: userId },
           {
-             restaurantId:product.restaurant_id,
+             restaurantId:product.restaurent_id,
               items: {
                 productId: product._id,
                 price: selectedVariant.offerPrice,
@@ -119,7 +123,7 @@ export const getCart = async (req,res)=>{
   try {
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
-    console.log(cartData,'cartDatass');
+    // console.log(cartData,'cartDatass');
     if(cartData){
       res.status(200).send({
         success:true,

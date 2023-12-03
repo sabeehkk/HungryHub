@@ -119,7 +119,7 @@ function Products() {
                           alt=""
                           className=" h-14 w-14  mr-10 rounded-sm"
                         />
-                        c
+                        
                         {item.productName}
                       </td>
                       <td className="px-6 py-2 whitespace-nowrap">
