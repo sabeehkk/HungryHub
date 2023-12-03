@@ -15,7 +15,8 @@ import {
     updateProduct,
     deleteProduct,
     editCategory,
-    deleteCategory
+    deleteCategory,
+    getResProfile
 
 }from '../controller/restaurent/restaurentController.js'
 import VerifyToken from '../middleware/jwtRestaurentVerification.js'    
@@ -32,9 +33,13 @@ router.get('/getCategory',getCategories)
 router.patch('/editCategory',editCategory);
 router.patch('/deleteCategory',deleteCategory)
 
+//Product Controlling
 router.get('/getRestaurentProduct',getRestaurentProducts)
 router.get('/editProduct',getProductData)
 router.patch('/updateProduct',updateProduct)
 router.patch('/deleteProduct',deleteProduct)
+
+router.get('/getResProfile',getResProfile)
+// router.get('/getRestaruent')
 
 export default router

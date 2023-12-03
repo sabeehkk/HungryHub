@@ -1,19 +1,21 @@
 // import restaurentModel from '../../models/restaurent.js'
 import ProductModel from "../../models/product.js";
 import CategoryModel from "../../models/category.js";
+import RestaurentModel from '../../models/restaurent.js'
 const LIMIT=6
 
 
 export const addProduct = async (req, res) => {
   try {
     console.log(req.body);
-    const { productName, description, productPrice, category, images, restId } =
+    const { productName, description, productPrice, category, images, restId,variants } =
       req.body;
 
     const newProduct = new ProductModel({
       productName,
       restaurent_id: restId,
-      price: productPrice,
+      // price: productPrice,
+      variants,
       category,
       images,
       description,
@@ -100,6 +102,7 @@ export const getCategories = async (req,res)=>{
   }
 }
 export const getRestaurentProducts = async (req,res)=>{
+  console.log('inside Restaurent Products');
     try {
       const PAGE = req?.query?.page
     ? req.query.page >= 1
@@ -117,12 +120,13 @@ export const getRestaurentProducts = async (req,res)=>{
       .limit(LIMIT);
       const TotalSize = await ProductModel.countDocuments({isDeleted:false});
       const size = Math.ceil(TotalSize / LIMIT);
-      // console.log(productData,'productDatas');
+      console.log(productData,'productDatas');
       if(productData.length>0){
         res.status(200).send({
           success:true,
           productData,size
         })
+
       }else{
         res.status(404).send({
           success:false,
@@ -139,11 +143,13 @@ export const getRestaurentProducts = async (req,res)=>{
 }
 
 export const getProductData =async (req,res)=>{
+  console.log('getProductData is working');
     try {
       console.log(req.query);
       const {id } =req.query ;
+
       const foundProduct = await ProductModel.findOne({_id:id}).populate('category')
-      // console.log(foundProduct,'foundproductttttt');
+      console.log(foundProduct,'foundproductttttt');
       if(foundProduct){
         res.status(200).send({success:true,product:foundProduct})
       }else{
@@ -157,12 +163,12 @@ export const getProductData =async (req,res)=>{
 
 export const updateProduct = async (req,res)=>{
      try {
-        console.log(req.body);
-        const {productName,description,productPrice,category,images,productId}=req.body
+        console.log(req.body,'incoming datass');
+        const {productName,description,category,images,productId,variants}=req.body
         await ProductModel.updateOne({_id:productId},
           {
             $set:{
-            productName,description,category,images,price:productPrice
+            productName,description,category,images,variants
           }
         }
        ).then(()=>{
@@ -295,6 +301,50 @@ export const deleteCategory = async(req,res)=>{
       success:true,
       message:"Category Deleted"
     })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message:"Server error"
+    })
+  }
+}
+
+export const getResProfile= async(req,res)=>{
+  try {
+    const restId = req.query.id
+    const restData = await RestaurentModel.findOne({_id:restId})
+    // const ratings = await Restarant.aggregate([
+    //   {
+    //     $match:{
+    //       _id:new mongoose.Types.ObjectId(restId),
+    //     }
+    //   },
+    //   {
+    //     $unwind: '$rating',
+    //   },
+    //   {
+    //     $group: {
+    //       _id: '$_id',
+    //       // Name: { $first: '$Name' },
+    //       totalRating: { $sum: '$rating.rating' },
+    //       averageRating: { $avg: '$rating.rating' },
+    //     },
+    //   },
+    // ])
+    
+    if(restData){
+      res.status(200).send({
+        success:true,
+        restData,
+        // ratings
+      })
+    }else{
+      res.status(404).send({
+        success:false,
+        message:"Restaurant data Not found"
+      })
+    }
   } catch (error) {
     console.log(error);
     res.status(500).send({

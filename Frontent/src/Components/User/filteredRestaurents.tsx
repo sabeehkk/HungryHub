@@ -5,47 +5,46 @@ import { BiSolidStarHalf } from "react-icons/bi";
 import { AiFillClockCircle } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";
 
-import { userAxios } from '../../axios/axios';
+import { userAxios } from "../../axios/axios";
 
-const FilteredRestaurents=()=> {
+const FilteredRestaurents = () => {
   const navigate = useNavigate();
   const [restaurants, setrestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState();
- 
-    const {catName}= useParams() ;
 
-    // console.log(restaurants.restaurent,'restaruent information');
-    
+  const { catName } = useParams();
+  // console.log(restaurants.restaurent,'restaruent information');
+  useEffect(() => {
+    userAxios.get("/getCategoryies").then((response) => {
+      console.log(response.data, "responseDataaaaas");
+      setCategories(response.data.categories);
+    });
+  }, []);
 
-    useEffect(()=>{
-        userAxios.get("/getCategoryies").then((response)=>{
-          console.log(response.data,'responseDataaaaas');
-          
-          setCategories(response.data.categories)
-        })
-    },[])
+  useEffect(() => {
+    let cateName;
+    if (selectedOption) {
+      cateName = selectedOption;
+    } else {
+      cateName = catName;
+    }
+    userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
+      console.log(
+        "RestaurentDatas",
+        response.data.restaurants[1].restaurent.restaurantName
+      );
 
-    useEffect(()=>{
-      let cateName;
-      if(selectedOption){
-        cateName = selectedOption ;
-      }else{
-        cateName = catName
-      }
-      userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response)=>{
-        console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
-        
-        setrestaurants(response.data)
-      });
-    },[selectedOption])
+      setrestaurants(response.data);
+    });
+  }, [selectedOption]);
 
-    const handleOptionChange = (event) => {
-      setSelectedOption(event.target.value);
-      // setIsLoading(true)
-    };
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+    // setIsLoading(true)
+  };
   return (
-    <div className="flex"> 
+    <div className="flex">
       <div className="w-1/4 pl-4">
         <div className="py-8">
           <h1 className="font-sans font-bold text-2xl">Food Categories</h1>
@@ -93,23 +92,25 @@ const FilteredRestaurents=()=> {
           <div className="text-3xl font-semibold mb-4 flex items-center justify-center"></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {restaurants?.restaurants?.map((item) => (
-        // console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
-              
+              // console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
               <div
                 key={item._id}
                 className="mb-10 cursor-pointer bg-white"
-                onClick={() => navigate(`/menu/${item.restaurant._id}`)}
+                onClick={() => navigate(`/menu/${item.restaurent._id}`)}
               >
                 <div className="flex items-center justify-between">
                   <img
-                    // src={item.restaurant.Image}
+                    src={
+                      "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    }
                     alt={item.name}
                     className="w-full h-44"
                   />
                 </div>
                 <div className="flex justify-between px-5 pb-5">
                   <h4 className="text-xl font-bold mt-2">
-                    {item?.restaurant?.restaurantName}
+                    {/* {item?.restaurant?.restaurantName} */}
+                    {item?.restaurent?.restaurantName}
                   </h4>
                   <h4 className="text-xl font-bold mt-3 ml-auto mr-1">
                     {/* {ratingsMap[item.restaurant._id] !== undefined ? (
@@ -134,8 +135,10 @@ const FilteredRestaurents=()=> {
                 <div className="px-5 py-3 flex">
                   <div className="flex items-center justify-start">
                     <img
-                      src={item.profilePicture}
-                      alt={item.restaurantName}
+                      src={
+                        "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      }
+                      alt={item.restaurent?.restaurantName}
                       className="w-10 h-10 rounded-full"
                     />
                   </div>
@@ -160,7 +163,7 @@ const FilteredRestaurents=()=> {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FilteredRestaurents
+export default FilteredRestaurents;

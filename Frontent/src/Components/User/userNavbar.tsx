@@ -41,7 +41,10 @@ const UserNavbar = () => {
       </div>
       {/* {CartButton} */}
       <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full">
-        <BsFillCartFill size={20} className="mr-2" /> Cart
+      <Link to="/cart" className="flex items-center">
+    <BsFillCartFill size={20} className="mr-2" /> Cart
+  </Link>
+        {/* <BsFillCartFill size={20} className="mr-2" /> Cart */}
       </button>
       {/* {Mobile Menu} */}
       {/* {Overlay} */}

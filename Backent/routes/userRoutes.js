@@ -18,7 +18,10 @@ import {
   getRestWithCategory
 } from '../controller/user/restaurent.js'
 
+import {getProductData} from '../controller/restaurent/restaurentController.js'
 import VerifyToken from "../middleware/jwtUserVerification.js";
+import { addToCart,getCart,changeQuantity,cartTotal,cancelCartItem } from "../controller/user/cartController.js";
+import Cart from "../models/cart.js";
 
 const router = express.Router();
 
@@ -34,4 +37,12 @@ router.patch("/profile/:userId/edit/profilePhoto",VerifyToken, updateProfilePhot
 
 router.get('/getCategoryies',getCategories)
 router.get('/getcatRestaurents',getRestWithCategory)
+   
+router.get('/getProuductDetail',getProductData)
+router.post('/addToCart',addToCart)
+router.get('/getCart',getCart)
+router.patch("/changeQuantity",changeQuantity)
+router.patch("/updateTotal",cartTotal)
+router.patch("/cancelCartItem",cancelCartItem)
+
 export default router;

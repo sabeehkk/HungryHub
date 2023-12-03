@@ -17,10 +17,28 @@ const productSchema = new mongoose.Schema({
     },
     category:{
       type:mongoose.Schema.Types.ObjectId,
-      ref:'category'
+      ref:'Category'
     },
-    price:{
-      type:Number
+    // price:{
+    //   type:Number
+    // },
+    variants: [
+      {
+        name:{type: String},
+        price: {
+          type: Number,
+        },
+        offer: {
+          type: Number,
+          min: 0,
+          max: 100
+        },  
+        offerPrice: {type:Number}
+      }
+    ],
+    stock: {
+      type: Boolean,
+      default: true
     },
     images: [{
       type: String
