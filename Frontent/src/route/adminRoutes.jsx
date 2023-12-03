@@ -2,6 +2,8 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Login from '../Pages/Admin/adminLogin';
 import IsLogout from '../middleware/admin/isLogout';
+import Logout from '../Pages/Admin/logout.tsx'
+
 import RestaurentList from '../Pages/Admin/restaurentList'
 import EmployeeList from '../Pages/Admin/employeeList';
 import UsersList from '../Pages/Admin/usersList'
@@ -10,6 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import AdminFrame from '../Components/Admin/adminFrame' 
 import Home from '../Pages/Admin/home' 
 import ErrorPage from '../Components/errorPage.tsx' 
+import IsLogged from '../middleware/admin/isLogged.tsx'
 
 
 const AdminAppLayout = ()=>{
@@ -42,6 +45,7 @@ const AdminAppLayout = ()=>{
         path:"login",
         element:(
           <>
+          <IsLogout/>
           <Login/>
           </>
         ),
@@ -50,7 +54,7 @@ const AdminAppLayout = ()=>{
         path:'logout',
         element:(
           <>
-          <IsLogout/>
+          <Logout/>
           </>
         )
       },
@@ -61,13 +65,19 @@ const AdminAppLayout = ()=>{
       children:[
         {
           path:'home',
-          element:<Home/>
+          element:(
+            <>
+            <IsLogged/>
+            <Home/>
+            </>
+          )
         },
         {
           path:"users",
           element:(
             <>
-              <UsersList/>
+            <IsLogged/>
+            <UsersList/>
             </>
           )
         },
@@ -76,6 +86,7 @@ const AdminAppLayout = ()=>{
 
           element:(
             <>
+            <IsLogged/>
               <RestaurentList/>
             </>
           )
@@ -84,6 +95,7 @@ const AdminAppLayout = ()=>{
           path:"employees",
           element:(
             <>
+            <IsLogged/>
             <EmployeeList/>
             </>
           )

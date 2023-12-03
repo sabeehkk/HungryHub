@@ -117,22 +117,25 @@ function Products() {
                         <img
                           src={item.images[0]}
                           alt=""
-                          className="h-10 w-10 mr-10"
+                          className=" h-14 w-14  mr-10 rounded-sm"
                         />
+                        
                         {item.productName}
                       </td>
                       <td className="px-6 py-2 whitespace-nowrap">
                         {item.description}
                       </td>
                       <td className="px-6 py-2 whitespace-nowrap">
-                        {item.price}
+                        {item.variants[0]?.price }
+
                       </td>
 
                       <td className="px-6 py-2 whitespace-nowrap">
                         {
                           <div className="flex justify-between">
                             <button
-                              className="text-yellow hover:text-orange-500"
+                              // className="text-yellow hover:text-orange-500"
+                              className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                               onClick={() =>
                                 navigate(`/restaurent/editProduct/${item._id}`)
                               }
@@ -146,7 +149,8 @@ function Products() {
                         {
                           <div className="flex justify-between">
                             <button
-                              className="px-6 py-2 text-red-600 hover:text-red-900"
+                             className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                            
                               onClick={() => deletProduct(item._id)}
                             >
                               Delete

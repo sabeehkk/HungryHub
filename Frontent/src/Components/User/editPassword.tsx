@@ -54,6 +54,7 @@ function EditPassword() {
               type="password"
               id="currentPassword"
               name="currentPassword"
+              placeholder='**************' 
               minLength={7}
               value={password.currentPassword}
               onChange={handleInputChange}
@@ -61,11 +62,12 @@ function EditPassword() {
             />
           </div>
           <div>
-            <label htmlFor="newPassword">New Password</label>
+            <label className='text-black font-bold' htmlFor="newPassword">New Password</label>
             <input
               type="password"
               id="newPassword"
               name="newPassword"
+              placeholder='**************' 
               minLength={7}
               value={password.newPassword}
               onChange={handleInputChange}
@@ -73,11 +75,12 @@ function EditPassword() {
             />
           </div>
           <div>
-            <label htmlFor="confirmPassword">Confirm Password</label>
+            <label className='text-black font-bold' htmlFor="confirmPassword">Confirm Password</label>
             <input
               type="password"
               id="confirmPassword"
               name="confirmPassword"
+              placeholder='**************' 
               minLength={7}
               value={password.confirmPassword}
               onChange={handleInputChange}

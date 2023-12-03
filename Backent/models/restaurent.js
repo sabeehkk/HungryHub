@@ -33,9 +33,18 @@ const restaurentSchema = new mongoose.Schema({
         type:Boolean,
         default:true,
     },
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'category'
+        }],
+     product:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+          }],
+  
 })
 
 // module.exports  =restaurentSchema
-const Restaurent = mongoose.model("Restaurent",restaurentSchema)
+const Restaurent = mongoose.model("Restaurant",restaurentSchema)
 
 export default Restaurent

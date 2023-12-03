@@ -19,7 +19,7 @@ const VerifyToken = async (req,res,next)=>{
           return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        if(!decoded.role ==='user'){
+        if(!decoded.role === 'user'){
             return res.status(401).json({ message: 'Unauthorized' });
         }
         console.log(decoded.user,'DECODED USER')

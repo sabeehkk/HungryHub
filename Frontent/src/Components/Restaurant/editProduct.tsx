@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { restaurentAxios } from "../../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import { uploadFoodImage } from "../../api/restaurentApi";
+import { PRICE_REGEX } from "../../rejux";
+import Loading from "../../Components/loading";
+
+
 
 const EditProduct: React.FC = () => {
   const navigate = useNavigate();
@@ -13,12 +17,15 @@ const EditProduct: React.FC = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  // const [productPrice, setProductPrice] = useState("");
   const [images, setImages] = useState([]);
   const [categories, setCategories] = useState([]);
   const [errors, setErrors] = useState(false);
   const [correntCat, setCorrentCat] = useState();
   const [previewImages, setPreviewImages] = useState([]);
+  const [variants, setVariants] = useState([]);
+
+  const [load, setLoad] = useState(true);
 
 
   // const fileInputRef = useRef(null);
@@ -26,6 +33,47 @@ const EditProduct: React.FC = () => {
   const restaurent = useSelector((state) => state.restaurentAuth);
   const restId = restaurent.restaurent._id;
   console.log(restId, "restidd");
+  const validPrice = () => {
+    if (
+      (variants.length === 1 && !variants[0].name && !variants[0].price) ||
+      (variants.length > 1 &&
+        variants.every((variant) => !variant.name && !variant.price))
+    ) {
+      return false;
+    }
+    for (const variant of variants) {
+      if (variant.price && !PRICE_REGEX.test(variant.price)) {
+        return false;
+      }
+    }
+    return true;
+  };
+  const addVariant = () => {
+    setVariants([...variants, { name: "", price: "" }]);
+  };
+  const removeVariant = (index) => {
+    const updatedVariants = [...variants];
+    updatedVariants.splice(index, 1);
+    setVariants(updatedVariants);
+  };
+  const handleVariantNameChange = (e, index) => {
+    const updatedVariants = [...variants];
+    updatedVariants[index].name = e.target.value;
+    setVariants(updatedVariants);
+  };
+  const handleVariantPriceChange = (e, index) => {
+    const updatedVariants = [...variants];
+    updatedVariants[index].price = e.target.value;
+    setVariants(updatedVariants);
+  };
+  const handleVariantOfferChange = (e, index) => {
+    const updatedVariants = [...variants];
+    updatedVariants[index].offer = e.target.value;
+    updatedVariants[index].offerPrice =
+      parseFloat(variants[index].price) -
+      (parseFloat(variants[index].price) * parseFloat(e.target.value)) / 100;
+    setVariants(updatedVariants);
+  };
 
   useEffect(() => {
     categoryData();
@@ -69,8 +117,10 @@ const EditProduct: React.FC = () => {
         setDescription(response.data.product.description);
         setCategory(response.data.product.category._id);
         setCorrentCat(response.data.product.category.name);
-        setProductPrice(response.data.product.price);
+        // setProductPrice(response.data.product.price);
         setImages(response.data.product.images);
+        setVariants(response.data.product.variants);
+
       })
       .catch((error) => {
         console.log(error);
@@ -101,14 +151,19 @@ const EditProduct: React.FC = () => {
     if (description.trim() === "") {
       return ErrorMessage("Please Fill Description");
     }
-    if (!productPrice) {
-      return ErrorMessage("Please Fill Product Price");
+       if (!variants || variants.length === 0) {
+      return ErrorMessage("Please add at least one variant");
+    }
+    if (!variants.some((variant) => variant.price !== 'string' )) {
+      return ErrorMessage("At least one variant should have a non-null price");
     }
   
 
     if (images.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
+    setLoad(true);
+
     const urlImages = await handleImageUpload(images);
     console.log("image url ", urlImages);
 
@@ -119,11 +174,12 @@ const EditProduct: React.FC = () => {
       const FormData = {
         productName,
         description,
-        productPrice,
+        // productPrice,
         category,
         images: urlImages,
         restId,
         productId,
+        variants
       };
       restaurentAxios
         .patch("/updateProduct", FormData)
@@ -140,8 +196,14 @@ const EditProduct: React.FC = () => {
         });
     }
   };
+  useEffect(() => {
+    setLoad(false);
+  }, []);
 
-  return (
+
+  return load ? (
+    <Loading />
+  ) : (
     <>
     <div className="text-center ">
       <h2 className="text-4xl font-bold italic text-black">
@@ -206,7 +268,49 @@ const EditProduct: React.FC = () => {
             <p className="text-red-500 text-sm">{"Select a Category"}</p>
           )}
 
-          <label htmlFor="price" className="block font-medium">
+{variants.map((variant, index) => (
+            <div key={index} className="border rounded-sm md:w-3/5 w-full">
+              <input
+                type="text"
+                placeholder="Variant Name"
+                value={variant.name}
+                onChange={(e) => handleVariantNameChange(e, index)}
+                className="md:border-r-4 rounded-sm md:w-1/2 bg-gray-300 py-1 w-full"
+              />
+              <input
+                type="number"
+                placeholder="Variant Price"
+                value={variant.price}
+                onChange={(e) => handleVariantPriceChange(e, index)}
+                className="border rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
+              />
+              <input
+                type="number"
+                placeholder="Offer (%)"
+                value={variant.offer}
+                onChange={(e) => handleVariantOfferChange(e, index)}
+                className="md:border-r-4 rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
+              />
+              <input
+                type="number"
+                placeholder="Offer Price"
+                value={variant.offerPrice}
+                readOnly
+                className="border rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
+              />
+              <button
+                className="text-cherry-Red"
+                onClick={() => removeVariant(index)}
+              >
+                Remove Variant
+              </button>
+            </div>
+          ))}
+          <button className="text-green-600" onClick={addVariant}>
+            Add Variant
+          </button>
+
+          {/* <label htmlFor="price" className="block font-medium">
             Price:
           </label>
           <input
@@ -219,7 +323,7 @@ const EditProduct: React.FC = () => {
             }}
             required
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-          />
+          /> */}
         </div>
         <div className="md:w-1/2">
           <label htmlFor="restId" className="block font-medium">

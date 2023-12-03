@@ -7,7 +7,7 @@ const categorySchema = new mongoose.Schema({
     },
     restaurent:{
         type :mongoose.Schema.Types.ObjectId,
-        ref:'Restaurent',
+        ref:'Restaurant',
     },
     is_deleted :{
         type : Boolean,
@@ -15,6 +15,6 @@ const categorySchema = new mongoose.Schema({
     }
 })
 
-const Category = mongoose.model('category',categorySchema)
+const Category = mongoose.model('Category',categorySchema)
 
 export default Category

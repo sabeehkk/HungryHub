@@ -1,0 +1,1 @@
+export const PRICE_REGEX = /^(?!-)[1-9]\d*(\.\d+)?|0\.[1-9]\d*$/;

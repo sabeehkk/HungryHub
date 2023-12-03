@@ -19,7 +19,11 @@ import ErrorPage from "../Components/errorPage.tsx";
 import IsLogged from "../middleware/user/isLogged.tsx";
 import Logout from "../Pages/User/userLogout.tsx";
 import Footer from '../Components/User/footer.tsx'
-
+import FilteredRestaurent from '../Components/User/filteredRestaurents.tsx'
+import MenuPage from '../Components/User/menu.tsx';
+import CartPage from '../Components/User/cart.tsx'
+import DummyCart from '../utils/cartDupe.tsx'
+import CheckoutPage from '../Components/User/checkout.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -42,7 +46,7 @@ const UserAuthAppLayout = () => {
 
 const UserRoute = {
   path: "/",
-  errorElement: <ErrorPage path={"/"} />,
+  // errorElement: <ErrorPage path={"/"} />,
   element: <UserAuthAppLayout />,
   children: [
     {
@@ -125,6 +129,54 @@ const UserRoute = {
         },
       ],
     },
+    {
+      path:"/filterShops",
+      element:(
+        <>
+              <UserNavbar />
+
+        <FilteredRestaurent/>
+        </>
+      )
+    },
+    {
+      path:"/menu/:restId",
+      element:(
+        <>
+          <UserNavbar />
+        <MenuPage/>
+        </>
+      )
+    },
+    {
+      path:"/cart",
+      element:(
+        <>
+        <UserNavbar/>
+        <CartPage/>
+        </>
+      )
+    },
+    {
+      path:"/checkout",
+      element:(
+        <>
+         <UserNavbar/>
+         <CheckoutPage/>
+        </>
+       
+      )
+    },
+    {
+      path:"/CartPage",
+      element:(
+        <>
+         <UserNavbar/>
+        <DummyCart/>
+        </>
+       
+      )
+    }
   ],
 };
 
