@@ -67,7 +67,7 @@ function Food() {
                   <p className="font-bold">{item.productName}</p>
                   <p>
                     <span className="bg-orange-500 text-white p-1 rounded-full">
-                    ₹ {item.price}
+                    ₹ {item.variants[0]?.price}
                     </span>
                   </p>
                 </div>
