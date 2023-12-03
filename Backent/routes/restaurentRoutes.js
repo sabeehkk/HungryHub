@@ -16,9 +16,10 @@ import {
     deleteProduct,
     editCategory,
     deleteCategory,
-    getResProfile
+    getResProfile,
 
 }from '../controller/restaurent/restaurentController.js'
+    import {getRestaurents} from '../controller/restaurent/productController.js'
 import VerifyToken from '../middleware/jwtRestaurentVerification.js'    
 
 const router =express.Router()
@@ -40,6 +41,6 @@ router.patch('/updateProduct',updateProduct)
 router.patch('/deleteProduct',deleteProduct)
 
 router.get('/getResProfile',getResProfile)
-// router.get('/getRestaruent')
+router.get('/getRestaurents',getRestaurents)
 
 export default router

@@ -115,16 +115,16 @@ function Menu() {
     categoryData();
   }, []);
 
-  useEffect(() => {
-    const fetchProducts = () => {
-      const searchTermLowercase = searchTerm.toLowerCase();
-      const filteredProducts = product.filter((product) =>
-        product.name.toLowerCase().includes(searchTermLowercase)
-      );
-      setFilterdProducts(filteredProducts);
-    };
-    fetchProducts();
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   const fetchProducts = () => {
+  //     const searchTermLowercase = searchTerm.toLowerCase();
+  //     const filteredProducts = product.filter((product) =>
+  //       product.name.toLowerCase().includes(searchTermLowercase)
+  //     );
+  //     setFilterdProducts(filteredProducts);
+  //   };
+  //   fetchProducts();
+  // }, [searchTerm]);
 
   const handleCategorySelection = (ind) => {
     const selectedCat = categories[ind];
@@ -174,9 +174,10 @@ function Menu() {
         <div className="grid grid-cols-1 p-2 py-3 shadow-md rounded-md">
           <div className="mb-10">
             <div className="flex justify-between items-baseline">
-              <h4 className="text-xl font-bold mt-2">
-                {restData?.restData.Name}
-              </h4>
+          
+        <h2 className="ml-8 text-4xl font-bold italic text-black">
+          {restData?.restData.restaurantName}
+        </h2>
               <div className="border rounded-sm px-3 py-1 shadow-md bg-white">
                 <div className="flex ">
                   <h4 className="text-xl font-bold ml-auto mr-1">
@@ -191,6 +192,9 @@ function Menu() {
               </div>
             </div>
             <div className="">
+              <h4 className="ml-8 text-lg text-gray-500 ">
+               Info : {restData?.restData.phoneNumber}
+              </h4>
               <h4 className="text-lg text-gray-500">
                 {restData?.restData.Place}
               </h4>
@@ -202,7 +206,7 @@ function Menu() {
           <div className="border border-gray-300 h-2 bg-gray-300"></div>
         </div>
 
-        <div className="text-center mt-8 flex items-center justify-between mb-4">
+        {/* <div className="text-center mt-8 flex items-center justify-between mb-4">
           <div className="navbar shadow-lg">
             <div className="navbar-start">
               <div className="dropdown ">
@@ -365,7 +369,7 @@ function Menu() {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {product?.length !== 0 ? (
           product?.map((prod) => (

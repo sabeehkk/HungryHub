@@ -31,7 +31,7 @@ export const addProduct = async (req, res) => {
 export const ProductList = async (req, res) => {
   try {
     const data = await ProductModel.find({isDeleted:false});
-    console.log(data);
+    // console.log(data);
     res.json({ data });
   } catch (error) {
     console.log(error.message);

@@ -126,7 +126,7 @@ function Products() {
                         {item.description}
                       </td>
                       <td className="px-6 py-2 whitespace-nowrap">
-                        {item.variants[0].price }
+                        {item.variants[0]?.price }
 
                       </td>
 
