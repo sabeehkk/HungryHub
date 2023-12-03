@@ -18,7 +18,8 @@ import EditProduct from '../Components/Restaurant/editProduct.tsx'
 import CategoryModal from "../Components/Restaurant/categoryList.tsx";
 import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
 import IsLogged from "../middleware/restaurent/isLogged";
-
+import OrderManagement from '../Components/Restaurant/orderManagement.tsx';
+import OrderMoreViewPage from '../Components/Restaurant/orderMoreViewPage.tsx'
 const RestaurantAppLayout = () => {
   return (
      <>     
@@ -119,6 +120,22 @@ const RestaurentRoute = {
               </>
             )
         },
+        {
+          path:'orders',
+          element:(
+            <>
+            <OrderManagement/>
+            </>
+          )
+        },
+        {
+          path:'ordersMoreView/:id',
+          element:(
+            <>
+            <OrderMoreViewPage/>
+            </>
+          )
+        }
       ],
     },
   ],

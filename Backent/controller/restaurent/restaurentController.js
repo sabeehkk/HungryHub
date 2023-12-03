@@ -312,6 +312,7 @@ export const deleteCategory = async(req,res)=>{
 
 export const getResProfile= async(req,res)=>{
   try {
+    console.log(req.query);
     const restId = req.query.id
     const restData = await RestaurentModel.findOne({_id:restId})
     // const ratings = await Restarant.aggregate([

@@ -1,6 +1,7 @@
 import OrderModel from "../../models/order.js";
 import CartModel from '../../models/cart.js'
 import UserModel from '../../models/user.js'
+import ProductModel from '../../models/product.js'
 
 export const Order = async (req, res) => {
   try {
@@ -43,3 +44,24 @@ export const Order = async (req, res) => {
     });
   }
 };
+
+export const getOrderItems = async (req,res)=>{
+  try {
+    console.log('inside getOrder iTEMS');
+    console.log(req.query);
+    const { id } = req.query;
+    const orderItems = await OrderModel.findOne({ _id: id })
+      .sort({ _id: -1 })
+      .populate("item.product").populate("employeeId")
+    res.status(200).send({
+      success: true,
+      orderItems,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Server error.",
+    });
+  }
+}

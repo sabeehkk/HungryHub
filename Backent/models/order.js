@@ -13,7 +13,7 @@ const orderSchema = mongoose.Schema({
         {
           product: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Product",
+            ref: "product",
           },
           price: {
             type: Number,
@@ -37,6 +37,10 @@ const orderSchema = mongoose.Schema({
           }
         },
       ],
+      employeeId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Employee",
+      },
       start_date: {
         type: Date,
         default:Date.now()

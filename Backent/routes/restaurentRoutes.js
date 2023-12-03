@@ -22,6 +22,8 @@ import {
     import {getRestaurents} from '../controller/restaurent/productController.js'
 import VerifyToken from '../middleware/jwtRestaurentVerification.js'    
 
+import { viewOrders,updateDeliveryStatus } from '../controller/restaurent/orderManagement.js';
+import {getOrderItems} from '../controller/user/orderController.js'
 const router =express.Router()
 
 router.post('/register',signup)  
@@ -42,5 +44,8 @@ router.patch('/deleteProduct',deleteProduct)
 
 router.get('/getResProfile',getResProfile)
 router.get('/getRestaurents',getRestaurents)
+router.get('/viewOrders',viewOrders)
+router.get('/getOrderIterms',getOrderItems)
+router.patch('/updateDeliveryStatus',updateDeliveryStatus)
 
 export default router
