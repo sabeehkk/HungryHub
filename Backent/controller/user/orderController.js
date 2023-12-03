@@ -1,11 +1,13 @@
 import OrderModel from "../../models/order.js";
+import CartModel from '../../models/cart.js'
+import UserModel from '../../models/user.js'
 
 export const Order = async (req, res) => {
   try {
     const { payment, addressIndex, cartData } = req.body;
-    const user = await Users.findOne({ _id: cartData.user });
+    const user = await UserModel.findOne({ _id: cartData.user });
     const address = user.Address[addressIndex];
-    const cart = await Cart.findOne({ _id: cartData._id }).populate(
+    const cart = await CartModel.findOne({ _id: cartData._id }).populate(
       "items.productId"
     );
     const items = cart.items.map((item) => ({
@@ -16,7 +18,7 @@ export const Order = async (req, res) => {
     }));
     const paymentStatus = payment === "COD" ? "Pending" : "Paid";
     if (payment === "COD") {
-      await Orders.create({
+      await OrderModel.create({
         userId: user._id,
         restaurantId: cart.restaurantId,
         item: items,
@@ -27,7 +29,7 @@ export const Order = async (req, res) => {
         paymentType: payment,
         paymentStatus,
       });
-      await Cart.deleteOne({ _id: cartData._id });
+      await CartModel.deleteOne({ _id: cartData._id });
       res.status(200).send({
         success: true,
         message: "order success",
