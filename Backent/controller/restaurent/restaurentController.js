@@ -68,39 +68,99 @@ export const addCategory = async (req, res) => {
   }
 };
 
-export const getCategories = async (req,res)=>{
+// export const getCategories = async (req,res)=>{
+//   try {
+//     console.log('inside get category');
+//     const PAGE = req?.query?.page
+//     ? req.query.page >= 1
+//       ? req.query.page
+//       : 1
+//     : 1;
+//     const SKIP = (PAGE - 1) * LIMIT;
+//     const {id} =req.query
+//     if (!id) {
+      
+//       return 
+//       res.status(400).json({
+//         status: 'error',
+//         message: 'Category ID is required',
+//       });
+//     }
+//     console.log(id,'query iddd');
+//     const categoryData =await CategoryModel.find({
+//       is_deleted:false,
+//       restaurent:id
+//     })
+//     .sort({ _id: -1 })
+//     .skip(SKIP)
+//     .limit(LIMIT);
+//     const TotalSize = await CategoryModel.countDocuments({is_deleted:false});
+//     const size = Math.ceil(TotalSize / LIMIT);
+//     res.status(200).json({
+//       status: 'success',
+//       categoryData,size
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({
+//       status: 'error',
+
+//       message: 'Internal Server Error'
+//     });
+//   }
+// }
+export const getCategories = async (req, res) => {
   try {
     console.log('inside get category');
     const PAGE = req?.query?.page
-    ? req.query.page >= 1
-      ? req.query.page
-      : 1
-    : 1;
+      ? req.query.page >= 1
+        ? req.query.page
+        : 1
+      : 1;
     const SKIP = (PAGE - 1) * LIMIT;
-    const {id} =req.query
-    console.log(id,'query iddd');
-    const categoryData =await CategoryModel.find({
-      is_deleted:false,
-      restaurent:id
+    const { id } = req.query;
+
+    if (!id) {
+      // No return statement here
+      return res.status(400).json({
+        status: 'error',
+        message: 'Category ID is required',
+      });
+    }
+
+    // Additional check to ensure id is not 'undefined'
+    if (id === 'undefined') {
+      return res.status(400).json({
+        // status: 'error',
+        // message: 'Invalid Category ID',
+      });
+    }
+
+    console.log(id, 'query iddd');
+    const categoryData = await CategoryModel.find({
+      is_deleted: false,
+      restaurent: id,
     })
-    .sort({ _id: -1 })
-    .skip(SKIP)
-    .limit(LIMIT);
-    const TotalSize = await CategoryModel.countDocuments({is_deleted:false});
+      .sort({ _id: -1 })
+      .skip(SKIP)
+      .limit(LIMIT);
+
+    const TotalSize = await CategoryModel.countDocuments({ is_deleted: false, restaurent: id });
     const size = Math.ceil(TotalSize / LIMIT);
     res.status(200).json({
       status: 'success',
-      categoryData,size
+      categoryData,
+      size,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       status: 'error',
-
-      message: 'Internal Server Error'
+      message: 'Internal Server Error',
     });
   }
-}
+};
+
 export const getRestaurentProducts = async (req,res)=>{
   console.log('inside Restaurent Products');
     try {
@@ -111,6 +171,12 @@ export const getRestaurentProducts = async (req,res)=>{
     : 1;
     const SKIP = (PAGE - 1) * LIMIT;
       const restId = req.query.id ;
+      if (restId === 'undefined') {
+        return res.status(400).json({
+          // status: 'error',
+          // message: 'Invalid Category ID',
+        });
+      }
       const productData = await ProductModel.find({
         isDeleted:false,
         restaurent_id:restId,

@@ -102,11 +102,11 @@ const CategoryList = () => {
           {"Category List"}
         </h2>
       </div>
-      <div className="p-10 w-full bg-gray-200">
+      <div className="p-10 w-full ">
         <div className="border rounded-md overflow-hidden shadow-md">
           <div className="w-full overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200 bg-white">
-              <thead className="bg-table-blue text-off-white">
+            <thead className=" bg-gray-400 text-off-White ">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
                     #
@@ -119,7 +119,7 @@ const CategoryList = () => {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="bg-gray-100 divide-y divide-gray-200 border">
                 {currentItems.length !== 0 ? (
                   currentItems.map((item, ind) => (
                     <tr
@@ -137,7 +137,7 @@ const CategoryList = () => {
                       <td className="px-6 py-4">
                         <div className="flex items-center space-x-4">
                           <button
-                            className="text-yellow hover:text-orange-500"
+                            className= "bg-blue-500 text-white border-neutral-50  hover:text-black"
                             onClick={() => {
                               editCategory(item._id, item.name, item.image);
                             }}
@@ -145,7 +145,7 @@ const CategoryList = () => {
                             Edit
                           </button>
                           <button
-                            className="text-red-600 hover:text-red-900"
+                            className="bg-red-400 text-white border-neutral-50  hover:text-black"
                             onClick={() => deleteCategory(item._id)}
                           >
                             Delete
@@ -164,9 +164,11 @@ const CategoryList = () => {
               </tbody>
             </table>
           </div>
-          <div className="p-4 bg-table-blue">
+          {/* <div className="p-4 bg-table-blue"> */}
             <button
-              className="ml-64 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              // className=" mt-8 w-full bg-teal-500 text-white border-neutral-50 hover:text-black"
+              className="mt-8 w-60 bg-teal-500 text-white border-neutral-50 hover:text-black pl-2 pr-2"
+
               type="button"
               onClick={openModal}
             >
@@ -179,7 +181,7 @@ const CategoryList = () => {
               categoryToEdit={categoryToEdit}
               editMode={editMode}
             />
-          </div>
+          {/* </div> */}
           <div className="float-center  mt-3">
             <PAgination
               filterPagination={filterPagination}

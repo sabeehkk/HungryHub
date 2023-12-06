@@ -1,4 +1,5 @@
 import { PayloadAction,createSlice } from "@reduxjs/toolkit";
+import { userInittalModel, UserData } from "../../models/models";
 
 interface RestaurentState {
     restaurent:RestaurentData | null;
@@ -25,11 +26,19 @@ const authSlice = createSlice({
         logout:(state)=>{
             state.restaurent=null;
             state.success=false
-        }
+        },
+        setProfile:(state,action:any)=>{
+            const data ={...state.restaurent,...action.payload};
+            state.restaurent=data
+          },
+          updateData:(state,action:PayloadAction<UserData>)=>{
+            const data={...state.restaurent,...action.payload};
+            state.restaurent=data;
+          }
     },
 })
 
-export const {restaurentLoggedIn,logout}=authSlice.actions
+export const {restaurentLoggedIn,logout,setProfile,updateData}=authSlice.actions
 
 export default  authSlice.reducer
 

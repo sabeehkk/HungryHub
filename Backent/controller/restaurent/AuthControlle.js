@@ -78,3 +78,28 @@ export const login=async (req,res)=>{
      .json({message:'internal server error',error:true})
    }
 }
+
+export const updateRestoProfilePhoto = async (req, res) => {
+  console.log('resto profile is working');
+  try {
+    console.log(req.body, req.params, "datasassaaaaaaaas");
+    const { userId } = req.params;
+    const { url } = req.body;
+
+    if (!userId || !url) {
+      return res
+        .status(400)
+        .json({ message: "Restaurent ID or Profile Picture is missing" });
+    }
+
+    await restaurentModel.updateOne(
+      { _id: userId },
+      { $set: { profilePicture: url } }
+    );
+
+    return res.json({ message: "success" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+};

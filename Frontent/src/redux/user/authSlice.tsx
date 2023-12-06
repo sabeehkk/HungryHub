@@ -17,7 +17,11 @@ const INITTAL_STATE: userInittalModel = {
       logout:(state)=>{
         state.user=null;
         state.success=false
+    console.log(state.user);
+    console.log(state.success);
+
       },
+
       setProfile:(state,action:any)=>{
         const data ={...state.user,...action.payload};
         state.user=data
@@ -27,6 +31,7 @@ const INITTAL_STATE: userInittalModel = {
         state.user=data;
       }
     },
+    
   });
 
   export const { userLoggedIn,logout,setProfile,updateData } =

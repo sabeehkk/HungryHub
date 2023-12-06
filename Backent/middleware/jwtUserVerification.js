@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import userModel from '../models/user.js'
 
-
 const VerifyToken = async (req,res,next)=>{
     try{
     const token = req.headers.authorization;
@@ -11,10 +10,10 @@ const VerifyToken = async (req,res,next)=>{
         .status(401)
         .json({message:'Authentication token is missing or invalid.'});
     }
-
     const tokenWithoutBearer = token.replace('Bearer ', '');
     console.log(tokenWithoutBearer,'token without bearerrrrrrrrrrrr');
     jwt.verify(tokenWithoutBearer, process.env.JWT_SECRET,async (err,decoded) => {
+        console.log(decoded, 'DECODED DATA');
         if (err) {
           return res.status(401).json({ message: 'Unauthorized' });
         }

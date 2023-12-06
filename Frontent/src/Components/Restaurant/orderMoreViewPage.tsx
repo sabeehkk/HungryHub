@@ -7,14 +7,11 @@ import { useParams } from "react-router-dom";
 
 // import RestaurantAxios from "../../Axios/RestaurantAxios";
 import { restaurentAxios } from "../../axios/axios";
-
 import BillModal from "../../assets/billModa";
 // import Pagination from "../../";
-
 import { USER_API } from "../../Constants/API";
 
 const baseUrl = USER_API
-
 function OrdersItems() {
   const [modalOpen, setModalOpen] = useState(false);
   const [orderItem, setOrderItem] = useState([]);
@@ -29,7 +26,6 @@ function OrdersItems() {
   let total = 0;
   const restaurant = useSelector((state) => state.restaurentAuth);
 
-  
 
   useEffect(()=>{
     restaurentAxios.get(`/getOrderIterms?id=${id}`).then((response)=>{
@@ -99,7 +95,7 @@ function OrdersItems() {
       cancelButtonText: "No",
     });
     if (result.isConfirmed) {
-      restaurentAxios.patch("/cancelorder", {
+      restaurentAxios.patch("/cancelOrder", {
         itemId,
         orderId,
         userId:orderItem.userId
@@ -122,9 +118,9 @@ function OrdersItems() {
       />
       <div className="border flex">
         <div className="h-full w-full">
-          <div className="w-full overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className=" bg-table-blue">
+          <div className="w-full overflow-x-auto ">
+            <table className="min-w-full divide-y divide-gray-300">
+            <thead className=" bg-gray-400 text-off-White ">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
                     PRODUCT
@@ -146,7 +142,7 @@ function OrdersItems() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200 border">
+              <tbody className="bg-gray-100 divide-y divide-gray-200 border">
                     {orderItem?.item?.map((ele, ind) => (
                         <tr key={ele._id}>
                           {}
@@ -155,9 +151,9 @@ function OrdersItems() {
                             onClick={() => openModal(orderItem)}
                           >
                             <img
-                              src={ele.product?.images}
+                              src={ele.product?.images[0]}
                               alt=""
-                              className="h-10 w-10 mr-10"
+                              className="h-12 w-12 mr-10 rounded-sm"
                             />
                             {ele.product?.name}
                           </td>
@@ -175,7 +171,7 @@ function OrdersItems() {
                           <td className="px-6 py-2 whitespace-nowrap">
                             {(ele.is_canceled)?(<h1 className="text-cherry-Red">Order Rejected</h1>):
                               <button
-                                className="text-green-300 bg-cherry-Red cursor-pointer p-1 flex items-center justify-center rounded"
+                                className="bg-teal-500 border-none text-white  cursor-pointer p-1 flex items-center justify-center rounded"
                                 onClick={()=>{updateDeliveryStatus(ele._id, ele.orderStatus)}}
                                 
                               >

@@ -90,7 +90,7 @@ function Products() {
           <div className="h-full w-full">
             <div className="w-full overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
-                <thead>
+                <thead className=" bg-gray-400 text-off-White ">
                   <tr>
                     <th className="px-6 font-bold py-3 text-left text-xs  text-off-White uppercase tracking-wider">
                       PRODUCT
@@ -110,7 +110,7 @@ function Products() {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200 border">
+                <tbody className="bg-gray-100 divide-y divide-gray-200 border">
                   {currentItems.map((item) => (
                     <tr key={item._id}>
                       <td className="flex px-6 py-2 whitespace-nowrap">
@@ -135,7 +135,7 @@ function Products() {
                           <div className="flex justify-between">
                             <button
                               // className="text-yellow hover:text-orange-500"
-                              className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                              className= "bg-blue-500 text-white border-neutral-50  hover:text-black"
                               onClick={() =>
                                 navigate(`/restaurent/editProduct/${item._id}`)
                               }
@@ -149,7 +149,7 @@ function Products() {
                         {
                           <div className="flex justify-between">
                             <button
-                             className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                             className="bg-red-400 text-white border-neutral-50  hover:text-black"
                             
                               onClick={() => deletProduct(item._id)}
                             >

@@ -5,7 +5,6 @@ import { ErrorMessage } from "../utils/util";
 // Define base URL from environment variables
 const VITE_USER_BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URLL;
 
-
 // Define role-specific paths
 const userPath = "";
 const adminPath="/admin"
@@ -28,7 +27,7 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
     return request;
   });
 
-  instance.interceptors.response.use(
+  instance.interceptors.response.use (
     (response) => response,
     (error) => {
       ErrorMessage(error.response.data.message);
@@ -41,7 +40,6 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
       ) {
         // return ErrorMessage(error.response.data.message)
         // console.log('axios is working')
-
         localStorage.removeItem(tokenName);
       } else if (error.response.status === 500) {
         console.error("Internal Server Error:", error.response.data);

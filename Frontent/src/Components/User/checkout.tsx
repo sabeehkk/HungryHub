@@ -27,7 +27,7 @@ const Checkout=()=> {
     state: "",
     postalCode: "",
   });
-
+const navigate =useNavigate()
 const user = useSelector((state) => state.userAuth);
 useEffect(() => {
     userAxios.get(`/getUserData?id=${user.user._id}`).then((response) => {
@@ -112,7 +112,7 @@ useEffect(() => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1500,
         });
-        navigate("/orders");
+        navigate("/OrderSuccess");
       }
       }).catch((err)=>{
         toast.error(err.response?.data?.message, {
@@ -147,16 +147,17 @@ useEffect(() => {
               </div>
             ))}
           </div>
-
-          <button
-            className="p-4 text-green-600"
+   
+       
+        </div>
+           <button
+           style={{ backgroundColor: '#3498db', color: '#fff', border:'none' }}
             onClick={() => {
               setIsModalOpen(true);
             }}
           >
             Add Address
           </button>
-        </div>
 
         <AddressModal
           isOpen={isModalOpen}
@@ -219,7 +220,7 @@ useEffect(() => {
                     checked={payment === "Online"}
                     onChange={() => handlePaymentRadio("Online")}
                   />
-                  <label className="ml-1">Online</label>
+                  {/* <label className="ml-1">Online</label> */}
                 </div>
                 <div>
                   <input
@@ -229,18 +230,25 @@ useEffect(() => {
                     checked={payment === "Wallet"}
                     onChange={() => handlePaymentRadio("Wallet")}
                   />
-                  <label className="ml-1">Wallet</label>
+                  {/* <label className="ml-1">Wallet</label> */}
                 </div>
               </div>
-              <button
+              {/* <button
                 value={"Place Order"}
                 className={"mt-7 w-full"}
                 onClick={() => {
                   placeOrder(payment);
                 }}
-              />
-            </div>
-          </div>
+                
+              /> */}
+            
+
+            </div>.
+           
+          </div> 
+          <button className="ml-4 bg-teal-400 border-none" onClick={() => placeOrder(payment)}>
+                  Place Order
+                </button>
         </div>
       </div>
     </div>

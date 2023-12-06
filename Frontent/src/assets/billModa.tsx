@@ -33,7 +33,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
 console.log(restaurant,'restaruent details in billmodal');
 
 
-  const restaurant_id = restaurant.restaurent._id;
+  const restaurant_id = restaurant.restaurent?._id;
   console.log(restaurant_id,'restaruent details');
 
   

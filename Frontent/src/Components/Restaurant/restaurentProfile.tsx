@@ -1,33 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setProfile } from "../../redux/user/authSlice";
-import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
+import { setProfile } from "../../redux/restaurent/authSlice";
+import { restoprofileUploadCloudinery, updateRestoProfileImage } from "../../api/restaurentApi";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import Loading from '../../Components/loading'
 
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 
-const UserProfile=()=> {
-  const { user } = useSelector((state: any) => state.userAuth);
+const RestaurentProfile=()=> {
+//   const { user } = useSelector((state: any) => state.userAuth);
+const restaurant = useSelector((state) => state.restaurentAuth);
+
+console.log(restaurant,'restaruent datssss');
+
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [load,setLoad] = useState(true)
-  const [address, setAddress] = useState([
-    {
-      street: "",
-      city: "",
-      state: "",
-      postalCode: "",
-    },
-  ]);
-  const [newAddress, setNewAddress] = useState({
-    street: "",
-    city: "",
-    state: "",
-    postalCode: "",
-  });
+
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -39,8 +30,8 @@ const UserProfile=()=> {
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const result = await profileUploadCloudinery(file);
-      const response = result && (await updateProfileImage(user?._id, result));
+      const result = await restoprofileUploadCloudinery(file);
+      const response = result && (await updateRestoProfileImage(restaurant?.restaurent._id, result));
       response && setSelectedImage(result);
     }
   };
@@ -63,7 +54,7 @@ const UserProfile=()=> {
     
       <div className="h-full mt-16 shadow-xl mr-16 ml-16">
         <div className="flex items-center justify-center">
-          <span className="text-xl font-extrabold block">User Profile</span>
+          <span className="text-xl font-extrabold block">Restaurent </span>
         </div>
 
         <div className="border-b-2 block md:flex">
@@ -78,8 +69,8 @@ const UserProfile=()=> {
               />
               <img
                 className="mx-auto rounded-full h-32 w-32 object-cover cursor-pointer"
-                src={user?.profilePicture ? user.profilePicture : demoImage}
-                alt={`${user?.name} `}
+                src={restaurant?.restaurent?.profilePicture? restaurant.restaurent.profilePicture: demoImage}
+                alt={`${restaurant.restaurent?.restaurantName} `}
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
@@ -94,19 +85,19 @@ const UserProfile=()=> {
                 <AiOutlineEdit size={25} />
               </button>
               {isDropdownOpen && (
-                <div className="absolute right-0 mt-2">
+                <div className="absolute  mt-4">
                   <Link
-                    to="/profile/edit"
-                    className="block px-4 py-2 text-left w-full max-w-[130px] mt-9 pr-3 mr-22 text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block"
+                    to="/restaurent/orders"
+                    className=" px-8 py-2 text-left w-full max-w-[130px] mt-9 pr-12 mr-1 text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block"
                   >
-                    Edit Profile
+                    Orders
                   </Link>
-                  <Link
+                  {/* <Link
                     to="/profile/editPassword"
                     className="ml-0 block px-4 py-2 text-left w-full max-w-[140px] text-white bg-gray-700 rounded-full hover:bg-gray-800 inline-block mt-2"
                   >
                     Edit Password
-                  </Link>
+                  </Link> */}
                 </div>
               )}
             </div>
@@ -121,7 +112,8 @@ const UserProfile=()=> {
                     id="username"
                     className="border-1  rounded-r px-4 py-2 w-full"
                     type="text"
-                    value={user?.name}
+                    value={restaurant.restaurent?.restaurantName
+                    }
                   />
                 </div>
               </div>
@@ -134,7 +126,7 @@ const UserProfile=()=> {
                   id="email"
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="email"
-                  value={user?.email}
+                  value={restaurant.restaurent?.email}
                 />
               </div>
               <div className="pb-4">
@@ -146,7 +138,7 @@ const UserProfile=()=> {
                   id="email"
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="email"
-                  value={user?.phoneNumber}
+                  value={restaurant.restaurent?.phoneNumber}
                 />
               </div>
             </div>
@@ -157,4 +149,4 @@ const UserProfile=()=> {
   );
 }
 
-export default UserProfile;
+export default RestaurentProfile;
