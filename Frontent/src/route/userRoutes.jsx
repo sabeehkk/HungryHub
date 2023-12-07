@@ -24,7 +24,9 @@ import MenuPage from '../Components/User/menu.tsx';
 import CartPage from '../Components/User/cart.tsx'
 import DummyCart from '../utils/cartDupe.tsx'
 import CheckoutPage from '../Components/User/checkout.tsx';
-import SuccessPage from '../Components/User/OrderSuccess.tsx'
+import SuccessPage from '../Components/User/OrderSuccess.tsx';
+import Dummy from '../utils/dummy.tsx'
+import CheckoutDummy from '../utils/checkoutDummy.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -190,6 +192,22 @@ const UserRoute = {
         <>
         <UserNavbar/>
         <SuccessPage/>
+        </>
+      )
+    },
+    {
+      path:"/dummy",
+      element:(
+        <Dummy/>  
+      )
+    },
+    {
+      path:"/checkoutDummy",
+      element:(
+        <>
+        <UserNavbar/>
+        <CheckoutDummy/>  
+
         </>
       )
     }
