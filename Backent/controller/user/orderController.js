@@ -2,9 +2,13 @@ import OrderModel from "../../models/order.js";
 import CartModel from '../../models/cart.js'
 import UserModel from '../../models/user.js'
 import ProductModel from '../../models/product.js'
+import Stripe from "stripe";
+export const stripe = new Stripe(process.env.STRIP_PRIVET_KEY);
+
 
 export const Order = async (req, res) => {
   try {
+    console.log(req.body,'inside order backend');
     const { payment, addressIndex, cartData } = req.body;
     const user = await UserModel.findOne({ _id: cartData.user });
     const address = user.Address[addressIndex];
@@ -35,7 +39,10 @@ export const Order = async (req, res) => {
         success: true,
         message: "order success",
       });
+    } else if (payment === 'Online') {
+        
     }
+    
   } catch (error) {
     console.log(error);
     res.status(500).send({

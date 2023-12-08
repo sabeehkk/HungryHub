@@ -73,3 +73,20 @@ export interface userInittalModel {
     phoneNumber: string | number | null | undefined;
     place: string | null | undefined;
   }
+
+  export interface OrderData {
+    userId: string | undefined;
+    restaurantId: string;
+    item: string;
+    product: string;
+    price: number;
+    quantity: number;
+    variant: String;
+    employeeId: string;
+    start_date: string;
+    totalPrice: number;
+    discount: number;
+    grandTotal: number;
+    address: string;
+   
+  }
