@@ -87,3 +87,19 @@ export const productImageUploadCloudinary = async (images) => {
     throw new Error("Failed to upload the images");
   }
 };
+
+// export const makePayment = async (payment, addressIndex: selectedAddressIndex,cartData) => {
+//   const response = await userAxios.post("/rent-booking", {payment, addressIndex: selectedAddressIndex,cartData});
+//   return response?.data?.url;
+// };
+export const makePayment = async ({payment, addressIndex, cartData}) => {
+  const response = await userAxios.post("/order", {
+   
+    
+    payment,
+    addressIndex,
+    cartData
+  });
+  console.log(response.data,'response data in order'); 
+  return response?.data?.url;
+};

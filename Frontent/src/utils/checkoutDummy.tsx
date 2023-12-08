@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { userAxios } from "../axios/axios";
 import AddressModal from "../assets/addressModal";
+import { makePayment } from "../api/userApi";
 
 const Checkout = (initPayment) => {
   //   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
@@ -99,13 +100,13 @@ const Checkout = (initPayment) => {
     setPayment(payMethod);
   };
 
-  const placeOrder = (payment) => {
+  const placeOrder =async (payment) => {
     if (selectedAddressIndex == null) {
       toast.error("Please select address", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-    } else {
+    }else if(payment==='COD'){
       userAxios
         .post("/order", {
           payment,
@@ -130,6 +131,13 @@ const Checkout = (initPayment) => {
             autoClose: 1500,
           });
         });
+    }else if(payment==='Online'){
+      console.log('this is online');
+      const url = await makePayment({payment, addressIndex: selectedAddressIndex,cartData});
+      if (url) {
+        window.location.href = url;
+        return;
+      }
     }
   };
   return (

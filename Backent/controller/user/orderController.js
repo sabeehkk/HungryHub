@@ -11,6 +11,7 @@ export const Order = async (req, res) => {
     console.log(req.body,'inside order backend');
     const { payment, addressIndex, cartData } = req.body;
     const user = await UserModel.findOne({ _id: cartData.user });
+    console.log('user ' ,user);
     const address = user.Address[addressIndex];
     const cart = await CartModel.findOne({ _id: cartData._id }).populate(
       "items.productId"
@@ -40,17 +41,62 @@ export const Order = async (req, res) => {
         message: "order success",
       });
     } else if (payment === 'Online') {
+        console.log(req.body,'inside online state');
+        const data =req.body
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        line_items: [
+          {
+            price_data: {
+              currency: "inr",
+              product_data: {
+                name: "Food Ordering",
+              },
+              unit_amount: cartData?.total * 100,
+            },
+            quantity: 1,
+          },
+        ],
         
+        mode: "payment",
+        success_url: `${process.env.CLIENT_URL}/payment-success/${cartData?.user}`,
+        cancel_url: `${process.env.CLIENT_URL}/payment-fail`,
+
+      });
+      console.log(session,'stripe is working');
+
+      await OrderModel.create({
+        userId: user._id,
+        restaurantId: cart.restaurantId,
+        item: items,
+        totalPrice: cart.total,
+        discount: cart.discount,
+        grandTotal: cart.grandTotal,
+        address,
+        paymentType: payment,
+        paymentStatus,
+      });
+      // const OrderData = new orderModel(data);
+      // await OrderData.save();
+      // const OrderData = new OrderModel(data);
+  
+      return res.json({ message: "success", url: session.url });
     }
-    
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      success: false,
-      message: "server error",
-    });
-  }
-};
+    } catch (error) {
+      console.log(error);
+      return res
+        .status(500)
+        .json({ message: "Internal server error", error: true });
+    }
+     }
+  // } catch (error) {  
+  //   console.log(error)
+  //   res.status(500).send({ 
+  //     success: false,
+  //     message: "server error",
+  //   })
+  // }
+// }
 
 export const getOrderItems = async (req,res)=>{
   try {
@@ -71,4 +117,12 @@ export const getOrderItems = async (req,res)=>{
       message: "Server error.",
     });
   }
+}
+
+export const OnlinePayment = async (req,res)=>{
+    try {
+      console.log(req.body,'online payment');
+    } catch (error) {
+      console.log(error);
+    }
 }

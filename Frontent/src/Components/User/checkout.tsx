@@ -98,12 +98,14 @@ useEffect(() => {
   };
 
   const placeOrder = (payment) => {
+    console.log(payment,'payment data');
+    
     if (selectedAddressIndex == null) {
       toast.error("Please select address", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-    } else {
+    } else if(payment==='COD'){
       userAxios.post("/order", {
         payment,
         addressIndex: selectedAddressIndex,
