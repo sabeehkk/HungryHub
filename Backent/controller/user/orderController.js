@@ -88,14 +88,7 @@ export const Order = async (req, res) => {
         .json({ message: "Internal server error", error: true });
     }
      }
-  // } catch (error) {  
-  //   console.log(error)
-  //   res.status(500).send({ 
-  //     success: false,
-  //     message: "server error",
-  //   })
-  // }
-// }
+ 
 
 export const getOrderItems = async (req,res)=>{
   try {
