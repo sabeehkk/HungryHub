@@ -6,6 +6,10 @@ import { useSelector } from "react-redux";
 import { restaurentAxios } from "../axios/axios";
 
 const BillModal = ({ isOpen, closeModal, orderItem }) => {
+
+  console.log(orderItem,'orderitem in bill modal');
+  
+
   const [resData, setResData] = useState({});
   const [address, setAddress] = useState({
     street: "",
@@ -60,26 +64,26 @@ console.log(restaurant,'restaruent details in billmodal');
       }`}
     >
       <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="modal-container border rounded">
+      <div className="bg-rose-50 modal-container border rounded">
         <div className="modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-3xl font-bold text-cherry-Red font-lobster duration-200">
-              Yummi
+              Hungry Hub
             </h2>
             <h2 className="text-lg font-bold">Billing Details...</h2>
-            <button className="text-gray-600" onClick={closeModal}>
-              <span className="text-3xl">×</span>
+            <button className="border-none text-gray-600" onClick={closeModal}>
+              <span className=" text-3xl">×</span>
             </button>
           </div>
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="embed-container flex justify-between">
             <div>
               <div>
-                <h1 className="text-xl font-bold">{resData.Name}</h1>
+                <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
                 <h1 className="italic font-semibold">{resData.Place}</h1>
                 <h1 className="italic font-semibold">{address.city}</h1>
                 <h1 className="italic font-semibold">{address.postalCode}</h1>
-                <h1 className="italic font-semibold">{resData.Mobile}</h1>
+                <h1 className="italic font-semibold">{resData.phoneNumber}</h1>
               </div>
               <div className="pt-7">
                 <h1 className="text-sm font-bold">Billing Address.</h1>
@@ -124,7 +128,7 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="template-text mt-4">
             <div className="container mx-auto">
-              <table className="min-w-full bg-white border border-gray-300">
+              <table className="min-w-full bg-white border border-gray-500">
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border-b text-left">Sl</th>
@@ -138,7 +142,7 @@ console.log(restaurant,'restaruent details in billmodal');
                   {orderItem?.item?.filter((data) => data.product !== null).map((item) => (
                           <tr key={item._id}>
                             <td className="py-2 px-4 border-b">#</td>
-                            <td className="py-2 px-4 border-b">{item.product?.name}</td>
+                            <td className="py-2 px-4 border-b">{item.product?.productName}</td>
                             <td className="py-2 px-4 border-b">
                             {item?.quantity}
                             </td>

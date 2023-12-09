@@ -40,6 +40,8 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   useEffect(() => {
     restaurentAxios.get(`/viewOrders?id=${restaurant.restaurent._id}`)
       .then((response) => {
+        console.log(response.data,'ordering datas in management');
+        
         const items = response.data.orders;
         if (response.data.orders.length) {
           setOrderItem(items);

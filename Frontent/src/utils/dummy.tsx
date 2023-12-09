@@ -185,15 +185,17 @@ function OrdersItems() {
     <h1 className="text-cherry-Red">Order Rejected</h1>
   ) : (
     <select
-      className="bg-teal-500 border-none text-white cursor-pointer p-1 rounded"
+      className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"
       value={ele.orderStatus}
       onChange={(e) => updateDeliveryStatus(ele._id, e.target.value)}
     >
-       <option value="Pending" style={{ color: 'blue' }}>Accept</option>
-  <option value="Preparing..." style={{ color: 'green' }}>Preparing...</option>
-  <option value="Packed" style={{ color: 'orange' }}>Packed</option>
-  <option value="Out of delivery" style={{ color: 'purple' }}>Out of delivery</option>
-  <option value="Delivered" style={{ color: 'red' }}>Delivered</option>
+      <option className="bg-white text-black hover:bg-gray-400" value="Pending">
+    Accept
+  </option>
+  <option className="bg-white text-black hover:bg-gray-400" value="Preparing..." >Preparing...</option>
+  <option value="Packed" className="bg-white text-black hover:bg-gray-400">Packed</option>
+  <option value="Out of delivery" className="bg-white text-black hover:bg-gray-400">Out of delivery</option>
+  <option value="Delivered" className="bg-white text-black hover:bg-gray-400">Delivered</option>
     </select>
   )}
 </td>

@@ -142,12 +142,3 @@ export const getOrderItems = async (req, res) => {
   }
 };
 
-export const OnlinePayment = async (req, res) => {
-  try {
-    console.log(req.body, "wallet payment");
-    const data = await UserModel.find({})
-    console.log(data,'userdatasssssss');
-  } catch (error) {
-    console.log(error);
-  }
-};
