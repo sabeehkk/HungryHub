@@ -157,6 +157,9 @@ const EditProduct: React.FC = () => {
     if (!variants.some((variant) => variant.price !== 'string' )) {
       return ErrorMessage("At least one variant should have a non-null price");
     }
+    if(!validPrice()){
+      return ErrorMessage("enter valid price");
+    }
   
 
     if (images.length < 4) {

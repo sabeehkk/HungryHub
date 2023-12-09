@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 // import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
+import { ErrorMessage } from "../../utils/util";
 
 const ProductDetailModal = ({ isOpen, close, item }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -12,7 +13,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
 
   const navigate = useNavigate();
 
-  const { user } = useSelector((state: any) => state.userAuth);
+  const { user,isAuthenticated } = useSelector((state: any) => state.userAuth);
 
   const handleVariandSelection = (ind) => {
     setSelectedVariant(item.product.variants[ind]);
@@ -24,6 +25,9 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
   };
   //  console.log(selectedVariant);
   const handleAddToCart = () => {
+    if (!user) {
+      return ErrorMessage('Invalid Login');
+    }
     if (selectedVariant.price) {
     const productId = item?.product._id;
     const userId = user._id;

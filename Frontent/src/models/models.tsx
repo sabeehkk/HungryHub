@@ -6,6 +6,7 @@ export interface UserData {
     place: string | null | undefined;
     address: string | null | undefined;
     profilePicture: string | null | undefined;
+    Wallet:number | null | undefined;
     status:boolean;
   }
   export interface RestaurentData {
@@ -72,4 +73,21 @@ export interface userInittalModel {
     email: string;
     phoneNumber: string | number | null | undefined;
     place: string | null | undefined;
+  }
+
+  export interface OrderData {
+    userId: string | undefined;
+    restaurantId: string;
+    item: string;
+    product: string;
+    price: number;
+    quantity: number;
+    variant: String;
+    employeeId: string;
+    start_date: string;
+    totalPrice: number;
+    discount: number;
+    grandTotal: number;
+    address: string;
+   
   }

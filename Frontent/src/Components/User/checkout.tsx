@@ -13,6 +13,10 @@ const Checkout=()=> {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cartData, setCartData] = useState();
 
+
+    // console.log(cartData.items[0].productId.images,'cartDatas in checkout page');
+    
+
   const [address, setAddress] = useState([
     {
       street: "",
@@ -27,7 +31,7 @@ const Checkout=()=> {
     state: "",
     postalCode: "",
   });
-
+const navigate =useNavigate()
 const user = useSelector((state) => state.userAuth);
 useEffect(() => {
     userAxios.get(`/getUserData?id=${user.user._id}`).then((response) => {
@@ -40,8 +44,8 @@ useEffect(() => {
 //   console.log(result,'userdatasss id checking');
   useEffect(() => {
     userAxios.get(`/getCart?id=${user.user._id}`).then((response) => {
-        // console.log(response.data.cartData,'response cartdata');
-        
+      const items = response.data
+      console.log(items,'items in checkout page');
       setCartData(response.data.cartData);
       });
   }, [is_change]);
@@ -94,12 +98,14 @@ useEffect(() => {
   };
 
   const placeOrder = (payment) => {
+    console.log(payment,'payment data');
+    
     if (selectedAddressIndex == null) {
       toast.error("Please select address", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-    } else {
+    } else if(payment==='COD'){
       userAxios.post("/order", {
         payment,
         addressIndex: selectedAddressIndex,
@@ -112,7 +118,7 @@ useEffect(() => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 1500,
         });
-        navigate("/orders");
+        navigate("/OrderSuccess");
       }
       }).catch((err)=>{
         toast.error(err.response?.data?.message, {
@@ -126,6 +132,7 @@ useEffect(() => {
     <div className="lg:ml-16 md:mr-16 mb-7 mt-7">
     <div className="lg:flex w-full md:p-5">
       <div className="lg:w-2/3 lg:ml-2 h-screan">
+      
         <div className="w-full lg:p-10 leading-loose">
           <label className="block text-sm font-medium text-gray-700 underline">
             Select Address :
@@ -147,16 +154,17 @@ useEffect(() => {
               </div>
             ))}
           </div>
-
-          <button
-            className="p-4 text-green-600"
+   
+       
+        </div>
+           <button
+           style={{ backgroundColor: '#3498db', color: '#fff', border:'none' }}
             onClick={() => {
               setIsModalOpen(true);
             }}
           >
             Add Address
           </button>
-        </div>
 
         <AddressModal
           isOpen={isModalOpen}
@@ -199,6 +207,24 @@ useEffect(() => {
                 <span className="float-right">{cartData?.grandTotal}</span>
               </h1>
             </div>
+
+
+
+            <div className="mb-4">
+              {/* Check if cartData.items exists before mapping over it */}
+              {cartData?.items && cartData.items.length > 0 && (
+                cartData.items.map((item, index) => (
+                  <img
+                    key={index}
+                    src={item.productId.images[0]}
+                    alt={`Product ${index + 1}`}
+                    className="w-full rounded-lg object-cover h-96 mb-4"
+                  />
+                ))
+              )}
+            </div>
+
+
             <div>
               <div className="flex justify-between pl-3 pr-3 pt-14">
                 <div className="">
@@ -219,7 +245,7 @@ useEffect(() => {
                     checked={payment === "Online"}
                     onChange={() => handlePaymentRadio("Online")}
                   />
-                  <label className="ml-1">Online</label>
+                  {/* <label className="ml-1">Online</label> */}
                 </div>
                 <div>
                   <input
@@ -229,18 +255,14 @@ useEffect(() => {
                     checked={payment === "Wallet"}
                     onChange={() => handlePaymentRadio("Wallet")}
                   />
-                  <label className="ml-1">Wallet</label>
+                  {/* <label className="ml-1">Wallet</label> */}
                 </div>
               </div>
-              <button
-                value={"Place Order"}
-                className={"mt-7 w-full"}
-                onClick={() => {
-                  placeOrder(payment);
-                }}
-              />
-            </div>
-          </div>
+            </div>.
+          </div> 
+          <button className="ml-4 bg-teal-400 border-none" onClick={() => placeOrder(payment)}>
+                  Place Order
+                </button>
         </div>
       </div>
     </div>

@@ -18,6 +18,10 @@ import EditProduct from '../Components/Restaurant/editProduct.tsx'
 import CategoryModal from "../Components/Restaurant/categoryList.tsx";
 import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
 import IsLogged from "../middleware/restaurent/isLogged";
+import OrderManagement from '../Components/Restaurant/orderManagement.tsx';
+import OrderMoreViewPage from '../Components/Restaurant/orderMoreViewPage.tsx'
+import RestaurentProfile from '../Components/Restaurant/restaurentProfile.tsx'
+import Dummy from '../utils/dummy.tsx'
 
 const RestaurantAppLayout = () => {
   return (
@@ -119,12 +123,45 @@ const RestaurentRoute = {
               </>
             )
         },
+        {
+          path:'orders',
+          element:(
+            <>
+               <IsLogged/>
+            <OrderManagement/>
+            </>
+           )
+        },
+        {
+          path:'ordersMoreView/:id',
+          element:(
+            <>
+               <IsLogged/>
+
+            <OrderMoreViewPage/>
+            </>
+          )
+        },
+        {
+          path:'restaurentProfile',
+          element:(
+            <>
+            <IsLogged/>
+            <RestaurentProfile/>
+            </>
+          )
+        },
+        {
+          path:"dummy/:id",
+          element:(
+            <Dummy/>  
+          )
+        },
       ],
     },
   ],
 };
 export default RestaurentRoute;
-
 
 
      // {

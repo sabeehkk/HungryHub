@@ -8,15 +8,13 @@ import IsLogout from '../middleware/employee/isLogout';
 import { ToastContainer,toast } from "react-toastify";
 import ErrorPage from '../Components/errorPage.tsx'
 
-
 const EmpoloyeeAppLayout =()=>{
     return (
         <>
         <Navbar/>
       <Outlet/>
     <ToastContainer/>
-
-        </>
+       </>
     )
 }
 
@@ -70,7 +68,6 @@ const EmployeeRoutes = {
                 }
             ]
         }
-       
     ]
 }
 export default EmployeeRoutes

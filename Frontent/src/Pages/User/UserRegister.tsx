@@ -3,7 +3,7 @@ import LoginFrame from '../../Components/loginFrame'
 import Signup from '../../Components/User/UserREgister'
 
 function UserRegister() {
-  const imgUrl:string='https://png.pngtree.com/thumb_back/fw800/background/20231003/pngtree-d-rendering-of-tablet-pc-mockup-displaying-an-online-food-ordering-image_13562533.png'
+  const imgUrl:string='https://img.lovepik.com/photo/45009/7677.jpg_wh860.jpg'
   return (
     <LoginFrame SidePart={Signup} img={imgUrl}/>
   )

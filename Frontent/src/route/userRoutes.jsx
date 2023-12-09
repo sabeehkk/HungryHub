@@ -23,7 +23,10 @@ import FilteredRestaurent from '../Components/User/filteredRestaurents.tsx'
 import MenuPage from '../Components/User/menu.tsx';
 import CartPage from '../Components/User/cart.tsx'
 import DummyCart from '../utils/cartDupe.tsx'
-import CheckoutPage from '../Components/User/checkout.tsx'
+import CheckoutPage from '../Components/User/checkout.tsx';
+import SuccessPage from '../Components/User/OrderSuccess.tsx';
+import CheckoutDummy from '../utils/checkoutDummy.tsx'
+import OrderFail from '../payment/paymentFiail.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -69,7 +72,7 @@ const UserRoute = {
       path: "logout",
       element: (
         <>
-          <IsLogout />
+          <IsLogged />
           <Logout />
         </>
       ),
@@ -97,6 +100,7 @@ const UserRoute = {
       path: "/profile/edit",
       element: (
         <>
+          <IsLogged />
           <UserNavbar />
           <EditProfile />
         </>
@@ -152,6 +156,8 @@ const UserRoute = {
       path:"/cart",
       element:(
         <>
+          <IsLogged />
+
         <UserNavbar/>
         <CartPage/>
         </>
@@ -161,6 +167,7 @@ const UserRoute = {
       path:"/checkout",
       element:(
         <>
+
          <UserNavbar/>
          <CheckoutPage/>
         </>
@@ -171,10 +178,48 @@ const UserRoute = {
       path:"/CartPage",
       element:(
         <>
+          <IsLogged />
+
          <UserNavbar/>
         <DummyCart/>
         </>
        
+      )
+    },
+    {
+      path:"/OrderSuccess",
+      element:(
+        <>
+        <UserNavbar/>
+        <SuccessPage/>
+        </>
+      )
+    },
+    
+    {
+      path:"/checkoutDummy",
+      element:(
+        <>
+        <UserNavbar/>
+        <CheckoutDummy/>  
+
+        </>
+      )
+    },
+    { 
+      path: "/payment-success/:orderId",
+      element: (
+        <>
+           <SuccessPage />
+        </>
+      ),
+    },
+    {
+      path:"/payment-fail",
+      element: (
+        <>
+        <OrderFail/>
+        </>
       )
     }
   ],

@@ -156,6 +156,9 @@ const AddProduct: React.FC = () => {
       return ErrorMessage("At least one variant should have a non-null price");
     }
    
+    if(!validPrice()){
+      return ErrorMessage("enter valid price");
+    }
     // if (productPrice.trim() === "") {
     //   return ErrorMessage("Please Fill product price");
     // }
@@ -306,12 +309,12 @@ const AddProduct: React.FC = () => {
                 readOnly
                 className="border rounded-sm md:w-1/2 bg-gray-300 py-1 w-full "
               />
-              <button className="text-cherry-Red" onClick={() => removeVariant(index)}>
+              <button className= "bg-red-500 text-white border-neutral-50  hover:text-black" onClick={() => removeVariant(index)}>
                 Remove Variant
               </button>
             </div>
           ))}
-          <button className="text-green-600" onClick={addVariant}>Add Variant</button>
+          <button className= "bg-blue-500 text-white border-neutral-50  hover:text-black" onClick={addVariant}>Add Variant</button>
 
 
             {/* <label htmlFor="price" className="block font-medium">
@@ -377,17 +380,18 @@ const AddProduct: React.FC = () => {
                 onChange={handleImages}
                 min={1}
                 max={4}
+                style={{ height: "80px" }}
               />
             </div>
-            <div className="pt-10">
+           
               <button
-                className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                // className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                className= "bg-teal-500 text-white border-neutral-50  hover:text-black"
                 type="button"
                 onClick={addProduct}
               >
                 Add Product
               </button>
-            </div>
             <div className="pt-3 "></div>
           </div>
         </div>

@@ -1,39 +1,47 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { menu } from "@material-tailwind/react";
+import { BiSolidBarChartSquare, BiSolidUserRectangle,BiFoodMenu,BiCategory } from 'react-icons/bi'
+import { AiOutlinePlusSquare } from 'react-icons/ai'
+import { MdSettingsApplications, MdOutlineFastfood } from 'react-icons/md'
 const App = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     {
       title: "Dashboard",
-      src: "https://cdn-icons-png.flaticon.com/512/5974/5974636.png",
+      icon: <BiSolidBarChartSquare/>,
       url: "/restaurent/home",
     },
 
     {
       title: "Profile",
-      src: "https://cdn-icons-png.flaticon.com/512/560/560277.png",
-      url: "#",
+      icon: <BiSolidUserRectangle/>,
+      url: "/restaurent/restaurentProfile",
     },
     {
       title: "Category",
-      src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
+      icon: <BiCategory/>,
       gap: true,
       url: "/restaurent/categoryAddingModal",
     },
     {
       title: "Add Menu Items ",
-      src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
+      icon: <AiOutlinePlusSquare/>,
       url: "/restaurent/addProduct",
     },
     {
       title: "Menu Items ",
-      src: "https://cdn-icons-png.flaticon.com/512/209/209116.png",
+      icon: <MdOutlineFastfood/>,
       url: "/restaurent/products",
     },
+    // {
+    //   title: "Orders ",
+    //   icon: <BiFoodMenu/>,
+    //   url: "/restaurent/orders",
+    // },
     {
       title: "Logout ",
-      src: "https://cdn-icons-png.flaticon.com/512/9612/9612679.png",
+      icon: <BiSolidUserRectangle/>,
       url: "/restaurent/logout",
     },
 
@@ -79,11 +87,12 @@ const App = () => {
               } `}
             >
               <Link to={Menu.url} className="flex items-center gap-x-2 w-full">
-                <img
+                {/* <img
                   src={`${Menu.src}`}
                   alt="User"
                   className=" md:h-7 md:w-9 rounded-full"
-                />
+                /> */}
+                 <span className='text-2xl'>{Menu.icon}</span>
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}
                 >

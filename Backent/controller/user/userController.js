@@ -135,3 +135,32 @@ export const getUserData =async (req,res)=>{
     });
   }
 }
+
+export const editAddress =async (req, res) => {
+  console.log('inside edit address');
+  
+  const { id, address, index } = req.body;
+  try {
+    await userModel.updateOne(
+      { _id: id },
+      {
+        $set: {
+          [`Address.${index}`]: address,
+        },
+      }
+    ).then((resp) => {
+      res.status(200).send({
+        success: true,
+        message: "address edited success",
+        resp,
+      });
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Internal server error ",
+      error,
+    });
+  }
+}

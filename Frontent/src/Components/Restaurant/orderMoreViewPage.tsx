@@ -5,12 +5,11 @@ import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 
-
 // import RestaurantAxios from "../../Axios/RestaurantAxios";
-import { restaurentAxios } from "../axios/axios";
-import BillModal from "../assets/billModa";
+import { restaurentAxios } from "../../axios/axios";
+import BillModal from "../../assets/billModa";
 // import Pagination from "../../";
-import { USER_API } from "../Constants/API";
+import { USER_API } from "../../Constants/API";
 
 const baseUrl = USER_API
 function OrdersItems() {
@@ -169,7 +168,7 @@ function OrdersItems() {
                             {ele?.price}
                             <h1 hidden> {(total = total + ele.price)}</h1>
                           </td>
-                          {/* <td className="px-6 py-2 whitespace-nowrap">
+                          <td className="px-6 py-2 whitespace-nowrap">
                             {(ele.is_canceled)?(<h1 className="text-cherry-Red">Order Rejected</h1>):
                               <button
                                 className="bg-teal-500 border-none text-white  cursor-pointer p-1 flex items-center justify-center rounded"
@@ -179,26 +178,7 @@ function OrdersItems() {
                                 {(ele.orderStatus === "Pending" ? "Accept" : ele.orderStatus)}
                               </button>
                             }
-                          </td> */}
-                          <td className="px-6 py-2 whitespace-nowrap">
-  {ele.is_canceled ? (
-    <h1 className="text-cherry-Red">Order Rejected</h1>
-  ) : (
-    <select
-      className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"
-      value={ele.orderStatus}
-      onChange={(e) => updateDeliveryStatus(ele._id, e.target.value)}
-    >
-      <option className="bg-white text-black hover:bg-gray-400" value="Pending">
-    Accept
-  </option>
-  <option className="bg-white text-black hover:bg-gray-400" value="Preparing..." >Preparing...</option>
-  <option value="Packed" className="bg-white text-black hover:bg-gray-400">Packed</option>
-  <option value="Out of delivery" className="bg-white text-black hover:bg-gray-400">Out of delivery</option>
-  <option value="Delivered" className="bg-white text-black hover:bg-gray-400">Delivered</option>
-    </select>
-  )}
-</td>
+                          </td>
                           <td className="px-6 py-2 whitespace-nowrap flex justify-center">
                             
                               {(ele.orderStatus === "Delivered") ? (<div className="bg-green-500 text-white rounded-full p-2">
