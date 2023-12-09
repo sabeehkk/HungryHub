@@ -63,9 +63,9 @@ console.log(restaurant,'restaruent details in billmodal');
         isOpen ? "" : "hidden"
       }`}
     >
-      <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="bg-rose-50 modal-container border rounded">
-        <div className="modal-content bg-off-White p-4 rounded-lg">
+      <div className="modal-overlay  " onClick={closeModal}></div>
+      <div className=" bg-rose-100  modal-container border rounded ">
+        <div className=" modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-3xl font-bold text-cherry-Red font-lobster duration-200">
               Hungry Hub
@@ -78,11 +78,11 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="embed-container flex justify-between">
             <div>
-              <div>
+              <div className="flex">
                 <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
-                <h1 className="italic font-semibold">{resData.Place}</h1>
-                <h1 className="italic font-semibold">{address.city}</h1>
-                <h1 className="italic font-semibold">{address.postalCode}</h1>
+                <h1 className="italic font-semibold">{resData.Place}sdkfaslkdf</h1>
+                <h1 className="italic font-semibold">{address.city}skdfadl</h1>
+                <h1 className="italic font-semibold">{address.postalCode}lolooooooooooooo</h1>
                 <h1 className="italic font-semibold">{resData.phoneNumber}</h1>
               </div>
               <div className="pt-7">
@@ -96,13 +96,23 @@ console.log(restaurant,'restaruent details in billmodal');
                       <h1 className="italic">
                         {orderItem.address[0].postalCode}
                       </h1>
+                    
                     </div>
+
+                  
+
                   ) : (
                     <div>Address information not available.</div>
                   )}
                 </div>
               </div>
+              <h1 className="font-bold">Payment Type :</h1>
+              <h1 className=" ">{orderItem.paymentType}</h1>
+
             </div>
+          
+
+                      
             <div className="justify-between font-semibold italic">
               <div>
               <div className="border shadow-md p-3">
