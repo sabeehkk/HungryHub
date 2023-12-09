@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { userInittalModel, UserData } from "../../models/models";
+import produce from 'immer';
 
 const INITTAL_STATE: userInittalModel = {
     user: null,
@@ -29,12 +30,19 @@ const INITTAL_STATE: userInittalModel = {
       updateData:(state,action:PayloadAction<UserData>)=>{
         const data={...state.user,...action.payload};
         state.user=data;
-      }
+      },
+      updateWallet: (state, action: PayloadAction<number>) => {
+        return produce(state, (draftState) => {
+          if (draftState.user) {
+            draftState.user.Wallet = action.payload;
+          }
+        });
+      },
     },
     
   });
 
-  export const { userLoggedIn,logout,setProfile,updateData } =
+  export const { userLoggedIn,logout,setProfile,updateData,updateWallet } =
   authSlice.actions;
 export default authSlice.reducer;
    

@@ -6,6 +6,7 @@ export interface UserData {
     place: string | null | undefined;
     address: string | null | undefined;
     profilePicture: string | null | undefined;
+    Wallet:number | null | undefined;
     status:boolean;
   }
   export interface RestaurentData {

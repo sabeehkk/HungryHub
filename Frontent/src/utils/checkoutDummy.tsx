@@ -45,16 +45,17 @@ const Checkout = (initPayment) => {
   }, [is_change]);
 
   useEffect(() => {
+
     userAxios.get(`/getCart?id=${user.user._id}`).then((response) => {
       const items = response.data;
       console.log(items, "items in checkout page");
       setCartData(response.data.cartData);
     });
-  }, [is_change]);
-  const handleSaveAddress = (userId) => {
-    let result = userId;
-    console.log(result, "insid savee adrres");
 
+  },[is_change]);
+  const handleSaveAddress = (userId) => {
+     let result = userId;
+     console.log(result, "insid savee adrres");
     if (
       newAddress.street.trim().length === 0 ||
       newAddress.city.trim().length === 0 ||
@@ -64,7 +65,7 @@ const Checkout = (initPayment) => {
       toast.error("Please fill all field", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
-      });
+       });
     } else {
       userAxios
         .patch("/addAddress", { id: userId, address: newAddress })
@@ -88,16 +89,16 @@ const Checkout = (initPayment) => {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 3000,
           });
-        });
+       });
     }
-
     setIsModalOpen(false);
-  };
+   }
   //   const handleRadioChange = (index) => {
   //     setSelectedAddressIndex(index);
   //   };
   const handlePaymentRadio = (payMethod) => {
     setPayment(payMethod);
+    console.log(payMethod);
   };
 
   const placeOrder =async (payment) => {
@@ -106,7 +107,7 @@ const Checkout = (initPayment) => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 1500,
       });
-    }else if(payment==='COD'){
+    }else if(payment==='COD'||payment==='Wallet') {
       userAxios
         .post("/order", {
           payment,
@@ -176,7 +177,6 @@ const Checkout = (initPayment) => {
               </div>
             )}
           </div>
-
           <div className="mt-10 border border-gray-300 p-4 rounded-md shadow-md md:w- mx-auto">
             <h2 className="text-lg font-semibold mb-4">
               Choose a Payment Method
@@ -204,6 +204,17 @@ const Checkout = (initPayment) => {
                   className="form-radio text-indigo-600 h-5 w-5"
                 />
                 <span className="text-gray-900">Online</span>
+              </label>
+              <label className="flex items-center space-x-2">
+                <input
+                  type="radio"
+                  value={"Wallet"}
+                  name="selectPayment"
+                  checked={payment === "Wallet"}
+                  onChange={() => handlePaymentRadio("Wallet")}
+                  className="form-radio text-indigo-600 h-5 w-5"
+                />
+                <span className="text-gray-900">Wallet</span>
               </label>
             </div>
           </div>
@@ -283,6 +294,7 @@ const Checkout = (initPayment) => {
                 <p className="font-semibold text-gray-900">
                   ₹ {cartData?.total}
                 </p>
+              
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Charges</p>

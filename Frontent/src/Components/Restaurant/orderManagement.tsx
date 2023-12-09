@@ -211,7 +211,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
                           </td>
                           <td className="px-6 py-2 whitespace-nowrap">
                             {
-                              <button className="bg-teal-500 border-none  text-white " onClick={()=>navigate(`/restaurent/ordersMoreView/${item._id}`)}>View</button>
+                              <button className="bg-teal-500 border-none  text-white " onClick={()=>navigate(`/restaurent/dummy/${item._id}`)}>View</button>
                             }
                           </td>
                         </tr>

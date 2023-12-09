@@ -5,11 +5,12 @@ import { profileUploadCloudinery, updateProfileImage } from "../../api/userApi";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import Loading from '../../Components/loading'
-
+import { CiWallet } from "react-icons/ci"
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
+  
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -149,6 +150,7 @@ const UserProfile=()=> {
                   value={user?.phoneNumber}
                 />
               </div>
+              <span className="flex justify-center "><CiWallet className="text-2xl"/>:{user?.Wallet}</span> 
             </div>
           </div>
         </div>

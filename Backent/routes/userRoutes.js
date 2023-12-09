@@ -64,7 +64,7 @@ router.patch("/addAddress", VerifyToken, addAddress);
 router.patch("/editAddress", VerifyToken, editAddress);
 
 router.post("/order", Order);
-router.post("/order", OnlinePayment);
+router.get("/wallet", OnlinePayment);
 
 // router.patch('/cancelOrder',cancelOrder)
 
