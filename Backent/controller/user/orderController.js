@@ -41,7 +41,7 @@ export const Order = async (req, res) => {
         message: "order success",
       });
     } else if (payment === 'Online') {
-        console.log(req.body,'inside online state');
+        // console.log(req.body,'inside online state');
         const data =req.body
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -76,11 +76,10 @@ export const Order = async (req, res) => {
         paymentType: payment,
         paymentStatus,
       });
-      // const OrderData = new orderModel(data);
-      // await OrderData.save();
-      // const OrderData = new OrderModel(data);
-  
+      await CartModel.deleteOne({ _id: cartData._id });
+
       return res.json({ message: "success", url: session.url });
+   
     }
     } catch (error) {
       console.log(error);
