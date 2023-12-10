@@ -27,6 +27,8 @@ import CheckoutPage from '../Components/User/checkout.tsx';
 import SuccessPage from '../Components/User/OrderSuccess.tsx';
 import CheckoutDummy from '../utils/checkoutDummy.tsx'
 import OrderFail from '../payment/paymentFiail.tsx'
+import OrderHistory from '../Components/User/orderHistory.tsx'
+import OrderItemsPage from '../Components/User/orderItemsPage.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -221,6 +223,23 @@ const UserRoute = {
         <OrderFail/>
         </>
       )
+    },
+    {
+      path:"/orders",
+      element: (
+        <>
+          <UserNavbar />
+          <OrderHistory />
+        </>
+      ),
+    },
+    {
+      path: "/orderItems/:orderId",
+      element: (
+        <>
+          <OrderItemsPage />
+        </>
+      ),
     }
   ],
 };

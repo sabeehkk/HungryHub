@@ -62,11 +62,11 @@ const App = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="flex gap-x-4 items-center">
-          <img
+          {/* <img
             src={"https://cdn-icons-png.flaticon.com/512/3075/3075977.png"}
             alt="User"
             className=" md:h-9 md:w-9 rounded-full"
-          />
+          /> */}
           <h1
             className={`text-white origin-left font-semibold text-xl duration-200 ${
               !open && "scale-0"

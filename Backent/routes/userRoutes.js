@@ -31,7 +31,7 @@ import {
   cartTotal,
   cancelCartItem,
 } from "../controller/user/cartController.js";
-import { Order } from "../controller/user/orderController.js";
+import { Order,getOrderItems } from "../controller/user/orderController.js";
 import Cart from "../models/cart.js";
 
 const router = express.Router();
@@ -64,6 +64,7 @@ router.patch("/addAddress", VerifyToken, addAddress);
 router.patch("/editAddress", VerifyToken, editAddress);
 
 router.post("/order", Order);
+router.get('/getOrderItems', getOrderItems);
 
 // router.patch('/cancelOrder',cancelOrder)
 

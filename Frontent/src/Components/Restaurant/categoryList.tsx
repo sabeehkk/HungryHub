@@ -97,100 +97,109 @@ const CategoryList = () => {
   };
   return (
     <>
-      <div className="text-center ">
-        <h2 className="text-4xl font-bold italic text-black">
-          {"Category List"}
-        </h2>
-      </div>
-      <div className="p-10 w-full ">
-        <div className="border rounded-md overflow-hidden shadow-md">
-          <div className="w-full overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 bg-white">
-            <thead className=" bg-gray-400 text-off-White ">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                    #
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">
-                    CATEGORY
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-gray-100 divide-y divide-gray-200 border">
-                {currentItems.length !== 0 ? (
-                  currentItems.map((item, ind) => (
-                    <tr
-                      key={item._id}
-                      className="transition-all hover:bg-gray-100"
-                    >
-                      <td className="px-6 py-4">
-                        <div className="flex items-center font-semibold">
-                          {(currentPage - 1) * itemsPerPage + ind + 1}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center">{item.name}</div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center space-x-4">
-                          <button
-                            className= "bg-blue-500 text-white border-neutral-50  hover:text-black"
-                            onClick={() => {
-                              editCategory(item._id, item.name, item.image);
-                            }}
-                          >
-                            Edit
-                          </button>
-                          <button
-                            className="bg-red-400 text-white border-neutral-50  hover:text-black"
-                            onClick={() => deleteCategory(item._id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="3" className="text-center py-4">
-                      No categories found.
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-          {/* <div className="p-4 bg-table-blue"> */}
-            <button
-              // className=" mt-8 w-full bg-teal-500 text-white border-neutral-50 hover:text-black"
-              className="mt-8 w-60 bg-teal-500 text-white border-neutral-50 hover:text-black pl-2 pr-2"
+     <div className="flex flex-col">
+  <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="flex ml-60">
+          <h1 className="ml-40 text-xl font-bold text-gray-800">
+            {"Category"} Management
+          </h1>
+        </div>
 
-              type="button"
-              onClick={openModal}
-            >
-              Add Categories
-            </button>
-            <CategoryModal
-              showModal={showModal}
-              closeModal={closeModal}
-              categoryId={categoryId}
-              categoryToEdit={categoryToEdit}
-              editMode={editMode}
-            />
-          {/* </div> */}
-          <div className="float-center  mt-3">
-            <PAgination
-              filterPagination={filterPagination}
-              currentPage={currentPage}
-              size={size}
-            />
-          </div>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                #
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Category
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {currentItems.length !== 0 ? (
+              currentItems.map((item, ind) => (
+                <tr
+                  key={item._id}
+                  className="transition-all hover:bg-gray-100"
+                >
+                  <td className="px-6 py-4">
+                    <div className="flex items-center font-semibold">
+                      {(currentPage - 1) * itemsPerPage + ind + 1}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">{item.name}</div>
+                  </td>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center space-x-4">
+                      <button
+                        className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-blue-500 shadow-md hover:bg-blue-400"
+                        onClick={() => {
+                          editCategory(item._id, item.name, item.image);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                       className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-red-500 shadow-md hover:bg-red-400"
+                        onClick={() => deleteCategory(item._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3" className="text-center py-4">
+                  No categories found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+        <button
+  className="p-1 ml-5 border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
+  style={{ whiteSpace: 'nowrap' }}
+  type="button"
+  onClick={openModal}
+>
+  Add Categories
+</button>
+        <CategoryModal
+          showModal={showModal}
+          closeModal={closeModal}
+          categoryId={categoryId}
+          categoryToEdit={categoryToEdit}
+          editMode={editMode}
+        />
+        <div className="float-center mt-3">
+          <PAgination
+            filterPagination={filterPagination}
+            currentPage={currentPage}
+            size={size}
+          />
         </div>
       </div>
+    </div>
+  </div>
+</div>
     </>
   );
 };

@@ -67,9 +67,9 @@ console.log(restaurant,'restaruent details in billmodal');
       <div className=" bg-rose-100  modal-container border rounded ">
         <div className=" modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-3xl font-bold text-cherry-Red font-lobster duration-200">
-              Hungry Hub
-            </h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl px-2">
+          Hungry<span className="font-bold">Hub </span>
+        </h2>
             <h2 className="text-lg font-bold">Billing Details...</h2>
             <button className="border-none text-gray-600" onClick={closeModal}>
               <span className=" text-3xl">×</span>

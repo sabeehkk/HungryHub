@@ -10,6 +10,7 @@ const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
+  console.log(user);
   
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -84,6 +85,11 @@ const UserProfile=()=> {
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
+            
+               
+               <h2 className="ml-40 text-xl font-bold">
+              {user.name} 
+            </h2>
           </div>
 
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
@@ -112,20 +118,7 @@ const UserProfile=()=> {
               )}
             </div>
             <div className="rounded  shadow p-6">
-              <div className="pb-6">
-                <label className="font-semibold text-gray-700 block pb-1">
-                  Name
-                </label>
-                <div className="flex">
-                  <input
-                    disabled
-                    id="username"
-                    className="border-1  rounded-r px-4 py-2 w-full"
-                    type="text"
-                    value={user?.name}
-                  />
-                </div>
-              </div>
+             
               <div className="pb-4">
                 <label className="font-semibold text-gray-700 block pb-1">
                   Email
@@ -149,6 +142,32 @@ const UserProfile=()=> {
                   type="email"
                   value={user?.phoneNumber}
                 />
+              </div>
+              <div className="pb-4">
+                <label className="font-semibold text-gray-700 block pb-1">
+                  Address
+                </label>
+                <input
+                  disabled
+                  id="email"
+                  className="border-1 rounded-r px-4 py-2 w-full"
+                  type="email"
+                  value={user ? [user?.Address[0]?.street, user?.Address[0]?.city, user?.Address[0]?.state].filter(Boolean).join(', ') : ''}
+                  />
+
+              </div>
+              <div className="pb-4">
+                <label className="font-semibold text-gray-700 block pb-1">
+                  Pin Code
+                </label>
+                <input
+                  disabled
+                  id="address"
+                  className="border-1 rounded-r px-4 py-2 w-full"
+                  type="address"
+                  value={user?.Address[0]?.postalCode || ''}
+                />
+
               </div>
               <span className="flex justify-center "><CiWallet className="text-2xl"/>:{user?.Wallet}</span> 
             </div>

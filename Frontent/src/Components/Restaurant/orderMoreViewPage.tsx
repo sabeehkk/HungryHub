@@ -110,7 +110,7 @@ function OrdersItems() {
   };
 
   return (
-    <div className="p-10">
+    <div className="flex flex-col">
       <BillModal
         isOpen={modalOpen}
         closeModal={closeModal}
@@ -119,25 +119,25 @@ function OrdersItems() {
       <div className="border flex">
         <div className="h-full w-full">
           <div className="w-full overflow-x-auto ">
-            <table className="min-w-full divide-y divide-gray-300">
-            <thead className=" bg-gray-400 text-off-White ">
+            <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     PRODUCT
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     QUANTITY
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     RATE
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     PRICE
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-off-White uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold text-off-White uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>

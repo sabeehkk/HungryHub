@@ -133,105 +133,192 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   };
 
   return (
-    <div className=" p-10">
-      <BillModal
-        isOpen={modalOpen}
-        closeModal={closeModal}
-        orderItem={itemData}
-      />
-      <div className="border flex">
-        <div className=" h-full w-full">
-          <div className="w-full overflow-x-auto">
-            <table className=" min-w-full divide-y divide-gray-400">
-              <thead className=" bg-gray-400 text-off-White ">
-                <tr>
-                  <th className=" px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                    #
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                  Order Date
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                    Payment Type
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                    Total Item
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
-                    
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-gray-100 divide-y divide-gray-200 border">
-                {currentItems.map((item, ind) =>{
-                   const formattedDate = new Date(
-                    item.createdAt
-                  ).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                  });
-                  return (
-                  <React.Fragment key={item._id}>
-                    
-                        <tr >
-                          <td
-                            className="flex px-6 py-2 whitespace-nowrap"
-                            onClick={() => openModal(item)}
-                          >
-                            {console.log(item)}
-                            {ind+1}
-                          </td>
-                          <td className="px-6 py-2 whitespace-nowrap">
-                          {formattedDate}
-                          </td>
-                          <td className="px-6 py-2 whitespace-nowrap">
-                            {item.paymentType}
-                          </td>
-                        
-                          {/* {item.item.map((ele)=>{
-                            <h1 hidden>{total = total+ele.price}</h1>
-                            {console.log(ele.price)}
-                          })} */}
-                          <td className="px-6 py-2 whitespace-nowrap">
-                            {item.item.length}
-                          </td>
-                          {/* <td className="px-6 py-2 whitespace-nowrap">
-                            {
-                              <p
-                                className="text-yellow hover:text-amber-600"
-                              >
-                                {(!item)}
-                              </p>
-                            }
-                          </td> */}
-                          <td className="text-yellow hover:text-amber-600">
-                            {item.paymentStatus === 'PAID' ? 'Delivered' : 'Processing...'}
-                          </td>
-                          <td className="px-6 py-2 whitespace-nowrap">
-                            {
-                              <button className="bg-teal-500 border-none  text-white " onClick={()=>navigate(`/restaurent/dummy/${item._id}`)}>View</button>
-                            }
-                          </td>
-                        </tr>
-                  </React.Fragment>
-                )})}
-              </tbody>
-            </table>
-          </div>
-          <div className="float-right mr-3 mt-3">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          </div>
+    <div className="flex flex-col">
+  <BillModal isOpen={modalOpen} closeModal={closeModal} orderItem={itemData} />
+  <div className="border flex">
+    <div className="h-full w-full">
+      <div className="w-full overflow-x-auto">
+      <div className="flex ml-60">
+          <h1 className="ml-40 text-xl font-bold text-gray-800">
+            {"Order"} Management
+          </h1>
         </div>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                #
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Order Date
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Payment Type
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Total Item
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              >
+                Status
+              </th>
+              <th
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+              ></th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200 border">
+            {currentItems.map((item, ind) => {
+              const formattedDate = new Date(item.createdAt).toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              });
+              return (
+                <React.Fragment key={item._id}>
+                  <tr  className="transition-all hover:bg-gray-100">
+                    <td className="px-6 py-2 whitespace-nowrap" onClick={() => openModal(item)}>
+                      {console.log(item)}
+                      {ind + 1}
+                    </td>
+                    <td className="px-6 py-2 whitespace-nowrap">{formattedDate}</td>
+                    <td className="px-6 py-2 whitespace-nowrap">{item.paymentType}</td>
+                    <td className="px-6 py-2 whitespace-nowrap">{item.item.length}</td>
+                    <td className="text-yellow hover:text-amber-600">
+                      {item.paymentStatus === "PAID" ? "Delivered" : "Processing..."}
+                    </td>
+                    <td className="px-6 py-2 whitespace-nowrap">
+                      {
+                        <button
+                          className="bg-teal-500 border-none text-white"
+                          onClick={() => navigate(`/restaurent/dummy/${item._id}`)}
+                        >
+                          View
+                        </button>
+                      }
+                    </td>
+                  </tr>
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      <div className="float-right mr-3 mt-3">
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
     </div>
+  </div>
+</div>
+
+    // <div className=" p-10">
+    //   <BillModal
+    //     isOpen={modalOpen}
+    //     closeModal={closeModal}
+    //     orderItem={itemData}
+    //   />
+    //   <div className="border flex">
+    //     <div className=" h-full w-full">
+    //       <div className="w-full overflow-x-auto">
+    //         <table className=" min-w-full divide-y divide-gray-400">
+    //           <thead className=" bg-gray-400 text-off-White ">
+    //             <tr>
+    //               <th className=" px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+    //                 #
+    //               </th>
+    //               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+    //               Order Date
+    //               </th>
+    //               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+    //                 Payment Type
+    //               </th>
+    //               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+    //                 Total Item
+    //               </th>
+    //               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+    //                 Status
+    //               </th>
+    //               <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                    
+    //               </th>
+    //             </tr>
+    //           </thead>
+    //           <tbody className="bg-gray-100 divide-y divide-gray-200 border">
+    //             {currentItems.map((item, ind) =>{
+    //                const formattedDate = new Date(
+    //                 item.createdAt
+    //               ).toLocaleDateString("en-GB", {
+    //                 day: "2-digit",
+    //                 month: "2-digit",
+    //                 year: "numeric",
+    //               });
+    //               return (
+    //               <React.Fragment key={item._id}>
+                    
+    //                     <tr >
+    //                       <td
+    //                         className="flex px-6 py-2 whitespace-nowrap"
+    //                         onClick={() => openModal(item)}
+    //                       >
+    //                         {console.log(item)}
+    //                         {ind+1}
+    //                       </td>
+    //                       <td className="px-6 py-2 whitespace-nowrap">
+    //                       {formattedDate}
+    //                       </td>
+    //                       <td className="px-6 py-2 whitespace-nowrap">
+    //                         {item.paymentType}
+    //                       </td>
+                        
+    //                       {/* {item.item.map((ele)=>{
+    //                         <h1 hidden>{total = total+ele.price}</h1>
+    //                         {console.log(ele.price)}
+    //                       })} */}
+    //                       <td className="px-6 py-2 whitespace-nowrap">
+    //                         {item.item.length}
+    //                       </td>
+    //                       {/* <td className="px-6 py-2 whitespace-nowrap">
+    //                         {
+    //                           <p
+    //                             className="text-yellow hover:text-amber-600"
+    //                           >
+    //                             {(!item)}
+    //                           </p>
+    //                         }
+    //                       </td> */}
+    //                       <td className="text-yellow hover:text-amber-600">
+    //                         {item.paymentStatus === 'PAID' ? 'Delivered' : 'Processing...'}
+    //                       </td>
+    //                       <td className="px-6 py-2 whitespace-nowrap">
+    //                         {
+    //                           <button className="bg-teal-500 border-none  text-white " onClick={()=>navigate(`/restaurent/dummy/${item._id}`)}>View</button>
+    //                         }
+    //                       </td>
+    //                     </tr>
+    //               </React.Fragment>
+    //             )})}
+    //           </tbody>
+    //         </table>
+    //       </div>
+    //       <div className="float-right mr-3 mt-3">
+    //         <Pagination
+    //           currentPage={currentPage}
+    //           totalPages={totalPages}
+    //           onPageChange={handlePageChange}
+    //         />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 }
 
