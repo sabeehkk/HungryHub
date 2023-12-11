@@ -174,7 +174,7 @@ function Menu() {
   };
 
   return (
-    <div className="bg-gray-100 container mx-auto px-5 my-element pt-5">
+    <div className="bg-gray-100 container mx-auto px-5 my-element ">
       <ProductDetailModal isOpen={isModalOpen} close={closeModal} item={item} />
       <div className="sm:px-24 px-3 md:px-32 lg:px-44 pt-3">
         <div className="grid grid-cols-1 p-2 py-3 shadow-md rounded-md">
@@ -212,13 +212,13 @@ function Menu() {
         </div>
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
 
-        <div className="text-center mt-8 flex items-center justify-between mb-4">
-          <div className="navbar shadow-lg">
-            <div className="navbar-start">
+        <div className=" text-center mt-4 flex items-center justify-between mb-2">
+          <div className=" navbar shadow-lg">
+            <div className=" navbar-start">
               <div className="dropdown ">
                 <label
                   tabIndex={0}
-                  className="btn btn-ghost lg:hidden"
+                  className="btn btn-ghost lg:hidden "
                   onClick={(e) =>
                     e.currentTarget.nextElementSibling.classList.toggle(
                       "hidden"
@@ -243,9 +243,9 @@ function Menu() {
               </div>
             </div>
 
-            <div className="navbar-center hidden lg:flex flex items-center">
-              <div className="flex flex-col  p-7 py-4 m-h-screen">
-                <div className="bg-white items-center justify-between w-72 h-10 flex rounded-full shadow-lg p- mb-3 sticky">
+            <div className=" navbar-center hidden lg:flex flex items-center w-[1124px]">
+              <div className=" flex flex-col  p-7 py-4 m-h-screen">
+                <div className=" bg-white items-center justify-between w-72 h-10 flex rounded-full shadow-lg p- mb-3 sticky">
                   <div>
                     <div className=" mr-2 rounded-md hover:bg-gray-100 cursor-pointer">
                       <svg
@@ -263,7 +263,7 @@ function Menu() {
                     </div>
                   </div>
                   <input
-                    className="font-bold  rounded-full w-full py-1 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+                    className=" font-bold  rounded-full w-full py-1 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
                     type="text"
                     placeholder="Search an Item"
                     value={searchTerm}
@@ -293,15 +293,15 @@ function Menu() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               /> */}
 
-              <ul className="ml-40 menu menu-horizontal px-1 flex items-center">
-                <li className="font-semibold my-2 cursor-pointer">
+              <ul className=" ml-70 menu menu-horizontal px-1 flex items-center">
+                <li className=" font-semibold my-2 cursor-pointer mr-">
                   {/* Category Dropdown */}
                   <section aria-labelledby="information-heading">
-                    <div className="relative">
+                    <div className=" relative">
                       <button
                         type="button"
                         onClick={toggleDropdown}
-                        className="flex items-center text-sm font-medium focus:outline-none"
+                        className="border-none bg-white flex items-center text-sm font-medium focus:outline-none"
                       >
                         {selectedCategory ? selectedCategory.name : "Category"}
                         <svg
@@ -347,7 +347,7 @@ function Menu() {
                       <button
                         type="button"
                         onClick={togglePriceDropdown}
-                        className="flex items-center text-sm font-medium focus:outline-none"
+                        className="border-none bg-white flex items-center text-sm font-medium focus:outline-none ml-3 "
                       >
                         {selectedPrice ? selectedPrice.fieled : "Select Price"}
                         <svg
