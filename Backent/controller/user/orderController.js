@@ -128,7 +128,7 @@ export const getOrderItems = async (req, res) => {
     const orderItems = await OrderModel.findOne({ _id: id })
       .sort({ _id: -1 })
       .populate("item.product")
-      .populate("employeeId");
+      .populate("employeeId")
     res.status(200).send({
       success: true,
       orderItems,
@@ -142,3 +142,27 @@ export const getOrderItems = async (req, res) => {
   }
 };
 
+export const  getOrders= async (req, res) => {
+  try {
+    const id = req.query.id;
+    const orders = await OrderModel.find({ userId: id })
+      .sort({ _id: -1 })
+      .populate("item.product");
+    if (orders) {
+      res.status(200).send({
+        success: true,
+        orders,
+      });
+    } else {
+      res.status(404).send({
+        success: false,
+        message: "You don't have any order",
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "server error",
+    });
+  }
+}

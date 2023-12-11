@@ -96,11 +96,8 @@ console.log(restaurant,'restaruent details in billmodal');
                       <h1 className="italic">
                         {orderItem.address[0].postalCode}
                       </h1>
-                    
                     </div>
-
                   
-
                   ) : (
                     <div>Address information not available.</div>
                   )}

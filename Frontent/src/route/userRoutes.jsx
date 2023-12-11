@@ -234,9 +234,10 @@ const UserRoute = {
       ),
     },
     {
-      path: "/orderItems/:orderId",
+      path: "/orderItems/:ordId",
       element: (
         <>
+          <UserNavbar />
           <OrderItemsPage />
         </>
       ),

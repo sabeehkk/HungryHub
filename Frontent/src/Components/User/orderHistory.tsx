@@ -27,7 +27,7 @@ const user =useSelector((state)=>state.userAuth);
 
 
   useEffect(() => {
-    userAxios.get(`/getOrderItems?id=${user._id}`).then((response) => {
+    userAxios.get(`/getOrderHistory?id=${user.user._id}`).then((response) => {
       const items = response.data.orders;
       setOrderItem(items);
       setIsLoading(false)
@@ -97,7 +97,7 @@ const user =useSelector((state)=>state.userAuth);
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200 border">
-                {orderItem.map((item) => {
+                {orderItem?.map((item) => {
                   const formattedDate = new Date(
                     item.updatedAt
                   ).toLocaleDateString("en-GB", {
@@ -148,7 +148,7 @@ const user =useSelector((state)=>state.userAuth);
                           )}
                         </td>
                         <td className="px-6 py-2 whitespace-nowrap">
-                        <button className="text-green-700" onClick={()=>navigate(`/orderitems/${item._id}`)}>View</button>
+                        <button className="text-green-700" onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
                         </td>
                       </tr>
                       <OrderTrack

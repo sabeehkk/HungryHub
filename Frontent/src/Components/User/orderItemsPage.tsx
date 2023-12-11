@@ -27,8 +27,10 @@ function OrderItems() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    userAxios.get(`/getOrderItems?id=${ordId}`).then((response) => {
+    userAxios.get(`/orderItems?id=${ordId}`).then((response) => {
       const items = response?.data?.orderItems;
+      console.log(items,'orderItems in more view');
+      
       setOrderItem(items);
       setIsLoading(false)
     });
@@ -92,7 +94,7 @@ function OrderItems() {
                   </th>
                 </tr>
               </thead>
-              (
+              
               <tbody className="bg-white divide-y divide-gray-200 border">
                   <Fragment>
                     {orderItem?.item.map((ele) => (
@@ -102,7 +104,7 @@ function OrderItems() {
                           onClick={() => openModal(ele)}
                         >
                           <img
-                            src={ele.product?.images}
+                            src={ele.product?.images[0]}
                             alt=""
                             className="h-10 w-10 mr-10"
                           />

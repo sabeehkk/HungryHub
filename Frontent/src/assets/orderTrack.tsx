@@ -15,7 +15,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
   const [userRating, setUserRating] = useState(0);
   const [review, setReview] = useState("");
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.userAuth);
   useEffect(() => {
 
     const steps = ["Preparing...", "Packed", "Out of delivery", "Delivered"];
@@ -100,14 +100,14 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
       style={{ overflow: "auto" }}
     >
       <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="modal-container border rounded md:w-2/3 w-full">
+      <div className="bg-pink-100 modal-container border rounded md:w-2/3 w-full">
         <div className="modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-3xl font-bold text-cherry-Red font-lobster duration-200">
-              Yummi
-            </h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl px-2 ">
+          Hungry<span className="font-bold ">Hub </span>
+        </h2>
             <h2 className="text-lg font-bold">Order Status...</h2>
-            <button className="text-gray-600" onClick={closeModal}>
+            <button className="text-gray-600 border-none" onClick={closeModal}>
               <span className="text-3xl">×</span>
             </button>
           </div>
@@ -115,7 +115,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
           <div className="embed-container flex justify-between items-center">
             <div>
               <div>
-                <h1 className="text-xl font-bold underline">Order Item Detail</h1>
+                <h1 className="text-xl font-bold underline ">Order Item Detail</h1>
                 <h1 className="italic font-semibold">Product : {orderItem?.product?.name}</h1>
                 <h1 className="italic font-semibold">Size : {orderItem?.variant}</h1>
                 <h1 className="italic font-semibold">Quantity : {orderItem?.quantity}</h1>
@@ -133,7 +133,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
             <div className="border p-3 shadow-md w-auto">
                 <div>
                   <h2>Rate this item:</h2>
-                  <StarRating
+                  {/* <StarRating
                     totalStars={5}
                     onRatingChange={handleRatingChange}
                   />
@@ -143,7 +143,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
                     onChange={handleReviewChange}
                     rows={5}
                     cols={50}
-                  />
+                  /> */}
                 </div>
                 <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button>
             </div> 
@@ -151,13 +151,13 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
             <div className="border p-3 justify-between shadow-md">
             <img
                 className="h-32 w-36"
-                src={orderItem.product?.images}
+                src={orderItem.product?.images[0]}
                 alt=""
               />
             </div>
           </div>
           <hr className="border-t-2 border-blue-500 my-4" />
-              <h1 className="text-xl font-bold underline">Order Status</h1>
+              <h1 className="text-xl font-bold underline ">Order Status</h1>
           <div className="embed-container md:flex justify-between items-center border">
             <div className="max-w-xl mx-auto my-5">
               <div className="flex justify-center">
