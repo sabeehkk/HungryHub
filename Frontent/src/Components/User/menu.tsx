@@ -20,7 +20,7 @@ function Menu() {
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [item, setsetItem] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const [size, setSize] = useState(1);
 
   const price = [
@@ -30,6 +30,9 @@ function Menu() {
     { fieled: "₹ : 500 - 1000", startedAt: 500 },
     { fieled: "₹ : 1000+", startedAt: 1000 },
   ];
+
+  console.log(product, "products in menu pages");
+  console.log(categories, "category in menu pages");
 
   const itemsPerPage = 5;
   const totalPages = Math.ceil(product?.length / itemsPerPage);
@@ -103,9 +106,11 @@ function Menu() {
   }, []);
 
   const categoryData = async () => {
-    const { data } = await restaurentAxios.get(`/getcategory?id=${restId}`);
+    const { data } = await restaurentAxios.get(`/getCategory?id=${restId}`);
+    console.log(data.categoryData, "found category data");
+
     if (data) {
-      setCategories(data.categoryDatas);
+      setCategories(data.categoryData);
     } else {
       ("");
     }
@@ -115,16 +120,16 @@ function Menu() {
     categoryData();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchProducts = () => {
-  //     const searchTermLowercase = searchTerm.toLowerCase();
-  //     const filteredProducts = product.filter((product) =>
-  //       product.name.toLowerCase().includes(searchTermLowercase)
-  //     );
-  //     setFilterdProducts(filteredProducts);
-  //   };
-  //   fetchProducts();
-  // }, [searchTerm]);
+  useEffect(() => {
+    const fetchProducts = () => {
+      const searchTermLowercase = searchTerm.toLowerCase();
+      const filteredProducts = product.filter((product) =>
+        product.productName.toLowerCase().includes(searchTermLowercase)
+      );
+      setFilterdProducts(filteredProducts);
+    };
+    fetchProducts();
+  }, [searchTerm]);
 
   const handleCategorySelection = (ind) => {
     const selectedCat = categories[ind];
@@ -140,32 +145,32 @@ function Menu() {
     }
   };
 
-  // const handlePriceSelection = (indx) => {
-  //   const priceSelected = price[indx];
-  //   setSelectedPrice(priceSelected);
-  //   let nearestPrice;
-  //   if (indx < price.length - 1) {
-  //     nearestPrice = price[indx + 1].startedAt;
-  //   } else {
-  //     nearestPrice = 5000;
-  //   }
+  const handlePriceSelection = (indx) => {
+    const priceSelected = price[indx];
+    setSelectedPrice(priceSelected);
+    let nearestPrice;
+    if (indx < price.length - 1) {
+      nearestPrice = price[indx + 1].startedAt;
+    } else {
+      nearestPrice = 5000;
+    }
 
-  //   if (priceSelected) {
-  //     const pricedProd = product.map((variant) => {
-  //       const filteredVariants = variant.variants.filter((priceBetween) => {
-  //         return (
-  //           priceBetween.price >= priceSelected.startedAt &&
-  //           priceBetween.price < nearestPrice
-  //         );
-  //       });
-  //       return { ...variant, variants: filteredVariants };
-  //     });
-  //     togglePriceDropdown();
-  //     setFilterdProducts(pricedProd);
-  //   } else {
-  //     setFilterdProducts([]);
-  //   }
-  // };
+    if (priceSelected) {
+      const pricedProd = product?.map((variant) => {
+        const filteredVariants = variant.variants.filter((priceBetween) => {
+          return (
+            priceBetween.price >= priceSelected.startedAt &&
+            priceBetween.price < nearestPrice
+          );
+        });
+        return { ...variant, variants: filteredVariants };
+      });
+      togglePriceDropdown();
+      setFilterdProducts(pricedProd);
+    } else {
+      setFilterdProducts([]);
+    }
+  };
 
   return (
     <div className="container mx-auto px-5 my-element pt-5">
@@ -174,10 +179,9 @@ function Menu() {
         <div className="grid grid-cols-1 p-2 py-3 shadow-md rounded-md">
           <div className="mb-10">
             <div className="flex justify-between items-baseline">
-          
-        <h2 className="ml-8 text-4xl font-bold italic text-black">
-          {restData?.restData.restaurantName}
-        </h2>
+              <h2 className="ml-8 text-4xl font-bold italic text-black">
+                {restData?.restData.restaurantName}
+              </h2>
               <div className="border rounded-sm px-3 py-1 shadow-md bg-white">
                 <div className="flex ">
                   <h4 className="text-xl font-bold ml-auto mr-1">
@@ -193,7 +197,7 @@ function Menu() {
             </div>
             <div className="">
               <h4 className="ml-8 text-lg text-gray-500 ">
-               Info : {restData?.restData.phoneNumber}
+                Info : {restData?.restData.phoneNumber}
               </h4>
               <h4 className="text-lg text-gray-500">
                 {restData?.restData.Place}
@@ -205,8 +209,9 @@ function Menu() {
           </div>
           <div className="border border-gray-300 h-2 bg-gray-300"></div>
         </div>
+        {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
 
-        {/* <div className="text-center mt-8 flex items-center justify-between mb-4">
+        <div className="text-center mt-8 flex items-center justify-between mb-4">
           <div className="navbar shadow-lg">
             <div className="navbar-start">
               <div className="dropdown ">
@@ -234,12 +239,12 @@ function Menu() {
                     />
                   </svg>
                 </label>
-                <ul
+                {/* <ul
                   tabIndex={0}
-                  className="menu-md dropdown-content mt-3 z-[1] p-2 shadow w-52  bg-gray-800 text-off-White"
+                  className="menu-md dropdown-content mt-3 z-[1] p-2 shadow w-52  bg-gray-700 text-off-White"
                 >
-                  <li className="font-semibold my-2 cursor-pointer ">
-                    <button
+                  <li className="font-semibold my-2 cursor-pointer "> */}
+                    {/* <button
                       type="button"
                       onClick={toggleDropdown}
                       className="flex items-center text-sm font-medium text-off-White hover:text-off-White focus:outline-none"
@@ -259,27 +264,28 @@ function Menu() {
                           clipRule="evenodd"
                         />
                       </svg>
-                    </button>
-                  </li>
-                  {isDropdownOpen &&
-                    categories.map((cate, indx) => (
+                    </button> */}
+                  {/* </li> */}
+                  {/* {isDropdownOpen &&
+                    categories?.map((cate, indx) => (
                       <li key={indx}>{cate.name}</li>
-                    ))}
-                </ul>
+                    ))} */}
+                {/* </ul> */}
               </div>
+           
+            </div>
+            {/* <div className="navbar-center hidden lg:flex">
               <input
                 type="text"
                 placeholder="Search an item..."
-                className="px-2 py-2 border rounded-sm focus:outline-none focus:right-1"
+                className=" px-12 py-2  border rounded-sm focus:outline-none focus:right-1"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </div>
-            <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1">
-                <li className="font-semibold my-2 cursor-pointer">
+              <ul className="ml-40 menu menu-horizontal px-1">
+                <li className=" font-semibold my-2 cursor-pointer">
                   <section aria-labelledby="information-heading" className="">
-                    <div className="relative">
+                    <div className="relative ">
                       <button
                         type="button"
                         onClick={toggleDropdown}
@@ -287,7 +293,7 @@ function Menu() {
                       >
                         {selectedCategory ? selectedCategory.name : "Category"}
                         <svg
-                          className={`w-4 h-4 ml-2 transition-transform ${
+                          className={`w-4 h-4 ml-2 transition-transform  ${
                             isDropdownOpen ? "" : "transform rotate-180"
                           }`}
                           fill="currentColor"
@@ -367,12 +373,118 @@ function Menu() {
                   </section>
                 </li>
               </ul>
-            </div>
-          </div>
-        </div> */}
+            </div> */}
+<div className="navbar-center hidden lg:flex flex items-center">
+  <input
+    type="text"
+    placeholder="Search an item..."
+    className="px-12 py-2 border rounded-sm focus:outline-none focus:right-1"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+  />
 
-        {product?.length !== 0 ? (
-          product?.map((prod) => (
+  <ul className="ml-40 menu menu-horizontal px-1 flex items-center">
+    <li className="font-semibold my-2 cursor-pointer">
+      {/* Category Dropdown */}
+      <section aria-labelledby="information-heading">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={toggleDropdown}
+            className="flex items-center text-sm font-medium focus:outline-none"
+          >
+            {selectedCategory ? selectedCategory.name : "Category"}
+            <svg
+              className={`w-4 h-4 ml-2 transition-transform  ${
+                isDropdownOpen ? "" : "transform rotate-180"
+              }`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+
+          {isDropdownOpen && (
+            <div
+              className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
+              style={{ zIndex: 10 }}
+            >
+              {categories.map((option, index) => (
+                <div
+                  key={index}
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
+                  onClick={() => handleCategorySelection(index)}
+                >
+                  {option.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </li>
+
+    <li className="font-semibold my-2 cursor-pointer">
+      {/* Price Dropdown */}
+      <section aria-labelledby="information-heading">
+        <div className="relative">
+          <button
+            type="button"
+            onClick={togglePriceDropdown}
+            className="flex items-center text-sm font-medium focus:outline-none"
+          >
+            {selectedPrice ? selectedPrice.fieled : "Select Price"}
+            <svg
+              className={`w-4 h-4 ml-2 transition-transform ${
+                isPriceDropdownOpen ? "" : "transform rotate-180"
+              }`}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+
+          {isPriceDropdownOpen && (
+            <div
+              className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
+              style={{ zIndex: 10 }}
+            >
+              {price.map((option, index) => (
+                <div
+                  key={index}
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
+                  onClick={() => handlePriceSelection(index)}
+                >
+                  {option.fieled}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </li>
+  </ul>
+</div>
+
+
+          </div>
+        </div>
+        {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
+
+        {filterdProducts?.length !== 0 ? (
+          filterdProducts?.map((prod) => (
             <div className="p-2" key={prod._id}>
               <div className="mb-10 sm:flex sm:justify-between block">
                 <div className="">
@@ -388,16 +500,16 @@ function Menu() {
                   // style={{ backgroundImage: `url(${prod?.images})` }}
                   // style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D')` }}
                   style={{ backgroundImage: `url(${prod?.images[0]})` }}
-              >
+                >
                   <div className="flex flex-col justify-end h-full"></div>
-               
-                 <button
-                  onClick={() => handleProducData(prod._id)}
-                  className="text-white py-1.5 px-1 rounded-sm  "
-                  style={{ backgroundColor: '#CC252C', border: 'none' }}
-               >
-                  Buy Now
-                </button>
+
+                  <button
+                    onClick={() => handleProducData(prod._id)}
+                    className="text-white py-1.5 px-1 rounded-sm  "
+                    style={{ backgroundColor: "#CC252C", border: "none" }}
+                  >
+                    Buy Now
+                  </button>
                 </div>
               </div>
               <div className="border border-gray-500"></div>
@@ -409,7 +521,9 @@ function Menu() {
               <div className="pb-2" key={prod._id}>
                 <div className="mb-10 sm:flex sm:justify-between block">
                   <div className="">
-                    <h4 className="text-xl font-bold mt-2">{prod.name}</h4>
+                    <h4 className="text-xl font-bold mt-2">
+                      {prod.productName}
+                    </h4>
                     <h4 className="text-lg text-gray-500">
                       {prod.description}
                     </h4>
@@ -419,14 +533,16 @@ function Menu() {
                   </div>
                   <div
                     className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
-                    style={{ backgroundImage: `url(${prod?.images})` }}
+                    style={{ backgroundImage: `url(${prod?.images[0]})` }}
                   >
                     <div className="flex flex-col justify-end h-full"></div>
                     <button
                       onClick={() => handleProducData(prod._id)}
-                      value="Buy Now"
-                      className="w-full rounded-md"
-                    />
+                      className="text-white py-1.5 px-1 rounded-sm  "
+                      style={{ backgroundColor: "#CC252C", border: "none" }}
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
                 <div className="border border-gray-500"></div>
