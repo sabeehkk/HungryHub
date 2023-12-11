@@ -7,6 +7,8 @@ import { useDispatch ,} from "react-redux";
 import { profileEditModal } from "../../models/models";
 
 const EditProfile = ({ data }) => {
+  console.log(data,'Edit profile datas');
+  
 
   const [user, setUser] = useState<profileEditModal>({
     _id: data?._id || "",       
@@ -14,6 +16,14 @@ const EditProfile = ({ data }) => {
     email: data?.email || "",
     phoneNumber: data?.phoneNumber || "",
     place: data?.place || "",
+    Address: data?.Address || [],
+    // Address:data.Address||"",
+    // Address:{
+    //   street: data?.Address?.street || "",
+    // city: data?.Address?.city || "",
+    // state: data?.Address?.state || "",
+    // postalCode: data?.Address?.postalCode || "",
+    // }
   });
      
   const navigate = useNavigate();
@@ -31,6 +41,7 @@ const EditProfile = ({ data }) => {
       name,
       email,
       phoneNumber,
+      Address
     }: profileEditModal = user;
 
     if ( 
@@ -56,6 +67,7 @@ const EditProfile = ({ data }) => {
       name,
       email,
       phoneNumber,
+      Address
      
     };
 
@@ -112,6 +124,19 @@ const EditProfile = ({ data }) => {
               minLength={10}
               maxLength={10}
               value={user?.phoneNumber}
+              onChange={handleInputChange}
+              className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
+            />
+          </div>
+          <div>
+            <label htmlFor="address" className="text-black font-bold">
+              Address
+            </label>
+            <input
+              type="Address"
+              id="Address"
+              name="Address"
+              value={user?.Address[0].street}
               onChange={handleInputChange}
               className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
             />

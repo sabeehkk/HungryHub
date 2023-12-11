@@ -30,11 +30,8 @@ const FilteredRestaurents = () => {
       cateName = catName;
     }
     userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
-      console.log(
-        "RestaurentDatas",
-        response.data.restaurants[1].restaurent.restaurantName
-      );
-
+       console.log(response.data);
+       
       setrestaurants(response.data);
     });
   }, [selectedOption]);

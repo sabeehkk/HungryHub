@@ -24,7 +24,7 @@ function OrderItems() {
 
   const { ordId } = useParams()
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.userAuth);
 
   useEffect(() => {
     userAxios.get(`/orderItems?id=${ordId}`).then((response) => {
@@ -45,6 +45,8 @@ function OrderItems() {
     setIsModalOpen(false);
   };
   const cancelOrder = async (orderId,itemId) => {
+    console.log('cancel button clicked');
+    
     const result = await Swal.fire({
       title: "Do you really want to cancel this Order?",
       icon: "warning",
@@ -53,10 +55,10 @@ function OrderItems() {
       cancelButtonText: "No",
     });
     if (result.isConfirmed) {
-      UserAxios.patch("/cancelorder", {
+      userAxios.patch("/cancelOrder", {
         itemId,
         orderId,
-        userId:user._id
+        userId:user.user._id
       }).then((response) => {
         console.log(response);
         setChange(!is_chage);

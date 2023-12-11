@@ -100,13 +100,13 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
       style={{ overflow: "auto" }}
     >
       <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="bg-pink-100 modal-container border rounded md:w-2/3 w-full">
+      <div className="bg-gray-200 modal-container border rounded md:w-2/3 w-full">
         <div className="modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl px-2 ">
           Hungry<span className="font-bold ">Hub </span>
         </h2>
-            <h2 className="text-lg font-bold">Order Status...</h2>
+            <h2 className="text-lg font-bold mr-16">Order Status...</h2>
             <button className="text-gray-600 border-none" onClick={closeModal}>
               <span className="text-3xl">×</span>
             </button>
@@ -116,7 +116,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
             <div>
               <div>
                 <h1 className="text-xl font-bold underline ">Order Item Detail</h1>
-                <h1 className="italic font-semibold">Product : {orderItem?.product?.name}</h1>
+                <h1 className="italic font-semibold">Product : {orderItem?.product?.productName}</h1>
                 <h1 className="italic font-semibold">Size : {orderItem?.variant}</h1>
                 <h1 className="italic font-semibold">Quantity : {orderItem?.quantity}</h1>
                 <h1 className="italic font-semibold">Price : ₹ {parseFloat(orderItem?.price).toFixed(2)}</h1>
@@ -131,7 +131,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
             {trackingStatus[3]?.completed ? (
 
             <div className="border p-3 shadow-md w-auto">
-                <div>
+                {/* <div> */}
                   {/* <h2>Rate this item:</h2> */}
                   {/* <StarRating
                     totalStars={5}
@@ -144,8 +144,8 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
                     rows={5}
                     cols={50}
                   /> */}
-                </div>
-                <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button>
+                {/* </div> */}
+                {/* <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button> */}
             </div> 
               ) : null}
             <div className="border p-3 justify-between shadow-md">

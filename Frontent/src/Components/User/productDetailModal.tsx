@@ -65,9 +65,9 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
                   <button
                     onClick={closeModal}
                     type="button"
-                    className="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
+                    className="border-none absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
                   >
-                    <span className="sr-only">Close</span>
+                    <span className="sr-only "></span>
                     <svg
                       className="h-6 w-6"
                       fill="none"

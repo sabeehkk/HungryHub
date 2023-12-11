@@ -64,13 +64,13 @@ console.log(restaurant,'restaruent details in billmodal');
       }`}
     >
       <div className="modal-overlay  " onClick={closeModal}></div>
-      <div className=" bg-rose-100  modal-container border rounded ">
+      <div className=" bg-gray-200  modal-container border rounded ">
         <div className=" modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl px-2">
           Hungry<span className="font-bold">Hub </span>
         </h2>
-            <h2 className="text-lg font-bold">Billing Details...</h2>
+            <h2 className="text-lg font-bold mr-16">Billing Details...</h2>
             <button className="border-none text-gray-600" onClick={closeModal}>
               <span className=" text-3xl">×</span>
             </button>
@@ -135,7 +135,7 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="template-text mt-4">
             <div className="container mx-auto">
-              <table className="min-w-full bg-white border border-gray-500">
+              <table className="min-w-full bg-gray-50 border border-gray-300">
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border-b text-left">Sl</th>

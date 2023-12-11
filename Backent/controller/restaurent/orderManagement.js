@@ -46,15 +46,27 @@ export const updateDeliveryStatus = async (req,res)=>{
         const { prodId, orderId, orderStatus } = req.body;
         console.log(req.body);
         let item_orderStatus;
+        // if (orderStatus === "Pending") {
+        //   item_orderStatus = "Preparing...";
+        // } else if (orderStatus === "Preparing...") {
+        //   item_orderStatus = "Packed";
+        // } else if (orderStatus === "Packed") {
+        //   item_orderStatus = "Out of delivery";
+        // } else {
+        //   item_orderStatus = "Delivered";
+        // }
+
         if (orderStatus === "Pending") {
-          item_orderStatus = "Preparing...";
+          item_orderStatus = "Pending";
         } else if (orderStatus === "Preparing...") {
-          item_orderStatus = "Packed";
+          item_orderStatus = "Preparing...";
         } else if (orderStatus === "Packed") {
+          item_orderStatus = "Packed";
+        } else if (orderStatus === "Out of delivery") {
           item_orderStatus = "Out of delivery";
-        } else {
+        } else if (orderStatus === "Delivered") {
           item_orderStatus = "Delivered";
-        }
+        } 
         await OrderModel.updateOne(
           { _id:orderId, "item._id": prodId },
           {

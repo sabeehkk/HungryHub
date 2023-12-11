@@ -166,3 +166,86 @@ export const  getOrders= async (req, res) => {
     });
   }
 }
+
+export const cancelOrder= async (req, res) => {
+  try {
+    console.log(req.body);
+    const { itemId, orderId, userId } = req.body;
+    const orderItem = await OrderModel.findOne({ "item._id": itemId });
+
+    if (orderItem) {
+      const canceledItemIndex = orderItem.item.findIndex(item => item._id.toString() === itemId);
+
+      if (canceledItemIndex !== -1 && orderItem.item[canceledItemIndex].orderStatus !== "Delivered") {
+        const canceledItem = orderItem.item[canceledItemIndex];
+        const canceledProductPrice = canceledItem.price * canceledItem.quantity;
+        const canceledProductDiscount = canceledProductPrice * (canceledItem.discount || 0);
+        const updatedTotalPrice = orderItem.totalPrice - canceledProductPrice;
+        const updatedDiscount = orderItem.discount - canceledProductDiscount;
+        const updatedGrandTotal = updatedTotalPrice - updatedDiscount;
+        
+        // Update order details to cancel the item and remove restaurantId
+        if(req.baseUrl.startsWith('/restaurant')){
+          await OrderModel.updateOne(
+            { _id: orderId },
+            {
+              $set: {
+                "item.$[element].is_canceled": true,
+                totalPrice: updatedTotalPrice,
+                discount: updatedDiscount,
+                grandTotal: updatedGrandTotal,
+              },
+            },
+            {
+              arrayFilters: [{ "element._id": itemId }], 
+            }
+          );
+        }else{
+          await OrderModel.updateOne(
+            { _id: orderId },
+            {
+              $pull: { item: { _id: itemId }, },
+              $set: {
+                totalPrice: updatedTotalPrice,
+                discount: updatedDiscount,
+                grandTotal: updatedGrandTotal
+              },
+            }
+          );
+        }
+        res.status(200).send({
+          success: true,
+          message: "Item cancelled",
+        });
+
+        if (orderItem.paymentType !== "COD") {
+          console.log('!COD order item cancelled');
+          const formattedPrice = parseFloat(canceledProductPrice).toFixed(2);
+          console.log(formattedPrice,userId,'formatted price')
+          await UserModel.updateOne(
+            { _id: userId },
+            {
+              $inc: { Wallet: parseFloat(formattedPrice) }
+            }
+          );
+        }
+      } else {
+        res.status(400).send({
+          success: false,
+          message: "Item not found or cannot be cancelled.",
+        });
+      }
+    } else {
+      res.status(400).send({
+        success: false,
+        message: "Order not found.",
+      });
+    }
+  } catch (error) {
+    console.error("Error cancelling item:", error);
+    res.status(500).send({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+}

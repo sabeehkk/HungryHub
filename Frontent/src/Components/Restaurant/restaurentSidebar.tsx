@@ -34,21 +34,17 @@ const App = () => {
       icon: <MdOutlineFastfood/>,
       url: "/restaurent/products",
     },
-    // {
-    //   title: "Orders ",
-    //   icon: <BiFoodMenu/>,
-    //   url: "/restaurent/orders",
-    // },
+    {
+      title: "Orders ",
+      icon: <BiFoodMenu/>,
+      url: "/restaurent/orders",
+    },
     {
       title: "Logout ",
       icon: <BiSolidUserRectangle/>,
       url: "/restaurent/logout",
     },
-    {
-      title: "Logout ",
-      icon: <BiSolidUserRectangle/>,
-      url: "/restaurent/orders",
-    },
+  
 
     // { title: "Setting", src: "Setting" },
   ];
