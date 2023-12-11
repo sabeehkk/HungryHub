@@ -106,6 +106,12 @@ const UserNavbar = () => {
               </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
+            <Link to="/orders" className="flex items-center">
+            <MdHome size={25} className="mr-4" />
+                 Home
+              </Link>
+            </li>
+            <li className="text-xl py-4 flex gap-x-2 items-center">
               <Link to="/logout" className="flex items-center">
                 <MdExitToApp size={25} className="mr-4" />
                 Logout

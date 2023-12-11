@@ -44,6 +44,11 @@ const App = () => {
       icon: <BiSolidUserRectangle/>,
       url: "/restaurent/logout",
     },
+    {
+      title: "Logout ",
+      icon: <BiSolidUserRectangle/>,
+      url: "/restaurent/orders",
+    },
 
     // { title: "Setting", src: "Setting" },
   ];

@@ -132,7 +132,7 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
 
             <div className="border p-3 shadow-md w-auto">
                 <div>
-                  <h2>Rate this item:</h2>
+                  {/* <h2>Rate this item:</h2> */}
                   {/* <StarRating
                     totalStars={5}
                     onRatingChange={handleRatingChange}
