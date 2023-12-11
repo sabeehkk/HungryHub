@@ -8,7 +8,6 @@ import { userAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
 import PAgination from "../../Components/pagination";
 
-
 function Menu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [restData, setRestData] = useState();
@@ -175,15 +174,15 @@ function Menu() {
   };
 
   return (
-    <div className="container mx-auto px-5 my-element pt-5">
+    <div className="bg-gray-100 container mx-auto px-5 my-element pt-5">
       <ProductDetailModal isOpen={isModalOpen} close={closeModal} item={item} />
       <div className="sm:px-24 px-3 md:px-32 lg:px-44 pt-3">
         <div className="grid grid-cols-1 p-2 py-3 shadow-md rounded-md">
           <div className="mb-10">
             <div className="flex justify-between items-baseline">
-              <h2 className="ml-8 text-4xl font-bold italic text-black">
+              <h3 className="ml-8 text-3xl font-bold italic text-black">
                 {restData?.restData.restaurantName}
-              </h2>
+              </h3>
               <div className="border rounded-sm px-3 py-1 shadow-md bg-white">
                 <div className="flex ">
                   <h4 className="text-xl font-bold ml-auto mr-1">
@@ -241,148 +240,58 @@ function Menu() {
                     />
                   </svg>
                 </label>
-                {/* <ul
-                  tabIndex={0}
-                  className="menu-md dropdown-content mt-3 z-[1] p-2 shadow w-52  bg-gray-700 text-off-White"
-                >
-                  <li className="font-semibold my-2 cursor-pointer "> */}
-                {/* <button
-                      type="button"
-                      onClick={toggleDropdown}
-                      className="flex items-center text-sm font-medium text-off-White hover:text-off-White focus:outline-none"
-                    >
-                      {selectedCategory ? selectedCategory.name : "Category"}
-                      <svg
-                        className={`w-4 h-4 ml-2 transition-transform ${
-                          isDropdownOpen ? "" : "transform rotate-180"
-                        }`}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    </button> */}
-                {/* </li> */}
-                {/* {isDropdownOpen &&
-                    categories?.map((cate, indx) => (
-                      <li key={indx}>{cate.name}</li>
-                    ))} */}
-                {/* </ul> */}
               </div>
             </div>
-            {/* <div className="navbar-center hidden lg:flex">
-              <input
-                type="text"
-                placeholder="Search an item..."
-                className=" px-12 py-2  border rounded-sm focus:outline-none focus:right-1"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              <ul className="ml-40 menu menu-horizontal px-1">
-                <li className=" font-semibold my-2 cursor-pointer">
-                  <section aria-labelledby="information-heading" className="">
-                    <div className="relative ">
-                      <button
-                        type="button"
-                        onClick={toggleDropdown}
-                        className="flex items-center text-sm font-medium focus:outline-none"
-                      >
-                        {selectedCategory ? selectedCategory.name : "Category"}
-                        <svg
-                          className={`w-4 h-4 ml-2 transition-transform  ${
-                            isDropdownOpen ? "" : "transform rotate-180"
-                          }`}
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
 
-                      {isDropdownOpen && (
-                        <div
-                          className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
-                          style={{ zIndex: 10 }}
-                        >
-                          {categories.map((option, index) => (
-                            <div
-                              key={index}
-                              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
-                              onClick={() => handleCategorySelection(index)}
-                            >
-                              {option.name}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </section>
-                </li>
-
-                <li className="font-semibold my-2 cursor-pointer">
-                  <section aria-labelledby="information-heading" className="">
-                    <div className="relative">
-                      <button
-                        type="button"
-                        onClick={togglePriceDropdown}
-                        className="flex items-center text-sm font-medium focus:outline-none"
-                      >
-                        {selectedPrice ? selectedPrice.fieled : "Select Price"}
-                        <svg
-                          className={`w-4 h-4 ml-2 transition-transform ${
-                            isPriceDropdownOpen ? "" : "transform rotate-180"
-                          }`}
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-
-                      {isPriceDropdownOpen && (
-                        <div
-                          className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
-                          style={{ zIndex: 10 }}
-                        >
-                          {price.map((option, index) => (
-                            <div
-                              key={index}
-                              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
-                              onClick={() => handlePriceSelection(index)}
-                            >
-                              {option.fieled}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </section>
-                </li>
-              </ul>
-            </div> */}
             <div className="navbar-center hidden lg:flex flex items-center">
-              <input
+              <div className="flex flex-col  p-7 py-4 m-h-screen">
+                <div className="bg-white items-center justify-between w-72 h-10 flex rounded-full shadow-lg p- mb-3 sticky">
+                  <div>
+                    <div className=" mr-2 rounded-md hover:bg-gray-100 cursor-pointer">
+                      <svg
+                        className="h-6 w-6 text-gray-500"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                  <input
+                    className="font-bold  rounded-full w-full py-1 pl-4 text-gray-700 bg-gray-100 leading-tight focus:outline-none focus:shadow-outline lg:text-sm text-xs"
+                    type="text"
+                    placeholder="Search an Item"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <div className="bg-gray-600 p-2 hover:bg-blue-400 cursor-pointer mx-2 rounded-full">
+                    <svg
+                      className="w-2 h-2 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              {/* <input
                 type="text"
                 placeholder="Search an item..."
                 className="px-12 py-2 border rounded-sm focus:outline-none focus:right-1"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-              />
+              /> */}
 
               <ul className="ml-40 menu menu-horizontal px-1 flex items-center">
                 <li className="font-semibold my-2 cursor-pointer">
@@ -546,18 +455,16 @@ function Menu() {
                 <div className="border border-gray-500"></div>
               </div>
             ))}
-           
           </div>
-          
         )}
       </div>
       <div className="float-center  ">
-              <PAgination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </div>
+        <PAgination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 }

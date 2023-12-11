@@ -31,9 +31,9 @@ function Food() {
 
   return (
     <div className="max-w-[1640px] m-auto px-4 py-12">
-      <h1 className="text-orange-600 font-bold text-center ">
-        Top Rated Menu Items
-      </h1>
+      <h1 className="font-sans text-orange-600 font-bold tracking-wider flex items-center justify-center md:text-lg  text-xs">
+      Top Rated Menu Items
+    </h1>
       {/* {Filter Row} */}
       <div className="flex flex-col lg:flex-row justify-between">
         {/* {Filter Type} */}
