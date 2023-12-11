@@ -11,6 +11,8 @@ import { restaurentAxios } from "../../axios/axios";
 
 import BillModal from "../../assets/billModa";
 import Pagination from "../../assets/pagination";
+import PAgination from "../../Components/pagination";
+
 import { USER_API } from "../../Constants/API";
 import { useNavigate } from "react-router-dom";
 
@@ -213,11 +215,13 @@ const restaurant = useSelector((state) => state.restaurentAuth);
           </tbody>
         </table>
       </div>
-      <div className="float-right mr-3 mt-3">
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
-      </div>
+   
     </div>
+    
   </div>
+  <div className="float- mr-3 mt-3">
+        <PAgination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+      </div>
 </div>
 
     // <div className=" p-10">

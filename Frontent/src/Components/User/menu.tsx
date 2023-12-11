@@ -6,6 +6,8 @@ import ProductDetailModal from "../User/productDetailModal";
 import { restaurentAxios } from "../../axios/axios";
 import { userAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
+import PAgination from "../../Components/pagination";
+
 
 function Menu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -544,16 +546,18 @@ function Menu() {
                 <div className="border border-gray-500"></div>
               </div>
             ))}
-            <div className="float-right mr-3 mt-3 pb-10">
-              <Pagination
+           
+          </div>
+          
+        )}
+      </div>
+      <div className="float-center  ">
+              <PAgination
                 currentPage={currentPage}
                 totalPages={totalPages}
                 onPageChange={handlePageChange}
               />
             </div>
-          </div>
-        )}
-      </div>
     </div>
   );
 }

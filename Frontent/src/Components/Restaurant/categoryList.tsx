@@ -189,15 +189,17 @@ const CategoryList = () => {
           categoryToEdit={categoryToEdit}
           editMode={editMode}
         />
-        <div className="float-center mt-3">
+        
+      </div>
+      <div className="float-center mt-3">
           <PAgination
             filterPagination={filterPagination}
             currentPage={currentPage}
             size={size}
           />
         </div>
-      </div>
     </div>
+    
   </div>
 </div>
     </>

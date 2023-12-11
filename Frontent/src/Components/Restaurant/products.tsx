@@ -298,15 +298,17 @@ function Products() {
             </tbody>
           </table>
   
-          <div className="float-center mt-3">
+         
+        </div>
+        <div className="float-center mt-3">
             <PAgination
               currentPage={currentPage}
               filterPagination={filterPagination}
               size={size}
             />
           </div>
-        </div>
       </div>
+      
     </div>
   </div>
   

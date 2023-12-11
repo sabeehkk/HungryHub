@@ -123,7 +123,7 @@ function OrdersItems() {
           </h1>
         </div>
       <table className="min-w-full divide-y divide-gray-200">
-      <thead className="bg-gray-70">
+      <thead className="bg-gray-100">
             <tr>
               <th  scope="col"
                 className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
@@ -153,7 +153,7 @@ function OrdersItems() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200 border">
             {orderItem?.item?.map((ele, ind) => (
-              <tr  className="transition-all hover:bg-gray-100" key={ele._id}>
+              <tr  className="transition-all hover:bg-gray-50" key={ele._id}>
                 <td
                   className="px-6 py-4"
                   onClick={() => openModal(orderItem)}
@@ -161,7 +161,7 @@ function OrdersItems() {
                   <img
                     src={ele.product?.images[0]}
                     alt=""
-                    className="h-14 w-14 mr-10 rounded-md"
+                    className="h-10 w-14 mr-10 rounded-sm"
                   />
                   {ele.product?.name}
                 </td>
