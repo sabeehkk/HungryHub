@@ -5,16 +5,16 @@ import { BiSolidStarHalf } from "react-icons/bi";
 import { AiFillClockCircle } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";
 
-import { userAxios } from "../../axios/axios";
+import { restaurentAxios, userAxios } from "../../axios/axios";
 
 const FilteredRestaurents = () => {
   const navigate = useNavigate();
   const [restaurants, setrestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedOption, setSelectedOption] = useState();
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const { catName } = useParams();
-  // console.log(restaurants.restaurent,'restaruent information');
+  console.log(restaurants,'restaruent information in state');
   useEffect(() => {
     userAxios.get("/getCategoryies").then((response) => {
       console.log(response.data, "responseDataaaaas");
@@ -29,12 +29,46 @@ const FilteredRestaurents = () => {
     } else {
       cateName = catName;
     }
-    userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
-       console.log(response.data);
-       
-      setrestaurants(response.data);
-    });
-  }, [selectedOption]);
+  
+    // Check if cateName is still falsy (null or undefined)
+    const isCategorySelected = Boolean(cateName);
+  
+    if (isCategorySelected) {
+      userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
+        console.log(response.data);
+        setrestaurants(response.data);
+      });
+    } else {
+      // If no category is selected, get all restaurants
+      restaurentAxios.get('/getRestaurents').then((response) => {
+        console.log(response.data, 'restaurent information');
+        setrestaurants(response.data);
+      });
+    }
+  }, [selectedOption, catName]);
+  
+
+  // useEffect(() => {
+  //   let cateName;
+  //   if (selectedOption) {
+  //     cateName = selectedOption;
+  //   } else {
+  //     cateName = catName;
+  //   }
+  //   const isCategorySelected = Boolean(cateName);
+  //   if (isCategorySelected) {
+  //   userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
+  //     console.log(response.data);
+
+  //     setrestaurants(response.data);
+  //   });
+  // } else {
+  //   restaurentAxios.get('/getRestaurents').then((response) => {
+  //     console.log(response.data, 'restaurent information');
+  //     setrestaurants(response.data);
+  // }, [selectedOption,catName]);
+
+  
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
@@ -76,7 +110,9 @@ const FilteredRestaurents = () => {
       <div className="bg-gray-100 w-3/4 ml-auto">
         <div className="py-10">
           <h1 className="font-sans font-semibold ml-8 flex items-center text-4xl">
-            {restaurants?.restaurants?.length}+ Restaurant
+            {/* {restaurants?.restaurants?.length}+ Restaurant */}
+            {restaurants?.restaurants?.length || restaurants?.data?.length || 0}+ Restaurant
+
           </h1>
           <div className="flex items-center pl-8 pt-6 ">
             <span className="border border-t-2 border-amber-500 w-10"></span>
@@ -88,8 +124,9 @@ const FilteredRestaurents = () => {
         <div className="container mx-auto px-8">
           <div className="text-3xl font-semibold mb-4 flex items-center justify-center"></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {restaurants?.restaurants?.map((item) => (
-              // console.log('RestaurentDatas',response.data.restaurants[1].restaurent.restaurantName);
+            {/* {restaurants?.restaurants?.|map((item) => ( */}
+            {(restaurants?.restaurants || restaurants?.data || []).map((item) => (
+
               <div
                 key={item._id}
                 className="mb-10 cursor-pointer bg-white"
@@ -106,7 +143,6 @@ const FilteredRestaurents = () => {
                 </div>
                 <div className="flex justify-between px-5 pb-5">
                   <h4 className="text-xl font-bold mt-2">
-                    {/* {item?.restaurant?.restaurantName} */}
                     {item?.restaurent?.restaurantName}
                   </h4>
                   <h4 className="text-xl font-bold mt-3 ml-auto mr-1">
