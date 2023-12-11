@@ -1,51 +1,54 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { menu } from "@material-tailwind/react";
-import { BiSolidBarChartSquare, BiSolidUserRectangle,BiFoodMenu,BiCategory } from 'react-icons/bi'
-import { AiOutlinePlusSquare } from 'react-icons/ai'
-import { MdSettingsApplications, MdOutlineFastfood } from 'react-icons/md'
+import {
+  BiSolidBarChartSquare,
+  BiSolidUserRectangle,
+  BiFoodMenu,
+  BiCategory,
+} from "react-icons/bi";
+import { AiOutlinePlusSquare } from "react-icons/ai";
+import { MdSettingsApplications, MdOutlineFastfood } from "react-icons/md";
 const App = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
     {
       title: "Dashboard",
-      icon: <BiSolidBarChartSquare/>,
+      icon: <BiSolidBarChartSquare />,
       url: "/restaurent/home",
     },
 
     {
       title: "Profile",
-      icon: <BiSolidUserRectangle/>,
+      icon: <BiSolidUserRectangle />,
       url: "/restaurent/restaurentProfile",
     },
     {
       title: "Category",
-      icon: <BiCategory/>,
+      icon: <BiCategory />,
       gap: true,
       url: "/restaurent/categoryAddingModal",
     },
     {
       title: "Add Menu Items ",
-      icon: <AiOutlinePlusSquare/>,
+      icon: <AiOutlinePlusSquare />,
       url: "/restaurent/addProduct",
     },
     {
       title: "Menu Items ",
-      icon: <MdOutlineFastfood/>,
+      icon: <MdOutlineFastfood />,
       url: "/restaurent/products",
     },
     {
       title: "Orders ",
-      icon: <BiFoodMenu/>,
+      icon: <BiFoodMenu />,
       url: "/restaurent/orders",
     },
     {
       title: "Logout ",
-      icon: <BiSolidUserRectangle/>,
+      icon: <BiSolidUserRectangle />,
       url: "/restaurent/logout",
     },
-  
-
     // { title: "Setting", src: "Setting" },
   ];
 
@@ -73,10 +76,9 @@ const App = () => {
               !open && "scale-0"
             }`}
           >
-            Hungry 
-            <span className='font-bold '>Hub </span>
+            Hungry
+            <span className="font-bold ">Hub </span>
           </h1>
-          
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
@@ -93,7 +95,7 @@ const App = () => {
                   alt="User"
                   className=" md:h-7 md:w-9 rounded-full"
                 /> */}
-                 <span className='text-2xl'>{Menu.icon}</span>
+                <span className="text-2xl">{Menu.icon}</span>
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}
                 >
