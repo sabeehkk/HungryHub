@@ -244,7 +244,7 @@ function Menu() {
                   className="menu-md dropdown-content mt-3 z-[1] p-2 shadow w-52  bg-gray-700 text-off-White"
                 >
                   <li className="font-semibold my-2 cursor-pointer "> */}
-                    {/* <button
+                {/* <button
                       type="button"
                       onClick={toggleDropdown}
                       className="flex items-center text-sm font-medium text-off-White hover:text-off-White focus:outline-none"
@@ -265,14 +265,13 @@ function Menu() {
                         />
                       </svg>
                     </button> */}
-                  {/* </li> */}
-                  {/* {isDropdownOpen &&
+                {/* </li> */}
+                {/* {isDropdownOpen &&
                     categories?.map((cate, indx) => (
                       <li key={indx}>{cate.name}</li>
                     ))} */}
                 {/* </ul> */}
               </div>
-           
             </div>
             {/* <div className="navbar-center hidden lg:flex">
               <input
@@ -374,111 +373,109 @@ function Menu() {
                 </li>
               </ul>
             </div> */}
-<div className="navbar-center hidden lg:flex flex items-center">
-  <input
-    type="text"
-    placeholder="Search an item..."
-    className="px-12 py-2 border rounded-sm focus:outline-none focus:right-1"
-    value={searchTerm}
-    onChange={(e) => setSearchTerm(e.target.value)}
-  />
-
-  <ul className="ml-40 menu menu-horizontal px-1 flex items-center">
-    <li className="font-semibold my-2 cursor-pointer">
-      {/* Category Dropdown */}
-      <section aria-labelledby="information-heading">
-        <div className="relative">
-          <button
-            type="button"
-            onClick={toggleDropdown}
-            className="flex items-center text-sm font-medium focus:outline-none"
-          >
-            {selectedCategory ? selectedCategory.name : "Category"}
-            <svg
-              className={`w-4 h-4 ml-2 transition-transform  ${
-                isDropdownOpen ? "" : "transform rotate-180"
-              }`}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
-                clipRule="evenodd"
+            <div className="navbar-center hidden lg:flex flex items-center">
+              <input
+                type="text"
+                placeholder="Search an item..."
+                className="px-12 py-2 border rounded-sm focus:outline-none focus:right-1"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-            </svg>
-          </button>
 
-          {isDropdownOpen && (
-            <div
-              className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
-              style={{ zIndex: 10 }}
-            >
-              {categories.map((option, index) => (
-                <div
-                  key={index}
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
-                  onClick={() => handleCategorySelection(index)}
-                >
-                  {option.name}
-                </div>
-              ))}
+              <ul className="ml-40 menu menu-horizontal px-1 flex items-center">
+                <li className="font-semibold my-2 cursor-pointer">
+                  {/* Category Dropdown */}
+                  <section aria-labelledby="information-heading">
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={toggleDropdown}
+                        className="flex items-center text-sm font-medium focus:outline-none"
+                      >
+                        {selectedCategory ? selectedCategory.name : "Category"}
+                        <svg
+                          className={`w-4 h-4 ml-2 transition-transform  ${
+                            isDropdownOpen ? "" : "transform rotate-180"
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+
+                      {isDropdownOpen && (
+                        <div
+                          className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
+                          style={{ zIndex: 10 }}
+                        >
+                          {categories.map((option, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
+                              onClick={() => handleCategorySelection(index)}
+                            >
+                              {option.name}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                </li>
+
+                <li className="font-semibold my-2 cursor-pointer">
+                  {/* Price Dropdown */}
+                  <section aria-labelledby="information-heading">
+                    <div className="relative">
+                      <button
+                        type="button"
+                        onClick={togglePriceDropdown}
+                        className="flex items-center text-sm font-medium focus:outline-none"
+                      >
+                        {selectedPrice ? selectedPrice.fieled : "Select Price"}
+                        <svg
+                          className={`w-4 h-4 ml-2 transition-transform ${
+                            isPriceDropdownOpen ? "" : "transform rotate-180"
+                          }`}
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+
+                      {isPriceDropdownOpen && (
+                        <div
+                          className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
+                          style={{ zIndex: 10 }}
+                        >
+                          {price.map((option, index) => (
+                            <div
+                              key={index}
+                              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
+                              onClick={() => handlePriceSelection(index)}
+                            >
+                              {option.fieled}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </section>
+                </li>
+              </ul>
             </div>
-          )}
-        </div>
-      </section>
-    </li>
-
-    <li className="font-semibold my-2 cursor-pointer">
-      {/* Price Dropdown */}
-      <section aria-labelledby="information-heading">
-        <div className="relative">
-          <button
-            type="button"
-            onClick={togglePriceDropdown}
-            className="flex items-center text-sm font-medium focus:outline-none"
-          >
-            {selectedPrice ? selectedPrice.fieled : "Select Price"}
-            <svg
-              className={`w-4 h-4 ml-2 transition-transform ${
-                isPriceDropdownOpen ? "" : "transform rotate-180"
-              }`}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M7.293 5.293a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L10 7.414l-2.293 2.293a1 1 0 01-1.414-1.414l3-3z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-
-          {isPriceDropdownOpen && (
-            <div
-              className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
-              style={{ zIndex: 10 }}
-            >
-              {price.map((option, index) => (
-                <div
-                  key={index}
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100 cursor-pointer text-left"
-                  onClick={() => handlePriceSelection(index)}
-                >
-                  {option.fieled}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-    </li>
-  </ul>
-</div>
-
-
           </div>
         </div>
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
@@ -502,7 +499,6 @@ function Menu() {
                   style={{ backgroundImage: `url(${prod?.images[0]})` }}
                 >
                   <div className="flex flex-col justify-end h-full"></div>
-
                   <button
                     onClick={() => handleProducData(prod._id)}
                     className="text-white py-1.5 px-1 rounded-sm  "
