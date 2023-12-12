@@ -164,3 +164,13 @@ export const editAddress =async (req, res) => {
     });
   }
 }
+
+export const WalletPrice = async (req,res)=>{
+  console.log('inside wallet price');
+  try {
+        const foundWalletPrice = await userModel.find({})
+        console.log(foundWalletPrice,'foundedWalletPrice');
+  } catch (error) {
+     console.log(error);
+  }
+}

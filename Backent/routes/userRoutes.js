@@ -15,6 +15,7 @@ import {
   addAddress,
   editAddress,
   getUserData,
+  WalletPrice
 } from "../controller/user/userController.js";
 import {
   getCategories,
@@ -65,11 +66,12 @@ router.patch("/editAddress", VerifyToken, editAddress);
 
 router.post("/order", Order);
 router.patch('/cancelOrder',cancelOrder)
-router.get('/getOrderHistory', getOrders);
+router.get('/getOrderHistory', getOrders)
 router.get('/orderItems',getOrderItems)
+router.get('/walletPrice',WalletPrice)
 
 // router.patch('/cancelOrder',cancelOrder)
-
+  
 //restaurnet Product list
 
 export default router;
