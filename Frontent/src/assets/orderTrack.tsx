@@ -9,7 +9,10 @@ import { userAxios } from "../axios/axios";
 
 import { useSelector } from "react-redux";
 
-const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
+const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
+
+  console.log(address,'address in track');
+  
         
   const [trackingStatus, setTrackingStatus] = useState([]);
   const [userRating, setUserRating] = useState(0);
@@ -123,10 +126,21 @@ const OrderTrack = ({ isOpen, closeModal, orderItem }) => {
                 
               </div>
               <div className="pt-7">
-                <h1 className="text-sm font-bold">Billing Address.</h1>
-                <div>
-                </div>
-              </div>
+  <h1 className="text-sm font-bold">Billing Address.</h1>
+  
+  {address
+    ? (
+      <div>
+        Address: {`${address[0]?.street}, ${address[0]?.city}, ${address[0]?.state}, ${address[0]?.postalCode}`}
+      </div>
+    )
+    : (
+      <div>
+        Address information not available
+      </div>
+    )
+  }
+</div>
             </div>
             {trackingStatus[3]?.completed ? (
 

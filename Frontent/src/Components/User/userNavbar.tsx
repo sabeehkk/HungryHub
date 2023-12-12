@@ -7,6 +7,8 @@ import { MdFavorite, MdHelp } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
 import { MdHome } from "react-icons/md";
 import { BiFoodMenu } from 'react-icons/bi'
+import {  MdOutlineFastfood } from "react-icons/md";
+
 
 
 import { Link } from "react-router-dom";
@@ -86,9 +88,15 @@ const UserNavbar = () => {
               </Link>
             </li>
           
-            <li className="text-xl py-4 flex gap-x-2 items-center">
+            {/* <li className="text-xl py-4 flex gap-x-2 items-center">
               <FaWallet size={25} className="mr-4" />
-              Wallet
+              Restaurants
+            </li> */}
+             <li className="text-xl py-4 flex gap-x-2 items-center">
+            <Link to="/filterShops" className="flex items-center">
+            <MdOutlineFastfood size={25} className="mr-4" />
+            Restaurants
+              </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
               <MdHelp size={25} className="mr-4" />

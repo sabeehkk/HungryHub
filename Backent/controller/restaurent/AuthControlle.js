@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 export const signup =async (req,res)=>{
     try{
         console.log(req.body);
-        const {name, email, phoneNumber, password} = req.body ;
+        const {name, email, phoneNumber, password,place} = req.body ;
         // const existRestorent = await restaurentModel.find({email,phoneNumber})
         // if(existRestorent.length !==0){
         //       return res.json({message:'Restaurent Already exists'})
@@ -24,7 +24,7 @@ export const signup =async (req,res)=>{
         }
 
         const hashedPassword = await bcrypt.hash(password,10)
-        const restaurent=new restaurentModel({restaurantName:name,email,phoneNumber,password:hashedPassword})
+        const restaurent=new restaurentModel({restaurantName:name,email,phoneNumber,password:hashedPassword,place:place})
         console.log('restaurentttt',restaurent);
         res.json({message:'success'})
     

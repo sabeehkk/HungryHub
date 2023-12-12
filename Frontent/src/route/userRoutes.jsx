@@ -25,7 +25,6 @@ import CartPage from '../Components/User/cart.tsx'
 import DummyCart from '../utils/cartDupe.tsx'
 import CheckoutPage from '../Components/User/checkout.tsx';
 import SuccessPage from '../Components/User/OrderSuccess.tsx';
-import CheckoutDummy from '../utils/checkoutDummy.tsx'
 import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx'
@@ -198,16 +197,6 @@ const UserRoute = {
       )
     },
     
-    {
-      path:"/checkoutDummy",
-      element:(
-        <>
-        <UserNavbar/>
-        <CheckoutDummy/>  
-
-        </>
-      )
-    },
     { 
       path: "/payment-success/:orderId",
       element: (

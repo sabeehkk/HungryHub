@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
-import OrderTrack from "../../assets/orderTrack";
+// import OrderTrack from "../../assets/orderTrack";
 // import Loader from "../../assets/Loader";
 
 function Orders() {
@@ -24,6 +24,8 @@ function Orders() {
   const navigate = useNavigate()
 //   const user = useSelector((state) => state.user);
 const user =useSelector((state)=>state.userAuth);
+console.log(orderItem, 'orderItem in history');
+
 
 
   useEffect(() => {
@@ -151,11 +153,13 @@ const user =useSelector((state)=>state.userAuth);
                         <button className="text-green-700" onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
                         </td>
                       </tr>
-                      <OrderTrack
+                      {/* <OrderTrack
                         isOpen={isModalOpen}
                         closeModal={closeModal}
                         orderItem={itemData}
-                      />
+                      address={orderItem?.address}
+
+                      /> */}
                     </Fragment>
                           }
                           </>

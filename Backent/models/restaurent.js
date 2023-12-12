@@ -17,6 +17,9 @@ const restaurentSchema = new mongoose.Schema({
         type :String,
         required :true ,
     },
+    place:{
+        type:String
+    },
     address :{
         type : String,
         trim : true ,

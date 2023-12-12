@@ -174,7 +174,8 @@ const FilteredRestaurents = () => {
                   <div className="flex items-center justify-start">
                     <img
                       src={
-                        "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      item.restaurent?.profilePicture || item.profilePicture
+
                       }
                       alt={item.restaurent?.restaurantName}
                       className="w-10 h-10 rounded-full"
@@ -190,7 +191,7 @@ const FilteredRestaurents = () => {
                     <div className="flex items-center">
                       <ImLocation2 className="text-blue-700 text-xl" />
                       <h4 className="text-lg text-gray-500">
-                        {/* {item.restaurant.Place} */}
+                        {item.restaurent?.place ||item?.place}
                       </h4>
                     </div>
                   </div>

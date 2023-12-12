@@ -11,6 +11,7 @@ export default function Signup() {
   const [password, setPassword] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<number | string>("");
+  const [place, setPlace] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -22,8 +23,9 @@ export default function Signup() {
       email,
       password,
       phoneNumber,
+      place
     });
-    if (email.trim() === "" || password.trim() === "" || name.trim() === "") {
+    if (email.trim() === "" || password.trim() === "" || name.trim() === "" || place.trim() === "") {
       return ErrorMessage("Please fill in all the required fields.");
     }
     if (phoneNumber !== null && phoneNumber.toString().length !== 10) {
@@ -41,6 +43,7 @@ export default function Signup() {
           password,
           name,
           phoneNumber,
+          place
         })
         .then((res) => {
           console.log(res.data);
@@ -128,6 +131,21 @@ export default function Signup() {
               placeholder="Enter Phone Number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
+              // required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-gray-600 font-bold">
+              Place
+            </label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              className=" px-4 py-2 border  focus:outline-none focus:ring focus:border-blue-500 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-300 dark:border-gray-300 white:placeholder-gray-400"
+              placeholder="Enter your Place"
+              value={place}
+              onChange={(e) => setPlace(e.target.value)}
               // required
             />
           </div>

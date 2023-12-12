@@ -40,13 +40,13 @@ const fetchRestaurent = async () => {
   return (
     <>
     <div>
-    <h1 className="mt-5 font-sans text-amber-500 font-bold tracking-wider flex items-center justify-center md:text-lg pb-3 text-xs">
+    {/* <h1 className="mt-5 font-sans text-amber-500 font-bold tracking-wider flex items-center justify-center md:text-lg pb-3 text-xs">
       TOP RESTAURANTS
-    </h1>
-    <h1 className="font-sans font-bold flex items-center justify-center md:text-5xl text-xl text-gray-400">
+    </h1> */}
+    <h1 className="mt-2 font-sans font-bold flex items-center justify-center md:text-5xl text-xl text-gray-400">
       Most Featured Restaurant
     </h1>
-    <div className="flex items-center justify-center pt-6 ">
+    <div className="flex items-center justify-center pt-3 ">
       <span className="border border-t-2 border-amber-500 w-10"></span>
       <span className="border border-t-2 border-amber-500 w-1 ml-1"></span>
       <span className="border border-t-2 border-amber-500 w-1  ml-1"></span>
@@ -69,7 +69,7 @@ const fetchRestaurent = async () => {
                     <div className="flex items-center">
                       <ImLocation2 className="text-blue-500 text-xl" />
                       <h4 className="ml-2 text-lg text-white">
-                        {/* {item.restaurant.Place} */}{'Areekode'}
+                        {/* {item.restaurant.Place} */}{restaurant.place}
                       </h4>
                     </div>
         </div>

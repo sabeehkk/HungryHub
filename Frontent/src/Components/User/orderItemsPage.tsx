@@ -29,12 +29,17 @@ function OrderItems() {
   useEffect(() => {
     userAxios.get(`/orderItems?id=${ordId}`).then((response) => {
       const items = response?.data?.orderItems;
-      console.log(items,'orderItems in more view');
+      console.log(items,'orderItems in more view items');
       
       setOrderItem(items);
       setIsLoading(false)
     });
   }, [is_chage]);
+
+  console.log(orderItem,'orderItems in more view');
+  console.log(itemData,'item data in mo');
+  
+  
 
   const openModal = (ele) => {
     setIsModalOpen(true);
@@ -158,6 +163,8 @@ function OrderItems() {
                       isOpen={isModalOpen}
                       closeModal={closeModal}
                       orderItem={itemData}
+                      address={orderItem?.address}
+
                     />
                   </Fragment>
                 <tr className="px-6 py-2 whitespace-nowra justify-between items-end">
