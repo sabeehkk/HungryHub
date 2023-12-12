@@ -217,6 +217,8 @@ const UserRoute = {
       path:"/orders",
       element: (
         <>
+          <IsLogged />
+
           <UserNavbar />
           <OrderHistory />
         </>
@@ -226,6 +228,8 @@ const UserRoute = {
       path: "/orderItems/:ordId",
       element: (
         <>
+          <IsLogged />
+
           <UserNavbar />
           <OrderItemsPage />
         </>
