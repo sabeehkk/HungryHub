@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 // import RestaurantAxios from "../Axios/RestaurantAxios";
 import { restaurentAxios } from "../axios/axios";
+import { ErrorMessage } from "../utils/util";
 
 const BillModal = ({ isOpen, closeModal, orderItem }) => {
 
@@ -43,19 +44,25 @@ console.log(restaurant,'restaruent details in billmodal');
   
 
   useEffect(() => {
-    restaurentAxios.get(`/getResProfile?id=${restaurant_id}`).then(
-      (response) => {
-        setResData(response.data.restData);
-        setAddress({
-          street: response.data.restData?.Address?.street,
-          city: response.data.restData?.Address?.city,
-          state: response.data.restData?.Address?.state,
-          postalCode: response.data.restData?.Address?.postalCode,
-        });
-        setImage(response.data.restData?.Image);
-      }
-    );
-  }, []);
+    if (!restaurant.restaurent || !restaurant.restaurent._id) {
+      return 
+        }else{
+          restaurentAxios.get(`/getResProfile?id=${restaurant_id}`).then(
+            (response) => {
+              setResData(response.data.restData);
+              setAddress({
+                street: response.data.restData?.Address?.street,
+                city: response.data.restData?.Address?.city,
+                state: response.data.restData?.Address?.state,
+                postalCode: response.data.restData?.Address?.postalCode,
+              });
+              setImage(response.data.restData?.Image);
+            }
+          );
+        }
+
+        }, []);
+
 
   return (
     <div
