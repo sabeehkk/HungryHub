@@ -130,12 +130,17 @@ const FilteredRestaurents = () => {
               <div
                 key={item._id}
                 className="mb-10 cursor-pointer bg-white"
-                onClick={() => navigate(`/menu/${item.restaurent._id}`)}
+                // onClick={() => navigate(`/menu/${item.restaurent._id || item._id}`)}
+                // onClick={() => navigate(`/menu/${item.restaurent._id || item._id}`)}
+                onClick={() => navigate(`/menu/${item.restaurent?._id || item._id}`)}
+
+
               >
                 <div className="flex items-center justify-between">
                   <img
                     src={
-                      "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      item.restaurent?.profilePicture || item.profilePicture
+                     
                     }
                     alt={item.name}
                     className="w-full h-44"
@@ -143,7 +148,7 @@ const FilteredRestaurents = () => {
                 </div>
                 <div className="flex justify-between px-5 pb-5">
                   <h4 className="text-xl font-bold mt-2">
-                    {item?.restaurent?.restaurantName}
+                    {item?.restaurent?.restaurantName||item?.restaurantName}
                   </h4>
                   <h4 className="text-xl font-bold mt-3 ml-auto mr-1">
                     {/* {ratingsMap[item.restaurant._id] !== undefined ? (
