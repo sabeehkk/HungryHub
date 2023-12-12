@@ -15,7 +15,6 @@ import {
   addAddress,
   editAddress,
   getUserData,
-  WalletPrice
 } from "../controller/user/userController.js";
 import {
   getCategories,
@@ -52,8 +51,8 @@ router.patch(
 );
 router.get("/getUserData", getUserData);
 
-router.get("/getCategoryies", VerifyToken, getCategories);
-router.get("/getcatRestaurents", VerifyToken, getRestWithCategory);
+router.get("/getCategoryies", getCategories);
+router.get("/getcatRestaurents", getRestWithCategory);
 
 router.get("/getProuductDetail", getProductData);
 router.post("/addToCart", VerifyToken, addToCart);
@@ -68,9 +67,7 @@ router.post("/order", Order);
 router.patch('/cancelOrder',cancelOrder)
 router.get('/getOrderHistory', getOrders)
 router.get('/orderItems',getOrderItems)
-router.get('/walletPrice',WalletPrice)
 
-// router.patch('/cancelOrder',cancelOrder)
   
 //restaurnet Product list
 

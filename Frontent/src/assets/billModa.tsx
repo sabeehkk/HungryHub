@@ -85,12 +85,16 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="embed-container flex justify-between">
             <div>
+            <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
+
               <div className="flex">
-                <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
-                <h1 className="italic font-semibold">{resData.Place}sdkfaslkdf</h1>
-                <h1 className="italic font-semibold">{address.city}skdfadl</h1>
-                <h1 className="italic font-semibold">{address.postalCode}lolooooooooooooo</h1>
+                <div className="w-80">
+                <h1 className="italic font-semibold">{resData.place }</h1>
+                <h1 className="italic font-semibold">{address.city}</h1>
+                <h1 className="italic font-semibold">{address.postalCode}</h1>
                 <h1 className="italic font-semibold">{resData.phoneNumber}</h1>
+                </div>
+               
               </div>
               <div className="pt-7">
                 <h1 className="text-sm font-bold">Billing Address.</h1>

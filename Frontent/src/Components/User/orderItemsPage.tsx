@@ -76,27 +76,29 @@ function OrderItems() {
   };
 
   return (
-    <div className="p-10">
+    // <div className="p-10">
+    <div className="bg-gray-50 p-10 flex flex-col">
+
     <div className="flex items-center justify-center pb-2 text-2xl font-semibold italic underline"><h1>Order Items</h1></div>
       <div className="border md:flex">
         <div className="h-full w-full">
           <div className="w-full overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className=" bg-table-blue text-off-White">
+            <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
+              <thead className=" bg-gray-100">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     PRODUCT
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     QUANTITY
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     RATE
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     PRICE
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -105,7 +107,8 @@ function OrderItems() {
               <tbody className="bg-white divide-y divide-gray-200 border">
                   <Fragment>
                     {orderItem?.item.map((ele) => (
-                      <tr key={ele._id}>
+                      <tr key={ele._id}
+                      className="transition-all hover:bg-gray-50">
                         <td
                           className="flex px-6 py-2 whitespace-nowrap"
                           onClick={() => openModal(ele)}
@@ -151,7 +154,9 @@ function OrderItems() {
                             </button>):(
                             <button
                               onClick={() => cancelOrder(orderItem._id,ele._id)}
-                              className="text-red-600 hover:text-red-900"
+                              // className="text-red-600 hover:text-red-900"
+                       className="p-1 w-20  border border-transparent text-white rounded bg-red-500 shadow-md hover:bg-red-400"
+
                             >
                               Cancel
                             </button>)

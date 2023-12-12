@@ -220,7 +220,7 @@ function OrdersItems() {
                     </select>
                   )}
                 </td>
-                <td className="px-6 py-2 whitespace-nowrap flex justify-center">
+                <td className=" px-6 py-4 whitespace-nowrap flex ">
                   {ele.orderStatus === "Delivered" ? (
                     <div className="bg-green-500 text-white rounded-full p-2">
                       <svg
@@ -243,8 +243,10 @@ function OrdersItems() {
                   ) : (
                     <button
                       onClick={() => cancelOrder(orderItem._id, ele._id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
+                      // className="text-red-600 hover:text-red-900"
+                       className="p-1 w-20  border border-transparent text-white rounded bg-red-500 shadow-md hover:bg-red-400"
+                   
+                   >
                       Cancel
                     </button>
                   )}

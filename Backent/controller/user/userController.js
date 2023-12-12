@@ -116,6 +116,8 @@ export const addAddress = async(req,res)=>{
 
 export const getUserData =async (req,res)=>{
   try {
+    console.log(req.query,'getUserData');
+
     const user = await userModel.findById(req.query.id);
     if (user) {
       res.status(200).send({
@@ -165,12 +167,3 @@ export const editAddress =async (req, res) => {
   }
 }
 
-export const WalletPrice = async (req,res)=>{
-  console.log('inside wallet price');
-  try {
-        const foundWalletPrice = await userModel.find({})
-        console.log(foundWalletPrice,'foundedWalletPrice');
-  } catch (error) {
-     console.log(error);
-  }
-}

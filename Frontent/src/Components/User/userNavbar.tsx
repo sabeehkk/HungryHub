@@ -98,10 +98,10 @@ const UserNavbar = () => {
             Restaurants
               </Link>
             </li>
-            <li className="text-xl py-4 flex gap-x-2 items-center">
+            {/* <li className="text-xl py-4 flex gap-x-2 items-center">
               <MdHelp size={25} className="mr-4" />
               Help
-            </li>
+            </li> */}
             <li className="text-xl py-4 flex gap-x-2 items-center">
             <Link to="/employee/login" className="flex items-center">
             <TbTruckDelivery size={25} className="mr-4" />

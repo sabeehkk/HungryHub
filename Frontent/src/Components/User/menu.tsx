@@ -22,6 +22,8 @@ function Menu() {
   const [item, setsetItem] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log(filterdProducts,'filterdProducts');
+  
   const [size, setSize] = useState(1);
 
   const price = [
@@ -158,7 +160,9 @@ function Menu() {
 
     if (priceSelected) {
       const pricedProd = product?.map((variant) => {
+        
         const filteredVariants = variant.variants.filter((priceBetween) => {
+
           return (
             priceBetween.price >= priceSelected.startedAt &&
             priceBetween.price < nearestPrice
@@ -166,6 +170,8 @@ function Menu() {
         });
         return { ...variant, variants: filteredVariants };
       });
+      console.log(pricedProd,'selected product');
+
       togglePriceDropdown();
       setFilterdProducts(pricedProd);
     } else {
@@ -183,7 +189,7 @@ function Menu() {
               <h3 className="ml-8 text-3xl font-bold italic text-black">
                 {restData?.restData.restaurantName}
               </h3>
-              <div className="border rounded-sm px-3 py-1 shadow-md bg-white">
+              <div className="border rounded-sm px-3  shadow-md bg-white">
                 <div className="flex ">
                   <h4 className="text-xl font-bold ml-auto mr-1">
                     {/* {restData?.ratings[0]?.averageRating} */}
@@ -196,17 +202,15 @@ function Menu() {
                 <div className="font-lobster text-gray-500">N/A</div>
               </div>
             </div>
-            <div className="">
+            {/* <div className=""> */}
               <h4 className="ml-8 text-lg text-gray-500 ">
                 Info : {restData?.restData.phoneNumber}
               </h4>
-              <h4 className="text-lg text-gray-500">
-                {restData?.restData.Place}
+              <h4 className="ml-8 text-lg text-gray-500">
+                {restData?.restData.place}
               </h4>
-              <h4 className="text-lg text-gray-500">
-                {restData?.Address?.state}
-              </h4>
-            </div>
+           
+            {/* </div> */}
           </div>
           <div className="border border-gray-300 h-2 bg-gray-300"></div>
         </div>
@@ -285,13 +289,7 @@ function Menu() {
                   </div>
                 </div>
               </div>
-              {/* <input
-                type="text"
-                placeholder="Search an item..."
-                className="px-12 py-2 border rounded-sm focus:outline-none focus:right-1"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              /> */}
+            
 
               <ul className=" ml-70 menu menu-horizontal px-1 flex items-center">
                 <li className=" font-semibold my-2 cursor-pointer mr-">
@@ -392,6 +390,7 @@ function Menu() {
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
 
         {filterdProducts?.length !== 0 ? (
+          
           filterdProducts?.map((prod) => (
             <div className="p-2" key={prod._id}>
               <div className="mb-10 sm:flex sm:justify-between block">
@@ -424,7 +423,10 @@ function Menu() {
           ))
         ) : (
           <div className="pb-8 mb-5">
-            {currentItems?.map((prod) => (
+            {filterdProducts !== null && filterdProducts?.length === 0 ? (
+      <p>No matching products found.</p>
+    ) : (
+            currentItems?.map((prod) => (
               <div className="pb-2" key={prod._id}>
                 <div className="mb-10 sm:flex sm:justify-between block">
                   <div className="">
@@ -454,7 +456,8 @@ function Menu() {
                 </div>
                 <div className="border border-gray-500"></div>
               </div>
-            ))}
+            ))
+          )}
           </div>
         )}
       </div>

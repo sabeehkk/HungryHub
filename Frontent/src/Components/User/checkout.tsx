@@ -230,7 +230,7 @@ const Checkout = (initPayment) => {
               Billing Address
             </label>
             <div className="w-full lg:p-10 leading-loose">
-              <label className="block text-sm font-medium text-gray-700 underline">
+              {/* <label className="block text-sm font-medium text-gray-700 underline">
                 Select Address:
               </label>
               <div className="relative">
@@ -240,6 +240,8 @@ const Checkout = (initPayment) => {
                   className=" block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 text-left" // Set text-left here
                   style={{ direction: "rtl", textAlign: "left" }} // Set direction and textAlign
                 >
+                    <option value="" disabled>Select an address</option>
+
                   {address?.map((elem, index) => (
                     <option
                       style={{ textAlign: "left" }}
@@ -251,7 +253,40 @@ const Checkout = (initPayment) => {
                       }, ${elem?.state}, ${elem?.postalCode}`}
                     </option>
                   ))}
-                </select>
+                </select> */}
+                <label className="block text-sm font-medium text-gray-700 underline">
+  Select Address:
+</label>
+<div className="relative">
+<select
+  value={address.length === 1 ? 0 : selectedAddressIndex !== -1 ? selectedAddressIndex : ""}
+  onChange={(e) => handleSelectChange(e.target.value)}
+  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 text-left"
+  style={{ direction: "rtl", textAlign: "left" }}
+>
+  {/* Initial option or placeholder */}
+  {address.length === 1 && (
+    <option value={0} selected>
+      {`${users?.user?.name || ""} ,${address[0]?.street}, ${address[0]?.city}, ${address[0]?.state}, ${address[0]?.postalCode}`}
+    </option>
+  )}
+
+  {address.length > 1 && (
+    <option value="" disabled hidden>Select an address</option>
+  )}
+
+  {address?.map((elem, index) => (
+    <option
+      style={{ textAlign: "left" }}
+      key={index}
+      value={index}
+    >
+      {`${users?.user?.name || ""} ,${elem?.street}, ${elem?.city}, ${elem?.state}, ${elem?.postalCode}`}
+    </option>
+  ))}
+</select>
+
+
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                   {/* You can add an arrow or any other icon here */}
                   <svg

@@ -68,32 +68,34 @@ console.log(orderItem, 'orderItem in history');
   };
 
   return (
-    <div className="p-10">
+    // <div className="p-10">
+    <div className="bg-gray-50 p-10 flex flex-col">
+
       <div className="flex items-center justify-center pb-2 text-2xl font-semibold italic underline">
         <h1>Orders</h1>
       </div>
-      <div className="border md:flex">
+      <div className="border md:flex ">
         <div className="h-full w-full">
           <div className="w-full overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className=" bg-table-blue text-off-White">
+            <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
+              <thead className=" bg-gray-100">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Order Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Total Items
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Payment Type
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Total Amount
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     
                   </th>
                 </tr>
@@ -111,7 +113,10 @@ console.log(orderItem, 'orderItem in history');
                     <>
                     {item.item.length !== 0 &&
                       <Fragment>
-                      <tr key={item._id}>
+                      <tr key={item._id}
+                className="transition-all hover:bg-gray-50">
+                
+                        
                         <td
                           className="flex px-6 py-2 whitespace-nowrap"
                         >
@@ -150,7 +155,8 @@ console.log(orderItem, 'orderItem in history');
                           )}
                         </td>
                         <td className="px-6 py-2 whitespace-nowrap">
-                        <button className="text-green-700" onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
+                        <button                           className="bg-teal-500 border-none text-white"
+ onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
                         </td>
                       </tr>
                       {/* <OrderTrack
