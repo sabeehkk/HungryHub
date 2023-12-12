@@ -185,6 +185,7 @@ function OrdersItems() {
                       onChange={(e) =>
                         updateDeliveryStatus(ele._id, e.target.value)
                       }
+                      disabled={ele.orderStatus === "Delivered"}
                     >
                       <option
                         className="bg-white text-black hover:bg-gray-400"
