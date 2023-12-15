@@ -12,7 +12,6 @@ import { BsFillTagsFill } from "react-icons/bs";
 
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
-  console.log(user._id,'userdatas');
   
 
   const [selectedImage, setSelectedImage] = useState(null);
@@ -41,7 +40,7 @@ const UserProfile=()=> {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    userAxios.get(`/getUserData?id=${user._id}`).then((response) => {
+    userAxios.get(`/getUserData?id=${user?._id}`).then((response) => {
       console.log(response.data,'fetched data');
       
       setUserData(response.data);

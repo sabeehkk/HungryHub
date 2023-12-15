@@ -163,7 +163,7 @@ function OrdersItems() {
                     alt=""
                     className="h-10 w-14 mr-10 rounded-sm"
                   />
-                  {ele.product?.name}
+                  {ele.product?.productName}
                 </td>
                 <td className="px-6 py-2 whitespace-nowrap">
                   {ele?.quantity}

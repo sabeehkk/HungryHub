@@ -203,9 +203,9 @@ function Menu() {
               </div>
             </div>
             {/* <div className=""> */}
-              <h4 className="ml-8 text-lg text-gray-500 ">
+              {/* <h4 className="ml-8 text-lg text-gray-500 ">
                 Info : {restData?.restData.phoneNumber}
-              </h4>
+              </h4> */}
               <h4 className="ml-8 text-lg text-gray-500">
                 {restData?.restData.place}
               </h4>
@@ -388,8 +388,40 @@ function Menu() {
           </div>
         </div>
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
-
-        {filterdProducts?.length !== 0 ? (
+        {searchTerm === "" ? (
+  // Show all products when no search term is present
+  currentItems?.map((prod) => (
+    <div className="pb-2" key={prod._id}>
+      <div className="mb-10 sm:flex sm:justify-between block">
+        <div className="">
+          <h4 className="text-xl font-bold mt-2">
+            {prod.productName}
+          </h4>
+          <h4 className="text-lg text-gray-500">
+            {prod.description}
+          </h4>
+          <h4 className="text-lg text-gray-500">
+            {/* Best Price :₹ {prod.variants[0]?.offerPrice} */}
+          </h4>
+        </div>
+        <div
+          className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
+          style={{ backgroundImage: `url(${prod?.images[0]})` }}
+        >
+          <div className="flex flex-col justify-end h-full"></div>
+          <button
+            onClick={() => handleProducData(prod._id)}
+            className="text-white py-1.5 px-1 rounded-sm"
+            style={{ backgroundColor: "#CC252C", border: "none" }}
+          >
+            Buy Now
+          </button>
+        </div>
+      </div>
+      <div className="border border-gray-500"></div>
+    </div>
+  ))
+       ) : filterdProducts?.length !== 0 ? (
           
           filterdProducts?.map((prod) => (
             <div className="p-2" key={prod._id}>

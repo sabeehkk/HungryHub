@@ -229,7 +229,6 @@ const UserRoute = {
       element: (
         <>
           <IsLogged />
-
           <UserNavbar />
           <OrderItemsPage />
         </>

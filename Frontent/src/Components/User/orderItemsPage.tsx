@@ -39,8 +39,6 @@ function OrderItems() {
   console.log(orderItem,'orderItems in more view');
   console.log(itemData,'item data in mo');
   
-  
-
   const openModal = (ele) => {
     setIsModalOpen(true);
     setItemDta(ele)
@@ -119,7 +117,7 @@ function OrderItems() {
                             className="h-10 w-10 mr-10"
                           />
 
-                          {ele.product?.name}
+                          {ele.product?.productName}
                         </td>
                         <td className="px-6 py-2 whitespace-nowrap">
                           {ele?.quantity}

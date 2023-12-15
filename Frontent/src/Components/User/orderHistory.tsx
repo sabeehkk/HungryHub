@@ -80,6 +80,7 @@ console.log(orderItem, 'orderItem in history');
             <table className="min-w-full divide-y divide-gray-200 bg-table-blue">
               <thead className=" bg-gray-100">
                 <tr>
+                 
                   <th className="px-6 py-3 text-left text-xs font-bold  uppercase tracking-wider">
                     Order Date
                   </th>
@@ -115,7 +116,8 @@ console.log(orderItem, 'orderItem in history');
                       <Fragment>
                       <tr key={item._id}
                 className="transition-all hover:bg-gray-50">
-                
+
+                  
                         
                         <td
                           className="flex px-6 py-2 whitespace-nowrap"

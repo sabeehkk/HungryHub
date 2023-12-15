@@ -117,6 +117,12 @@ export const addAddress = async(req,res)=>{
 export const getUserData =async (req,res)=>{
   try {
     console.log(req.query,'getUserData');
+    // if(req.query.id === undefined){
+    //   return res.status(400).send({
+    //     success: false,
+    //     message: "User ID is missing",
+    //   });
+    // }
 
     const user = await userModel.findById(req.query.id);
     if (user) {
