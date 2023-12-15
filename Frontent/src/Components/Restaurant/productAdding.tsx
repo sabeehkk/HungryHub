@@ -333,7 +333,7 @@ const AddProduct: React.FC = () => {
             /> */}
           </div>
           <div className="md:w-1/2">
-            <label htmlFor="restId" className="block font-medium">
+            {/* <label htmlFor="restId" className="block font-medium">
               Restaurant ID
             </label>
             <input
@@ -342,7 +342,22 @@ const AddProduct: React.FC = () => {
               value={restId}
               readOnly
               className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-            />
+            /> */}
+            {/* <label htmlFor="restId" className="block font-medium 
+/>">
+  Restaurant ID
+</label> */}
+<input
+  type="text"
+  id="restId"
+  value={restId}
+  readOnly
+  className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+  style={{ display: 'none' }}
+/>
+<label htmlFor="price" className="block font-medium">
+          Product Image
+          </label>
 
             <div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
               <div className="flex flex-wrap">

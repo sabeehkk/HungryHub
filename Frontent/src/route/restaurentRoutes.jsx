@@ -6,7 +6,6 @@ import Home from "../Components/Restaurant/Home" ;
 import { ToastContainer, toast } from "react-toastify" ;
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Pages/Restaurent/restaurentNavbar";
-// import FoodAdd from "../Components/Restaurant/foodAdding";
 // import UserNavbar from "../Components/User/userNavbar";
 import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
