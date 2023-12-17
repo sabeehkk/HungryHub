@@ -133,6 +133,7 @@ export const getOrderItems = async (req, res) => {
       success: true,
       orderItems,
     });
+    console.log(orderItems,'orderItems');
   } catch (error) {
     console.log(error);
     res.status(500).send({

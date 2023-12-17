@@ -6,8 +6,9 @@ import ChatBox from "./chatBox";
 import { io } from "socket.io-client";
 import Loading from "../loading";
 
-const BACKEND_URL = import.meta.env.VITE_USER_BACKEND_URL;
-const socket = io(BACKEND_URL);
+const VITE_USER_BACKEND_URLL = import.meta.env.VITE_USER_BACKEND_URLL;
+const socket = io(VITE_USER_BACKEND_URLL);
+console.log(socket,'socket datass');
 
 const Chat = ({ role }) => {
   console.log(role,'inside  chat rol')
@@ -26,6 +27,7 @@ const Chat = ({ role }) => {
 
 
   console.log(currentUserId,'curentuserid');
+  console.log(chats,'chatsssssssssss');
   
 
   console.log(recieveMessage,'recived message');

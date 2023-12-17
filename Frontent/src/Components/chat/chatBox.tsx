@@ -13,11 +13,18 @@ const ChatBox = ({
   setSendMessage,
   recieveMessage,
 }) => {
+  console.log(currentUserId,'currentUserId inside chatbox');
+  console.log(role,'role inside chatbox');
+  console.log(setSendMessage,'setSendMessage inside chatbox');
+  console.log(recieveMessage,'recieveMessage inside chatbox');
+  
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const chatBodyRef = useRef(null);
 
   const getMessage = async (chatId) => {
+    console.log('getmessage function called');
+    
     const data = await getMessageAPI(chatId);
     setMessages([...data]);
   };
@@ -83,7 +90,7 @@ const ChatBox = ({
               ref={chatBodyRef}
             >
               {messages &&
-                messages.map((message, index) => (
+                messages.map((message, index) => (  
                   <div
                     key={message._id}
                     className={`message ${

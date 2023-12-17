@@ -20,6 +20,7 @@ export const addMessage = async (req, res) => {
 };
 
 export const getMessage = async (req, res) => {
+  console.log('inside getMessage function called');
   try {
     const result = await messageModel.find({ chatId: req.params.chatId });
     res.json({ message: "success", result });
