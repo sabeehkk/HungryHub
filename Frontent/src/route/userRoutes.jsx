@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Signup from "../Pages/User/UserRegister";
 import Login from "../Pages/User/login";
 // import Home from '../Components/User/HomePage'
-import IsLogout from "../middleware/user/isLogout";
+import IsLogout from "../middleware/user/isLogout" ;
 // import Navbar from '../Components/navbar'
 import { ToastContainer, toast } from "react-toastify";
 import OtpVerification from "../Components/User/otpVerification";
@@ -27,7 +27,8 @@ import CheckoutPage from '../Components/User/checkout.tsx';
 import SuccessPage from '../Components/User/OrderSuccess.tsx';
 import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
-import OrderItemsPage from '../Components/User/orderItemsPage.tsx'
+import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
+import Chat from '../Components/chat/chat.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -233,6 +234,15 @@ const UserRoute = {
           <OrderItemsPage />
         </>
       ),
+    },
+    {
+      path:"/chat",
+      element:(
+        <>
+        <UserNavbar/>
+        <Chat role={"user"}/>
+        </>
+      )
     }
   ],
 };

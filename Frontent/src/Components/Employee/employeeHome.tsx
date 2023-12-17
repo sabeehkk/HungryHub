@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-function employeeHome() {
+function EmployeeHome() {
   return (
 
     <>
@@ -11,4 +11,4 @@ function employeeHome() {
   )
 }
 
-export default employeeHome
+export default EmployeeHome

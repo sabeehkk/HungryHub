@@ -50,7 +50,6 @@ router.patch(
   updateProfilePhoto
 );
 router.get("/getUserData", getUserData);
-
 router.get("/getCategoryies", getCategories);
 router.get("/getcatRestaurents", getRestWithCategory);
 

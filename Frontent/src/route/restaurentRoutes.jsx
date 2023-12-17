@@ -6,11 +6,9 @@ import Home from "../Components/Restaurant/Home" ;
 import { ToastContainer, toast } from "react-toastify" ;
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Pages/Restaurent/restaurentNavbar";
-// import UserNavbar from "../Components/User/userNavbar";
 import ErrorPage from "../Components/errorPage.tsx";
 import Logout from "../Pages/Restaurent/logout.tsx";
 import ProductAdd from "../Components/Restaurant/productAdding.tsx";
-// import Category from "../Components/Restaurant/category.tsx";
 import RestaurentFrame from '../Components/Restaurant/restaurentFrame.tsx'
 import Products from  '../Components/Restaurant/products.tsx';
 import EditProduct from '../Components/Restaurant/editProduct.tsx'
@@ -76,7 +74,7 @@ const RestaurentRoute = {
       path: "/restaurent",
       element: <RestaurentAuthAppLayout />,
       children: [
-        {
+         {
           path: "home",
           element: (
             <>

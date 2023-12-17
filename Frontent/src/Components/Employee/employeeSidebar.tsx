@@ -15,39 +15,39 @@ const App = () => {
     {
       title: "Dashboard",
       icon: <BiSolidBarChartSquare />,
-      url: "/restaurent/home",
+      url: "/employee/home",
     },
 
     {
       title: "Profile",
       icon: <BiSolidUserRectangle />,
-      url: "/restaurent/restaurentProfile",
+      url: "#",
     },
-    {
-      title: "Category",
-      icon: <BiCategory />,
-      gap: true,
-      url: "/restaurent/categoryAddingModal",
-    },
+    // {
+    //   title: "Category",
+    //   icon: <BiCategory />,
+    //   gap: true,
+    //   url: "/restaurent/categoryAddingModal",
+    // },
     {
       title: "Add Menu Items ",
       icon: <AiOutlinePlusSquare />,
-      url: "/restaurent/addProduct",
+      url: "#",
     },
     {
       title: "Menu Items ",
       icon: <MdOutlineFastfood />,
-      url: "/restaurent/products",
+      url: "#",
     },
     {
       title: "Orders ",
       icon: <BiFoodMenu />,
-      url: "/restaurent/orders",
+      url: "#",
     },
     {
       title: "Logout ",
       icon: <BiSolidUserRectangle />,
-      url: "/restaurent/logout",
+      url: "/employee/logout",
     },
     // { title: "Setting", src: "Setting" },
   ];

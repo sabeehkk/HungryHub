@@ -1,14 +1,15 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import Signup from '../Pages/Employee/Signup'
-import Home from '../Components/Employee/employeeHome'
-import Login from '../Pages/Employee/login'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Signup from '../Pages/Employee/Signup';
+import Home from '../Components/Employee/employeeHome';
+import Login from '../Pages/Employee/login';
 import IsLogout from '../middleware/employee/isLogout';
 import { ToastContainer,toast } from "react-toastify";
-import ErrorPage from '../Components/errorPage.tsx'
-import EmployeeFrame from '../Components/Employee/employeeFrame.tsx'
+import EmployeeFrame from '../Components/Employee/employeeFrame.tsx';
+import Islogged from '../middleware/employee/isLogged.tsx' ;
+import Logout from '../Pages/Employee/logout.tsx';
 
-const EmpoloyeeAppLayout =()=>{
+const EmpoloyeeAppLayout =()=>{  
     return (
         <>
       <Outlet/>
@@ -16,35 +17,33 @@ const EmpoloyeeAppLayout =()=>{
        </>
     )
 }
-
-const EmployeeAuthAppLayout = () =>{
+const EmployeeAuthAppLayout = () => {
     return( 
         <>
       <EmployeeFrame />
       <ToastContainer/>
       </>
       )
-};
-
-const EmployeeRoutes = {
-    path :'/employee',
-  errorElement: <ErrorPage path={"/employee"} />,
-
-    element : <EmpoloyeeAppLayout/>,
-    
+  };
+    const EmployeeRoutes = {
+        path :'/employee',
+        // errorElement: <ErrorPage path={"/employee"} />,
+        element : <EmpoloyeeAppLayout/>,
     children : [
         {
             path:'login',
             element:(
                 <>
+                <IsLogout/>
                 <Login/>
                 </>
-            )
+            ),
         },
-        {
+         {
             path :'signup',
             element : (
                 <>
+                <IsLogout/>
                 <Signup/>
                 </>
             )
@@ -53,21 +52,26 @@ const EmployeeRoutes = {
            path:'logout',
            element: (
             <>
-            <IsLogout/>
+            <Islogged/>
+            <Logout/>
             </>
            )
         },
         {
             path:'/employee',
             element:<EmployeeAuthAppLayout/>,
-            children:[
+            children:[ 
                 {
                     path:"home",
-                    element:<Home/>
+                    element:(
+                        <>
+                        <Islogged/>
+                        <Home/>
+                        </>
+                    ),
                 }
             ]
         },
-
     ]
 }
 export default EmployeeRoutes

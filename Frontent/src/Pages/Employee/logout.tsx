@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import {logout} from '../../redux/restaurent/authSlice'
+import {logout} from '../../redux/employee/authSlice'
 import { useNavigate } from 'react-router-dom'
 
 function UserLogout() {
@@ -10,7 +10,7 @@ function UserLogout() {
 
      useEffect(()=>{
         dispatch(logout())
-        navigate("/restaurent/login")
+        navigate("/employee/login");
      },[])
 
   return 

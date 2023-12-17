@@ -10,6 +10,8 @@ const userPath = "";
 const adminPath="/admin"
 const restaurentPath ="/restaurent"
 const employeePath ="/employee"
+const chatPath ="/chat" ;
+const messagePath ="/message"
 
 
 const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
@@ -47,7 +49,6 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
       return Promise.reject(error.response.data);
     }
   );
-
   return instance;
 };
 
@@ -55,6 +56,8 @@ const createRoleSpecificAxiosInstance = (tokenName, rolePath) => {
 const userAxios = createRoleSpecificAxiosInstance("userToken", userPath);
 const adminAxios = createRoleSpecificAxiosInstance("adminToken",adminPath)
 const restaurentAxios = createRoleSpecificAxiosInstance("restaurentToken",restaurentPath)
-const employeeAxios = createRoleSpecificAxiosInstance('employeeToken',employeePath)
+const employeeAxios = createRoleSpecificAxiosInstance('employeeToken',employeePath);
+const chatAxios = createRoleSpecificAxiosInstance('userToken',chatPath);
+const messageAxios = createRoleSpecificAxiosInstance('userToken',messagePath);
 
-export { userAxios,adminAxios,restaurentAxios,employeeAxios };
+export { userAxios,adminAxios,restaurentAxios,employeeAxios,chatAxios,messageAxios };

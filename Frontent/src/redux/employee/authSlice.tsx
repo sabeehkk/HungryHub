@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { userInittalModel, UserData } from "../../models/models";
 
 interface EmployeeState {
     employee :EmployeeData | null ;
@@ -24,7 +25,10 @@ const authSlice =createSlice({
         logout:(state)=>{
             state.employee=null
             state.success=false
+        console.log(state.success,'logout status')
+            
         }
+        
     },
 })
 
