@@ -13,7 +13,7 @@ const Pagination = ({ size, filterPagination, currentPage }) => {
             filterPagination(currentPage - 1);
           }
         }}
-        className="hover:bg-gray-200 cursor-pointer p-2 rounded-full"
+        className="hover:bg-gray-200 cursor-pointer p-1 rounded-full"
         disabled={currentPage === 1}
       >
         &laquo; Prev
@@ -27,7 +27,7 @@ const Pagination = ({ size, filterPagination, currentPage }) => {
           <button
             className={`${
               currentPage === pageNumber ? 'bg-blue-500 text-white' : 'bg-blue-200'
-            } hover:bg-blue-400 cursor-pointer p-2 rounded-full`}
+            } hover:bg-blue-400 cursor-pointer p-1 rounded-full`}
             onClick={() => filterPagination(pageNumber)}
           >
             {pageNumber}
@@ -42,7 +42,7 @@ const Pagination = ({ size, filterPagination, currentPage }) => {
             filterPagination(currentPage + 1);
           }
         }}
-        className="hover:bg-gray-200 cursor-pointer p-2 rounded-full"
+        className="hover:bg-gray-200 cursor-pointer p-1 rounded-full"
         disabled={currentPage === size}
       >
         Next &raquo;

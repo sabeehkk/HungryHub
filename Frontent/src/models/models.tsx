@@ -64,7 +64,6 @@ export interface userInittalModel {
         name: string;
         email: string;
         phoneNumber: string | number;
-        address: string;
       },
       _id: any
     ): unknown;
@@ -72,7 +71,7 @@ export interface userInittalModel {
 
     email: string;
     phoneNumber: string | number | null | undefined;
-    place: string | null | undefined;
+   
   }
 
   export interface OrderData {
@@ -88,6 +87,5 @@ export interface userInittalModel {
     totalPrice: number;
     discount: number;
     grandTotal: number;
-    address: string;
    
   }

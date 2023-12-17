@@ -21,14 +21,15 @@ function EmployeeLogin() {
     }
     try {
       await employeeAxios.post(`/login`, { email, password }).then((res) => {
-        if (res.data.error) {
-          // return ErrorMessage(res.data.message)
-        }
+        console.log(res.data.token,'token response in login');
+        
         localStorage.setItem("employeeToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(employeeLoggedIn(res.data.employeeData));
+        console.log('before going home');
+        
         navigate("/employee/home");
         SuccessMessage(res.data.message);
       });

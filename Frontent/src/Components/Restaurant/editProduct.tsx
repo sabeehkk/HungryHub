@@ -329,17 +329,18 @@ const EditProduct: React.FC = () => {
           /> */}
         </div>
         <div className="md:w-1/2">
-          <label htmlFor="restId" className="block font-medium">
+          {/* <label htmlFor="restId" className="block font-medium">
             Restaurant ID
-          </label>
+          </label> */}
           <input
             type="text"
             id="restId"
             value={restId}
             readOnly
+            style={{ display: 'none' }}
             className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
           />
-
+{/* 
 <div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
   <div className="flex flex-wrap">
     {images.map((image, index) => (
@@ -378,7 +379,68 @@ const EditProduct: React.FC = () => {
     min={1}
     max={5}
   />
+</div> */}
+
+<label htmlFor="image" className="block font-medium">
+ Add Best Food Images (4-5 images)
+</label>
+<div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
+
+  <div className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+    <div className="space-y-1 text-center">
+      <div className="flex text-sm text-gray-600">
+        <label
+          htmlFor="file-upload"
+          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+        >
+          <span>Upload up to 4 files</span>
+          <input
+            id="file-upload"
+            name="image"
+            type="file"
+            className="sr-only"
+            accept="image/*"
+            onChange={handleImages}
+            multiple
+            min={4}
+            max={5}
+          />
+        </label>
+        <p className="pl-1">or drag and drop</p>
+      </div>
+      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB each</p>
+    </div>
+  </div>
+
+  <div className="flex flex-wrap">
+    {images.map((image, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={image}
+            alt={`Product Image ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+  <div className="flex flex-wrap">
+    {previewImages.map((preview, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={preview}
+            alt={`Preview ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+ 
 </div>
+
 
 {/* 
           <div className="custom-file mt-3 h-52 items-center justify-center bg-gray-300 md:w-3/5 w-full">

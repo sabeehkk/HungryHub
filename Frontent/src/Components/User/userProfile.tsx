@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import Loading from '../../Components/loading'
 import { CiWallet } from "react-icons/ci"
+import { userAxios } from "../../axios/axios";
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
+import { BsFillTagsFill } from "react-icons/bs";
 
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
@@ -14,6 +16,11 @@ const UserProfile=()=> {
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [userData, setUserData] = useState({});
+
+  
+  
+  
   const [load,setLoad] = useState(true)
   const [address, setAddress] = useState([
     {
@@ -32,6 +39,22 @@ const UserProfile=()=> {
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    userAxios.get(`/getUserData?id=${user?._id}`).then((response) => {
+      console.log(response.data,'fetched data');
+      
+      setUserData(response.data);
+      // setName(response?.data?.user?.Name);
+   
+    }).catch((error)=>{
+      console.log(error);
+      
+      // toast.error(error.response.data.message, {
+      //   position: toast.POSITION.TOP_CENTER,
+      //   autoClose: 3000,
+      // });
+    })
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
@@ -84,6 +107,15 @@ const UserProfile=()=> {
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
+            
+               
+               <h2 className="ml-52 p- text-xl font-bold">
+              {user.name} 
+            </h2>
+              <span className="mt-2 flex justify-center items-center">
+  <BsFillTagsFill className="text-2xl text-green-600 mr-2"/>
+  <span className="text-1xl mr  font-bold text-black ">₹ :{userData.user?.Wallet}</span>
+</span>
           </div>
 
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
@@ -112,20 +144,7 @@ const UserProfile=()=> {
               )}
             </div>
             <div className="rounded  shadow p-6">
-              <div className="pb-6">
-                <label className="font-semibold text-gray-700 block pb-1">
-                  Name
-                </label>
-                <div className="flex">
-                  <input
-                    disabled
-                    id="username"
-                    className="border-1  rounded-r px-4 py-2 w-full"
-                    type="text"
-                    value={user?.name}
-                  />
-                </div>
-              </div>
+             
               <div className="pb-4">
                 <label className="font-semibold text-gray-700 block pb-1">
                   Email
@@ -150,7 +169,20 @@ const UserProfile=()=> {
                   value={user?.phoneNumber}
                 />
               </div>
-              <span className="flex justify-center "><CiWallet className="text-2xl"/>:{user?.Wallet}</span> 
+              <div className="pb-4">
+                <label className="font-semibold text-gray-700 block pb-1">
+                  Address
+                </label>
+                <input
+                  disabled
+                  id="email"
+                  className="border-1 rounded-r px-4 py-2 w-full"
+                  type="email"
+                  value={user ? [user?.Address[0]?.street, user?.Address[0]?.city, user?.Address[0]?.state,user?.Address[0]?.postalCode].filter(Boolean).join(', ') : ''}
+                  />
+
+              </div>
+             
             </div>
           </div>
         </div>

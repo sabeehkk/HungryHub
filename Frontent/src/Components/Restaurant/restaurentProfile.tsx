@@ -74,6 +74,16 @@ console.log(restaurant,'restaruent datssss');
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
+            <div className="pb-6 flex items-center">
+              <label className="ml-16 font-semibold text-gray-700 block pr-2">Name :</label>
+              <input
+                disabled
+                id="username"
+                className="border-1 rounded-r ml-"
+                type="text"
+                value={restaurant.restaurent?.restaurantName}
+              />
+            </div>
           </div>
 
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
@@ -102,7 +112,7 @@ console.log(restaurant,'restaruent datssss');
               )}
             </div>
             <div className="rounded  shadow p-6">
-              <div className="pb-6">
+              {/* <div className="pb-6">
                 <label className="font-semibold text-gray-700 block pb-1">
                   Name
                 </label>
@@ -116,7 +126,7 @@ console.log(restaurant,'restaruent datssss');
                     }
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="pb-4">
                 <label className="font-semibold text-gray-700 block pb-1">
                   Email
@@ -139,6 +149,18 @@ console.log(restaurant,'restaruent datssss');
                   className="border-1  rounded-r px-4 py-2 w-full"
                   type="email"
                   value={restaurant.restaurent?.phoneNumber}
+                />
+              </div>
+              <div className="pb-4">
+                <label className="font-semibold text-gray-700 block pb-1">
+                 Place
+                </label>
+                <input
+                  disabled
+                  id="email"
+                  className="border-1  rounded-r px-4 py-2 w-full"
+                  type="email"
+                  value={restaurant.restaurent?.place}
                 />
               </div>
             </div>

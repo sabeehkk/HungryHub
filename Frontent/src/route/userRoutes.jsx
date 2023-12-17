@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Signup from "../Pages/User/UserRegister";
 import Login from "../Pages/User/login";
 // import Home from '../Components/User/HomePage'
-import IsLogout from "../middleware/user/isLogout";
+import IsLogout from "../middleware/user/isLogout" ;
 // import Navbar from '../Components/navbar'
 import { ToastContainer, toast } from "react-toastify";
 import OtpVerification from "../Components/User/otpVerification";
@@ -25,8 +25,10 @@ import CartPage from '../Components/User/cart.tsx'
 import DummyCart from '../utils/cartDupe.tsx'
 import CheckoutPage from '../Components/User/checkout.tsx';
 import SuccessPage from '../Components/User/OrderSuccess.tsx';
-import CheckoutDummy from '../utils/checkoutDummy.tsx'
 import OrderFail from '../payment/paymentFiail.tsx'
+import OrderHistory from '../Components/User/orderHistory.tsx'
+import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
+import Chat from '../Components/chat/chat.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -196,16 +198,6 @@ const UserRoute = {
       )
     },
     
-    {
-      path:"/checkoutDummy",
-      element:(
-        <>
-        <UserNavbar/>
-        <CheckoutDummy/>  
-
-        </>
-      )
-    },
     { 
       path: "/payment-success/:orderId",
       element: (
@@ -219,6 +211,36 @@ const UserRoute = {
       element: (
         <>
         <OrderFail/>
+        </>
+      )
+    },
+    {
+      path:"/orders",
+      element: (
+        <>
+          <IsLogged />
+
+          <UserNavbar />
+          <OrderHistory />
+        </>
+      ),
+    },
+    {
+      path: "/orderItems/:ordId",
+      element: (
+        <>
+          <IsLogged />
+          <UserNavbar />
+          <OrderItemsPage />
+        </>
+      ),
+    },
+    {
+      path:"/chat",
+      element:(
+        <>
+        <UserNavbar/>
+        <Chat role={"user"}/>
         </>
       )
     }

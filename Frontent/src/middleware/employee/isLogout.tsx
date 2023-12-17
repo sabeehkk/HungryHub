@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function IsLogout() {
+  console.log('islogout is calling');
+  
     const {success}=useSelector((state:any)=>state.employeeAuth)
+    console.log(success,'sucessssss')
 
     const navigate = useNavigate()
     

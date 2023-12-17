@@ -7,9 +7,14 @@ import RestaurentModel from '../../models/restaurent.js';
 
 
 export const viewOrders = async (req,res)=>{
+  console.log('function viewOrders');
     try {
+   
         console.log(req.query,'inside view order');
         const id = req.query.id;
+        if(id ==='undefined'){
+          return res.status(400).json({message:''})
+        }
         const orders = await OrderModel.find({
           "item.product": {
             $in: await ProductModel.find({ restaurent_id: id }).select("_id"),
@@ -22,19 +27,19 @@ export const viewOrders = async (req,res)=>{
         console.log(orders,'ordersdatas');
   
         if (orders) {
-          res.status(200).send({
+          res.status(200).json({
             success: true,
             orders,
           });
         } else {
-          res.status(404).send({
+          res.status(404).json({
             success: false,
             message: "You don't have any order",
           });
         }
       } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status(500).json({
           success: false,
           message: "server error",
         });
@@ -46,15 +51,27 @@ export const updateDeliveryStatus = async (req,res)=>{
         const { prodId, orderId, orderStatus } = req.body;
         console.log(req.body);
         let item_orderStatus;
+        // if (orderStatus === "Pending") {
+        //   item_orderStatus = "Preparing...";
+        // } else if (orderStatus === "Preparing...") {
+        //   item_orderStatus = "Packed";
+        // } else if (orderStatus === "Packed") {
+        //   item_orderStatus = "Out of delivery";
+        // } else {
+        //   item_orderStatus = "Delivered";
+        // }
+
         if (orderStatus === "Pending") {
-          item_orderStatus = "Preparing...";
+          item_orderStatus = "Pending";
         } else if (orderStatus === "Preparing...") {
-          item_orderStatus = "Packed";
+          item_orderStatus = "Preparing...";
         } else if (orderStatus === "Packed") {
+          item_orderStatus = "Packed";
+        } else if (orderStatus === "Out of delivery") {
           item_orderStatus = "Out of delivery";
-        } else {
+        } else if (orderStatus === "Delivered") {
           item_orderStatus = "Delivered";
-        }
+        } 
         await OrderModel.updateOne(
           { _id:orderId, "item._id": prodId },
           {

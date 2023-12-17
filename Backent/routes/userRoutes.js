@@ -31,7 +31,7 @@ import {
   cartTotal,
   cancelCartItem,
 } from "../controller/user/cartController.js";
-import { Order } from "../controller/user/orderController.js";
+import { Order,getOrders,getOrderItems,cancelOrder } from "../controller/user/orderController.js";
 import Cart from "../models/cart.js";
 
 const router = express.Router();
@@ -50,9 +50,8 @@ router.patch(
   updateProfilePhoto
 );
 router.get("/getUserData", getUserData);
-
-router.get("/getCategoryies", VerifyToken, getCategories);
-router.get("/getcatRestaurents", VerifyToken, getRestWithCategory);
+router.get("/getCategoryies", getCategories);
+router.get("/getcatRestaurents", getRestWithCategory);
 
 router.get("/getProuductDetail", getProductData);
 router.post("/addToCart", VerifyToken, addToCart);
@@ -64,9 +63,12 @@ router.patch("/addAddress", VerifyToken, addAddress);
 router.patch("/editAddress", VerifyToken, editAddress);
 
 router.post("/order", Order);
+router.patch('/cancelOrder',cancelOrder)
+router.get('/getOrderHistory', getOrders)
+router.get('/orderItems',getOrderItems)
 
-// router.patch('/cancelOrder',cancelOrder)
-
+  
 //restaurnet Product list
 
 export default router;
+ 

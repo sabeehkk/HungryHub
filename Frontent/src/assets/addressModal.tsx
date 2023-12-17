@@ -67,11 +67,11 @@ const userdata = useSelector((state) => state.userAuth);
           isOpen ? "scale-100" : "scale-0"
         } transition-transform duration-500 ease-in-out`}
       >
-        <div className="modal-header flex justify-between p-3 bg-cherry-Red text-off-White">
+        <div className=" modal-header flex justify-between p-3 bg-cherry-Red text-off-White">
           <h2 className="text-xl font-semibold">
             {isEditing ? "Edit Address" : "Add Address"}
           </h2>
-          <button className="modal-close text-3xl" onClick={onClose}>
+          <button className="border-none modal-close text-3xl" onClick={onClose}>
             &times;
           </button>
         </div>

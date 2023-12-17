@@ -22,9 +22,9 @@ import VerifyToken from "../middleware/jwtRestaurentVerification.js";
 import {
   viewOrders,
   updateDeliveryStatus,
-  cancelOrder
+  
 } from "../controller/restaurent/orderManagement.js";
-import { getOrderItems } from "../controller/user/orderController.js";
+import { getOrderItems,cancelOrder } from "../controller/user/orderController.js";
 const router = express.Router();
 
 router.post("/register", signup);

@@ -7,13 +7,15 @@ import { useDispatch ,} from "react-redux";
 import { profileEditModal } from "../../models/models";
 
 const EditProfile = ({ data }) => {
+  console.log(data,'Edit profile datas');
+  
 
   const [user, setUser] = useState<profileEditModal>({
     _id: data?._id || "",       
     name: data?.name || "",   
     email: data?.email || "",
     phoneNumber: data?.phoneNumber || "",
-    place: data?.place || "",
+ 
   });
      
   const navigate = useNavigate();
@@ -116,6 +118,7 @@ const EditProfile = ({ data }) => {
               className="w-full p-2 border rounded focus:outline-none focus:ring focus:border-black"
             />
           </div>
+         
          
         </div>
 

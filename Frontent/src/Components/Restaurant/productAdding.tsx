@@ -317,23 +317,9 @@ const AddProduct: React.FC = () => {
           <button className= "bg-blue-500 text-white border-neutral-50  hover:text-black" onClick={addVariant}>Add Variant</button>
 
 
-            {/* <label htmlFor="price" className="block font-medium">
-              Price:
-            </label>
-            <input
-              type="number"
-              id="price"
-              name="price"
-              value={productPrice}
-              onChange={(e) => {
-                setProductPrice(e.target.value);
-              }}
-              required
-              className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-            /> */}
           </div>
           <div className="md:w-1/2">
-            <label htmlFor="restId" className="block font-medium">
+            {/* <label htmlFor="restId" className="block font-medium">
               Restaurant ID
             </label>
             <input
@@ -342,7 +328,22 @@ const AddProduct: React.FC = () => {
               value={restId}
               readOnly
               className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-            />
+            /> */}
+            {/* <label htmlFor="restId" className="block font-medium 
+/>">
+  Restaurant ID
+</label> */}
+<input
+  type="text"
+  id="restId"
+  value={restId}
+  readOnly
+  className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+  style={{ display: 'none' }}
+/>
+{/* <label htmlFor="price" className="block font-medium">
+          Product Image
+          </label>
 
             <div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
               <div className="flex flex-wrap">
@@ -363,15 +364,11 @@ const AddProduct: React.FC = () => {
               </div>
               {previewImages.length > 0 && (
                 <label htmlFor="profImage" className="w-1/4 p-2 block relative">
-                  {/* <img
-        className="h-52 object-cover w-full rounded-md"
-        // src={previewImages[0]}
-        // alt={`Preview 1`}
-      /> */}
+      
                 </label>
               )}
               <input
-                className="form-control custom-file-input"
+                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                 name="file"
                 multiple
                 type="file"
@@ -380,9 +377,59 @@ const AddProduct: React.FC = () => {
                 onChange={handleImages}
                 min={1}
                 max={4}
-                style={{ height: "80px" }}
+                // style={{ height: "80px" }}
               />
-            </div>
+            </div> */}
+<label htmlFor="image" className="block font-medium">
+    Add Best Food Images (4-5 images)
+  </label>
+<div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
+  
+  <div className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+    <div className="space-y-1 text-center">
+      <div className="flex text-sm text-gray-600">
+        <label
+          htmlFor="file-upload"
+          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+        >
+          <span>Upload up to 4 files</span>
+          <input
+            id="file-upload"
+            name="image"
+            type="file"
+            className="sr-only"
+            accept="image/*"
+            onChange={handleImages}
+            multiple
+            min={4}
+            max={5}
+          />
+        </label>
+        <p className="pl-1">or drag and drop</p>
+      </div>
+      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB each</p>
+    </div>
+  </div>
+
+  <div className="flex flex-wrap">
+    {previewImages.map((preview, index) => (
+      <div key={index} className="w-1/4 p-2">
+        <label htmlFor={`profImage-${index}`} className="block relative">
+          <img
+            className="h-52 object-cover w-full rounded-md"
+            src={preview}
+            alt={`Preview ${index + 1}`}
+          />
+        </label>
+      </div>
+    ))}
+  </div>
+  {previewImages.length > 0 && (
+    <label htmlFor="profImage" className="w-1/4 p-2 block relative"></label>
+  )}
+  
+</div>
+
            
               <button
                 // className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

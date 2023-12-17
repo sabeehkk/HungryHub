@@ -205,24 +205,13 @@ function TabelFrame({
                           </div>
                         </div>
                       </td>
-                      {/* <td className="p-4 border-b border-gray-200">
-                    {item.restaurantName || "" || item.name || ""}
-                  </td> */}
+                   
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
                           {item.name || "" || item.restaurantName}
                         </div>
                       </td>
-                      {/* <td className="text-center">
-                    <div className="flex items-center">
-                      <div
-                        className={`h-2.5 w-2.5 rounded-full ${
-                          item.status ? "bg-green-500" : "bg-red-500"
-                        } mr-2`}
-                      ></div>
-                      {item.status ? "Online" : "Offline"}
-                    </div>
-                  </td> */}
+                    
 
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span

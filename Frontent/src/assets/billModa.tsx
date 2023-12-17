@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 // import RestaurantAxios from "../Axios/RestaurantAxios";
 import { restaurentAxios } from "../axios/axios";
+import { ErrorMessage } from "../utils/util";
 
 const BillModal = ({ isOpen, closeModal, orderItem }) => {
 
@@ -43,19 +44,25 @@ console.log(restaurant,'restaruent details in billmodal');
   
 
   useEffect(() => {
-    restaurentAxios.get(`/getResProfile?id=${restaurant_id}`).then(
-      (response) => {
-        setResData(response.data.restData);
-        setAddress({
-          street: response.data.restData?.Address?.street,
-          city: response.data.restData?.Address?.city,
-          state: response.data.restData?.Address?.state,
-          postalCode: response.data.restData?.Address?.postalCode,
-        });
-        setImage(response.data.restData?.Image);
-      }
-    );
-  }, []);
+    if (!restaurant.restaurent || !restaurant.restaurent._id) {
+      return 
+        }else{
+          restaurentAxios.get(`/getResProfile?id=${restaurant_id}`).then(
+            (response) => {
+              setResData(response.data.restData);
+              setAddress({
+                street: response.data.restData?.Address?.street,
+                city: response.data.restData?.Address?.city,
+                state: response.data.restData?.Address?.state,
+                postalCode: response.data.restData?.Address?.postalCode,
+              });
+              setImage(response.data.restData?.Image);
+            }
+          );
+        }
+
+        }, []);
+
 
   return (
     <div
@@ -63,14 +70,14 @@ console.log(restaurant,'restaruent details in billmodal');
         isOpen ? "" : "hidden"
       }`}
     >
-      <div className="modal-overlay" onClick={closeModal}></div>
-      <div className="bg-rose-50 modal-container border rounded">
-        <div className="modal-content bg-off-White p-4 rounded-lg">
+      <div className="modal-overlay  " onClick={closeModal}></div>
+      <div className=" bg-gray-200  modal-container border rounded ">
+        <div className=" modal-content bg-off-White p-4 rounded-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-3xl font-bold text-cherry-Red font-lobster duration-200">
-              Hungry Hub
-            </h2>
-            <h2 className="text-lg font-bold">Billing Details...</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl px-2">
+          Hungry<span className="font-bold">Hub </span>
+        </h2>
+            <h2 className="text-lg font-bold mr-16">Billing Details...</h2>
             <button className="border-none text-gray-600" onClick={closeModal}>
               <span className=" text-3xl">×</span>
             </button>
@@ -78,12 +85,16 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="embed-container flex justify-between">
             <div>
-              <div>
-                <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
-                <h1 className="italic font-semibold">{resData.Place}</h1>
+            <h1 className="text-xl font-bold">{resData.restaurantName}</h1>
+
+              <div className="flex">
+                <div className="w-80">
+                <h1 className="italic font-semibold">{resData.place }</h1>
                 <h1 className="italic font-semibold">{address.city}</h1>
                 <h1 className="italic font-semibold">{address.postalCode}</h1>
                 <h1 className="italic font-semibold">{resData.phoneNumber}</h1>
+                </div>
+               
               </div>
               <div className="pt-7">
                 <h1 className="text-sm font-bold">Billing Address.</h1>
@@ -97,12 +108,19 @@ console.log(restaurant,'restaruent details in billmodal');
                         {orderItem.address[0].postalCode}
                       </h1>
                     </div>
+                  
                   ) : (
                     <div>Address information not available.</div>
                   )}
                 </div>
               </div>
+              <h1 className="font-bold">Payment Type :</h1>
+              <h1 className=" ">{orderItem.paymentType}</h1>
+
             </div>
+          
+
+                      
             <div className="justify-between font-semibold italic">
               <div>
               <div className="border shadow-md p-3">
@@ -128,7 +146,7 @@ console.log(restaurant,'restaruent details in billmodal');
           <hr className="border-t-2 border-blue-500 my-4" />
           <div className="template-text mt-4">
             <div className="container mx-auto">
-              <table className="min-w-full bg-white border border-gray-500">
+              <table className="min-w-full bg-gray-50 border border-gray-300">
                 <thead>
                   <tr>
                     <th className="py-2 px-4 border-b text-left">Sl</th>
