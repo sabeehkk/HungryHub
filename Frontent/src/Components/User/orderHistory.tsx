@@ -157,7 +157,10 @@ console.log(orderItem, 'orderItem in history');
                           )}
                         </td>
                         <td className="px-6 py-2 whitespace-nowrap">
-                        <button                           className="bg-teal-500 border-none text-white"
+                        <button   
+                       className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
+
+                          // className="bg-teal-500 border-none text-white"
  onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
                         </td>
                       </tr>

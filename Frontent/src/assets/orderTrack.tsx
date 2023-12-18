@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-// import StarRating from "./StarRating";
+import StarRating from "./StarRating";
 
 // import UserAxios from "../Axios/UserAxios";
 
@@ -38,14 +38,14 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
   const handleReviewChange = (event) => {
     setReview(event.target.value);
   };
-
+  console.log(orderItem,'orderItemsUpdated');
+  
   const ratingAndClose = async () => {
-    const restId = orderItem.product.restaurant_id;
+    const restId = orderItem.product.restaurent_id
     try {
-      // closeModal();
       if (userRating > 0) {
-        const response = await UserAxios.patch("/rating", {
-          userId: user._id,
+        const response = await userAxios.patch("/rating", {
+          userId: user.user._id,
           rating: userRating,
           restId,
         });
@@ -66,11 +66,11 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
   };
 
   const reviewAndClose = async()=>{
-    const restId = orderItem.product.restaurant_id;
+    const restId = orderItem.product.restaurent_id;
     try {
       if(review.length > 0){
-        const response = await UserAxios.patch("/review", {
-          userId: user._id,
+        const response = await userAxios.patch("/review", {
+          userId: user.user._id,
           review,
           restId,
         });
@@ -145,9 +145,9 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
             {trackingStatus[3]?.completed ? (
 
             <div className="border p-3 shadow-md w-auto">
-                {/* <div> */}
-                  {/* <h2>Rate this item:</h2> */}
-                  {/* <StarRating
+                <div>
+                  <h2>Rate this item:</h2>
+                  <StarRating
                     totalStars={5}
                     onRatingChange={handleRatingChange}
                   />
@@ -157,9 +157,9 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
                     onChange={handleReviewChange}
                     rows={5}
                     cols={50}
-                  /> */}
-                {/* </div> */}
-                {/* <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button> */}
+                  />
+                </div>
+                <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button>
             </div> 
               ) : null}
             <div className="border p-3 justify-between shadow-md">

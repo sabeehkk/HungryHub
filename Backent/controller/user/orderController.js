@@ -2,6 +2,7 @@ import OrderModel from "../../models/order.js";
 import CartModel from "../../models/cart.js";
 import UserModel from "../../models/user.js";
 import ProductModel from "../../models/product.js";
+import RestaurantModel from "../../models/restaurent.js";
 import Stripe from "stripe";
 export const stripe = new Stripe(process.env.STRIP_PRIVET_KEY);
 
@@ -247,6 +248,69 @@ export const cancelOrder= async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Internal server error",
+    });
+  }
+}
+
+export const  doRating= async (req,res) => {
+  try {
+    console.log(req.body,'inside rating');
+    const { userId, rating, restId } = req.body;
+    const existingRating = await RestaurantModel.findOne({
+      "rating.userId": userId,
+      _id: restId,
+    });
+    if (existingRating) {
+      res.status(400).send({
+        success: false,
+        message: "You have already rating this restaurant...",
+      });
+    } else {
+      await RestaurantModel.updateOne(
+        { _id: restId },
+        { $push: { rating: { userId, rating } } }
+      );
+      res.status(200).send({
+        success: true,
+        message: "Thank you! Rating submitted successfully.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Server error.",
+    });
+  }
+}
+
+export const doReview= async (req, res) => {
+  try {
+    console.log(req.body,'inside doReview');
+    const { userId, review, restId } = req.body;
+    const existingReview = await RestaurantModel.findOne({
+      "reviews.userId": userId,
+      _id: restId,
+    });
+    if (existingReview) {
+      res.status(400).send({
+        success: false,
+        message: "You have already review this restaurant...",
+      });
+    } else {
+      await RestaurantModel.updateOne(
+        { _id: restId },
+        { $push: { reviews: { userId, review } } }
+      );
+      res.status(200).send({
+        success: true,
+        message: "Thank you! Review submitted successfully.",
+      });
+    }
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Server error.",
     });
   }
 }

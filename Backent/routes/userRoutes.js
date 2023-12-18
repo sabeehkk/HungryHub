@@ -31,7 +31,7 @@ import {
   cartTotal,
   cancelCartItem,
 } from "../controller/user/cartController.js";
-import { Order,getOrders,getOrderItems,cancelOrder } from "../controller/user/orderController.js";
+import { Order,getOrders,getOrderItems,cancelOrder,doRating ,doReview} from "../controller/user/orderController.js";
 import Cart from "../models/cart.js";
 
 const router = express.Router();
@@ -66,6 +66,8 @@ router.post("/order", Order);
 router.patch('/cancelOrder',cancelOrder)
 router.get('/getOrderHistory', getOrders)
 router.get('/orderItems',getOrderItems)
+router.patch('/rating',doRating)
+router.patch('/review',doReview)
 
   
 //restaurnet Product list
