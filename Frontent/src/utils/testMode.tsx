@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidStarHalf } from "react-icons/bi";
 import { AiFillClockCircle } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";
-import { restaurentAxios, userAxios } from "../../axios/axios";
+import { restaurentAxios, userAxios } from "../axios/axios";
  
 const FilteredRestaurents = () => {
   const navigate = useNavigate();
   const [restaurants, setrestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState([]);
-
   const { catName } = useParams();
   
   useEffect(() => {
@@ -39,7 +39,6 @@ const FilteredRestaurents = () => {
       });
     }
   }, [selectedOption, catName]);
-
   const handleOptionChange = (event) => {
     const categoryName = event.target.value;
     if (selectedOption.includes(categoryName)) {
@@ -72,18 +71,14 @@ const FilteredRestaurents = () => {
                 </div>
                 </div>
                 <div>
-                <div>
-                        <h4 className="font-sans font-bold text-gray-600">Select Category</h4>
-                    </div>
+                    
           {categories.map((cat, indx) => (
             <label key={indx} className="flex h-10 items-center">
               <input
                 type="checkbox"
                 name="category"
                 value={cat._id.name}
-                // checked={selectedOption === cat._id.name}
                 checked={selectedOption.includes(cat._id.name)}
-
                 onChange={handleOptionChange}
                 className="mr-4"
               />
@@ -138,7 +133,6 @@ const FilteredRestaurents = () => {
                       <span>N/A</span>
                     )}
                   </h4>
-
                   <h4 className="flex text-xl mt-4 mr-6 text-yellow-500">
                     <BiSolidStarHalf />
                   </h4>
@@ -157,7 +151,6 @@ const FilteredRestaurents = () => {
                     <img
                       src={
                       item.restaurent?.profilePicture || item.profilePicture
-
                       }
                       alt={item.restaurent?.restaurantName}
                       className="w-10 h-10 rounded-full"
