@@ -14,7 +14,6 @@ const FilteredRestaurents = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const { catName } = useParams();
-  console.log(restaurants,'restaruent information in state');
   useEffect(() => {
     userAxios.get("/getCategoryies").then((response) => {
       console.log(response.data, "responseDataaaaas");
@@ -48,32 +47,24 @@ const FilteredRestaurents = () => {
   }, [selectedOption, catName]);
   
 
-  // useEffect(() => {
-  //   let cateName;
-  //   if (selectedOption) {
-  //     cateName = selectedOption;
-  //   } else {
-  //     cateName = catName;
-  //   }
-  //   const isCategorySelected = Boolean(cateName);
-  //   if (isCategorySelected) {
-  //   userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
-  //     console.log(response.data);
-
-  //     setrestaurants(response.data);
-  //   });
-  // } else {
-  //   restaurentAxios.get('/getRestaurents').then((response) => {
-  //     console.log(response.data, 'restaurent information');
-  //     setrestaurants(response.data);
-  // }, [selectedOption,catName]);
-
-  
-
+ 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
     // setIsLoading(true)
   };
+ 
+
+const ratingsMap = {};
+(restaurants?.restaurants || restaurants?.data || []).forEach((item) => {
+  const restaurantRatings = item.restaurent?.rating || item.rating || [];
+  if (restaurantRatings && restaurantRatings.length > 0) {
+    const totalRating = restaurantRatings.reduce((sum, rating) => sum + rating.rating, 0);
+    const averageRating = totalRating / restaurantRatings.length;
+    ratingsMap[item.restaurent?._id || item._id] = averageRating;
+
+  }
+});
+
   return (
     <div className="flex">
       <div className="w-1/4 pl-4">
@@ -110,7 +101,6 @@ const FilteredRestaurents = () => {
       <div className="bg-gray-100 w-3/4 ml-auto">
         <div className="py-10">
           <h1 className="font-sans font-semibold ml-8 flex items-center text-4xl">
-            {/* {restaurants?.restaurants?.length}+ Restaurant */}
             {restaurants?.restaurants?.length || restaurants?.data?.length || 0}+ Restaurant
 
           </h1>
@@ -124,17 +114,11 @@ const FilteredRestaurents = () => {
         <div className="container mx-auto px-8">
           <div className="text-3xl font-semibold mb-4 flex items-center justify-center"></div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {/* {restaurants?.restaurants?.|map((item) => ( */}
             {(restaurants?.restaurants || restaurants?.data || []).map((item) => (
-
               <div
                 key={item._id}
                 className="mb-10 cursor-pointer bg-white"
-                // onClick={() => navigate(`/menu/${item.restaurent._id || item._id}`)}
-                // onClick={() => navigate(`/menu/${item.restaurent._id || item._id}`)}
                 onClick={() => navigate(`/menu/${item.restaurent?._id || item._id}`)}
-
-
               >
                 <div className="flex items-center justify-between">
                   <img
@@ -150,14 +134,15 @@ const FilteredRestaurents = () => {
                   <h4 className="text-xl font-bold mt-2">
                     {item?.restaurent?.restaurantName||item?.restaurantName}
                   </h4>
-                  <h4 className="text-xl font-bold mt-3 ml-auto mr-1">
-                    {/* {ratingsMap[item.restaurant._id] !== undefined ? (
-                      <span>{ratingsMap[item.restaurant._id]}</span>
+                  <h4 className="text-xl font-bold mt-3 ml-auto mr-1 text-gray-600">
+                    {ratingsMap[item.restaurent?._id || item._id] !== undefined ? (
+                      <span>{ratingsMap[item.restaurent?._id || item._id]}</span>
                     ) : (
-                      "N/A"
-                    )} */}
+                      <span>N/A</span>
+                    )}
                   </h4>
-                  <h4 className="flex text-xl mt-4 mr-6 text-yellow">
+
+                  <h4 className="flex text-xl mt-4 mr-6 text-yellow-500">
                     <BiSolidStarHalf />
                   </h4>
                 </div>

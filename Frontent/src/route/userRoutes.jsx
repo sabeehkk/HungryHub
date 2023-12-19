@@ -29,6 +29,7 @@ import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
 import Chat from '../Components/chat/chat.tsx'
+import MenuDummy from '../utils/checkoutDummy.tsx'
 const UserAppLayout = () => {
   return (
     <>
@@ -243,7 +244,16 @@ const UserRoute = {
         <Chat role={"user"}/>
         </>
       )
-    }
+    },
+    {
+      path:"/menuDummy/:restId",
+      element:(
+        <>
+          <UserNavbar />
+        <MenuDummy/>
+        </>
+      )
+    },
   ],
 };
 

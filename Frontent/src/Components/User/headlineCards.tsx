@@ -55,7 +55,7 @@ const fetchRestaurent = async () => {
   </div>
     <div className='max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-3 gap-6'>
     {restaurants.map((restaurant) => (
-      <Link to={`/menu/${restaurant._id}`} key={restaurant._id} className='rounded-xl relative'>
+      <Link to={`/menuDummy/${restaurant._id}`} key={restaurant._id} className='rounded-xl relative'>
         <div className='absolute w-full h-full bg-black/50 rounded-xl text-white'>
           <p className='font-bold text-2xl px-2 pt-4'>{restaurant.restaurantName}</p>
           <p className='px-2'>{/* You can add more details here, e.g., categories, products, etc. */}</p>

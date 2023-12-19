@@ -191,10 +191,10 @@ function Menu() {
               </h3>
               <div className="border rounded-sm px-3  shadow-md bg-white">
                 <div className="flex ">
-                  <h4 className="text-xl font-bold ml-auto mr-1">
-                    {/* {restData?.ratings[0]?.averageRating} */}
+                  <h4 className="text-xl font-bold ml-auto mr-1 text-gray-600">
+                    {restData?.restData?.rating[0]?.rating}
                   </h4>
-                  <h4 className="flex text-xl mt-1 text-yellow">
+                  <h4 className="flex text-xl mt-1 text-yellow-500">
                     <BiSolidStarHalf />
                   </h4>
                 </div>
@@ -202,20 +202,13 @@ function Menu() {
                 <div className="font-lobster text-gray-500">N/A</div>
               </div>
             </div>
-            {/* <div className=""> */}
-              {/* <h4 className="ml-8 text-lg text-gray-500 ">
-                Info : {restData?.restData.phoneNumber}
-              </h4> */}
               <h4 className="ml-8 text-lg text-gray-500">
                 {restData?.restData.place}
               </h4>
-           
-            {/* </div> */}
           </div>
           <div className="border border-gray-300 h-2 bg-gray-300"></div>
         </div>
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
-
         <div className=" text-center mt-4 flex items-center justify-between mb-2">
           <div className=" navbar shadow-lg">
             <div className=" navbar-start">
@@ -246,7 +239,6 @@ function Menu() {
                 </label>
               </div>
             </div>
-
             <div className=" navbar-center hidden lg:flex flex items-center w-[1124px]">
               <div className=" flex flex-col  p-7 py-4 m-h-screen">
                 <div className=" bg-white items-center justify-between w-72 h-10 flex rounded-full shadow-lg p- mb-3 sticky">
@@ -289,8 +281,6 @@ function Menu() {
                   </div>
                 </div>
               </div>
-            
-
               <ul className=" ml-70 menu menu-horizontal px-1 flex items-center">
                 <li className=" font-semibold my-2 cursor-pointer mr-">
                   {/* Category Dropdown */}
@@ -317,7 +307,6 @@ function Menu() {
                           />
                         </svg>
                       </button>
-
                       {isDropdownOpen && (
                         <div
                           className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
@@ -337,7 +326,6 @@ function Menu() {
                     </div>
                   </section>
                 </li>
-
                 <li className="font-semibold my-2 cursor-pointer">
                   {/* Price Dropdown */}
                   <section aria-labelledby="information-heading">
@@ -363,7 +351,6 @@ function Menu() {
                           />
                         </svg>
                       </button>
-
                       {isPriceDropdownOpen && (
                         <div
                           className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
@@ -401,7 +388,7 @@ function Menu() {
             {prod.description}
           </h4>
           <h4 className="text-lg text-gray-500">
-            {/* Best Price :₹ {prod.variants[0]?.offerPrice} */}
+            Best Price :₹ {prod.variants[0]?.offerPrice}
           </h4>
         </div>
         <div
@@ -422,7 +409,6 @@ function Menu() {
     </div>
   ))
        ) : filterdProducts?.length !== 0 ? (
-          
           filterdProducts?.map((prod) => (
             <div className="p-2" key={prod._id}>
               <div className="mb-10 sm:flex sm:justify-between block">
@@ -436,8 +422,6 @@ function Menu() {
                 </div>
                 <div
                   className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
-                  // style={{ backgroundImage: `url(${prod?.images})` }}
-                  // style={{ backgroundImage: `url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D')` }}
                   style={{ backgroundImage: `url(${prod?.images[0]})` }}
                 >
                   <div className="flex flex-col justify-end h-full"></div>
@@ -452,12 +436,15 @@ function Menu() {
               </div>
               <div className="border border-gray-500"></div>
             </div>
-          ))
-        ) : (
+         
+         ))
+        ) 
+        : (
           <div className="pb-8 mb-5">
             {filterdProducts !== null && filterdProducts?.length === 0 ? (
       <p>No matching products found.</p>
-    ) : (
+    )
+     : (
             currentItems?.map((prod) => (
               <div className="pb-2" key={prod._id}>
                 <div className="mb-10 sm:flex sm:justify-between block">
@@ -474,7 +461,7 @@ function Menu() {
                   </div>
                   <div
                     className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
-                    style={{ backgroundImage: `url(${prod?.images[0]})` }}
+                    // style={{ backgroundImage: `url(${prod?.images[0]})` }}
                   >
                     <div className="flex flex-col justify-end h-full"></div>
                     <button
