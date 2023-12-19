@@ -178,6 +178,8 @@ function Menu() {
       setFilterdProducts([]);
     }
   };
+  console.log(currentItems,'current items');
+  
 
   return (
     <div className="bg-gray-100 container mx-auto px-5 my-element ">
@@ -376,7 +378,8 @@ function Menu() {
         </div>
         
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
-        {filterdProducts === "" ? (
+        {/* {filterdProducts === "" ? ( */}
+        { !filterdProducts  || filterdProducts.length === 0 ?(
   currentItems?.map((prod) => (
     <div className="pb-2" key={prod._id}>
       <div className="mb-10 sm:flex sm:justify-between block">
@@ -407,9 +410,8 @@ function Menu() {
       </div>
       <div className="border border-gray-500"></div>
     </div>
-  ))
+     ))
        ) : filterdProducts?.length !== 0 ? (
-        
           filterdProducts?.map((prod) => (
             // {(console.log('ddddddddd'))}
             <div className="p-2" key={prod._id}>
@@ -440,47 +442,14 @@ function Menu() {
             </div>
          
          ))
-        ) 
-        : (
+         ) : (
           <div className="pb-8 mb-5">
             {filterdProducts !== null && filterdProducts?.length === 0 ? (
-      <p>No matching products found.</p>
-    )
-     : (
-            currentItems?.map((prod) => (
-              <div className="pb-2" key={prod._id}>
-                <div className="mb-10 sm:flex sm:justify-between block">
-                  <div className="">
-                    <h4 className="text-xl font-bold mt-2">
-                      {prod.productName}
-                    </h4>
-                    <h4 className="text-lg text-gray-500">
-                      {prod.description}
-                    </h4>
-                    <h4 className="text-lg text-gray-500">
-                      {/* Best Price :₹ {prod.variants[0]?.offerPrice} */}
-                    </h4>
-                  </div>
-                  <div
-                    className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
-                    // style={{ backgroundImage: `url(${prod?.images[0]})` }}
-                  >
-                    <div className="flex flex-col justify-end h-full"></div>
-                    <button
-                      onClick={() => handleProducData(prod._id)}
-                      className="text-white py-1.5 px-1 rounded-sm  "
-                      style={{ backgroundColor: "#CC252C", border: "none" }}
-                    >
-                      Buy Now
-                    </button>
-                  </div>
-                </div>
-                <div className="border border-gray-500"></div>
-              </div>
-            ))
-          )}
+              <p>No matching products found.</p>
+            ) : null}
           </div>
         )}
+
       </div>
       <div className="float-center  ">
         <PAgination

@@ -11,7 +11,7 @@ const FilteredRestaurents = () => {
   const navigate = useNavigate();
   const [restaurants, setrestaurants] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState([]);
 
   const { catName } = useParams();
   useEffect(() => {
@@ -48,10 +48,25 @@ const FilteredRestaurents = () => {
   
 
  
+  // const handleOptionChange = (event) => {
+  //   setSelectedOption(event.target.value);
+  //   // setIsLoading(true)
+  // };
+
   const handleOptionChange = (event) => {
-    setSelectedOption(event.target.value);
-    // setIsLoading(true)
+    const categoryName = event.target.value;
+    // Check if the category is already in the selectedOption array
+    if (selectedOption.includes(categoryName)) {
+      // Remove the category if it's already selected
+      setSelectedOption((prevSelected) =>
+        prevSelected.filter((cat) => cat !== categoryName)
+      );
+    } else {
+      // Add the category if it's not selected
+      setSelectedOption((prevSelected) => [...prevSelected, categoryName]);
+    }
   };
+  
  
 
 const ratingsMap = {};
@@ -97,6 +112,19 @@ const ratingsMap = {};
             </label>
           ))}
         </div>
+         <div>
+          {categories.map((cat, indx) => (
+        <input
+  type="checkbox"
+  name="category"
+  value={cat._id.name}
+  checked={selectedOption.includes(cat._id.name)}
+  onChange={handleOptionChange}
+  className="mr-4"
+/>
+     ))}
+    </div> 
+
       </div>
       <div className="bg-gray-100 w-3/4 ml-auto">
         <div className="py-10">
