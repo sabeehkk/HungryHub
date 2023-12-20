@@ -6,8 +6,7 @@ export const addToCart =async (req,res)=>{
     console.log(req.body,'incoming datas in Add To Cart');
     const { productId, userId ,selectedVariant } = req.body;
     try {
-      const product = await ProductModel.findOne({ _id: productId }); 
-
+      const product = await ProductModel.findOne({_id: productId }); 
       // console.log(product,'finded product');
       const userCart = await CartModel.findOne({ user: userId });
       console.log(userCart,'usercart find details');
@@ -26,8 +25,6 @@ export const addToCart =async (req,res)=>{
             { user: userId, "items.productId": productId, "items.variant":selectedVariant.name },
             {
               $inc: {
-
-                
                 "items.$.quantity": 1,
                 "items.$.price": selectedVariant.offerPrice,
               },
@@ -94,7 +91,7 @@ export const addToCart =async (req,res)=>{
       } else {
              await CartModel.create({
           user: userId,
-          restaurantId:product.restaurant_id,
+          restaurantId:product.restaurent_id,
           items: [
             {
               productId: product._id,
@@ -124,7 +121,7 @@ export const getCart = async (req,res)=>{
 
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
-    console.log(cartData,'cartDatass');
+    console.log(cartData.restaurantId,'cartDatass');
     if(cartData){
       res.status(200).send({
         success:true,

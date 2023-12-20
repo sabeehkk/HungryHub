@@ -220,7 +220,6 @@ const UserRoute = {
       element: (
         <>
           <IsLogged />
-
           <UserNavbar />
           <OrderHistory />
         </>

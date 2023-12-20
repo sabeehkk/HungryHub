@@ -10,7 +10,6 @@ export const addProduct = async (req, res) => {
     console.log(req.body);
     const { productName, description, productPrice, category, images, restId,variants } =
       req.body;
-
     const newProduct = new ProductModel({
       productName,
       restaurent_id: restId,
@@ -20,7 +19,6 @@ export const addProduct = async (req, res) => {
       images,
       description,
     });
-
     await newProduct.save();
     res.json({ message: "success" });
   } catch (error) {

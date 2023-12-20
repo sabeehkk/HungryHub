@@ -134,7 +134,6 @@ const RestaurentRoute = {
           element:(
             <>
                <IsLogged/>
-
             <OrderMoreViewPage/>
             </>
           )

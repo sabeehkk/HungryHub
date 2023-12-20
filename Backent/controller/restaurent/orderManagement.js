@@ -201,27 +201,58 @@ export const dashboardData = async(req,res)=>{
         {
           $group: {
             _id: "$userId", 
+            users: { $addToSet: "$userId" },
             total: { $sum: 1 } 
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            totalUsers: { $size: "$users" }
           }
         }
       ]);
       console.log(totalUsers,'totalUsers');
 
+  // const totalOrders = await OrderModel.aggregate([
+  //   {
+  //     $match: {
+  //       is_returned: 0,
+  //       // is_delivered: true,
+  //       restaurantId: restId 
+  //     }
+  //   },
+  //   {
+  //     $group: {
+  //       _id: "$restaurantId", 
+  //       total: { $sum: 1 } 
+  //     }
+  //   }
+  // ]);    
+  // const totalOrders = await OrderModel.countDocuments();
   const totalOrders = await OrderModel.aggregate([
     {
-      $match: {
-        is_returned: 0,
-        // is_delivered: true,
-        restaurantId: restId 
+      $match: { restaurantId: restId }
+    },
+    {
+      $group: {
+        _id: {
+          restaurantId: "$restaurantId",
+          userId: "$userId"
+        },
+        orders: { $addToSet: "$_id" }
       }
     },
     {
       $group: {
-        _id: "$restaurantId", 
-        total: { $sum: 1 } 
+        _id: "$_id.restaurantId",
+        totalOrders: { $sum: { $size: "$orders" } }
       }
     }
-  ]);    
+  ]);
+  console.log(totalOrders);
+  
+
   console.log(totalOrders,'totalOrders');
       res.status(200).send({
         success:true,

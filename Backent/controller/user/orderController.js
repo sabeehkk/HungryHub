@@ -8,14 +8,16 @@ export const stripe = new Stripe(process.env.STRIP_PRIVET_KEY);
 
 export const Order = async (req, res) => {
   try {
-    console.log(req.body, "inside order backend");
+    // console.log(req.body, "inside order backend");
     const { payment, addressIndex, cartData } = req.body;
+    console.log(cartData.restaurantId,'cart data restaruentId');
     const user = await UserModel.findOne({ _id: cartData.user });
     console.log("user ", user);
     const address = user.Address[addressIndex];
     const cart = await CartModel.findOne({ _id: cartData._id }).populate(
       "items.productId"
     );
+    // console.log(cart,'searching restId');
     const items = cart.items.map((item) => ({
       product: item.productId,
       quantity: item.quantity,
@@ -62,7 +64,7 @@ export const Order = async (req, res) => {
         success_url: `${process.env.CLIENT_URL}/payment-success/${cartData?.user}`,
         cancel_url: `${process.env.CLIENT_URL}/payment-fail`,
       });
-      console.log(session, "stripe is working");
+      // console.log(session, "stripe is working");
 
       await OrderModel.create({
         userId: user._id,

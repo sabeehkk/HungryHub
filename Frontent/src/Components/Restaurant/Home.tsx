@@ -25,6 +25,8 @@ let result = restaurant.restaurent;
     // }) 
      restaurentAxios.get(`/dashboardData?id=${restId}`).then((response)=>{
       setDashBoardDatas(response.data)
+      console.log(response.data,'dashboardData');
+      
 
      })
   },[])
@@ -60,7 +62,7 @@ let result = restaurant.restaurent;
             </div>
             <div className=''>
             <h3 className="text-2xl font-semibold text-off-White text-center">
-              {dashBordDatas?.totalOrders[0]?.total}
+              {dashBordDatas?.totalOrders[0]?.totalOrders}
             </h3>
             <h3 className="font-semibold text-off-White text-center opacity-50">
              Total Orders
@@ -79,7 +81,7 @@ let result = restaurant.restaurent;
             </div>
             <div className=''>
             <h3 className="text-2xl font-semibold text-off-White text-center">
-              {dashBordDatas?.totalUsers[0]?.total}
+              {dashBordDatas?.totalUsers[0]?.totalUsers}
             </h3>
             <h3 className="font-semibold text-off-White text-center opacity-50">
              Total Users
