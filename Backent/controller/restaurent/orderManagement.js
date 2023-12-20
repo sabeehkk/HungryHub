@@ -182,3 +182,58 @@ export const cancelOrder = async (req,res)=>{
     });
   }
 }
+
+export const dashboardData = async(req,res)=>{
+  try {
+    console.log(req.query) 
+    // const restId = req.query.id
+    const restId = new mongoose.Types.ObjectId(req.query.id);
+    console.log(restId,'restId');
+    const totalSale = await OrderModel.aggregate([
+      {$match : { paymentStatus:'PAID', restaurantId: restId}},   
+      {$group : { _id: "$restaurantId", total : {$sum :"$grandTotal"}}}]) 
+      console.log(totalSale,'totalSales');
+
+      const totalUsers = await OrderModel.aggregate([
+        {
+          $match: { restaurantId: restId } 
+        },
+        {
+          $group: {
+            _id: "$userId", 
+            total: { $sum: 1 } 
+          }
+        }
+      ]);
+      console.log(totalUsers,'totalUsers');
+
+  const totalOrders = await OrderModel.aggregate([
+    {
+      $match: {
+        is_returned: 0,
+        // is_delivered: true,
+        restaurantId: restId 
+      }
+    },
+    {
+      $group: {
+        _id: "$restaurantId", 
+        total: { $sum: 1 } 
+      }
+    }
+  ]);    
+  console.log(totalOrders,'totalOrders');
+      res.status(200).send({
+        success:true,
+        totalSale,
+        totalUsers,
+        totalOrders
+      })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message:"server error"
+    })
+  }
+}

@@ -1,21 +1,32 @@
 // RestaurantDashboard.js
 
 import React, { useEffect, useState} from 'react';
+import { useSelector } from "react-redux";
+
 import { RiFileList3Fill } from 'react-icons/ri'
 import { FaShopify } from 'react-icons/fa'
 import { BiSolidUserAccount } from 'react-icons/bi'
 // import RestaurantAxios from '../../Axios/RestaurantAxios';
 import { restaurentAxios } from '../../axios/axios';
-import PieChart from '../../assets/PieChart';
-import Chart from '../../assets/Chart';
+// import PieChart from '../../assets/PieChart';
+import PieChart from '../../assets/pieChart';
+import Chart from '../../assets/chart';
 
 const RestaurantDashboard = () => {
   const [dashBordDatas,setDashBoardDatas] = useState()
 
+const restaurant = useSelector((state) => state.restaurentAuth);
+let result = restaurant.restaurent;
+  const restId = result?._id;
+
   useEffect(()=>{
-    RestaurantAxios.get('/dashborddata').then((response)=>{
+    // restaurentAxios.get('/dashboardData').then((response)=>{
+    //   setDashBoardDatas(response.data)
+    // }) 
+     restaurentAxios.get(`/dashboardData?id=${restId}`).then((response)=>{
       setDashBoardDatas(response.data)
-    })
+
+     })
   },[])
     
   return (

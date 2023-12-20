@@ -22,6 +22,7 @@ import VerifyToken from "../middleware/jwtRestaurentVerification.js";
 import {
   viewOrders,
   updateDeliveryStatus,
+  dashboardData
   
 } from "../controller/restaurent/orderManagement.js";
 import { getOrderItems,cancelOrder } from "../controller/user/orderController.js";
@@ -48,6 +49,7 @@ router.get("/viewOrders", viewOrders);
 router.get("/getOrderIterms", getOrderItems);
 router.patch("/updateDeliveryStatus", VerifyToken, updateDeliveryStatus);
 router.patch("/cancelOrder",cancelOrder)
+router.get('/dashboardData',dashboardData);
 
 router.patch(
   "/profile/:userId/edit/profilePhoto",
