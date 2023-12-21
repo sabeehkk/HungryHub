@@ -148,7 +148,7 @@ const RestaurentRoute = {
           )
         },
         {
-          path:"dummy/:id",
+          path:"dummy",
           element:(
             <Dummy/>  
           )

@@ -11,12 +11,12 @@ function IsLogout() {
 
     const navigate = useNavigate()
     
-    useEffect(()=>{
-        navigate('/employee/login') 
-    },[success])
-  return null
-    
-  
-}
+    useEffect(() => {
+      if (success) {
+        navigate("/employee/home");
+      }
+    }, [success]);
+    return null;
+  }
 
 export default IsLogout

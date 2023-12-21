@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import { generateOTP, transporter } from "../../utils/utils.js";
 
 let copyOtp;
-
 export const signup = async (req, res) => {
   try {
     console.log(req.body);
@@ -12,14 +11,12 @@ export const signup = async (req, res) => {
     const existUser = await userModel.findOne({
       $or: [{ email }, { phoneNumber }],
     });
-
     if (existUser) {
       return res.json({
         message: "User Already exists",
         error: true,
       });
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new userModel({
       name,

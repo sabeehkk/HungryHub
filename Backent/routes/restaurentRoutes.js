@@ -22,8 +22,8 @@ import VerifyToken from "../middleware/jwtRestaurentVerification.js";
 import {
   viewOrders,
   updateDeliveryStatus,
-  dashboardData
-  
+  dashboardData,
+  splitOrder
 } from "../controller/restaurent/orderManagement.js";
 import { getOrderItems,cancelOrder } from "../controller/user/orderController.js";
 const router = express.Router();
@@ -50,6 +50,7 @@ router.get("/getOrderIterms", getOrderItems);
 router.patch("/updateDeliveryStatus", VerifyToken, updateDeliveryStatus);
 router.patch("/cancelOrder",cancelOrder)
 router.get('/dashboardData',dashboardData);
+router.post('/splitOrder',splitOrder)
 
 router.patch(
   "/profile/:userId/edit/profilePhoto",

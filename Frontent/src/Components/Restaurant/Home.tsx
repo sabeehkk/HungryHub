@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
-
+import { ErrorMessage } from '../../utils/util';
 import { RiFileList3Fill } from 'react-icons/ri'
 import { FaShopify } from 'react-icons/fa'
 import { BiSolidUserAccount } from 'react-icons/bi'
@@ -20,15 +20,16 @@ let result = restaurant.restaurent;
   const restId = result?._id;
 
   useEffect(()=>{
-    // restaurentAxios.get('/dashboardData').then((response)=>{
-    //   setDashBoardDatas(response.data)
-    // }) 
+    if (!restaurant.restaurent || !restaurant.restaurent._id) {
+      return  
+      //  ErrorMessage('UnAuthorized')
+        }else{
      restaurentAxios.get(`/dashboardData?id=${restId}`).then((response)=>{
       setDashBoardDatas(response.data)
       console.log(response.data,'dashboardData');
-      
-
      })
+    }
+
   },[])
     
   return (

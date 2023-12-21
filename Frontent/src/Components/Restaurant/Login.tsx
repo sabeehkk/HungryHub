@@ -1,6 +1,5 @@
 import  {  useState,SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { restaurentAxios } from "../../axios/axios";
@@ -22,9 +21,7 @@ const handleSubmit = async (e: SyntheticEvent)=>{
        return;
   }
   try {
-    await restaurentAxios
-      .post(`/login`, { email, password })
-      .then((res) => {
+    await restaurentAxios.post(`/login`, { email, password }).then((res) => {
         localStorage.setItem("restaurentToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"

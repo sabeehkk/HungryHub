@@ -98,8 +98,6 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   //     });
   // }, []);
   //   }
-   
-
   const itemsPerPage = 5;
   const totalPages = Math.ceil(orderItem.length / itemsPerPage);
 
@@ -110,7 +108,6 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
    // Initialize the socket connection
 //    useEffect(() => {
 //     const newSocket = io(baseUrl);
@@ -240,7 +237,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
                       {
                         <button
                           className="bg-teal-500 border-none text-white"
-                          onClick={() => navigate(`/restaurent/dummy/${item._id}`)}
+                          onClick={() => navigate(`/restaurent/ordersMoreView/${item._id}`)}
                         >
                           View
                         </button>

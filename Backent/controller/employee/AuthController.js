@@ -32,8 +32,6 @@ export const login=async (req,res)=>{
         const {email,password}=req.body;
         const employeeData =await employeeModel.findOne({email})
         console.log('employedataaaaaaa',employeeData);
-        
-        console.log(employeeData,'restaurentdataaaaaaaaaaaaaaaaaaaaaaa');
         // if(!employeeData){
         //     return res.json({message:'invalid email or password '})
         // }
@@ -43,7 +41,6 @@ export const login=async (req,res)=>{
             error: true,
           });
         }
-
         if (employeeData.status === false) {
             return res.status(400).json({
               message:
@@ -51,21 +48,14 @@ export const login=async (req,res)=>{
               error: true,
             });
           }
-     
-        
         const isPasswordVerified = bcrypt.compareSync(password,employeeData.password)
-
         if (!isPasswordVerified) {
             return res.status(400).json({ message: "Invalid Password", error: true });
           }
-      
         const token=jwt.sign(
             {employee:email,role:"employee"},
-
             process.env.JWT_SECRET,
-
             {expiresIn:"1h"}
-
             )
             return res.json({message:"success",token,employeeData})
         

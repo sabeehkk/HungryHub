@@ -50,8 +50,6 @@ export const login=async (req,res)=>{
             error: true,
           });
         }
-    
- 
        if (restaurentData.status === false) {
          return res.status(400).json({
            message:

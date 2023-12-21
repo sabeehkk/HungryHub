@@ -9,7 +9,6 @@ import RestaurentModel from '../../models/restaurent.js';
 export const viewOrders = async (req,res)=>{
   console.log('function viewOrders');
     try {
-   
         console.log(req.query,'inside view order');
         const id = req.query.id;
         if(id ==='undefined'){
@@ -51,16 +50,6 @@ export const updateDeliveryStatus = async (req,res)=>{
         const { prodId, orderId, orderStatus } = req.body;
         console.log(req.body);
         let item_orderStatus;
-        // if (orderStatus === "Pending") {
-        //   item_orderStatus = "Preparing...";
-        // } else if (orderStatus === "Preparing...") {
-        //   item_orderStatus = "Packed";
-        // } else if (orderStatus === "Packed") {
-        //   item_orderStatus = "Out of delivery";
-        // } else {
-        //   item_orderStatus = "Delivered";
-        // }
-
         if (orderStatus === "Pending") {
           item_orderStatus = "Pending";
         } else if (orderStatus === "Preparing...") {
@@ -250,9 +239,6 @@ export const dashboardData = async(req,res)=>{
       }
     }
   ]);
-  console.log(totalOrders);
-  
-
   console.log(totalOrders,'totalOrders');
       res.status(200).send({
         success:true,
@@ -267,4 +253,18 @@ export const dashboardData = async(req,res)=>{
       message:"server error"
     })
   }
+}
+
+export const splitOrder = async(req,res)=>{
+    try {
+       console.log(req.body,'splitOrder is working')
+       const { orderId, employeeId } = req.body;
+       const order = await OrderModel.findById(orderId);
+     console.log(order,'order');
+       const ordersDetails = await OrderModel.findByIdAndUpdate(orderId, { employeeId: employeeId });
+       
+       
+    } catch (error) {
+      console.log(error);
+    }
 }

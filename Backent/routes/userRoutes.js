@@ -70,7 +70,6 @@ router.patch('/rating',doRating)
 router.patch('/review',doReview)
 
   
-//restaurnet Product list
 
 export default router;
  

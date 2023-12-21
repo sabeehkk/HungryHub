@@ -35,7 +35,6 @@ const UserAppLayout = () => {
     <>
       {/* <Navbar/> */}
       <Outlet />
-      <ToastContainer />
     </>
   );
 };
