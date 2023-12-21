@@ -75,3 +75,11 @@ export const getEmplOrders= async (req, res) => {
       console.log(error.message);
     }
   }
+
+export const updateDeliveryStatus = async(req,res)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+}

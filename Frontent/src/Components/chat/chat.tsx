@@ -25,11 +25,9 @@ const Chat = ({ role }) => {
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [load, setLoad] = useState(true);
 
-
   console.log(currentUserId,'curentuserid');
   console.log(chats,'chatsssssssssss');
   
-
   console.log(recieveMessage,'recived message');
   const getChats = async (id) => {
     console.log('inside getChats in chatPAGE', id);

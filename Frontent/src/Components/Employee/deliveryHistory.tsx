@@ -1,29 +1,47 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import {employeeAxios} from '../../axios/axios'
+import { restaurentAxios } from '../../axios/axios'
 import { useSelector } from 'react-redux'
+import { ErrorMessage } from '../../utils/util'
 
 function DeliveryHistoryItem() {
     const [deliveryHistory,setDeliveryHistory] = useState()
-
+    const [orderItem,setOrderItem]=useState([])
     const employee = useSelector((state)=> state.employeeAuth)
     console.log(employee,'employee datas');
-    
-
     useEffect(() => {
         employeeAxios.get(`/getordersempl/?id=${employee?.employee?._id}`).then((response) => {
             setDeliveryHistory(response.data);
-            console.log(response.data,'delivery history');
-            
-        });
-      }, []);
+            // console.log(response.data,'delivery history');
+         });
+      },[]);
+      console.log(deliveryHistory,'delivery history');
+      
+
+      const updateDeliveryStatus = (prodId, orderStatus,orderId) => {
+        const productId =prodId.find((e)=>{return e.orderStatus=='Packed'})
+               
+        if(productId && orderStatus && orderId) {
+          restaurentAxios.patch("/updateDeliveryStatus", {
+            prodId:productId._id, 
+            orderId:orderId ,
+            orderStatus:orderStatus,
+          }).then((response) => {
+            setStatusUpdated(!is_statusUpdated);
+          });
+        }else {
+          return ErrorMessage('no data available')
+        }
+      };
 
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Delivery History</h2>
       {deliveryHistory?.ordersDetails.map((delivery) => (
+           
           <Fragment key={delivery._id}>
           {delivery.item.map((deliveryItem) =>
-            (deliveryItem && delivery.employeeId===employee.employee._id  ) ? (
+            (deliveryItem && delivery.employeeId===employee.employee._id && deliveryItem.orderStatus=='Packed'  ) ? (
                 <div key={deliveryItem._id} className="flex border items-center justify-between">
               <div className="p-4 mb-4">
                 <div>
@@ -47,8 +65,28 @@ function DeliveryHistoryItem() {
              
               </div>
               <div>
-               5<div>
-                  <strong>Chat:</strong> {delivery.userId.name}
+               <div>
+               <select
+                      className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"
+                      value={deliveryItem.orderStatus}
+                      onChange={(e) =>
+                        updateDeliveryStatus(delivery.item, e.target.value,delivery._id)
+                      }
+                      disabled={delivery.item.orderStatus === "Delivered"}
+                    >
+                      <option
+                        value="Out of delivery"
+                        className="bg-white text-black hover:bg-gray-400"
+                      >
+                        Out of delivery
+                      </option>
+                      <option
+                        value="Delivered"
+                        className="bg-white text-black hover:bg-gray-400"
+                      >
+                        Delivered
+                      </option>
+                    </select>
                 </div>
               </div>
            <div className="bg-green-500 text-white rounded-full p-2">

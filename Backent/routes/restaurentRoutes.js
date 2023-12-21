@@ -47,7 +47,7 @@ router.get("/getResProfile", getResProfile);
 router.get("/getRestaurents", getRestaurents);
 router.get("/viewOrders", viewOrders);
 router.get("/getOrderIterms", getOrderItems);
-router.patch("/updateDeliveryStatus", VerifyToken, updateDeliveryStatus);
+router.patch("/updateDeliveryStatus", updateDeliveryStatus);
 router.patch("/cancelOrder",cancelOrder)
 router.get('/dashboardData',dashboardData);
 router.post('/splitOrder',splitOrder)

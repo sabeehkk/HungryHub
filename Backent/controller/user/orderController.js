@@ -131,7 +131,7 @@ export const getOrderItems = async (req, res) => {
     const orderItems = await OrderModel.findOne({ _id: id })
       .sort({ _id: -1 })
       .populate("item.product")
-      .populate("employeeId")
+      // .populate("employeeId")
     res.status(200).send({
       success: true,
       orderItems,

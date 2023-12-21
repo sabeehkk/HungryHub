@@ -48,7 +48,8 @@ export const viewOrders = async (req,res)=>{
 export const updateDeliveryStatus = async (req,res)=>{
     try {
         const { prodId, orderId, orderStatus } = req.body;
-        console.log(req.body);
+
+        console.log(req.body,'datassssssssssssssss');
         let item_orderStatus;
         if (orderStatus === "Pending") {
           item_orderStatus = "Pending";
@@ -182,7 +183,6 @@ export const dashboardData = async(req,res)=>{
       {$match : { paymentStatus:'PAID', restaurantId: restId}},   
       {$group : { _id: "$restaurantId", total : {$sum :"$grandTotal"}}}]) 
       console.log(totalSale,'totalSales');
-
       const totalUsers = await OrderModel.aggregate([
         {
           $match: { restaurantId: restId } 
@@ -260,10 +260,8 @@ export const splitOrder = async(req,res)=>{
        console.log(req.body,'splitOrder is working')
        const { orderId, employeeId } = req.body;
        const order = await OrderModel.findById(orderId);
-     console.log(order,'order');
+       console.log(order,'order');
        const ordersDetails = await OrderModel.findByIdAndUpdate(orderId, { employeeId: employeeId });
-       
-       
     } catch (error) {
       console.log(error);
     }

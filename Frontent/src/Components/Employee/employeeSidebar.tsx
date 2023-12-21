@@ -42,7 +42,7 @@ const App = () => {
     {
       title: "Orders ",
       icon: <BiFoodMenu />,
-      url: "#",
+      url: "/employee/deliveryHistory",
     },
     {
       title: "Logout ",

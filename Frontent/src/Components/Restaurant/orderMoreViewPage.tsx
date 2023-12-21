@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import { restaurentAxios ,employeeAxios} from "../../axios/axios";
 import BillModal from "../../assets/billModa";
 import { USER_API } from "../../Constants/API";
-import { SuccessMessage } from "../../utils/util";
+import { ErrorMessage, SuccessMessage } from "../../utils/util";
 
 const baseUrl = USER_API
 function OrdersItems() {
@@ -24,8 +24,6 @@ function OrdersItems() {
   const { id } = useParams()
   let total = 0;
   const restaurant = useSelector((state) => state.restaurentAuth);
-  const employee = useSelector((state) => state.employeeAuth);
-console.log(employees,'employee details');
   useEffect(()=>{
     restaurentAxios.get(`/getOrderIterms?id=${id}`).then((response)=>{
       setOrderItem(response.data.orderItems)
@@ -44,6 +42,7 @@ console.log(employees,'employee details');
     setModalOpen(false);
   };
   const updateDeliveryStatus = (prodId, orderStatus) => {
+     SuccessMessage(prodId)
     const updateStatus = {
       prodId, 
       orderId:orderItem._id ,
@@ -57,10 +56,28 @@ console.log(employees,'employee details');
       setStatusUpdated(!is_statusUpdated);
     });
   };
-  const employeeDelivery = ((employeeId,orderId)=>{
-    restaurentAxios.post("/splitOrder",{employeeId:employeeId,orderId:orderId})
-     return SuccessMessage (orderId)
-  })
+  // const employeeDelivery = ((employeeId,orderId)=>{
+  //   if(employeeId && orderId){
+  //     return SuccessMessage('Selected employee')
+  //     restaurentAxios.post("/splitOrder",{employeeId:employeeId,orderId:orderId})
+  //   }else{
+  //     return ErrorMessage('select employee')
+  //   }
+     
+  // })
+  const employeeDelivery = (employeeId, orderId) => {
+    if (employeeId && orderId) {
+      if (employeeId !== "all") {
+        SuccessMessage('Selected employee');
+        restaurentAxios.post("/splitOrder", { employeeId: employeeId, orderId: orderId })
+      } else {
+        ErrorMessage('Select a specific employee');
+      }
+    } else {
+      ErrorMessage('Select employee and order');
+    }
+  };
+  
   const cancelOrder = async (orderId,itemId) => {
     const result = await Swal.fire({
       title: "Do you really want to cancel this Order?",
@@ -83,7 +100,6 @@ console.log(employees,'employee details');
       });
     }
   };
-
   return (
     <div className="flex flex-col">
   <BillModal isOpen={modalOpen} closeModal={closeModal} orderItem={itemData} />
@@ -91,7 +107,7 @@ console.log(employees,'employee details');
   <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
     <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
     <div className="flex ml-60">
-          <h1 className="ml-40 text-xl font-bold text-gray-800">
+          <h1 className="ml-72 text-xl font-bold text-gray-800">
             {"More"} Details
           </h1>
         </div>
@@ -120,11 +136,17 @@ console.log(employees,'employee details');
               </th>
               <th  scope="col"
                 className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                Actions
+                Select Employee
+              
               </th>
               <th  scope="col"
                 className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                Select Employee
+              Confirm
+              </th>
+              <th  scope="col"
+                className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
+                 Actions
+                
               </th>
             </tr>
           </thead>
@@ -140,13 +162,12 @@ console.log(employees,'employee details');
                     alt=""
                     className="h-10 w-14 mr-10 rounded-sm"
                   />
-                  {ele.product?.productName}
                 </td>
                 <td className="px-6 py-2 whitespace-nowrap">
-                  {ele?._id}
+                {ele.product?.productName}
                 </td>
                 <td className="px-6 py-2 whitespace-nowrap">
-                  {/* {ele.product?.price} */}
+                  {ele?.quantity}
                 </td>
                 <td className="px-6 py-2 whitespace-nowrap">
                   {ele?.price}
@@ -197,7 +218,38 @@ console.log(employees,'employee details');
                     </select>
                   )}
                 </td>
-                <td className=" px-6 py-4 whitespace-nowrap flex ">
+                
+                {/* {
+                employees.map((employee, index) => (
+                  <td key={index} className="px-6 py-2 whitespace-nowrap">
+                    <h1>{employee?.name}</h1>
+                  </td>
+                ))
+              } */}
+              <td>
+              <select 
+              className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"
+               id="employeeDropdown" onChange={(e)=>{setSelectEmployee(e.target.value)}}>
+                <option
+                className="bg-white text-black hover:bg-gray-400"
+                 value="all">All Employees</option>
+                {employees.map((employee, index) => (
+                  <option
+                   className="bg-white text-black hover:bg-gray-400"
+                   key={index} value={employee._id}>
+                    {employee.name}
+                  </option>
+                ))}
+              </select>
+              </td>
+              <td>
+                <button
+                       className="p-1 w-28  border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
+                 onClick={()=>{employeeDelivery(selectEmployee,orderItem._id)}}>
+                   confirm
+                </button>
+              </td>
+              <td className=" px-6 py-4 whitespace-nowrap flex ">
                   {ele.orderStatus === "Delivered" ? (
                     <div className="bg-green-500 text-white rounded-full p-2">
                       <svg
@@ -220,45 +272,22 @@ console.log(employees,'employee details');
                   ) : (
                     <button
                       onClick={() => cancelOrder(orderItem._id, ele._id)}
-                      // className="text-red-600 hover:text-red-900"
                        className="p-1 w-20  border border-transparent text-white rounded bg-red-500 shadow-md hover:bg-red-400"
-                   
                    >
                       Cancel
                     </button>
                   )}
                 </td>
-                {/* {
-                employees.map((employee, index) => (
-                  <td key={index} className="px-6 py-2 whitespace-nowrap">
-                    <h1>{employee?.name}</h1>
-                  </td>
-                ))
-              } */}
-              <td>
-              <select id="employeeDropdown" onChange={(e)=>{setSelectEmployee(e.target.value)}}>
-                <option value="all">All Employees</option>
-                {employees.map((employee, index) => (
-                  <option key={index} value={employee._id}>
-                    {employee.name}
-                  </option>
-                ))}
-              </select>
-              
-              </td>
-              <td>
-                <button onClick={()=>{employeeDelivery(selectEmployee,orderItem._id)}}>
-                   continue
-                </button>
-              </td>
-              
               </tr>
             ))}
             <tr className="px-6 py-2 whitespace-nowra justify-between items-end">
               <td></td>
               <td></td>
-              <td className="text-lg font-semibold">Total:</td>
-              <td className="text-end text-lg font-semibold">{total}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="text-lg  text-end font-semibold">Total  :   {total}</td>
             </tr>
           </tbody>
         </table>
@@ -266,7 +295,6 @@ console.log(employees,'employee details');
     </div>
   </div>
 </div>
-
   );
 }
 

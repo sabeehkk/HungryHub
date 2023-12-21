@@ -176,7 +176,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
     <div className="h-full w-full">
       <div className="w-full overflow-x-auto">
       <div className="flex ml-60">
-          <h1 className="ml-40 text-xl font-bold text-gray-800">
+          <h1 className="ml-72 text-xl font-bold text-gray-800">
             {"Order"} Management
           </h1>
         </div>
