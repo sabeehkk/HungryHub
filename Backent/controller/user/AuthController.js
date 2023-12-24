@@ -4,9 +4,9 @@ import jwt from "jsonwebtoken";
 import { generateOTP, transporter } from "../../utils/utils.js";
 
 let copyOtp;
+// signup--------------------
 export const signup = async (req, res) => {
   try {
-    console.log(req.body);
     const { name, email, phoneNumber, password } = req.body;
     const existUser = await userModel.findOne({
       $or: [{ email }, { phoneNumber }],
@@ -25,27 +25,22 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
     res.json({ message: "success" });
-
     await user.save();
   } catch (error) {
     console.log(error.message);
   }
 };
-
+//userLogin-------------------------
 export const userLogin = async (req, res) => {
   try {
-    console.log("userdataaaaaaaa", req.body);
     const { email, password } = req.body;
     const userData = await userModel.findOne({ email });
-    console.log("userdataa from backend", userData);
-
     if (!userData) {
       return res.status(400).json({
         message: "Invalid email address or password",
         error: true,
       });
     }
-
     if (userData.status === false) {
       return res.status(400).json({
         message: "Admin-initiated account block",
@@ -56,7 +51,6 @@ export const userLogin = async (req, res) => {
     if (!isPasswordVerified) {
       return res.status(400).json({ message: "Invalid Password", error: true });
     }
-
     const token = jwt.sign(
       { user: userData._id, role: "user" },
       process.env.JWT_SECRET,
@@ -69,10 +63,9 @@ export const userLogin = async (req, res) => {
       .json({ message: "internal server error", error: true });
   }
 };
-
+//googleLogin------------------
 export const googleLogin = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, family_name, given_name } = req.body;
     const result = await userModel.findOne({ email: email });
     if (result) {
@@ -83,7 +76,6 @@ export const googleLogin = async (req, res) => {
           error: true,
         });
       }
-
       const token = jwt.sign(
         { user: result._id, role: "user" },
         process.env.JWT_SECRET,
@@ -91,16 +83,12 @@ export const googleLogin = async (req, res) => {
       );
       return res.json({ message: "success", token, userData: result });
     }
-
     const userSchema = new userModel({
       email,
       name: given_name,
     });
-
     const response = await userSchema.save();
-
     const userData = await userModel.findOne({ email });
-
     const token = jwt.sign(
       { user: userData._id, role: "user" },
       process.env.JWT_SECRET,
@@ -111,7 +99,7 @@ export const googleLogin = async (req, res) => {
     console.log(error.message);
   }
 };
-
+// Action---------------------------
 const Action = async (req, res) => {
   const id = req.query.id;
   const status = req.query.status;
@@ -124,24 +112,20 @@ const Action = async (req, res) => {
       console.log(error);
     });
 };
-
+// verifySignup-------------------
 export const verifySignup = async (req, res) => {
   try {
     const { email, phoneNumber } = req.body;
-
     const result = await userModel.findOne({
       $or: [{ email }, { phoneNumber }],
     });
-
     if (result) {
       return res.status(404).json({
         message: "the user is already exsist ",
         error: true,
       });
     }
-
     const otp = generateOTP();
-    console.log("generate otp", otp);
     copyOtp = otp;
     var mailOptions = {
       to: email,
@@ -152,35 +136,26 @@ export const verifySignup = async (req, res) => {
         otp +
         "</h1>",
     };
-
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         return console.log(error);
       }
-      console.log("Message sent: %s", info.messageId);
       return res.status(200).json({ message: "success" });
     });
-
     return res.status(200).json({ message: "success" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
+// verifyOtp----------------------------
 export const verifyOtp = async (req, res) => {
   try {
-    console.log("verifing");
-    const { digitone, digitTwo, digitThree, digitFour, digitFive, digitSix } =
-      req.body;
-
+    const { digitone, digitTwo, digitThree, digitFour, digitFive, digitSix } =req.body;
     const formOtp = `${digitone}${digitTwo}${digitThree}${digitFour}${digitFive}${digitSix}`;
-    console.log("formotttpppp", formOtp);
-    console.log("copyotttpppp", copyOtp);
     if (formOtp != copyOtp) {
       return res.status(401).json({ message: "Otp is Not valid " });
     } else if (formOtp === copyOtp) {
-      console.log("success aayi");
       return res.json({ message: "success" });
     }
   } catch (error) {
