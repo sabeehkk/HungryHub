@@ -159,7 +159,9 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
                     cols={50}
                   />
                 </div>
-                <button className="text-green-500 " onClick={handleRatingAndReview}>Submit</button>
+                <button
+                 className="text-green-500 "
+                  onClick={handleRatingAndReview}>Submit</button>
             </div> 
               ) : null}
             <div className="border p-3 justify-between shadow-md">

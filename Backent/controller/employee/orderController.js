@@ -1,15 +1,14 @@
 import OrderModel from '../../models/order.js'
 import EmployeeModel from '../../models/employee.js'
+import mongoose from "mongoose";
+import ChatModel from "../../models/chat.js"
+
+
 export const getEmplOrders= async (req, res) => {
     try {
         console.log(req.query,'getEmplOrders is called');
       const id = req.query.id;
       const ordersDetails = await OrderModel.find({
-        // $or: [
-        //   { employeeId: id },
-        //   // { "item.employeeId._id": { $exists: false } },
-        //   { "item.orderStatus": "Preparing..." },
-        // ],
       })
         .sort({ _id: -1 })
         .populate({
@@ -22,41 +21,19 @@ export const getEmplOrders= async (req, res) => {
         })
         .populate("userId");
       if (ordersDetails) {
-        res.status(200).send({
+        res.status(200).json({
           success: true,
           ordersDetails,
         });
       } else {
-        res.status(404).send({
+        res.status(404).json({
           success: false,
           message: "No orders found",
         });
       }
     } catch (error) {
       console.log(error);
-      res.status(500).send({
-        success: false,
-        message: "Server Error",
-      });
-    }
-  }
-
-
-  orderAccept:async(req,res)=>{
-    try {
-      const { orderId, emplId} = req.body
-      await Orders.updateOne({_id:orderId},{
-        $set:{
-          employeeId:emplId
-        }
-      })
-      res.status(200).send({
-        success: true,
-        message:"Please collect order"
-      });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send({
+      res.status(500).json({
         success: false,
         message: "Server Error",
       });
@@ -83,3 +60,47 @@ export const updateDeliveryStatus = async(req,res)=>{
     
   }
 }
+
+export const getChat = async (req,res) => {
+  try {
+   console.log(req.query,'inside getChat');
+   const id = req.query.id;
+   const orderId =new mongoose.Types.ObjectId(req.query.id);
+   console.log(orderId,'orderId');
+   const findChat = await ChatModel.find({orderId:orderId}).populate('employeeId').populate('userId');
+   if(findChat){
+     res.status(200).send({
+       success: true,
+       findChat,
+     });
+   }else{
+     res.status(404).send({
+       success: false,
+       message: "Chat not found",
+     });
+   }
+   console.log(findChat,'findChat');
+  } catch (error) {
+   console.log(error);
+  }
+}
+
+export const saveChat = async (req, res) => {
+  try {
+    console.log(req.body, 'inside saveChat');
+    const { orderId, chat } = req.body;
+
+    const chatFind = await ChatModel.findOne({ orderId: orderId });
+
+    if (chatFind) {
+    
+      await ChatModel.findOneAndUpdate({ orderId: orderId }, { $push: { chat: chat } });
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+};

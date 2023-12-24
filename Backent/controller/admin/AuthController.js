@@ -7,13 +7,9 @@ const LIMIT = 6;
 
 export const login=async (req,res)=>{
     try {
-      console.log(req.body);
-        
         const {email,password}=req.body;
         const adminData =await adminModel.findOne({email})
-        console.log(adminData,'admindataaaaaaaaaaaaaaaaaaaaaaa');
         if (!adminData) {
-          console.log('inside ~admin');
             return res.status(400).json({
               message: "Invalid email address or email not found",
               error: true,

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import PAgination from "../../Components/pagination";
+
 
 // import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
@@ -20,12 +22,23 @@ function Orders() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemData, setItemDta] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate()
 //   const user = useSelector((state) => state.user);
 const user =useSelector((state)=>state.userAuth);
 console.log(orderItem, 'orderItem in history');
 
+const itemsPerPage = 5;
+const totalPages = Math.ceil(orderItem.length / itemsPerPage);
+
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+const currentItems = orderItem.slice(startIndex, endIndex);
+
+const handlePageChange = (page) => {
+  setCurrentPage(page);
+};
 
 
   useEffect(() => {
@@ -70,7 +83,6 @@ console.log(orderItem, 'orderItem in history');
   return (
     // <div className="p-10">
     <div className="bg-gray-50 p-10 flex flex-col">
-
       <div className="flex items-center justify-center pb-2 text-2xl font-semibold italic underline">
         <h1>Orders</h1>
       </div>
@@ -161,7 +173,7 @@ console.log(orderItem, 'orderItem in history');
                        className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
 
                           // className="bg-teal-500 border-none text-white"
- onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
+             onClick={()=>navigate(`/orderItems/${item._id}`)}>View</button>
                         </td>
                       </tr>
                       {/* <OrderTrack
@@ -181,7 +193,11 @@ console.log(orderItem, 'orderItem in history');
           </div>
         </div>
       </div>
+      <div className="float- mr-3 mt-3">
+     <PAgination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+   </div>
     </div>
+   
   );
 }
 

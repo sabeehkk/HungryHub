@@ -27,7 +27,6 @@ const Chat = ({ role }) => {
 
   console.log(currentUserId,'curentuserid');
   console.log(chats,'chatsssssssssss');
-  
   console.log(recieveMessage,'recived message');
   const getChats = async (id) => {
     console.log('inside getChats in chatPAGE', id);
@@ -48,7 +47,6 @@ const Chat = ({ role }) => {
       setCurrentUserId(employee?._id);
     }
   }, []);
-
   const handleGetUsers = (users) => {
     setOnlineUsers(users);
   };
@@ -58,7 +56,6 @@ const Chat = ({ role }) => {
       socket.emit("new-user-add", currentUserId);
       socket.on("get-users", handleGetUsers);
     }
-
     return () => {
       socket.off("get-users", handleGetUsers);
     };
@@ -78,7 +75,7 @@ const Chat = ({ role }) => {
   const checkOnlineStatus = (chat) => {
     const chatMember =
       chat?.userId?._id === currentUserId
-        ? chat?.ownerId?._id
+        ? chat?.employeeId?._id
         : chat?.userId?._id;
     const online = onlineUsers.find((user) => user?.userId === chatMember);
     return !!online;

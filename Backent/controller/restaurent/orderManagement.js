@@ -4,7 +4,7 @@ import OrderModel from '../../models/order.js'
 import ProductModel from '../../models/product.js';
 import UserModel from '../../models/user.js';
 import RestaurentModel from '../../models/restaurent.js';
-
+import ChatModel from '../../models/chat.js';
 
 export const viewOrders = async (req,res)=>{
   console.log('function viewOrders');
@@ -262,6 +262,12 @@ export const splitOrder = async(req,res)=>{
        const order = await OrderModel.findById(orderId);
        console.log(order,'order');
        const ordersDetails = await OrderModel.findByIdAndUpdate(orderId, { employeeId: employeeId });
+       const openChat = new ChatModel({
+         userId:order.userId,
+         employeeId:employeeId,
+         orderId:orderId,
+       })
+       await openChat.save();
     } catch (error) {
       console.log(error);
     }

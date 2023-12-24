@@ -15,6 +15,8 @@ import {
   addAddress,
   editAddress,
   getUserData,
+  saveChat,
+  getChat
 } from "../controller/user/userController.js";
 import {
   getCategories,
@@ -41,7 +43,6 @@ router.post("/login", userLogin);
 router.post("/googleLogin", googleLogin);
 router.post("/signupVerify", verifySignup);
 router.post("/verifyOtp", verifyOtp);
-
 router.patch("/profile/:userId/edit", VerifyToken, updateProfile);
 router.patch("/profile/:userId/editPassword", VerifyToken, updatePassword);
 router.patch(
@@ -68,8 +69,10 @@ router.get('/getOrderHistory', getOrders)
 router.get('/orderItems',getOrderItems)
 router.patch('/rating',doRating)
 router.patch('/review',doReview)
+router.post('/saveChat',saveChat)
+router.get('/getchat',getChat)
 
-  
+
 
 export default router;
  

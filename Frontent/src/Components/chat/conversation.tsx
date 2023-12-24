@@ -5,7 +5,6 @@ const PROFILE =
 
   const Conversation = ({ data, role , online}) => {
     console.log(data,role,online,'datassss')
-    
   const ownerProfilePicture = data?.ownerId?.profilePicture;
   const userProfilePicture = data?.userId?.profilePicture;
   const src = 
@@ -13,7 +12,7 @@ const PROFILE =
       ? ownerProfilePicture || PROFILE
       : userProfilePicture || PROFILE;
   const name =
-    role === "user" ? data?.ownerId?.firstName : data?.userId?.firstName;
+    role === "user" ? data?.ownerId?.name : data?.userId?.name;
 
   return (
     <>

@@ -13,10 +13,7 @@ const ChatBox = ({
   setSendMessage,
   recieveMessage,
 }) => {
-  console.log(currentUserId,'currentUserId inside chatbox');
-  console.log(role,'role inside chatbox');
-  console.log(setSendMessage,'setSendMessage inside chatbox');
-  console.log(recieveMessage,'recieveMessage inside chatbox');
+
   
   const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState("");
@@ -24,7 +21,6 @@ const ChatBox = ({
 
   const getMessage = async (chatId) => {
     console.log('getmessage function called');
-    
     const data = await getMessageAPI(chatId);
     setMessages([...data]);
   };
@@ -56,15 +52,14 @@ const ChatBox = ({
       setSendMessage({ ...data, receiverId: receiverId._id });
     }
   };
-  const ownerProfilePicture = chat?.ownerId?.profilePicture;
+  const employeeProfilePicture = chat?.ownerId?.profilePicture;
   const userProfilePicture = chat?.userId?.profilePicture;
   const src =
     role === "user"
-      ? ownerProfilePicture || PROFILE
+      ? employeeProfilePicture || PROFILE
       : userProfilePicture || PROFILE;
   const name =
     role === "user" ? chat?.ownerId?.firstName : chat?.userId?.firstName;
-
   return (
     <>
       <div className="ChatBox-container">
@@ -104,7 +99,7 @@ const ChatBox = ({
                     </span>
                     <p className="text-gray-400 mt-1">
                       {index == messages.length - 1
-                        ? format(message?.createdAt)
+                        ? (message?.createdAt)
                         : ""}
                     </p>
                   </div>
@@ -121,7 +116,7 @@ const ChatBox = ({
               </div>
             </div>
           </>
-        ) : (
+        ) : ( 
           <>
             <div className="text-center">
               <span className=" text-lg font-semibold mb-4">
@@ -138,5 +133,4 @@ const ChatBox = ({
     </>
   );
 };
-
 export default ChatBox;

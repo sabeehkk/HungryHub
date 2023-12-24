@@ -1,5 +1,9 @@
 import userModel from "../../models/user.js";
 import bcrypt from "bcrypt";
+import OrderModel from "../../models/order.js"
+import emmployeeModel from '../../models/employee.js'
+import ChatModel from "../../models/chat.js"
+import mongoose from "mongoose";
 
 export const updateProfile = async (req, res) => {
   try {
@@ -173,3 +177,48 @@ export const editAddress =async (req, res) => {
   }
 }
 
+
+export const saveChat = async (req, res) => {
+  try {
+    console.log(req.body, 'inside saveChat');
+    const { orderId, chat } = req.body;
+
+    const chatFind = await ChatModel.findOne({ orderId: orderId });
+
+    if (chatFind) {
+    
+      await ChatModel.findOneAndUpdate({ orderId: orderId }, { $push: { chat: chat } });
+      res.json({ success: true });
+    } else {
+      res.json({ success: false });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, error: "Internal Server Error" });
+  }
+};
+
+ 
+export const getChat = async (req,res) => {
+   try {
+    console.log(req.query,'inside getChat');
+    const id = req.query.id;
+    const orderId =new mongoose.Types.ObjectId(req.query.id);
+    console.log(orderId,'orderId');
+    const findChat = await ChatModel.find({orderId:orderId}).populate('userId').populate('employeeId')
+    if(findChat){
+      res.status(200).send({
+        success: true,
+        findChat,
+      });
+    }else{
+      res.status(404).send({
+        success: false,
+        message: "Chat not found",
+      });
+    }
+    console.log(findChat,'findChat');
+   } catch (error) {
+    console.log(error);
+   }
+}

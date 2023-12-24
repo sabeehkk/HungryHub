@@ -118,7 +118,6 @@ export const addToCart =async (req,res)=>{
 export const getCart = async (req,res)=>{
   try {
   console.log(req.query,'inside cart')
-
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
     console.log(cartData.restaurantId,'cartDatass');

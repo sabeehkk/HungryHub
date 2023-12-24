@@ -43,7 +43,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
 
   useEffect(() => {
     if (!restaurant.restaurent || !restaurant.restaurent._id) {
-      return ErrorMessage('UnAuthorized')
+      return 
         }else{
           restaurentAxios.get(`/viewOrders?id=${restaurant.restaurent._id}`)
           .then((response) => {

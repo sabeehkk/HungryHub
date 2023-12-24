@@ -8,8 +8,25 @@ const chatSchema = new mongoose.Schema(
     },
     employeeId:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Employee",
-    }
+      ref: "employee",
+    },
+    orderId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "orders",
+    },
+    chat:[
+      {
+        user:{
+          type:String,
+
+        },
+        employee:{
+          type:String,
+        }
+      }
+    ]
+     
+    
   },
   {
     timestamps: true,

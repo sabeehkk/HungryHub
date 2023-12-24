@@ -29,16 +29,16 @@ const App = () => {
     //   gap: true,
     //   url: "/restaurent/categoryAddingModal",
     // },
-    {
-      title: "Add Menu Items ",
-      icon: <AiOutlinePlusSquare />,
-      url: "#",
-    },
-    {
-      title: "Menu Items ",
-      icon: <MdOutlineFastfood />,
-      url: "#",
-    },
+    // {
+    //   title: "Add Menu Items ",
+    //   icon: <AiOutlinePlusSquare />,
+    //   url: "#",
+    // },
+    // {
+    //   title: "Menu Items ",
+    //   icon: <MdOutlineFastfood />,
+    //   url: "#",
+    // },
     {
       title: "Orders ",
       icon: <BiFoodMenu />,

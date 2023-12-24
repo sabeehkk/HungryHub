@@ -1,26 +1,38 @@
-import React, { Fragment, useEffect, useState } from 'react'
-import {employeeAxios} from '../../axios/axios'
+import React, { Fragment, useEffect, useState, } from 'react'
+import {employeeAxios, userAxios} from '../../axios/axios'
 import { restaurentAxios } from '../../axios/axios'
-import { useSelector } from 'react-redux'
+import { useSelector, } from 'react-redux'
 import { ErrorMessage } from '../../utils/util'
+import { useNavigate } from 'react-router-dom'
 
 function DeliveryHistoryItem() {
     const [deliveryHistory,setDeliveryHistory] = useState()
     const [orderItem,setOrderItem]=useState([])
     const employee = useSelector((state)=> state.employeeAuth)
+    const navigate =useNavigate()
     console.log(employee,'employee datas');
+    // useEffect(() => {
+    //   if(!employee){
+    //     return
+    //   }else{
+    //     employeeAxios.get(`/getordersempl/?id=${employee?.employee?._id}`).then((response) => {
+    //       setDeliveryHistory(response.data);
+    //    });
+    // ,[]);
+    //   }
     useEffect(() => {
+      if (!employee.employee || !employee.employee._id) {
+        return
+          }else{
         employeeAxios.get(`/getordersempl/?id=${employee?.employee?._id}`).then((response) => {
-            setDeliveryHistory(response.data);
-            // console.log(response.data,'delivery history');
-         });
-      },[]);
+          setDeliveryHistory(response.data);
+        });
+      }
+    }, [employee]);
+        
       console.log(deliveryHistory,'delivery history');
-      
-
       const updateDeliveryStatus = (prodId, orderStatus,orderId) => {
         const productId =prodId.find((e)=>{return e.orderStatus=='Packed'})
-               
         if(productId && orderStatus && orderId) {
           restaurentAxios.patch("/updateDeliveryStatus", {
             prodId:productId._id, 
@@ -33,6 +45,10 @@ function DeliveryHistoryItem() {
           return ErrorMessage('no data available')
         }
       };
+      const handleChat =  (orderId:string)=>{
+        // navigate(`/userChat/?id=${orderId}`)
+        navigate(`/employee/employeeChat/?id=${orderId}`, { state: orderId });
+      }
 
   return (
     <div>
@@ -41,7 +57,7 @@ function DeliveryHistoryItem() {
            
           <Fragment key={delivery._id}>
           {delivery.item.map((deliveryItem) =>
-            (deliveryItem && delivery.employeeId===employee.employee._id && deliveryItem.orderStatus=='Packed'  ) ? (
+            (deliveryItem && delivery.employeeId===employee.employee._id && deliveryItem.orderStatus=='Packed' ||deliveryItem.orderStatus=='Delivered'   ) ? (
                 <div key={deliveryItem._id} className="flex border items-center justify-between">
               <div className="p-4 mb-4">
                 <div>
@@ -89,9 +105,17 @@ function DeliveryHistoryItem() {
                     </select>
                 </div>
               </div>
-           <div className="bg-green-500 text-white rounded-full p-2">
+              <div>
+                <button
+                       className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
+
+                 onClick={()=>{handleChat(delivery._id)}}>
+                  Chat
+                </button>
+              </div>
+           <div className="bg-white text-white rounded-full p-2">
             
-                <svg
+                {/* <svg
                   className="w-6 h-6"
                   fill="none"
                   stroke="currentColor"
@@ -104,7 +128,7 @@ function DeliveryHistoryItem() {
                     strokeWidth="2"
                     d="M5 13l4 4L19 7"
                   ></path>
-                </svg>
+                </svg> */}
               </div>
                 </div>
             ) : null

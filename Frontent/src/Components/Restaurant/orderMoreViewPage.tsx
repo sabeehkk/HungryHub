@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
+import { SwalAlert } from "../../utils/util";
 import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
+import PAgination from "../../Components/pagination";
 
 import { restaurentAxios ,employeeAxios} from "../../axios/axios";
 import BillModal from "../../assets/billModa";
@@ -42,7 +43,6 @@ function OrdersItems() {
     setModalOpen(false);
   };
   const updateDeliveryStatus = (prodId, orderStatus) => {
-     SuccessMessage(prodId)
     const updateStatus = {
       prodId, 
       orderId:orderItem._id ,
@@ -56,15 +56,7 @@ function OrdersItems() {
       setStatusUpdated(!is_statusUpdated);
     });
   };
-  // const employeeDelivery = ((employeeId,orderId)=>{
-  //   if(employeeId && orderId){
-  //     return SuccessMessage('Selected employee')
-  //     restaurentAxios.post("/splitOrder",{employeeId:employeeId,orderId:orderId})
-  //   }else{
-  //     return ErrorMessage('select employee')
-  //   }
-     
-  // })
+
   const employeeDelivery = (employeeId, orderId) => {
     if (employeeId && orderId) {
       if (employeeId !== "all") {
@@ -79,13 +71,7 @@ function OrdersItems() {
   };
   
   const cancelOrder = async (orderId,itemId) => {
-    const result = await Swal.fire({
-      title: "Do you really want to cancel this Order?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes",
-      cancelButtonText: "No",
-    });
+    const result = await SwalAlert();
     if (result.isConfirmed) {
       restaurentAxios.patch("/cancelOrder", {
         itemId,
@@ -93,15 +79,12 @@ function OrdersItems() {
         userId:orderItem.userId
       }).then((response) => {
         setChange(!is_chage);
-        toast.success(response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
+        SuccessMessage(response.data.message)
       });
     }
   };
   return (
-    <div className="flex flex-col">
+    <div className=" flex flex-col">
   <BillModal isOpen={modalOpen} closeModal={closeModal} orderItem={itemData} />
   <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
   <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -203,18 +186,7 @@ function OrdersItems() {
                       >
                         Packed
                       </option>
-                      <option
-                        value="Out of delivery"
-                        className="bg-white text-black hover:bg-gray-400"
-                      >
-                        Out of delivery
-                      </option>
-                      <option
-                        value="Delivered"
-                        className="bg-white text-black hover:bg-gray-400"
-                      >
-                        Delivered
-                      </option>
+                   
                     </select>
                   )}
                 </td>
@@ -294,6 +266,10 @@ function OrdersItems() {
       </div>
     </div>
   </div>
+  <div className="float- mr-3 mt-3">
+     <PAgination
+      />
+   </div>
 </div>
   );
 }
