@@ -150,9 +150,7 @@ export const getProductData =async (req,res)=>{
     try {
       console.log(req.query);
       const {id } =req.query ;
-
       const foundProduct = await ProductModel.findOne({_id:id}).populate('category')
-      console.log(foundProduct,'foundproductttttt');
       if(foundProduct){
         res.status(200).send({success:true,product:foundProduct})
       }else{
@@ -163,10 +161,9 @@ export const getProductData =async (req,res)=>{
       res.status(500).send({success:false,message:"internal server error"})
     }
 }
-
+//updateProduct-----------------------------
 export const updateProduct = async (req,res)=>{
      try {
-        console.log(req.body,'incoming datass');
         const {productName,description,category,images,productId,variants}=req.body
         await ProductModel.updateOne({_id:productId},
           {
@@ -193,15 +190,11 @@ export const updateProduct = async (req,res)=>{
       })
      }
 }
-
+// deleteProduct----------------------------
 export const deleteProduct =async(req,res)=>{
      try {
-       console.log(req.body);
        const {proId} = req.body ;
-
        const productToDelete = await ProductModel.findOne({ _id: proId });
-
-    // Check if the product was found
     if (!productToDelete) {
       console.log('product not found');
       return res.status(404).send({
@@ -209,7 +202,6 @@ export const deleteProduct =async(req,res)=>{
         message: "Product not found",
       });
     }
-
      const result =  await ProductModel.updateOne(
         {_id:proId},
         {$set:{
@@ -235,23 +227,18 @@ export const deleteProduct =async(req,res)=>{
       })
       console.log(error);
      }
-
-}
-
+  }
+// editCategory-----------------------
 export const editCategory= async(req,res)=>{
   try {
     const { categoryName, image, categoryId, restId } = req.body
-    console.log(req.body);
     const existCategory = await CategoryModel.findOne({
       name: categoryName,
       restaurent: restId,
-    });
-    console.log(existCategory,'category exist');
+     });
     if(existCategory){
       const existId = existCategory._id.toString()
-      console.log(existId,'exist isddddddddd');
       if(existId === categoryId){
-        console.log('not matching');
         await CategoryModel.updateOne({_id:categoryId},{$set:{
           image,
         }})
@@ -259,18 +246,15 @@ export const editCategory= async(req,res)=>{
           success:true,
           message:"Category edited success"
         })
-        
       }else{
-        console.log('else is working');
         res.status.json({
           success:false,
           message:"Category already exists"
       })
-      }
+    }
     }else{await CategoryModel.updateOne({_id:categoryId},{
       $set:{
         name:categoryName,
-        
       }
     })
     res.status(200).json({
@@ -285,10 +269,9 @@ export const editCategory= async(req,res)=>{
     })
   }
 }
-
+// deleteCategory------------------------
 export const deleteCategory = async(req,res)=>{
   try {
-    console.log(req.body);
     const { catId } = req.body
     const isProduct = await ProductModel.find({'category._id':catId})
     if (isProduct.length > 0) {
@@ -312,36 +295,15 @@ export const deleteCategory = async(req,res)=>{
     })
   }
 }
-
+// getResProfile---------------------------------
 export const getResProfile= async(req,res)=>{
   try {
-    console.log(req.query);
     const restId = req.query.id
     const restData = await RestaurentModel.findOne({_id:restId})
-    // const ratings = await Restarant.aggregate([
-    //   {
-    //     $match:{
-    //       _id:new mongoose.Types.ObjectId(restId),
-    //     }
-    //   },
-    //   {
-    //     $unwind: '$rating',
-    //   },
-    //   {
-    //     $group: {
-    //       _id: '$_id',
-    //       // Name: { $first: '$Name' },
-    //       totalRating: { $sum: '$rating.rating' },
-    //       averageRating: { $avg: '$rating.rating' },
-    //     },
-    //   },
-    // ])
-    
     if(restData){
       res.status(200).send({
         success:true,
         restData,
-        // ratings
       })
     }else{
       res.status(404).send({
