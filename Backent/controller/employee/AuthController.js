@@ -1,7 +1,5 @@
 import employeeModel from '../../models/employee.js'
-
 import bcrypt from 'bcrypt'
-
 import jwt from 'jsonwebtoken'
 
 
