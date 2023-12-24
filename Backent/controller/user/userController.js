@@ -189,7 +189,7 @@ export const getChat = async (req,res) => {
         success: false,
         message: "Chat not found",
       });
-    }
+     }
    } catch (error) {
     console.log(error);
    }

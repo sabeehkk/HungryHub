@@ -263,7 +263,7 @@ export const  doRating= async (req,res) => {
       success: false,
       message: "Server error.",
     });
-  }
+   }
 }
 // doReview--------------------------------
 export const doReview= async (req, res) => {
