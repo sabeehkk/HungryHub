@@ -114,7 +114,6 @@ export const getRestaurentProducts = async (req,res)=>{
       const restId = req.query.id ;
       if (restId === 'undefined') {
         return res.status(400).json({
-        
         });
       }
       const productData = await ProductModel.find({
@@ -196,7 +195,6 @@ export const deleteProduct =async(req,res)=>{
        const {proId} = req.body ;
        const productToDelete = await ProductModel.findOne({ _id: proId });
     if (!productToDelete) {
-      console.log('product not found');
       return res.status(404).send({
         success: false,
         message: "Product not found",
