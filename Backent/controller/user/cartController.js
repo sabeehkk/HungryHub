@@ -105,7 +105,7 @@ export const addToCart =async (req,res)=>{
         message: "Internal server error", 
       });
     }
-}
+ }
 //getCart--------------------------------
 export const getCart = async (req,res)=>{
   try {

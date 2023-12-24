@@ -3,17 +3,13 @@ import ProductModel from "../../models/product.js";
 import CategoryModel from "../../models/category.js";
 import RestaurentModel from '../../models/restaurent.js'
 const LIMIT=6
-
-
+// addProduct-----------------------------
 export const addProduct = async (req, res) => {
   try {
-    console.log(req.body);
-    const { productName, description, productPrice, category, images, restId,variants } =
-      req.body;
+    const { productName, description, productPrice, category, images, restId,variants } = req.body;
     const newProduct = new ProductModel({
       productName,
       restaurent_id: restId,
-      // price: productPrice,
       variants,
       category,
       images,
@@ -25,21 +21,20 @@ export const addProduct = async (req, res) => {
     console.log(error);
   }
 };
-
+// ProductList----------------------
 export const ProductList = async (req, res) => {
   try {
     const data = await ProductModel.find({isDeleted:false});
-    // console.log(data);
     res.json({ data });
   } catch (error) {
     console.log(error.message);
   }
 };
 
+// addCategory--------------------------
+
 export const addCategory = async (req, res) => {
   try {
-    console.log(req.body,'req,bodyyyy');
-    console.log('ADD CATEGORY IS WORKING');
     const { categoryName, restId } = req.body;
     const lowerCaseCategoryName = categoryName.toLowerCase() ;
     const existCategory = await CategoryModel.findOne({
@@ -47,7 +42,6 @@ export const addCategory = async (req, res) => {
       restaurent: restId,
     });
     if (existCategory) {
-      console.log("category alere exist")
       res.status(400).send({
         error: true,
         message: "Category already exists",
@@ -65,51 +59,9 @@ export const addCategory = async (req, res) => {
     console.log(error.message);
   }
 };
-
-// export const getCategories = async (req,res)=>{
-//   try {
-//     console.log('inside get category');
-//     const PAGE = req?.query?.page
-//     ? req.query.page >= 1
-//       ? req.query.page
-//       : 1
-//     : 1;
-//     const SKIP = (PAGE - 1) * LIMIT;
-//     const {id} =req.query
-//     if (!id) {
-      
-//       return 
-//       res.status(400).json({
-//         status: 'error',
-//         message: 'Category ID is required',
-//       });
-//     }
-//     console.log(id,'query iddd');
-//     const categoryData =await CategoryModel.find({
-//       is_deleted:false,
-//       restaurent:id
-//     })
-//     .sort({ _id: -1 })
-//     .skip(SKIP)
-//     .limit(LIMIT);
-//     const TotalSize = await CategoryModel.countDocuments({is_deleted:false});
-//     const size = Math.ceil(TotalSize / LIMIT);
-//     res.status(200).json({
-//       status: 'success',
-//       categoryData,size
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({
-//       status: 'error',
-
-//       message: 'Internal Server Error'
-//     });
-//   }
-// }
+// getCategories
 export const getCategories = async (req, res) => {
   try {
-    console.log('inside get category');
     const PAGE = req?.query?.page
       ? req.query.page >= 1
         ? req.query.page
@@ -117,24 +69,17 @@ export const getCategories = async (req, res) => {
       : 1;
     const SKIP = (PAGE - 1) * LIMIT;
     const { id } = req.query;
-
     if (!id) {
-      // No return statement here
       return res.status(400).json({
         status: 'error',
         message: 'Category ID is required',
       });
     }
-
-    // Additional check to ensure id is not 'undefined'
     if (id === 'undefined') {
       return res.status(400).json({
-        // status: 'error',
-        // message: 'Invalid Category ID',
+        
       });
     }
-
-    console.log(id, 'query iddd');
     const categoryData = await CategoryModel.find({
       is_deleted: false,
       restaurent: id,
@@ -142,7 +87,6 @@ export const getCategories = async (req, res) => {
       .sort({ _id: -1 })
       .skip(SKIP)
       .limit(LIMIT);
-
     const TotalSize = await CategoryModel.countDocuments({ is_deleted: false, restaurent: id });
     const size = Math.ceil(TotalSize / LIMIT);
     res.status(200).json({
@@ -158,9 +102,8 @@ export const getCategories = async (req, res) => {
     });
   }
 };
-
+// getRestaurentProducts--------------------------------
 export const getRestaurentProducts = async (req,res)=>{
-  console.log('inside Restaurent Products');
     try {
       const PAGE = req?.query?.page
     ? req.query.page >= 1
@@ -171,8 +114,7 @@ export const getRestaurentProducts = async (req,res)=>{
       const restId = req.query.id ;
       if (restId === 'undefined') {
         return res.status(400).json({
-          // status: 'error',
-          // message: 'Invalid Category ID',
+        
         });
       }
       const productData = await ProductModel.find({
@@ -184,13 +126,11 @@ export const getRestaurentProducts = async (req,res)=>{
       .limit(LIMIT);
       const TotalSize = await ProductModel.countDocuments({isDeleted:false});
       const size = Math.ceil(TotalSize / LIMIT);
-      console.log(productData,'productDatas');
       if(productData.length>0){
         res.status(200).send({
           success:true,
           productData,size
         })
-
       }else{
         res.status(404).send({
           success:false,
@@ -205,9 +145,8 @@ export const getRestaurentProducts = async (req,res)=>{
       })
     }
 }
-
+// getProductData--------------------------------
 export const getProductData =async (req,res)=>{
-  console.log('getProductData is working');
     try {
       console.log(req.query);
       const {id } =req.query ;

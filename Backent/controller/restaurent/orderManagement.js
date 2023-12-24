@@ -1,19 +1,17 @@
 import mongoose from "mongoose";
-
 import OrderModel from '../../models/order.js'
 import ProductModel from '../../models/product.js';
 import UserModel from '../../models/user.js';
 import RestaurentModel from '../../models/restaurent.js';
 import ChatModel from '../../models/chat.js';
 
+//viewOrders--------------------------------
 export const viewOrders = async (req,res)=>{
-  console.log('function viewOrders');
     try {
-        console.log(req.query,'inside view order');
         const id = req.query.id;
         if(id ==='undefined'){
           return res.status(400).json({message:''})
-        }
+           }
         const orders = await OrderModel.find({
           "item.product": {
             $in: await ProductModel.find({ restaurent_id: id }).select("_id"),
@@ -23,8 +21,6 @@ export const viewOrders = async (req,res)=>{
           model: "product",
           match: { restaurant_id: id },
         });
-        console.log(orders,'ordersdatas');
-  
         if (orders) {
           res.status(200).json({
             success: true,
@@ -43,13 +39,11 @@ export const viewOrders = async (req,res)=>{
           message: "server error",
         });
       }
-}
-
+   }
+// updateDeliveryStatus--------------------------
 export const updateDeliveryStatus = async (req,res)=>{
     try {
         const { prodId, orderId, orderStatus } = req.body;
-
-        console.log(req.body,'datassssssssssssssss');
         let item_orderStatus;
         if (orderStatus === "Pending") {
           item_orderStatus = "Pending";
@@ -92,15 +86,13 @@ export const updateDeliveryStatus = async (req,res)=>{
         });
       }
 }
-
+// cancelOrder---------------------------
 export const cancelOrder = async (req,res)=>{
   try {
     const { itemId, orderId, userId } = req.body;
     const orderItem = await OrderModel.findOne({ "item._id": itemId });
-
     if (orderItem) {
       const canceledItemIndex = orderItem.item.findIndex(item => item._id.toString() === itemId);
-
       if (canceledItemIndex !== -1 && orderItem.item[canceledItemIndex].orderStatus !== "Delivered") {
         const canceledItem = orderItem.item[canceledItemIndex];
         const canceledProductPrice = canceledItem.price * canceledItem.quantity;
@@ -108,8 +100,6 @@ export const cancelOrder = async (req,res)=>{
         const updatedTotalPrice = orderItem.totalPrice - canceledProductPrice;
         const updatedDiscount = orderItem.discount - canceledProductDiscount;
         const updatedGrandTotal = updatedTotalPrice - updatedDiscount;
-        
-        // Update order details to cancel the item and remove restaurantId
         if(req.baseUrl.startsWith('/restaurant')){
           await OrderModel.updateOne(
             { _id: orderId },
@@ -142,14 +132,10 @@ export const cancelOrder = async (req,res)=>{
           success: true,
           message: "Item cancelled",
         });
-
         if (orderItem.paymentType !== "COD") {
           const formattedPrice = parseFloat(canceledProductPrice).toFixed(2);
           await UserModel.updateOne(
             { _id: userId },
-            // {
-            //   $inc: { Wallet: parseFloat(formattedPrice) }
-            // }
           );
         }
       } else {
@@ -172,13 +158,10 @@ export const cancelOrder = async (req,res)=>{
     });
   }
 }
-
+// dashboardData--------------------------------
 export const dashboardData = async(req,res)=>{
   try {
-    console.log(req.query) 
-    // const restId = req.query.id
     const restId = new mongoose.Types.ObjectId(req.query.id);
-    console.log(restId,'restId');
     const totalSale = await OrderModel.aggregate([
       {$match : { paymentStatus:'PAID', restaurantId: restId}},   
       {$group : { _id: "$restaurantId", total : {$sum :"$grandTotal"}}}]) 
@@ -201,24 +184,6 @@ export const dashboardData = async(req,res)=>{
           }
         }
       ]);
-      console.log(totalUsers,'totalUsers');
-
-  // const totalOrders = await OrderModel.aggregate([
-  //   {
-  //     $match: {
-  //       is_returned: 0,
-  //       // is_delivered: true,
-  //       restaurantId: restId 
-  //     }
-  //   },
-  //   {
-  //     $group: {
-  //       _id: "$restaurantId", 
-  //       total: { $sum: 1 } 
-  //     }
-  //   }
-  // ]);    
-  // const totalOrders = await OrderModel.countDocuments();
   const totalOrders = await OrderModel.aggregate([
     {
       $match: { restaurantId: restId }
@@ -239,7 +204,6 @@ export const dashboardData = async(req,res)=>{
       }
     }
   ]);
-  console.log(totalOrders,'totalOrders');
       res.status(200).send({
         success:true,
         totalSale,
@@ -254,13 +218,11 @@ export const dashboardData = async(req,res)=>{
     })
   }
 }
-
+// splitOrder--------------------------
 export const splitOrder = async(req,res)=>{
     try {
-       console.log(req.body,'splitOrder is working')
        const { orderId, employeeId } = req.body;
        const order = await OrderModel.findById(orderId);
-       console.log(order,'order');
        const ordersDetails = await OrderModel.findByIdAndUpdate(orderId, { employeeId: employeeId });
        const openChat = new ChatModel({
          userId:order.userId,
