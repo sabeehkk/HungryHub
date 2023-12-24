@@ -6,18 +6,15 @@ import RestaurantModel from "../../models/restaurent.js";
 import Stripe from "stripe";
 export const stripe = new Stripe(process.env.STRIP_PRIVET_KEY);
 
+//Order--------------------------------
 export const Order = async (req, res) => {
   try {
-    // console.log(req.body, "inside order backend");
     const { payment, addressIndex, cartData } = req.body;
-    console.log(cartData.restaurantId,'cart data restaruentId');
     const user = await UserModel.findOne({ _id: cartData.user });
-    console.log("user ", user);
     const address = user.Address[addressIndex];
     const cart = await CartModel.findOne({ _id: cartData._id }).populate(
       "items.productId"
     );
-    // console.log(cart,'searching restId');
     const items = cart.items.map((item) => ({
       product: item.productId,
       quantity: item.quantity,
@@ -43,7 +40,6 @@ export const Order = async (req, res) => {
         message: "order success",
       });
     } else if (payment === "Online") {
-      // console.log(req.body,'inside online state');
       const data = req.body;
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -59,13 +55,10 @@ export const Order = async (req, res) => {
             quantity: 1,
           },
         ],
-
         mode: "payment",
         success_url: `${process.env.CLIENT_URL}/payment-success/${cartData?.user}`,
         cancel_url: `${process.env.CLIENT_URL}/payment-fail`,
       });
-      // console.log(session, "stripe is working");
-
       await OrderModel.create({
         userId: user._id,
         restaurantId: cart.restaurantId,
@@ -78,10 +71,8 @@ export const Order = async (req, res) => {
         paymentStatus,
       });
       await CartModel.deleteOne({ _id: cartData._id });
-
       return res.json({ message: "success", url: session.url });
     }else if (payment === "Wallet") {
-      console.log('inside wallet')
       if (user.Wallet >= cart.grandTotal) {
         const grandTotal = parseFloat(cart.grandTotal).toFixed(2);
         await UserModel.updateOne(
@@ -122,21 +113,17 @@ export const Order = async (req, res) => {
       .json({ message: "Internal server error", error: true });
   }
 };
-
+// getOrderItems--------------------------------
 export const getOrderItems = async (req, res) => {
   try {
-    console.log("inside getOrder iTEMS");
-    console.log(req.query);
     const { id } = req.query;
     const orderItems = await OrderModel.findOne({ _id: id })
       .sort({ _id: -1 })
       .populate("item.product")
-      // .populate("employeeId")
     res.status(200).send({
       success: true,
       orderItems,
     });
-    console.log(orderItems,'orderItems');
   } catch (error) {
     console.log(error);
     res.status(500).send({
@@ -145,7 +132,7 @@ export const getOrderItems = async (req, res) => {
     });
   }
 };
-
+// getOrders--------------------------
 export const  getOrders= async (req, res) => {
   try {
     const id = req.query.id;
@@ -170,16 +157,13 @@ export const  getOrders= async (req, res) => {
     });
   }
 }
-
+// cancelOrder------------------------
 export const cancelOrder= async (req, res) => {
   try {
-    console.log(req.body);
     const { itemId, orderId, userId } = req.body;
     const orderItem = await OrderModel.findOne({ "item._id": itemId });
-
     if (orderItem) {
       const canceledItemIndex = orderItem.item.findIndex(item => item._id.toString() === itemId);
-
       if (canceledItemIndex !== -1 && orderItem.item[canceledItemIndex].orderStatus !== "Delivered") {
         const canceledItem = orderItem.item[canceledItemIndex];
         const canceledProductPrice = canceledItem.price * canceledItem.quantity;
@@ -187,8 +171,6 @@ export const cancelOrder= async (req, res) => {
         const updatedTotalPrice = orderItem.totalPrice - canceledProductPrice;
         const updatedDiscount = orderItem.discount - canceledProductDiscount;
         const updatedGrandTotal = updatedTotalPrice - updatedDiscount;
-        
-        // Update order details to cancel the item and remove restaurantId
         if(req.baseUrl.startsWith('/restaurant')){
           await OrderModel.updateOne(
             { _id: orderId },
@@ -221,7 +203,6 @@ export const cancelOrder= async (req, res) => {
           success: true,
           message: "Item cancelled",
         });
-
         if (orderItem.paymentType !== "COD") {
           console.log('!COD order item cancelled');
           const formattedPrice = parseFloat(canceledProductPrice).toFixed(2);
@@ -253,10 +234,9 @@ export const cancelOrder= async (req, res) => {
     });
   }
 }
-
+// doRating---------------------------
 export const  doRating= async (req,res) => {
   try {
-    console.log(req.body,'inside rating');
     const { userId, rating, restId } = req.body;
     const existingRating = await RestaurantModel.findOne({
       "rating.userId": userId,
@@ -285,10 +265,9 @@ export const  doRating= async (req,res) => {
     });
   }
 }
-
+// doReview--------------------------------
 export const doReview= async (req, res) => {
   try {
-    console.log(req.body,'inside doReview');
     const { userId, review, restId } = req.body;
     const existingReview = await RestaurantModel.findOne({
       "reviews.userId": userId,
