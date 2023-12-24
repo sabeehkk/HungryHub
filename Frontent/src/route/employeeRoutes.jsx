@@ -8,6 +8,8 @@ import { ToastContainer,toast } from "react-toastify";
 import EmployeeFrame from '../Components/Employee/employeeFrame.tsx';
 import Islogged from '../middleware/employee/isLogged.tsx' ;
 import Logout from '../Pages/Employee/logout.tsx';
+import DeliveryHistory from '../Components/Employee/deliveryHistory.tsx'
+import EmployeeChat from '../Components/Employee/employeeChat.tsx'
 
 const EmpoloyeeAppLayout =()=>{  
     return (
@@ -69,6 +71,26 @@ const EmployeeAuthAppLayout = () => {
                         <Home/>
                         </>
                     ),
+                },
+                {
+                    path:"deliveryHistory",
+                    element:(
+                       <>
+                        <Islogged/>
+                        <DeliveryHistory/>
+                       </>
+                      )
+                },
+                {
+                    path:"employeeChat",
+                    element:(
+                        
+                       <>
+                        <Islogged/>
+
+                        <EmployeeChat/>
+                       </>
+                      )
                 }
             ]
         },

@@ -28,6 +28,13 @@ const employeeSchema = new mongoose.Schema({
         type:Date,
         default:Date.now,
      },
+     ernings:{
+        type:Number,
+        default:0
+      },
+      rating:{
+        type:Number
+      },
     
 })
 const Employee = mongoose.model('employee',employeeSchema)

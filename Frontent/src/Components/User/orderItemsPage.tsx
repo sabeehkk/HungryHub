@@ -2,13 +2,12 @@ import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-
 // import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
-
 import OrderTrack from "../../assets/orderTrack";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 // import Loader from "../../assets/Loader";
+import PAgination from "../../Components/pagination";
 
 function OrderItems() {
   let total = 0;
@@ -21,11 +20,19 @@ function OrderItems() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [itemData, setItemDta] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const navigate = useNavigate();
   const { ordId } = useParams()
+  const [currentPage, setCurrentPage] = useState(1);
 
+const handlePageChange = (page) => {
+  setCurrentPage(page);
+};
+const itemsPerPage = 5;
+// const totalPages = Math.ceil(orderItem.length / itemsPerPage);
+const startIndex = (currentPage - 1) * itemsPerPage;
+const endIndex = startIndex + itemsPerPage;
+// const currentItems = orderItem.slice(startIndex, endIndex);
   const user = useSelector((state) => state.userAuth);
-
   useEffect(() => {
     userAxios.get(`/orderItems?id=${ordId}`).then((response) => {
       const items = response?.data?.orderItems;
@@ -35,6 +42,10 @@ function OrderItems() {
       setIsLoading(false)
     });
   }, [is_chage]);
+
+  const handleChat = () => {
+    navigate(`/userChat?id=${ordId}`,{state:ordId}) 
+  }
 
   console.log(orderItem,'orderItems in more view');
   console.log(itemData,'item data in mo');
@@ -160,6 +171,15 @@ function OrderItems() {
                             </button>)
                           }
                         </td>
+                        <td>
+                          <button
+                       className="p-1 w-20  border border-transparent text-white rounded bg-teal-500 shadow-md hover:bg-teal-400"
+
+                           onClick={()=>{handleChat()}}>
+                            
+                            Chat
+                          </button>
+                        </td>
                       </tr>
                     ))}
                     <OrderTrack
@@ -183,6 +203,11 @@ function OrderItems() {
         </div>
         
       </div>
+      <div className="float- mr-3 mt-3">
+     <PAgination
+      // currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} 
+      />
+   </div>
     </div>
   );
 }

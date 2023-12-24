@@ -1,24 +1,17 @@
 import CartModel from '../../models/cart.js'
 import ProductModel from '../../models/product.js'
 
-
+//addToCart-----------------------
 export const addToCart =async (req,res)=>{
-    console.log(req.body,'incoming datas in Add To Cart');
     const { productId, userId ,selectedVariant } = req.body;
     try {
-      const product = await ProductModel.findOne({ _id: productId }); 
-
-      // console.log(product,'finded product');
+      const product = await ProductModel.findOne({_id: productId }); 
       const userCart = await CartModel.findOne({ user: userId });
-      console.log(userCart,'usercart find details');
-
       if (userCart) {
-        console.log(userCart.restaurantId,'inside equalsssss both are matching');
-           
         if(product.restaurent_id.equals(userCart.restaurantId)){
         const proExist = userCart.items.findIndex(
             (item) => item.productId == productId
-          );
+           );
         if (proExist !== -1) {
           const varExist = userCart.items.find(item => item.variant === selectedVariant.name);
           if(varExist){
@@ -26,12 +19,9 @@ export const addToCart =async (req,res)=>{
             { user: userId, "items.productId": productId, "items.variant":selectedVariant.name },
             {
               $inc: {
-
-                
                 "items.$.quantity": 1,
                 "items.$.price": selectedVariant.offerPrice,
               },
-              
             }
           );
           res.status(200).send({
@@ -92,9 +82,9 @@ export const addToCart =async (req,res)=>{
         });
       }
       } else {
-             await CartModel.create({
+          await CartModel.create({
           user: userId,
-          restaurantId:product.restaurant_id,
+          restaurantId:product.restaurent_id,
           items: [
             {
               productId: product._id,
@@ -104,10 +94,9 @@ export const addToCart =async (req,res)=>{
           ],
         })
             res.status(200).send({
-                success:true,
-                message:"product added to cart"
+            success:true,
+            message:"product added to cart"
             })
-        
       }
     } catch (error) {
       console.log(error);
@@ -116,15 +105,12 @@ export const addToCart =async (req,res)=>{
         message: "Internal server error", 
       });
     }
-}
-
+ }
+//getCart--------------------------------
 export const getCart = async (req,res)=>{
   try {
-  console.log(req.query,'inside cart')
-
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
-    console.log(cartData,'cartDatass');
     if(cartData){
       res.status(200).send({
         success:true,
@@ -144,9 +130,8 @@ export const getCart = async (req,res)=>{
     })
   }
 }
-
+// changeQuantity--------------------------
 export const changeQuantity =  async(req,res)=>{
-  console.log('inside Change quantity');
   try {
     console.log(req.body);
     const {itemId, cartId, action, variant} = req.body
@@ -181,9 +166,8 @@ export const changeQuantity =  async(req,res)=>{
     });
   }
 }
-
+//cartTotal-------------------------
 export const cartTotal = async (req,res)=>{
-  console.log(req.body);
   try {
     const { cartId, amount, grandTotal } = req.body
     await CartModel.updateOne({_id:cartId},{
@@ -203,11 +187,10 @@ export const cartTotal = async (req,res)=>{
     })
   }
 }
-
+// cancelCartItem-----------------------------
 export const cancelCartItem =async (req,res)=>{
   try {
     const {itemId, cartId, variant} = req.body
-    console.log(req.body);
     await CartModel.updateOne({_id:cartId},{
       $pull:{
          items: { productId: itemId, variant }

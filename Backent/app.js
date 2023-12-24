@@ -28,11 +28,36 @@ app.use(cors({
 }));
 
 const server =http.createServer(app)
-const io = new Server(server,{
-  cors: 'http://localhost:3001'
-})
+const io = new Server(server, {
+  cors: {
+    origin: (origin, callback) => {
+      callback(null, origin === 'http://localhost:3001');
+    },
+    credentials: true,
+  },
+});
 
-configureSocket(io)
+
+// configureSocket(io)
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Check if the socket is connected
+  if (socket.connected) {
+    console.log('Socket is connected');
+  } else {
+    console.log('Socket is not connected');
+  }
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+
+  socket.on('sentMessage', async () => {
+    console.log('Connection is on-------------------------------------------------------------');
+    io.emit('receiveMessage');
+  });
+});
 
 app.use(express.static('public'))
 

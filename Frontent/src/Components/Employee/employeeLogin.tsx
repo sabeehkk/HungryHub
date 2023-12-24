@@ -2,9 +2,9 @@ import { useState, SyntheticEvent } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { employeeAxios } from "../../axios/axios";
-import { employeeLoggedIn } from "../../redux/employee/authSlice";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
 import { Link, useNavigate } from "react-router-dom";
+import { employeeLoggedIn } from "../../redux/employee/authSlice";
 
 function EmployeeLogin() {
   const [email, setEmail] = useState<string>("");
@@ -22,23 +22,18 @@ function EmployeeLogin() {
     try {
       await employeeAxios.post(`/login`, { email, password }).then((res) => {
         console.log(res.data.token,'token response in login');
-        
         localStorage.setItem("employeeToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(employeeLoggedIn(res.data.employeeData));
         console.log('before going home');
-        
-        navigate("/employee/home");
+        navigate("/employee/home")
         SuccessMessage(res.data.message);
       });
     } catch (error) {
       console.log(error.message);
-
-      if (error) {
-        ErrorMessage(error.message);
-      }
+      ErrorMessage(error.message);
     }
   };
   return (

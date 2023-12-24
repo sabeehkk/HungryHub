@@ -13,7 +13,8 @@ const Checkout = (initPayment) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cartData, setCartData] = useState();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
-
+  console.log(cartData,'cartDataaasssssssssssssss');
+  
   const users = useSelector((state: any) => state.userAuth);
   // console.log(cartData.items[0].productId.images,'cartDatas in checkout page');
 

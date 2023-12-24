@@ -29,20 +29,20 @@ const App = () => {
     //   gap: true,
     //   url: "/restaurent/categoryAddingModal",
     // },
-    {
-      title: "Add Menu Items ",
-      icon: <AiOutlinePlusSquare />,
-      url: "#",
-    },
-    {
-      title: "Menu Items ",
-      icon: <MdOutlineFastfood />,
-      url: "#",
-    },
+    // {
+    //   title: "Add Menu Items ",
+    //   icon: <AiOutlinePlusSquare />,
+    //   url: "#",
+    // },
+    // {
+    //   title: "Menu Items ",
+    //   icon: <MdOutlineFastfood />,
+    //   url: "#",
+    // },
     {
       title: "Orders ",
       icon: <BiFoodMenu />,
-      url: "#",
+      url: "/employee/deliveryHistory",
     },
     {
       title: "Logout ",
@@ -57,7 +57,7 @@ const App = () => {
       <div
         className={` ${
           open ? "w-72" : "w-20 "
-        } bg-dark-purple h-screen p-5  pt-8 relative duration-300`}
+        } bg-gray-700 h-screen p-5  pt-8 relative duration-300`}
       >
         <img
           src="https://cdn-icons-png.flaticon.com/512/93/93634.png"

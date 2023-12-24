@@ -4,22 +4,17 @@ import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken';
 
 const LIMIT = 6;
-
+// login------------------------------------
 export const login=async (req,res)=>{
     try {
-      console.log(req.body);
-        
         const {email,password}=req.body;
         const adminData =await adminModel.findOne({email})
-        console.log(adminData,'admindataaaaaaaaaaaaaaaaaaaaaaa');
         if (!adminData) {
-          console.log('inside ~admin');
             return res.status(400).json({
               message: "Invalid email address or email not found",
               error: true,
             });
           }
-
         const isPasswordVerified = bcrypt.compareSync(password,adminData.password)
         if (!isPasswordVerified) {
             return res.status(400).json({ message: "Invalid Password", error: true });
@@ -34,29 +29,24 @@ export const login=async (req,res)=>{
     } catch (error) {
         console.error(error)
     return res.status(500).json({ message: "Internal server error", error: true });
-
     }
 }
-
+// userList--------------------------------
 export const userList = async (req, res) => {
   try {
-    console.log('userlistt');
     const PAGE = req?.query?.page
       ? req.query.page >= 1
         ? req.query.page
         : 1
       : 1;
     const SKIP = (PAGE - 1) * LIMIT;
-
     const userData = await userModel
       .find()
       .sort({ _id: -1 })
       .skip(SKIP)
       .limit(LIMIT);
-      
     const TotalSize = await userModel.countDocuments();
     const size = Math.ceil(TotalSize / LIMIT);
-
     return res.json({ message: "success", userData, size });
   } catch (error) {
     console.error(error);
@@ -65,7 +55,7 @@ export const userList = async (req, res) => {
       .json({ message: "Internal Server Error", error: true });
   }
 };
-
+// userUnblock--------------------------------
 export const userUnblock = async (req, res) => {
   try {
     const id = req.params.id;
@@ -73,7 +63,6 @@ export const userUnblock = async (req, res) => {
       { _id: id },
       { $set: { status: true } }
     );
-
     if (result.modifiedCount > 0) {
       return res.json({ message: "User IS Unblocked!!" });
     }
@@ -85,7 +74,7 @@ export const userUnblock = async (req, res) => {
       .json({ message: "Internal Server Error", error: true });
   }
 };
-
+// userBlock-----------------------
 export const userBlock = async (req, res) => {
   try {
     const id = req.params.id;

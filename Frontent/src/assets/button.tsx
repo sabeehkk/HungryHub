@@ -16,6 +16,8 @@ function Button({value, onClick, className}) {
           </button>
     </div>
   )
-}
+},
+const categoryNames = catName.split(',');
+
 
 export default Button

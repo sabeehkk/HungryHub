@@ -43,7 +43,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
 
   useEffect(() => {
     if (!restaurant.restaurent || !restaurant.restaurent._id) {
-      return ErrorMessage('UnAuthorized')
+      return 
         }else{
           restaurentAxios.get(`/viewOrders?id=${restaurant.restaurent._id}`)
           .then((response) => {
@@ -98,8 +98,6 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   //     });
   // }, []);
   //   }
-   
-
   const itemsPerPage = 5;
   const totalPages = Math.ceil(orderItem.length / itemsPerPage);
 
@@ -110,7 +108,6 @@ const restaurant = useSelector((state) => state.restaurentAuth);
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
    // Initialize the socket connection
 //    useEffect(() => {
 //     const newSocket = io(baseUrl);
@@ -179,7 +176,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
     <div className="h-full w-full">
       <div className="w-full overflow-x-auto">
       <div className="flex ml-60">
-          <h1 className="ml-40 text-xl font-bold text-gray-800">
+          <h1 className="ml-72 text-xl font-bold text-gray-800">
             {"Order"} Management
           </h1>
         </div>
@@ -240,7 +237,7 @@ const restaurant = useSelector((state) => state.restaurentAuth);
                       {
                         <button
                           className="bg-teal-500 border-none text-white"
-                          onClick={() => navigate(`/restaurent/dummy/${item._id}`)}
+                          onClick={() => navigate(`/restaurent/ordersMoreView/${item._id}`)}
                         >
                           View
                         </button>

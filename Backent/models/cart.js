@@ -48,5 +48,4 @@ import mongoose, { mongo } from 'mongoose'
     });
 
 const Cart = mongoose.model('Cart',cartSchema)
-
 export default Cart

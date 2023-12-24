@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 const orderSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
+        ref: "User",
       },
       restaurantId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Restarant",
+        // ref: "Restarant",
+        ref: "Restaurant",
       },
       item: [
         {
@@ -37,10 +38,6 @@ const orderSchema = mongoose.Schema({
           }
         },
       ],
-      employeeId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Employee",
-      },
       start_date: {
         type: Date,
         default:Date.now()
@@ -65,6 +62,10 @@ const orderSchema = mongoose.Schema({
       },
       paymentStatus: {
         type:String
+    },
+    employeeId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee",
     },
 },{
     timestamps: true

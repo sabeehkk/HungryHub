@@ -9,14 +9,13 @@ import { logout } from "../../redux/employee/authSlice";
 
 const IsLogged=()=>{
     
-    const {success} = useSelector((state:any)=> state.employeeAuth);
+    const {success,} = useSelector((state:any)=> state.employeeAuth);
     console.log(success,'sucess')
     const navigate = useNavigate();
     const dispatch = useDispatch()
 
     useEffect(()=>{
         console.log(success,'use effect is called');
-        
         if(!success){
             navigate('/employee/login')
         }

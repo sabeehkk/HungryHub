@@ -29,12 +29,14 @@ import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
 import Chat from '../Components/chat/chat.tsx'
+import MenuDummy from '../utils/checkoutDummy.tsx';
+import Userchat from '../Components/User/userChat.tsx'
+import Dummy from '../utils/dummy.tsx'
 const UserAppLayout = () => {
   return (
     <>
       {/* <Navbar/> */}
       <Outlet />
-      <ToastContainer />
     </>
   );
 };
@@ -219,7 +221,6 @@ const UserRoute = {
       element: (
         <>
           <IsLogged />
-
           <UserNavbar />
           <OrderHistory />
         </>
@@ -243,7 +244,34 @@ const UserRoute = {
         <Chat role={"user"}/>
         </>
       )
-    }
+    },
+    {
+      path:"/menuss/:restId",
+      element:(
+         <>
+          <UserNavbar />
+         <MenuDummy/>
+         </>
+      )
+    },
+    {
+      path:"/userChat",  
+      element:(
+         <>
+         <UserNavbar />
+         <Userchat/>
+         </>
+      )
+    },
+    {
+      path:"/dummy",
+      element:(
+         <>
+          <UserNavbar />
+         <Dummy/>
+         </>
+      )
+    },
   ],
 };
 

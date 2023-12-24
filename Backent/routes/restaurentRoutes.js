@@ -2,7 +2,6 @@ import express from "express";
 
 import { signup, login ,updateRestoProfilePhoto} from "../controller/restaurent/AuthControlle.js";
 import {
-  // ProductAdd,
   ProductList,
   addProduct,
   addCategory,
@@ -22,7 +21,8 @@ import VerifyToken from "../middleware/jwtRestaurentVerification.js";
 import {
   viewOrders,
   updateDeliveryStatus,
-  
+  dashboardData,
+  splitOrder
 } from "../controller/restaurent/orderManagement.js";
 import { getOrderItems,cancelOrder } from "../controller/user/orderController.js";
 const router = express.Router();
@@ -46,8 +46,10 @@ router.get("/getResProfile", getResProfile);
 router.get("/getRestaurents", getRestaurents);
 router.get("/viewOrders", viewOrders);
 router.get("/getOrderIterms", getOrderItems);
-router.patch("/updateDeliveryStatus", VerifyToken, updateDeliveryStatus);
+router.patch("/updateDeliveryStatus", updateDeliveryStatus);
 router.patch("/cancelOrder",cancelOrder)
+router.get('/dashboardData',dashboardData);
+router.post('/splitOrder',splitOrder)
 
 router.patch(
   "/profile/:userId/edit/profilePhoto",
