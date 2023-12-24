@@ -4,7 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken';
 
 const LIMIT = 6;
-
+// login------------------------------------
 export const login=async (req,res)=>{
     try {
         const {email,password}=req.body;
@@ -29,13 +29,11 @@ export const login=async (req,res)=>{
     } catch (error) {
         console.error(error)
     return res.status(500).json({ message: "Internal server error", error: true });
-
     }
 }
-
+// userList--------------------------------
 export const userList = async (req, res) => {
   try {
-    console.log('userlistt');
     const PAGE = req?.query?.page
       ? req.query.page >= 1
         ? req.query.page
@@ -57,7 +55,7 @@ export const userList = async (req, res) => {
       .json({ message: "Internal Server Error", error: true });
   }
 };
-
+// userUnblock--------------------------------
 export const userUnblock = async (req, res) => {
   try {
     const id = req.params.id;
@@ -65,7 +63,6 @@ export const userUnblock = async (req, res) => {
       { _id: id },
       { $set: { status: true } }
     );
-
     if (result.modifiedCount > 0) {
       return res.json({ message: "User IS Unblocked!!" });
     }
@@ -77,7 +74,7 @@ export const userUnblock = async (req, res) => {
       .json({ message: "Internal Server Error", error: true });
   }
 };
-
+// userBlock-----------------------
 export const userBlock = async (req, res) => {
   try {
     const id = req.params.id;
