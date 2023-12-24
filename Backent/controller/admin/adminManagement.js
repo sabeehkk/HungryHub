@@ -10,23 +10,19 @@ const LIMIT=6
 //RESTAURENT MANAGEMENT----
 export const restaurentList = async (req, res) => {
     try {
-      console.log('restaurent lsit');
       const PAGE = req?.query?.page
         ? req.query.page >= 1
           ? req.query.page
           : 1
         : 1;
       const SKIP = (PAGE - 1) * LIMIT;
-  
       const restaurentData = await restaurentModel
         .find()
         .sort({ _id: -1 })
         .skip(SKIP)
         .limit(LIMIT);
-        
       const TotalSize = await restaurentModel.countDocuments();
       const size = Math.ceil(TotalSize / LIMIT);
-  
       return res.json({ message: "success", restaurentData, size });
     } catch (error) {
       console.error(error);
@@ -35,8 +31,7 @@ export const restaurentList = async (req, res) => {
         .json({ message: "Internal Server Error", error: true });
     }
   };
-
-  
+  // restaurentUnblock--------------------------------
 export const restaurentUnblock = async (req, res) => {
     try {
       const id = req.params.id;
@@ -44,7 +39,6 @@ export const restaurentUnblock = async (req, res) => {
         { _id: id },
         { $set: { status: true } }
       );
-  
       if (result.modifiedCount > 0) {
         return res.json({ message: "restaurent Un blocked!!" });
       }

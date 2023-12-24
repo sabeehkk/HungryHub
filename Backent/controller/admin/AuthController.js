@@ -15,7 +15,6 @@ export const login=async (req,res)=>{
               error: true,
             });
           }
-
         const isPasswordVerified = bcrypt.compareSync(password,adminData.password)
         if (!isPasswordVerified) {
             return res.status(400).json({ message: "Invalid Password", error: true });
@@ -43,16 +42,13 @@ export const userList = async (req, res) => {
         : 1
       : 1;
     const SKIP = (PAGE - 1) * LIMIT;
-
     const userData = await userModel
       .find()
       .sort({ _id: -1 })
       .skip(SKIP)
       .limit(LIMIT);
-      
     const TotalSize = await userModel.countDocuments();
     const size = Math.ceil(TotalSize / LIMIT);
-
     return res.json({ message: "success", userData, size });
   } catch (error) {
     console.error(error);
