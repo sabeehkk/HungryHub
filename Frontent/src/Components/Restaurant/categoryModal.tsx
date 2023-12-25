@@ -24,7 +24,6 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   useEffect(() => {
     setCategoryName(categoryToEdit);
   }, [editMode]);
-
   const handleAddCategory = async (e) => {
     e.preventDefault();
     if (categoryName.trim() !== "") {
