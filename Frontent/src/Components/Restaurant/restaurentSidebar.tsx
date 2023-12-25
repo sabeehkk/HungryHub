@@ -17,7 +17,6 @@ const App = () => {
       icon: <BiSolidBarChartSquare />,
       url: "/restaurent/home",
     },
-
     {
       title: "Profile",
       icon: <BiSolidUserRectangle />,
@@ -49,9 +48,7 @@ const App = () => {
       icon: <BiSolidUserRectangle />,
       url: "/restaurent/logout",
     },
-    // { title: "Setting", src: "Setting" },
   ];
-
   return (
     <div className="flex sticky top-0">
       <div
@@ -66,11 +63,6 @@ const App = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="flex gap-x-4 items-center">
-          {/* <img
-            src={"https://cdn-icons-png.flaticon.com/512/3075/3075977.png"}
-            alt="User"
-            className=" md:h-9 md:w-9 rounded-full"
-          /> */}
           <h1
             className={`text-white origin-left font-semibold text-xl duration-200 ${
               !open && "scale-0"
@@ -90,11 +82,6 @@ const App = () => {
               } `}
             >
               <Link to={Menu.url} className="flex items-center gap-x-2 w-full">
-                {/* <img
-                  src={`${Menu.src}`}
-                  alt="User"
-                  className=" md:h-7 md:w-9 rounded-full"
-                /> */}
                 <span className="text-2xl">{Menu.icon}</span>
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}

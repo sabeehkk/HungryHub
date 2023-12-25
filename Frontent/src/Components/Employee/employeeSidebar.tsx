@@ -5,10 +5,7 @@ import {
   BiSolidBarChartSquare,
   BiSolidUserRectangle,
   BiFoodMenu,
-  BiCategory,
 } from "react-icons/bi";
-import { AiOutlinePlusSquare } from "react-icons/ai";
-import { MdSettingsApplications, MdOutlineFastfood } from "react-icons/md";
 const App = () => {
   const [open, setOpen] = useState(true);
   const Menus = [
@@ -23,22 +20,6 @@ const App = () => {
       icon: <BiSolidUserRectangle />,
       url: "#",
     },
-    // {
-    //   title: "Category",
-    //   icon: <BiCategory />,
-    //   gap: true,
-    //   url: "/restaurent/categoryAddingModal",
-    // },
-    // {
-    //   title: "Add Menu Items ",
-    //   icon: <AiOutlinePlusSquare />,
-    //   url: "#",
-    // },
-    // {
-    //   title: "Menu Items ",
-    //   icon: <MdOutlineFastfood />,
-    //   url: "#",
-    // },
     {
       title: "Orders ",
       icon: <BiFoodMenu />,
@@ -49,7 +30,6 @@ const App = () => {
       icon: <BiSolidUserRectangle />,
       url: "/employee/logout",
     },
-    // { title: "Setting", src: "Setting" },
   ];
 
   return (
@@ -66,11 +46,7 @@ const App = () => {
           onClick={() => setOpen(!open)}
         />
         <div className="flex gap-x-4 items-center">
-          {/* <img
-            src={"https://cdn-icons-png.flaticon.com/512/3075/3075977.png"}
-            alt="User"
-            className=" md:h-9 md:w-9 rounded-full"
-          /> */}
+         
           <h1
             className={`text-white origin-left font-semibold text-xl duration-200 ${
               !open && "scale-0"
@@ -90,11 +66,7 @@ const App = () => {
               } `}
             >
               <Link to={Menu.url} className="flex items-center gap-x-2 w-full">
-                {/* <img
-                  src={`${Menu.src}`}
-                  alt="User"
-                  className=" md:h-7 md:w-9 rounded-full"
-                /> */}
+              
                 <span className="text-2xl">{Menu.icon}</span>
                 <span
                   className={`${!open && "hidden"} origin-left duration-200`}

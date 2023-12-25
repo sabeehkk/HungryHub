@@ -2,9 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Signup from "../Pages/User/UserRegister";
 import Login from "../Pages/User/login";
-// import Home from '../Components/User/HomePage'
 import IsLogout from "../middleware/user/isLogout" ;
-// import Navbar from '../Components/navbar'
 import { ToastContainer, toast } from "react-toastify";
 import OtpVerification from "../Components/User/otpVerification";
 import UserNavbar from "../Components/User/userNavbar";
@@ -21,8 +19,7 @@ import Logout from "../Pages/User/userLogout.tsx";
 import Footer from '../Components/User/footer.tsx'
 import FilteredRestaurent from '../Components/User/filteredRestaurents.tsx'
 import MenuPage from '../Components/User/menu.tsx';
-import CartPage from '../Components/User/cart.tsx'
-import DummyCart from '../utils/cartDupe.tsx'
+import CartPage from '../Components/User/cart.tsx';
 import CheckoutPage from '../Components/User/checkout.tsx';
 import SuccessPage from '../Components/User/OrderSuccess.tsx';
 import OrderFail from '../payment/paymentFiail.tsx'
@@ -46,7 +43,6 @@ const UserAuthAppLayout = () => {
       <Outlet />
       <ToastContainer />
       <Footer/>
-
     </>
   );
 };
@@ -99,7 +95,6 @@ const UserRoute = {
         </>
       ),
     },
-
     {
       path: "/profile/edit",
       element: (
@@ -179,18 +174,6 @@ const UserRoute = {
       )
     },
     {
-      path:"/CartPage",
-      element:(
-        <>
-          <IsLogged />
-
-         <UserNavbar/>
-        <DummyCart/>
-        </>
-       
-      )
-    },
-    {
       path:"/OrderSuccess",
       element:(
         <>
@@ -199,7 +182,6 @@ const UserRoute = {
         </>
       )
     },
-    
     { 
       path: "/payment-success/:orderId",
       element: (

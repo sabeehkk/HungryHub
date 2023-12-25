@@ -9,29 +9,22 @@ import { ErrorMessage,SuccessMessage } from "../../utils/util";
 import { data } from "autoprefixer";
 import { Link, useNavigate } from "react-router-dom";
 
-
 function UserLogin() {
-  
   const [email,setEmail]=useState<string>("")
   const [password,setPassword]=useState<string>("")
-
   const dispatch=useDispatch()
   const navigate=useNavigate()
       
 const handleSubmit = async (e: SyntheticEvent)=>{
   e.preventDefault();
-  console.log('formdata',email,password)
   if(email ==='' || password===''){
       ErrorMessage('Please fill in all fields')
-             return;
+      return;
   }
   try {
     await userAxios
       .post(`/login`, { email, password })
       .then((res) => {
-
-        console.log('inside then',res.data);
-      
         localStorage.setItem("userToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
@@ -41,12 +34,9 @@ const handleSubmit = async (e: SyntheticEvent)=>{
         SuccessMessage(res.data.message)
       })
   } catch (error) {
-    // alert(error.message)
     if(error){
       ErrorMessage(error.message)
-      
     }
-    
   }
 }
   return (

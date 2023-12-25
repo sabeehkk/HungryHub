@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
 import {} from "react-redux";
-import { USER_API } from "../../Constants/API";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
@@ -23,14 +21,11 @@ export const verifyOtp = async (otp) => {
     ErrorMessage(validationError.message);
     throw validationError;
   }
-  console.log(otp.data);
   try {
     const response = await userAxios.post(`/verifyOtp`, otp);
-    console.log("Backend Response:", response.data);
     return response;
   } catch (error) {
-    ErrorMessage(error.message)
-    console.error("Error from Backend:", error);
+    ErrorMessage(error.message);
     throw error;
   }
 };
@@ -45,14 +40,6 @@ export default function Signup() {
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log("Form Data:", {
-      name,
-      email,
-      password,
-      phoneNumber,
-    });
-
     if (email.trim() === "" || password.trim() === "" || name.trim() === "") {
       return ErrorMessage("Please fill in all the required fields.");
     }
@@ -71,10 +58,8 @@ export default function Signup() {
   };
   const handleSumbit = async (otp) => {
     const result = Object.values(otp).join("");
-    console.log(result, "register finallresult");
     try {
       const result = await verifyOtp(otp);
-      console.log(result.data,'resulttt');
       if (result.data.message == "success") {
         navigate("/login");
         SuccessMessage("user created successfully");
@@ -85,14 +70,12 @@ export default function Signup() {
           phoneNumber,
         };
         await SignupApi(userData);
-      }if(result.data.message==error){
-        console.log(error?.message)
+      }
+      if (result.data.message == error) {
+        console.log(error?.message);
       }
     } catch (error) {
-      // console.log(error);
-  //  alert(error.message)
-   ErrorMessage(errormessage)
-
+      ErrorMessage(errormessage);
     }
   };
   return otpComponent ? (
@@ -119,7 +102,6 @@ export default function Signup() {
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -134,7 +116,6 @@ export default function Signup() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -149,7 +130,6 @@ export default function Signup() {
               placeholder="Enter your Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -164,7 +144,6 @@ export default function Signup() {
               placeholder="Enter Phone Number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              // required
             />
           </div>
           <div className="text-center">

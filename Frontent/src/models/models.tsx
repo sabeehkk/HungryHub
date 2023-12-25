@@ -89,3 +89,11 @@ export interface userInittalModel {
     grandTotal: number;
    
   }
+
+ export interface CategoryModalProps {
+    showModal: any;
+    closeModal: any;
+    categoryId: any;
+    categoryToEdit: any;
+    editMode: any;
+  }

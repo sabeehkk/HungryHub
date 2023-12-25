@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import TabelFrame from "../../Components/tableFrame";
 import { useDispatch } from "react-redux";
-import {  addRestaurents } from "../../redux/admin/restaurentSlice";
+import { addRestaurents } from "../../redux/admin/restaurentSlice";
 import { restaurentsData, restaurentActionAPI } from "../../api/adminApi";
 
 function RestaurentListTable() {
   const [restaurentsList, setRestaurentList] = useState([]);
   const [update, setUpdate] = useState(" ");
   const dispatch = useDispatch();
-  const [page, setPage] = useState(1) ;
-  const [size, setSize] = useState(1)  ;
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(1);
 
   useEffect(() => {
     getRestaurentData();
   }, [update, page]);
 
   const getRestaurentData = async () => {
-
-    const { restaurentData , size } = await restaurentsData(page)
-
+    const { restaurentData, size } = await restaurentsData(page);
     setRestaurentList(restaurentData);
     setSize(size);
     setUpdate("");
@@ -33,9 +31,7 @@ function RestaurentListTable() {
   const filterPagination = (value) => {
     setPage(value);
   };
-
   const heading = "Restaurents";
-
   return (
     <TabelFrame
       heading={heading}
@@ -48,5 +44,4 @@ function RestaurentListTable() {
     />
   );
 }
-
 export default RestaurentListTable;

@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-// import { chat, chatSave, socketCall } from "../../api/apiConnection/user";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAxios } from "../../axios/axios";
 import { io } from "socket.io-client";
 function UserChat() {
-  const user = useSelector((state) => state.userAuth);
+  const user = useSelector((state: any) => state.userAuth);
   const [chatPerson, setChatPerson] = useState([]);
   const [Userdetails, setUserdetails] = useState({});
   const location = useLocation();

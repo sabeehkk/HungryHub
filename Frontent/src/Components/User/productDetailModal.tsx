@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
 import { ErrorMessage } from "../../utils/util";
 
@@ -12,9 +11,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const navigate = useNavigate();
-
   const { user,isAuthenticated } = useSelector((state: any) => state.userAuth);
-
   const handleVariandSelection = (ind) => {
     setSelectedVariant(item.product.variants[ind]);
     toggleDropdown();
@@ -23,7 +20,6 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
     close();
     setSelectedVariant({});
   };
-  //  console.log(selectedVariant);
   const handleAddToCart = () => {
     if (!user) {
       return ErrorMessage('Invalid Login');
@@ -38,7 +34,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
-        navigate("/CartPage");
+        navigate("/cart");
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -47,10 +43,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
         });
       });
   }else {
-    toast.error("Please Select Size", {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000,
-    });
+    ErrorMessage('Please Select Size')
   }
   };
   return (
@@ -128,8 +121,6 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
                               />
                             </svg>
                           </button>
-
-                          {/* Dropdown content */}
                           {isDropdownOpen && (
                             <div
                               className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg"
@@ -148,9 +139,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
                           )}
                         </div>
                       </section>
-
                       <hr/>
-
                       <section
                         aria-labelledby="options-heading"
                         className="mt-10"
@@ -169,29 +158,9 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
                               Offer Price : {selectedVariant.offerPrice}
                             </h4>
                           </div>
-
-                          {/* <div className="mt-10">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-medium text-gray-900">
-                                Size
-                              </h4>
-                              <a
-                                href="#"
-                                className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                              >
-                                Size guide
-                              </a>
-                            </div> */}
-
-                            {/* <fieldset className="mt-4"> */}
-                              {/* ... (sizes radio buttons) ... */}
-                            {/* </fieldset> */}
-                          {/* </div> */}
-
                           <button
                           onClick={() => {
                             handleAddToCart();
-                           
                           }}
                             className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >

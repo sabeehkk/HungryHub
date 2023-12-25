@@ -12,15 +12,9 @@ import { BsFillTagsFill } from "react-icons/bs";
 
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
-  
-
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [userData, setUserData] = useState({});
-
-  
-  
-  
   const [load,setLoad] = useState(true)
   const [address, setAddress] = useState([
     {
@@ -41,25 +35,14 @@ const UserProfile=()=> {
   const dispatch = useDispatch();
   useEffect(() => {
     userAxios.get(`/getUserData?id=${user?._id}`).then((response) => {
-      console.log(response.data,'fetched data');
-      
       setUserData(response.data);
-      // setName(response?.data?.user?.Name);
-   
     }).catch((error)=>{
       console.log(error);
-      
-      // toast.error(error.response.data.message, {
-      //   position: toast.POSITION.TOP_CENTER,
-      //   autoClose: 3000,
-      // });
     })
   }, []);
-
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -70,7 +53,6 @@ const UserProfile=()=> {
   };
   useEffect(() => {
     if (selectedImage) {
-      console.log(selectedImage, "selected imageee");
       const data = { profilePicture: selectedImage };
       dispatch(setProfile(data));
       setSelectedImage(null);
@@ -84,12 +66,10 @@ const UserProfile=()=> {
   return load ? (
       <Loading/>
   ) : ( 
-    
       <div className="h-full mt-16 shadow-xl mr-16 ml-16">
         <div className="flex items-center justify-center">
           <span className="text-xl font-extrabold block">User Profile</span>
         </div>
-
         <div className="border-b-2 block md:flex">
           <div className="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
             <div className="w-full p-8 mx-2 flex justify-center">
@@ -107,17 +87,14 @@ const UserProfile=()=> {
                 onClick={() => fileInputRef.current.click()}
               />
             </div>
-            
-               
                <h2 className="ml-52 p- text-xl font-bold">
               {user.name} 
             </h2>
               <span className="mt-2 flex justify-center items-center">
-  <BsFillTagsFill className="text-2xl text-green-600 mr-2"/>
-  <span className="text-1xl mr  font-bold text-black ">₹ :{userData.user?.Wallet}</span>
-</span>
+            <BsFillTagsFill className="text-2xl text-green-600 mr-2"/>
+            <span className="text-1xl mr  font-bold text-black ">₹ :{userData.user?.Wallet}</span>
+          </span>
           </div>
-
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
             <div className="flex justify-end">
               <button
@@ -144,7 +121,6 @@ const UserProfile=()=> {
               )}
             </div>
             <div className="rounded  shadow p-6">
-             
               <div className="pb-4">
                 <label className="font-semibold text-gray-700 block pb-1">
                   Email
@@ -180,15 +156,11 @@ const UserProfile=()=> {
                   type="email"
                   value={user ? [user?.Address[0]?.street, user?.Address[0]?.city, user?.Address[0]?.state,user?.Address[0]?.postalCode].filter(Boolean).join(', ') : ''}
                   />
-
               </div>
-             
             </div>
           </div>
         </div>
       </div>
-   
-  );
-}
-
+      );
+    }
 export default UserProfile;

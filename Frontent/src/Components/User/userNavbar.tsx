@@ -6,13 +6,10 @@ import { FaUserFriends, FaWallet } from "react-icons/fa";
 import { MdFavorite, MdHelp } from "react-icons/md";
 import { MdExitToApp } from "react-icons/md";
 import { MdHome } from "react-icons/md";
-import { BiFoodMenu } from 'react-icons/bi'
-import {  MdOutlineFastfood } from "react-icons/md";
-
-
+import { BiFoodMenu } from "react-icons/bi";
+import { MdOutlineFastfood } from "react-icons/md";
 
 import { Link } from "react-router-dom";
-
 const UserNavbar = () => {
   const [nav, setNav] = useState(false);
   return (
@@ -44,13 +41,10 @@ const UserNavbar = () => {
       </div>
       {/* {CartButton} */}
       <button className="bg-black text-white hidden md:flex items-center py-2 rounded-full">
-      <Link to="/CartPage" className="flex items-center">
-    <BsFillCartFill size={20} className="mr-2" /> Cart
-  </Link>
-        {/* <BsFillCartFill size={20} className="mr-2" /> Cart */}
+        <Link to="/cart" className="flex items-center">
+          <BsFillCartFill size={20} className="mr-2" /> Cart
+        </Link>
       </button>
-      {/* {Mobile Menu} */}
-      {/* {Overlay} */}
       {nav ? (
         <div className="bg-black/80 fixed w-full h-screen z-10 top-0 left-0"></div>
       ) : (
@@ -77,7 +71,7 @@ const UserNavbar = () => {
             <li className="text-xl py-4 flex gap-x-2 items-center">
               <Link to="/restaurent/home" className="flex items-center">
                 <FaUserFriends size={25} className="mr-4" />
-                   Become a Partner
+                Become a Partner
               </Link>
             </li>
 
@@ -87,37 +81,28 @@ const UserNavbar = () => {
                 Profile
               </Link>
             </li>
-          
-            {/* <li className="text-xl py-4 flex gap-x-2 items-center">
-              <FaWallet size={25} className="mr-4" />
-              Restaurants
-            </li> */}
-             <li className="text-xl py-4 flex gap-x-2 items-center">
-            <Link to="/filterShops" className="flex items-center">
-            <MdOutlineFastfood size={25} className="mr-4" />
-            Restaurants
-              </Link>
-            </li>
-            {/* <li className="text-xl py-4 flex gap-x-2 items-center">
-              <MdHelp size={25} className="mr-4" />
-              Help
-            </li> */}
             <li className="text-xl py-4 flex gap-x-2 items-center">
-            <Link to="/employee/login" className="flex items-center">
-            <TbTruckDelivery size={25} className="mr-4" />
-            Join With Us
+              <Link to="/filterShops" className="flex items-center">
+                <MdOutlineFastfood size={25} className="mr-4" />
+                Restaurants
               </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
-            <Link to="/" className="flex items-center">
-            <MdHome size={25} className="mr-4" />
-                 Home
+              <Link to="/employee/login" className="flex items-center">
+                <TbTruckDelivery size={25} className="mr-4" />
+                Join With Us
               </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
-            <Link to="/orders" className="flex items-center">
-            <BiFoodMenu size={25} className="mr-4" />
-                 Orders
+              <Link to="/" className="flex items-center">
+                <MdHome size={25} className="mr-4" />
+                Home
+              </Link>
+            </li>
+            <li className="text-xl py-4 flex gap-x-2 items-center">
+              <Link to="/orders" className="flex items-center">
+                <BiFoodMenu size={25} className="mr-4" />
+                Orders
               </Link>
             </li>
             <li className="text-xl py-4 flex gap-x-2 items-center">
@@ -129,7 +114,6 @@ const UserNavbar = () => {
           </ul>
         </nav>
       </div>
-
       {/* {Side drawer menu} */}
     </div>
   );

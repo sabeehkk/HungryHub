@@ -8,11 +8,9 @@ const OrderActionModal = ({ onClose, onSelectAction }) => {
   };
 
   return (
-    // Your modal content here, displaying available actions as buttons
     <div className="modal">
       <button onClick={() => handleActionClick('Accept')}>Accept</button>
       <button onClick={() => handleActionClick('Reject')}>Reject</button>
-      {/* Add more buttons for other actions as needed */}
       <button onClick={onClose}>Cancel</button>
     </div>
   );

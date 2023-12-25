@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-// import { FiEye, FiSettings, FiEyeOff } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import Pagination from "../Components/pagination";
-import { Button, Modal } from "antd";
+import {  Modal } from "antd";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./adminSidebar";
 
 const demoImage =
   "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png";
 
-import {
-  AdminSideRestaurentModel,
-  AdminSideTableFrameProps,
-} from "../models/models";
-import { usersData } from "../api/adminApi";
-
+import { AdminSideTableFrameProps } from "../models/models";
 function TabelFrame({
   heading,
   data,
@@ -24,14 +18,8 @@ function TabelFrame({
   currentPage,
   size,
 }: AdminSideTableFrameProps) {
-  // const [rejectedMessage, setRejectedMessage] = useState("");
-
-  // const [id, setId] = useState("");
-  // const [status, setStatus] = useState("");
-
   const [showModal, setShowModal] = React.useState(false);
   const [actionData, setActionData] = useState({});
-  const navigate = useNavigate();
 
   const handleClick = (id: string, status: string, message: string) => {
     handleAction(id, status, message);
@@ -40,7 +28,6 @@ function TabelFrame({
     setActionData(item);
     setShowModal(true);
   };
-
   return (
     <>
       <div className="flex flex-col">
@@ -52,7 +39,6 @@ function TabelFrame({
                   {heading} Management
                 </h1>
               </div>
-
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
@@ -110,7 +96,6 @@ function TabelFrame({
                                     </button>
                                   </div>
                                   {/*body*/}
-
                                   <h5></h5>
                                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div className="flex justify-center items-center">
@@ -158,16 +143,7 @@ function TabelFrame({
                                     </div>
                                   </div>
 
-                                  {/*footer*/}
-                                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                                    {/* <button
-                                      className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                      type="button"
-                                      onClick={() => setShowModal(false)}
-                                    >
-                                      Close
-                                    </button> */}
-                                  </div>
+                                  <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b"></div>
                                 </div>
                               </div>
                             </div>
@@ -205,14 +181,11 @@ function TabelFrame({
                           </div>
                         </div>
                       </td>
-                   
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">
                           {item.name || "" || item.restaurantName}
                         </div>
                       </td>
-                    
-
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span
                           className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
@@ -225,7 +198,6 @@ function TabelFrame({
                           {item.status ? "Online" : "Offline"}
                         </span>
                       </td>
-
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex items-center justify-center">
                           {item.status === true ? (
@@ -247,7 +219,6 @@ function TabelFrame({
                           ) : null}
                           <button
                             className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-blue-500 shadow-md hover:bg-blue-400"
-                            // onClick={() => setShowModal(true)}
                             onClick={() => handleModalButtonClick(item, role)}
                           >
                             More

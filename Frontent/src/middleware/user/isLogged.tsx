@@ -7,9 +7,7 @@ function IsLogged() {
     const {success} = useSelector((state:any)=> state.userAuth);
     const navigate = useNavigate();
     const dispatch = useDispatch()
-
     useEffect(()=>{
-        
         if(!success){
             navigate('/login')
         }

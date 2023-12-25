@@ -16,16 +16,8 @@ export default function EmployeeSignup() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
-    console.log("Form Data:", {
-      name,
-      email,
-      password,
-      phoneNumber,
-    });
     if (email.trim() === "" || password.trim() === "" || name.trim() === "") {
       return ErrorMessage("Please fill in all the required fields.");
-
       return;
     }
     if (password.length < 6) {
@@ -44,8 +36,6 @@ export default function EmployeeSignup() {
           phoneNumber,
         })
         .then((res) => {
-          console.log(res.data);
-          console.log(res.data.message);
           if (res.data.message === "success") {
             navigate("/employee/login");
             SuccessMessage(res.data.message);
@@ -82,7 +72,6 @@ export default function EmployeeSignup() {
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -97,7 +86,6 @@ export default function EmployeeSignup() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -112,7 +100,6 @@ export default function EmployeeSignup() {
               placeholder="Enter your Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -127,7 +114,6 @@ export default function EmployeeSignup() {
               placeholder="Enter Phone Number"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              // required
             />
           </div>
           <div className="text-center">

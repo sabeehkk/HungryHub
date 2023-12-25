@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidStarHalf } from "react-icons/bi";
 import { toast } from "react-toastify";
-import ProductDetailModal from "../User/productDetailModal";
+import ProductDetailModal from "../../Components/User/productDetailModal";
 import { restaurentAxios } from "../../axios/axios";
 import { userAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
@@ -96,9 +96,7 @@ function Menu() {
       .then((response) => {
         setProduct(response.data.productData);
         console.log(response.data.productData, "restoProducts");
-
-        // const newSize = response.data.size;
-        // setSize(newSize);
+   
       })
       .catch((error) => {
         toast.error(error.response?.data?.message, {
@@ -135,6 +133,8 @@ function Menu() {
   }, [searchTerm]);
 
   const handleCategorySelection = (ind) => {
+    console.log('handleCategorySelection is called');
+    
     const selectedCat = categories[ind];
     setSelectedCategory(selectedCat);
 
@@ -178,6 +178,8 @@ function Menu() {
       setFilterdProducts([]);
     }
   };
+  console.log(currentItems,'current items');
+  
 
   return (
     <div className="bg-gray-100 container mx-auto px-5 my-element ">
@@ -374,9 +376,10 @@ function Menu() {
             </div>
           </div>
         </div>
+        
         {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
-        {searchTerm === "" ? (
-  // Show all products when no search term is present
+        {/* {filterdProducts === "" ? ( */}
+        { !filterdProducts  || filterdProducts.length === 0 ?(
   currentItems?.map((prod) => (
     <div className="pb-2" key={prod._id}>
       <div className="mb-10 sm:flex sm:justify-between block">
@@ -407,9 +410,10 @@ function Menu() {
       </div>
       <div className="border border-gray-500"></div>
     </div>
-  ))
+     ))
        ) : filterdProducts?.length !== 0 ? (
           filterdProducts?.map((prod) => (
+            // {(console.log('ddddddddd'))}
             <div className="p-2" key={prod._id}>
               <div className="mb-10 sm:flex sm:justify-between block">
                 <div className="">
@@ -438,47 +442,14 @@ function Menu() {
             </div>
          
          ))
-        ) 
-        : (
+         ) : (
           <div className="pb-8 mb-5">
             {filterdProducts !== null && filterdProducts?.length === 0 ? (
-      <p>No matching products found.</p>
-    )
-     : (
-            currentItems?.map((prod) => (
-              <div className="pb-2" key={prod._id}>
-                <div className="mb-10 sm:flex sm:justify-between block">
-                  <div className="">
-                    <h4 className="text-xl font-bold mt-2">
-                      {prod.productName}
-                    </h4>
-                    <h4 className="text-lg text-gray-500">
-                      {prod.description}
-                    </h4>
-                    <h4 className="text-lg text-gray-500">
-                      {/* Best Price :₹ {prod.variants[0]?.offerPrice} */}
-                    </h4>
-                  </div>
-                  <div
-                    className="sm:w-36 sm:h-28 rounded-md bg-cover bg-center bg-no-repeat h-72 flex flex-col justify-between"
-                    // style={{ backgroundImage: `url(${prod?.images[0]})` }}
-                  >
-                    <div className="flex flex-col justify-end h-full"></div>
-                    <button
-                      onClick={() => handleProducData(prod._id)}
-                      className="text-white py-1.5 px-1 rounded-sm  "
-                      style={{ backgroundColor: "#CC252C", border: "none" }}
-                    >
-                      Buy Now
-                    </button>
-                  </div>
-                </div>
-                <div className="border border-gray-500"></div>
-              </div>
-            ))
-          )}
+              <p>No matching products found.</p>
+            ) : null}
           </div>
         )}
+
       </div>
       <div className="float-center  ">
         <PAgination

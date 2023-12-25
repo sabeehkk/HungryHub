@@ -1,20 +1,14 @@
-// RestaurantDashboard.js
-
 import React, { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
-import { ErrorMessage } from '../../utils/util';
 import { RiFileList3Fill } from 'react-icons/ri'
 import { FaShopify } from 'react-icons/fa'
 import { BiSolidUserAccount } from 'react-icons/bi'
-// import RestaurantAxios from '../../Axios/RestaurantAxios';
 import { restaurentAxios } from '../../axios/axios';
-// import PieChart from '../../assets/PieChart';
 import PieChart from '../../assets/pieChart';
 import Chart from '../../assets/chart';
 
 const RestaurantDashboard = () => {
   const [dashBordDatas,setDashBoardDatas] = useState()
-
 const restaurant = useSelector((state) => state.restaurentAuth);
 let result = restaurant.restaurent;
   const restId = result?._id;
@@ -22,16 +16,13 @@ let result = restaurant.restaurent;
   useEffect(()=>{
     if (!restaurant.restaurent || !restaurant.restaurent._id) {
       return  
-      //  ErrorMessage('UnAuthorized')
         }else{
      restaurentAxios.get(`/dashboardData?id=${restId}`).then((response)=>{
       setDashBoardDatas(response.data)
       console.log(response.data,'dashboardData');
      })
     }
-
   },[])
-    
   return (
     <div className="container mx-auto p-4">
       <div className="w-full p-5 md:flex bg-off-White shadow-md">
@@ -40,7 +31,6 @@ let result = restaurant.restaurent;
         >
           <div className="space-y-2 flex justify-center items-stretch">
             <div className='h-20 w-20 mr-3 bg-green-100 rounded-full flex items-center justify-center '>
-
             <FaShopify className="h-16 w-16 text-green-500 "/> 
             </div>
             <div className=''>
@@ -58,7 +48,6 @@ let result = restaurant.restaurent;
         >
           <div className="space-y-2 flex justify-center items-stretch">
             <div className='h-20 w-20 mr-3 bg-green-100 rounded-full flex items-center justify-center '>
-
             <RiFileList3Fill className="h-20 w-16 text-green-500 "/> 
             </div>
             <div className=''>
@@ -71,13 +60,11 @@ let result = restaurant.restaurent;
             </div>
           </div>
         </div>
-
         <div
           className={`h-28 p-4 md:w-1/3 shadow-md bg-cherry-Red rounded w-full md:mr-3 mb-3 cursor-pointer`}
         >
           <div className="space-y-2 flex justify-center items-stretch">
             <div className='h-20 w-20 mr-3 bg-green-100 rounded-full flex items-center justify-center '>
-
             <BiSolidUserAccount className="h-20 w-16 text-green-500 "/> 
             </div>
             <div className=''>
@@ -90,7 +77,6 @@ let result = restaurant.restaurent;
             </div>
           </div>
         </div>
-        
       </div>
       <div className='w-full'>
         <div className=''>

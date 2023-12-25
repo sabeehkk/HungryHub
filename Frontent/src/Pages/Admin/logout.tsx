@@ -7,14 +7,10 @@ import React from "react";
 function AdminLogout() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useLayoutEffect(() => {
-
     dispatch(logout());
     navigate("/admin/login");
-    
   }, []);
-  
   return <></>;
 }
 

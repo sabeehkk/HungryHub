@@ -115,7 +115,7 @@ const FilteredRestaurents = () => {
               <div
                 key={item._id}
                 className="mb-10 cursor-pointer bg-white"
-                onClick={() => navigate(`/menuss/${item.restaurent?._id || item._id}`)}
+                onClick={() => navigate(`/menu/${item.restaurent?._id || item._id}`)}
               >
                 <div className="flex items-center justify-between">
                   <img
