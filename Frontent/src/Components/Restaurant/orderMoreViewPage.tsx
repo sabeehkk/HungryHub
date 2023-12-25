@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { io } from "socket.io-client";
 import { useParams } from "react-router-dom";
 import PAgination from "../../Components/pagination";
-
 import { restaurentAxios ,employeeAxios} from "../../axios/axios";
 import BillModal from "../../assets/billModa";
 import { USER_API } from "../../Constants/API";
@@ -69,7 +68,6 @@ function OrdersItems() {
       ErrorMessage('Select employee and order');
     }
   };
-  
   const cancelOrder = async (orderId,itemId) => {
     const result = await SwalAlert();
     if (result.isConfirmed) {
@@ -129,7 +127,6 @@ function OrdersItems() {
               <th  scope="col"
                 className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
                  Actions
-                
               </th>
             </tr>
           </thead>
@@ -186,18 +183,9 @@ function OrdersItems() {
                       >
                         Packed
                       </option>
-                   
                     </select>
                   )}
                 </td>
-                
-                {/* {
-                employees.map((employee, index) => (
-                  <td key={index} className="px-6 py-2 whitespace-nowrap">
-                    <h1>{employee?.name}</h1>
-                  </td>
-                ))
-              } */}
               <td>
               <select 
               className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"

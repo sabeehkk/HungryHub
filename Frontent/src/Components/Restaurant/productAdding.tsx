@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
 import { restaurentAxios } from "../../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../../utils/util";
-// import Button from "../../assets/button";
 import { useNavigate } from "react-router-dom";
 import { uploadFoodImage } from "../../api/restaurentApi";
 import Loading from "../../Components/loading";
@@ -12,7 +11,6 @@ import { PRICE_REGEX } from "../../rejux";
 const AddProduct: React.FC = () => {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
-  // const [productPrice, setProductPrice] = useState("");
   const [images, setImages] = useState([]);
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState(false);
@@ -21,11 +19,8 @@ const AddProduct: React.FC = () => {
   const [variants, setVariants] = useState([
     { name: "", price: "", offer: "", offerPrice: "" },
   ]);
-
   const [load, setLoad] = useState(true);
-
   const navigate = useNavigate();
-
   const restaurant = useSelector((state) => state.restaurentAuth);
   const result = restaurant.restaurent;
 
@@ -119,19 +114,16 @@ const AddProduct: React.FC = () => {
     const newImages = [...images, ...Array.from(e.target.files)];
     setImages(newImages);
 
-    // Image preview
     const imagePreviews = [];
     for (const image of newImages) {
       const reader = new FileReader();
       reader.onload = (e) => {
         imagePreviews.push(e.target.result);
-        // Assuming setPreviewImages is a state setter for image previews
         setPreviewImages([...imagePreviews.slice(0, 4)]);
       };
       reader.readAsDataURL(image);
     }
   };
-
   useEffect(() => {
     if (selectedImage) {
       console.log(selectedImage, "selected imagee");
@@ -159,18 +151,11 @@ const AddProduct: React.FC = () => {
     if(!validPrice()){
       return ErrorMessage("enter valid price");
     }
-    // if (productPrice.trim() === "") {
-    //   return ErrorMessage("Please Fill product price");
-    // }
-
     if (images.length < 4) {
       return ErrorMessage("Please upload at least 4 images");
     }
     setLoad(true);
-
     const urlImages = await handleImageUpload(images);
-    console.log("image url ", urlImages);
-
     if (productName.trim().length === 0 || description.trim().length === 0) {
       setErrors(true);
     } else {
@@ -178,7 +163,6 @@ const AddProduct: React.FC = () => {
       const FormData = {
         productName,
         description,
-        // productPrice,
         category,
         images: urlImages,
         restId,
@@ -249,7 +233,6 @@ const AddProduct: React.FC = () => {
                 </option>
               ))}
             </select>
-
             <label htmlFor="description" className="block font-medium">
               Description:
             </label>
@@ -275,7 +258,6 @@ const AddProduct: React.FC = () => {
         <label htmlFor="price" className="block font-medium">
             Price:
           </label>
-  
           {!validPrice() && errors && (
             <p className="text-red-500 text-sm">{"Invalid Price"}</p>
           )}
@@ -315,124 +297,64 @@ const AddProduct: React.FC = () => {
             </div>
           ))}
           <button className= "bg-blue-500 text-white border-neutral-50  hover:text-black" onClick={addVariant}>Add Variant</button>
-
-
           </div>
           <div className="md:w-1/2">
-            {/* <label htmlFor="restId" className="block font-medium">
-              Restaurant ID
-            </label>
-            <input
-              type="text"
-              id="restId"
-              value={restId}
-              readOnly
-              className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-            /> */}
-            {/* <label htmlFor="restId" className="block font-medium 
-/>">
-  Restaurant ID
-</label> */}
-<input
-  type="text"
-  id="restId"
-  value={restId}
-  readOnly
-  className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
-  style={{ display: 'none' }}
-/>
-{/* <label htmlFor="price" className="block font-medium">
-          Product Image
-          </label>
-
-            <div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
-              <div className="flex flex-wrap">
-                {previewImages.map((preview, index) => (
-                  <div key={index} className="w-1/4 p-2">
-                    <label
-                      htmlFor={`profImage-${index}`}
-                      className="block relative"
-                    >
-                      <img
-                        className="h-52 object-cover w-full rounded-md"
-                        src={preview}
-                        alt={`Preview ${index + 1}`}
-                      />
-                    </label>
-                  </div>
-                ))}
-              </div>
-              {previewImages.length > 0 && (
-                <label htmlFor="profImage" className="w-1/4 p-2 block relative">
-      
-                </label>
-              )}
               <input
-                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                name="file"
-                multiple
-                type="file"
-                id="fileInput"
-                required
-                onChange={handleImages}
-                min={1}
-                max={4}
-                // style={{ height: "80px" }}
+                type="text"
+                id="restId"
+                value={restId}
+                readOnly
+                className="border border-gray-300 rounded-sm md:w-3/5 bg-gray-300 mb-5 py-1 w-full"
+                style={{ display: 'none' }}
               />
-            </div> */}
-<label htmlFor="image" className="block font-medium">
-    Add Best Food Images (4-5 images)
-  </label>
-<div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
-  
-  <div className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-    <div className="space-y-1 text-center">
-      <div className="flex text-sm text-gray-600">
-        <label
-          htmlFor="file-upload"
-          className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-        >
-          <span>Upload up to 4 files</span>
-          <input
-            id="file-upload"
-            name="image"
-            type="file"
-            className="sr-only"
-            accept="image/*"
-            onChange={handleImages}
-            multiple
-            min={4}
-            max={5}
-          />
-        </label>
-        <p className="pl-1">or drag and drop</p>
-      </div>
-      <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB each</p>
-    </div>
-  </div>
-
-  <div className="flex flex-wrap">
-    {previewImages.map((preview, index) => (
-      <div key={index} className="w-1/4 p-2">
-        <label htmlFor={`profImage-${index}`} className="block relative">
-          <img
-            className="h-52 object-cover w-full rounded-md"
-            src={preview}
-            alt={`Preview ${index + 1}`}
-          />
-        </label>
-      </div>
-    ))}
-  </div>
-  {previewImages.length > 0 && (
-    <label htmlFor="profImage" className="w-1/4 p-2 block relative"></label>
-  )}
-  
-</div>
-
-           
+              <label htmlFor="image" className="block font-medium">
+                  Add Best Food Images (4-5 images)
+                </label>
+              <div className="custom-file mt-3 h-auto items-center justify-center bg-gray-300 md:w-3/5 w-full">
+                <div className="mt-1 flex items-center justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                  <div className="space-y-1 text-center">
+                    <div className="flex text-sm text-gray-600">
+                      <label
+                        htmlFor="file-upload"
+                        className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                      >
+                        <span>Upload up to 4 files</span>
+                        <input
+                          id="file-upload"
+                          name="image"
+                          type="file"
+                          className="sr-only"
+                          accept="image/*"
+                          onChange={handleImages}
+                          multiple
+                          min={4}
+                          max={5}
+                        />
+                      </label>
+                      <p className="pl-1">or drag and drop</p>
+                    </div>
+                    <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB each</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap">
+                  {previewImages.map((preview, index) => (
+                    <div key={index} className="w-1/4 p-2">
+                      <label htmlFor={`profImage-${index}`} className="block relative">
+                        <img
+                          className="h-52 object-cover w-full rounded-md"
+                          src={preview}
+                          alt={`Preview ${index + 1}`}
+                        />
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                {previewImages.length > 0 && (
+                  <label htmlFor="profImage" className="w-1/4 p-2 block relative"></label>
+                )}
+                
+              </div>
               <button
-                // className="ml-14 bg-teal-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 className= "bg-teal-500 text-white border-neutral-50  hover:text-black"
                 type="button"
                 onClick={addProduct}
