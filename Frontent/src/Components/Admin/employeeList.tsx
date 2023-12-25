@@ -10,20 +10,16 @@ function EmployeeListTable() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(1);
-
   useEffect(() => {
     getEmployeeData();
   }, [update, page]);
-
   const getEmployeeData = async () => {
     const { employeeData, size } = await employeesData(page);
-
     setEmployeeList(employeeData);
     setSize(size);
     setUpdate("");
     dispatch(addEmployees(employeeData));
   };
-
   const handleAction = async (id: string, action: string, message: string) => {
     await employeesActionAPI(id, action);
     setUpdate("update");
@@ -44,5 +40,4 @@ function EmployeeListTable() {
     />
   );
 }
-
 export default EmployeeListTable;
