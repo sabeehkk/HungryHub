@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { userAxios } from "../../axios/axios";
 import { io } from "socket.io-client";
 function UserChat() {
-  const user = useSelector((state:any) => state.userAuth);
+  const user = useSelector((state: any) => state.userAuth);
   const [chatPerson, setChatPerson] = useState([]);
   const [Userdetails, setUserdetails] = useState({});
   const location = useLocation();
