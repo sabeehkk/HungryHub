@@ -8,13 +8,12 @@ import {
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import Loading from "../../Components/loading";
-
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 const RestaurentProfile = () => {
   const restaurant = useSelector((state: any) => state.restaurentAuth);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [load, setLoad] = useState(true);
+  const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
+  const [load, setLoad] = useState<boolean>(true);
   const fileInputRef = useRef(null);
   const dispatch = useDispatch();
   const toggleDropdown = () => {
@@ -88,7 +87,7 @@ const RestaurentProfile = () => {
             <button
               onClick={toggleDropdown}
               className="px-2 py-2 mr-10  hover:bg-gray-100 rounded-full absolute "
-            >
+               >
               <AiOutlineEdit size={25} />
             </button>
             {isDropdownOpen && (

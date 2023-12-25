@@ -17,7 +17,7 @@ function Products() {
   const restaurant_id = restaurant.restaurent?._id;
   const navigate = useNavigate();
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page:any) => {
     setCurrentPage(page);
   };
 
@@ -28,7 +28,6 @@ function Products() {
         setProduct(response.data.productData);
         const newSize = response.data.size;
         setSize(newSize);
-        console.log(response.data, "productDataaaaaaa");
       });
   }, [page, is_deleted]);
 
