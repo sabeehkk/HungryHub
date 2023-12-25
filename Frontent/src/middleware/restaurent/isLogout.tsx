@@ -12,5 +12,4 @@ const IsLogout = () => {
   }, [success]);
   return null;
 };
-
 export default IsLogout;
