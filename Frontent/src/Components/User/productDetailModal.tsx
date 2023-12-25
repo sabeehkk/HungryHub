@@ -34,7 +34,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
-        navigate("/CartPage");
+        navigate("/cart");
       })
       .catch((err) => {
         toast.error(err.response.data.message, {

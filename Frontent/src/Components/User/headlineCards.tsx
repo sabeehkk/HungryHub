@@ -43,7 +43,7 @@ const HomePageRestaurent = () => {
       <div className="max-w-[1640px] mx-auto p-4 py-12 grid md:grid-cols-3 gap-6">
         {restaurants.map((restaurant) => (
           <Link
-            to={`/menuss/${restaurant._id}`}
+            to={`/menu/${restaurant._id}`}
             key={restaurant._id}
             className="rounded-xl relative"
           >
