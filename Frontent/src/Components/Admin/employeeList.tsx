@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TabelFrame from "../../Components/tableFrame";
 import { useDispatch } from "react-redux";
-import {  addEmployees } from "../../redux/admin/employeeSlice";
+import { addEmployees } from "../../redux/admin/employeeSlice";
 import { employeesData, employeesActionAPI } from "../../api/adminApi";
 
 function EmployeeListTable() {
@@ -16,10 +16,9 @@ function EmployeeListTable() {
   }, [update, page]);
 
   const getEmployeeData = async () => {
+    const { employeeData, size } = await employeesData(page);
 
-    const { employeeData  , size}  = await employeesData(page)
-
-     setEmployeeList(employeeData);
+    setEmployeeList(employeeData);
     setSize(size);
     setUpdate("");
     dispatch(addEmployees(employeeData));
@@ -29,13 +28,10 @@ function EmployeeListTable() {
     await employeesActionAPI(id, action);
     setUpdate("update");
   };
-
   const filterPagination = (value) => {
     setPage(value);
   };
-
-  const heading ="Employee"
-  
+  const heading = "Employee";
   return (
     <TabelFrame
       heading={heading}
@@ -48,6 +44,5 @@ function EmployeeListTable() {
     />
   );
 }
-
 
 export default EmployeeListTable;
