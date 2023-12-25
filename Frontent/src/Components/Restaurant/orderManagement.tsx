@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-// import { io } from "socket.io-client";
-
-// import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
-// import RestaurantAxios from "../../Axios/RestaurantAxios";
 import { restaurentAxios } from "../../axios/axios";
 
 import BillModal from "../../assets/billModa";
