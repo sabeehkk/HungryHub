@@ -219,7 +219,6 @@ function TabelFrame({
                           ) : null}
                           <button
                             className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-blue-500 shadow-md hover:bg-blue-400"
-                            // onClick={() => setShowModal(true)}
                             onClick={() => handleModalButtonClick(item, role)}
                           >
                             More
