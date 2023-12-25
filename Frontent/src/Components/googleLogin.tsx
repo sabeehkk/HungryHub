@@ -8,7 +8,6 @@ import axios from "axios";
 import { userLoggedIn } from "../redux/user/authSlice";
 import { ErrorMessage,SuccessMessage } from '../utils/util';
 
-
 function GoogleAuthentication() {
     const navigate =useNavigate()
   const dispatch=useDispatch()
@@ -17,15 +16,12 @@ function GoogleAuthentication() {
             const data : any =jwtDecode(token)
             await userAxios.post(`/googleLogin`,data)
             .then((res)=>{
-              console.log('datasssssfrom backend',res.message);
-              
                 localStorage.setItem("userToken", res.data.token);
                 axios.defaults.headers.common[
                   "Authorization"
                 ] = `Bearer ${res.data.token}`;
                 dispatch(userLoggedIn(res.data.userData));
                 navigate("/");
-
                 SuccessMessage(res.data.message)
               }) 
               .catch((err)=>{
@@ -36,19 +32,14 @@ function GoogleAuthentication() {
             console.log(error.message);
         }
     }
-
   return (
     <GoogleOAuthProvider clientId="1025416617728-mdbjd2n8h3ctovsre8ld0osgse2agfp2.apps.googleusercontent.com">
     <div className='flex mt-5 mx-5 rounded-full'>
     <GoogleLogin 
         onSuccess={(credentialResponse) => {
-            // const details =jwt_decode(credentialResponse.credential)
-            // console.log(details);
             GoogleSignin(credentialResponse.credential)
-            console.log(credentialResponse)
         }}
         onError={() => {
-            console.log('Login Failed');
         }}
         />
     </div>
