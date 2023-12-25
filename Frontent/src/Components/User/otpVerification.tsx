@@ -17,7 +17,6 @@ const OtpVerification = ({handleSumbit}) => {
   useEffect(() => {
     inputRef.current[0].focus();
     inputRef.current[0].addEventListener("paste", pasteText);
-    // return () => inputRef.current[0].removeEventListener("paste", pasteText);
   }, [] );   
   
   const pasteText = (event:any) => {
@@ -39,7 +38,6 @@ const OtpVerification = ({handleSumbit}) => {
       ...prev,
       [name]: value.slice(-1),
     }));
-    // event.target.nextSibling.focus( )
     if (value && index < 5) {
       inputRef.current[index + 1].focus();
     }

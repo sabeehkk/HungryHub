@@ -21,8 +21,6 @@ function Menu() {
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [item, setsetItem] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(filterdProducts,'filterdProducts');
   
   const [size, setSize] = useState(1);
 
@@ -33,9 +31,6 @@ function Menu() {
     { fieled: "₹ : 500 - 1000", startedAt: 500 },
     { fieled: "₹ : 1000+", startedAt: 1000 },
   ];
-
-  console.log(product, "products in menu pages");
-  console.log(categories, "category in menu pages");
 
   const itemsPerPage = 5;
   const totalPages = Math.ceil(product?.length / itemsPerPage);
@@ -57,8 +52,6 @@ function Menu() {
   const handleProducData = async (proId) => {
     try {
       const { data } = await userAxios.get(`/getProuductDetail?id=${proId}`);
-      console.log(data, "restaurent details in menupage");
-
       if (data) {
         setsetItem(data);
       }
@@ -78,8 +71,6 @@ function Menu() {
         const { data } = await restaurentAxios.get(
           `/getResProfile?id=${restId}`
         );
-        console.log(data, "restoProfile datas");
-
         if (data) {
           setRestData(data);
         }
@@ -95,10 +86,7 @@ function Menu() {
       .get(`/getRestaurentProduct?id=${restId}`)
       .then((response) => {
         setProduct(response.data.productData);
-        console.log(response.data.productData, "restoProducts");
 
-        // const newSize = response.data.size;
-        // setSize(newSize);
       })
       .catch((error) => {
         toast.error(error.response?.data?.message, {
@@ -110,8 +98,6 @@ function Menu() {
 
   const categoryData = async () => {
     const { data } = await restaurentAxios.get(`/getCategory?id=${restId}`);
-    console.log(data.categoryData, "found category data");
-
     if (data) {
       setCategories(data.categoryData);
     } else {
@@ -170,8 +156,6 @@ function Menu() {
         });
         return { ...variant, variants: filteredVariants };
       });
-      console.log(pricedProd,'selected product');
-
       togglePriceDropdown();
       setFilterdProducts(pricedProd);
     } else {

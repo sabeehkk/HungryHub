@@ -12,9 +12,9 @@ const Checkout = (initPayment) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cartData, setCartData] = useState();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
-
   const users = useSelector((state: any) => state.userAuth);
 
+  
   const handleSelectChange = (index) => {
     setSelectedAddressIndex(index);
   };
