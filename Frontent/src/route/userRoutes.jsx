@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Signup from "../Pages/User/UserRegister";
 import Login from "../Pages/User/login";
-// import Home from '../Components/User/HomePage'
 import IsLogout from "../middleware/user/isLogout" ;
 // import Navbar from '../Components/navbar'
 import { ToastContainer, toast } from "react-toastify";

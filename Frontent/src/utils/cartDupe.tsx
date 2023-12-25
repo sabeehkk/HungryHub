@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-
 import { userAxios } from "../axios/axios";
+import { ErrorMessage } from "./util";
 
 function Cart() {
   const navigate = useNavigate();
@@ -18,9 +18,7 @@ function Cart() {
   const [isLoading, setIsLoading] = useState(true);
 
   const isInProductListing = true;
-
   const { user } = useSelector((state: any) => state.userAuth);
-
   useEffect(() => {
     userAxios.get(`/getcart?id=${user._id}`).then((response) => {
       const items = response.data?.cartData?.items;
@@ -37,14 +35,10 @@ function Cart() {
       variant,
     })
       .then((response) => {
-        // setChange(!is_chage);
         setChange(prevState => !prevState);
       })
       .catch((error) => {
-        toast.error(error.response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 3000,
-        });
+        ErrorMessage(error.response.data.message)
       });
   };
 
