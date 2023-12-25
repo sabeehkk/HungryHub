@@ -14,25 +14,21 @@ function EmployeeLogin() {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log("formdata", email, password);
     if (email === "" || password === "") {
       ErrorMessage("Please fill in all fields");
       return;
     }
     try {
       await employeeAxios.post(`/login`, { email, password }).then((res) => {
-        console.log(res.data.token,'token response in login');
         localStorage.setItem("employeeToken", res.data.token);
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${res.data.token}`;
         dispatch(employeeLoggedIn(res.data.employeeData));
-        console.log('before going home');
-        navigate("/employee/home")
+        navigate("/employee/home");
         SuccessMessage(res.data.message);
       });
     } catch (error) {
-      console.log(error.message);
       ErrorMessage(error.message);
     }
   };
@@ -53,7 +49,6 @@ function EmployeeLogin() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // required
             />
           </div>
           <div className="mb-4">
@@ -68,7 +63,6 @@ function EmployeeLogin() {
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // required
             />
           </div>
           <div className="text-center">
@@ -79,7 +73,6 @@ function EmployeeLogin() {
               Login
             </button>
             <div className="text-sm md:flex md:justify-between mt-2">
-              
               <Link
                 to="/employee/signup"
                 className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"
