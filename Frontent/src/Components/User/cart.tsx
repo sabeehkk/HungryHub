@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 import { toast } from "react-toastify";
-
-// import Button from "../../assets/Button";
-// import UserAxios from "../../Axios/UserAxios";
 import { userAxios } from "../../axios/axios";
-// import Loader from "../../assets/Loader";
+import { SuccessMessage, SwalAlert,ErrorMessage } from "../../utils/util";
 
 function Cart() {
   const navigate = useNavigate();
@@ -49,13 +46,7 @@ function Cart() {
   };
 
   const cancelCartItem = async (id, variant) => {
-    const result = await Swal.fire({
-      title: "Do you really want to delete this product?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "No, cancel",
-    });
+    const result = await SwalAlert()
     if (result.isConfirmed) {
         userAxios.patch("/cancelcartitem", {
         itemId: id,
@@ -63,10 +54,7 @@ function Cart() {
         variant,
       }).then((response) => {
         setChange(!is_chage);
-        toast.success(response.data.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
+        SuccessMessage(response.data.message)
       });
     }
   };
@@ -82,10 +70,7 @@ function Cart() {
       });
     } else {
       console.log("error");
-      toast.error("Your cart is empty", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-      });
+      ErrorMessage('Your cart is empty')
     }
   };
 
@@ -120,7 +105,6 @@ function Cart() {
                   </th>
                 </tr>
               </thead>
-               
               <tbody className="bg-white divide-y divide-gray-200 border">
                 {cartItem?.map((item) => (
                   <tr key={item._id}>
@@ -175,7 +159,6 @@ function Cart() {
                       {parseFloat(item.price).toFixed(2)}
                     </td>
                     <td className="px-6 py-2 whitespace-nowrap">
-                      {/* {item.offer}% */}
                     </td>
                     <td className="px-6 py-2 whitespace-nowrap">
                       {parseFloat(item?.price).toFixed(2)}
@@ -205,7 +188,6 @@ function Cart() {
                   </td>
                 </tr>
               </tbody>
-              
             </table>
           </div>
           <div className="">
@@ -258,5 +240,4 @@ function Cart() {
     </div>
   );
 }
-
 export default Cart;

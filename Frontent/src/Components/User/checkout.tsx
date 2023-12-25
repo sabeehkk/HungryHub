@@ -1,22 +1,19 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { userAxios } from "../../axios/axios";
 import AddressModal from "../../assets/addressModal";
 import { makePayment } from "../../api/userApi";
+import { ErrorMessage, SuccessMessage } from "../../utils/util";
 
 const Checkout = (initPayment) => {
-  //   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const [payment, setPayment] = useState("COD");
   const [is_change, set_change] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [cartData, setCartData] = useState();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
-  console.log(cartData,'cartDataaasssssssssssssss');
-  
+
   const users = useSelector((state: any) => state.userAuth);
-  // console.log(cartData.items[0].productId.images,'cartDatas in checkout page');
 
   const handleSelectChange = (index) => {
     setSelectedAddressIndex(index);
@@ -40,75 +37,52 @@ const Checkout = (initPayment) => {
   const user = useSelector((state) => state.userAuth);
   useEffect(() => {
     userAxios.get(`/getUserData?id=${user.user._id}`).then((response) => {
-      //   setUserData(response);
       setAddress(response?.data?.user?.Address);
     });
   }, [is_change]);
 
   useEffect(() => {
-
     userAxios.get(`/getCart?id=${user.user._id}`).then((response) => {
       const items = response.data;
       console.log(items, "items in checkout page");
       setCartData(response.data.cartData);
     });
+  }, [is_change]);
 
-  },[is_change]);
   const handleSaveAddress = (userId) => {
-     let result = userId;
-     console.log(result, "insid savee adrres");
+    let result = userId;
     if (
       newAddress.street.trim().length === 0 ||
       newAddress.city.trim().length === 0 ||
       newAddress.state.trim().length === 0 ||
       newAddress.postalCode.trim().length === 0
     ) {
-      toast.error("Please fill all field", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
-       });
+      ErrorMessage("Please fill all field");
     } else {
       userAxios
         .patch("/addAddress", { id: userId, address: newAddress })
         .then((response) => {
           if (response) {
             set_change(!is_change);
-            toast.success(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
-            });
+            SuccessMessage(response.data.message);
           } else {
-            toast.error(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
-            });
+            ErrorMessage(response.data.message);
           }
         })
         .catch((error) => {
-          console.log(error);
-          toast.error(error.response.data.message, {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 3000,
-          });
-       });
+          ErrorMessage(error.response.data.message);
+        });
     }
     setIsModalOpen(false);
-   }
-  //   const handleRadioChange = (index) => {
-  //     setSelectedAddressIndex(index);
-  //   };
-  const handlePaymentRadio = (payMethod) => {
-    setPayment(payMethod);
-    console.log(payMethod);
   };
 
-  const placeOrder =async (payment) => {
+  const handlePaymentRadio = (payMethod) => {
+    setPayment(payMethod);
+  };
+  const placeOrder = async (payment) => {
     if (selectedAddressIndex == null) {
-      toast.error("Please select address", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
-      });
-    }else if(payment==='COD'||payment==='Wallet') {
+      ErrorMessage("Please select address");
+    } else if (payment === "COD" || payment === "Wallet") {
       userAxios
         .post("/order", {
           payment,
@@ -117,25 +91,21 @@ const Checkout = (initPayment) => {
         })
         .then((response) => {
           if (response.data.data) {
-            console.log(response.data,'inside ordering frontend');
             initPayment(response.data.data);
           } else {
-            toast.success(response.data.message, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
+            SuccessMessage(response.data.message);
             navigate("/OrderSuccess");
           }
         })
         .catch((err) => {
-          toast.error(err.response?.data?.message, {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 1500,
-          });
+          ErrorMessage(err.response?.data?.message);
         });
-    }else if(payment==='Online'){
-      console.log('this is online');
-      const url = await makePayment({payment, addressIndex: selectedAddressIndex,cartData});
+    } else if (payment === "Online") {
+      const url = await makePayment({
+        payment,
+        addressIndex: selectedAddressIndex,
+        cartData,
+      });
       if (url) {
         window.location.href = url;
         return;
@@ -147,9 +117,7 @@ const Checkout = (initPayment) => {
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <div className="px-4 pt-8">
           <p className="text-xl font-medium">Order Summary</p>
-
           <div className="mb-4 space-y-3">
-            {/* Check if cartData.items exists before mapping over it */}
             {cartData?.items && cartData.items.length > 0 && (
               <div className="space-y-3">
                 {cartData.items.map((item, index) => (
@@ -223,7 +191,6 @@ const Checkout = (initPayment) => {
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
           <div className="">
             <div className="relative"></div>
-
             <label
               for="billing-address"
               class="mt-4 mb-2 block text-sm font-medium"
@@ -231,18 +198,34 @@ const Checkout = (initPayment) => {
               Billing Address
             </label>
             <div className="w-full lg:p-10 leading-loose">
-              {/* <label className="block text-sm font-medium text-gray-700 underline">
+              <label className="block text-sm font-medium text-gray-700 underline">
                 Select Address:
               </label>
               <div className="relative">
                 <select
-                  value={selectedAddressIndex}
+                  value={
+                    address.length === 1
+                      ? 0
+                      : selectedAddressIndex !== -1
+                      ? selectedAddressIndex
+                      : ""
+                  }
                   onChange={(e) => handleSelectChange(e.target.value)}
-                  className=" block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 text-left" // Set text-left here
-                  style={{ direction: "rtl", textAlign: "left" }} // Set direction and textAlign
+                  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 text-left"
+                  style={{ direction: "rtl", textAlign: "left" }}
                 >
-                    <option value="" disabled>Select an address</option>
-
+                  {address.length === 1 && (
+                    <option value={0} selected>
+                      {`${users?.user?.name || ""} ,${address[0]?.street}, ${
+                        address[0]?.city
+                      }, ${address[0]?.state}, ${address[0]?.postalCode}`}
+                    </option>
+                  )}
+                  {address.length > 1 && (
+                    <option value="" disabled hidden>
+                      Select an address
+                    </option>
+                  )}
                   {address?.map((elem, index) => (
                     <option
                       style={{ textAlign: "left" }}
@@ -254,42 +237,8 @@ const Checkout = (initPayment) => {
                       }, ${elem?.state}, ${elem?.postalCode}`}
                     </option>
                   ))}
-                </select> */}
-                <label className="block text-sm font-medium text-gray-700 underline">
-  Select Address:
-</label>
-<div className="relative">
-<select
-  value={address.length === 1 ? 0 : selectedAddressIndex !== -1 ? selectedAddressIndex : ""}
-  onChange={(e) => handleSelectChange(e.target.value)}
-  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300 text-left"
-  style={{ direction: "rtl", textAlign: "left" }}
->
-  {/* Initial option or placeholder */}
-  {address.length === 1 && (
-    <option value={0} selected>
-      {`${users?.user?.name || ""} ,${address[0]?.street}, ${address[0]?.city}, ${address[0]?.state}, ${address[0]?.postalCode}`}
-    </option>
-  )}
-
-  {address.length > 1 && (
-    <option value="" disabled hidden>Select an address</option>
-  )}
-
-  {address?.map((elem, index) => (
-    <option
-      style={{ textAlign: "left" }}
-      key={index}
-      value={index}
-    >
-      {`${users?.user?.name || ""} ,${elem?.street}, ${elem?.city}, ${elem?.state}, ${elem?.postalCode}`}
-    </option>
-  ))}
-</select>
-
-
+                </select>
                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  {/* You can add an arrow or any other icon here */}
                   <svg
                     className="fill-current h-4 w-4"
                     xmlns="http://www.w3.org/2000/svg"
@@ -300,7 +249,6 @@ const Checkout = (initPayment) => {
                 </div>
               </div>
             </div>
-
             <div className="lg:w-2/3 lg:ml-2 h-screan">
               <button
                 style={{
@@ -314,7 +262,6 @@ const Checkout = (initPayment) => {
               >
                 Add Address
               </button>
-
               <AddressModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
@@ -330,7 +277,6 @@ const Checkout = (initPayment) => {
                 <p className="font-semibold text-gray-900">
                   ₹ {cartData?.total}
                 </p>
-              
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Charges</p>
@@ -350,7 +296,6 @@ const Checkout = (initPayment) => {
               </p>
             </div>
           </div>
-
           <button
             className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
             onClick={() => placeOrder(payment)}
