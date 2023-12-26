@@ -26,9 +26,9 @@ import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
 import Chat from '../Components/chat/chat.tsx'
-import MenuDummy from '../utils/checkoutDummy.tsx';
 import Userchat from '../Components/User/userChat.tsx'
-import Dummy from '../utils/dummy.tsx'
+import Dummy from '../utils/dummy.tsx';
+import ForgotPassword from '../Pages/User/forgotPassword.tsx';
 const UserAppLayout = () => {
   return (
     <>
@@ -228,15 +228,6 @@ const UserRoute = {
       )
     },
     {
-      path:"/menuss/:restId",
-      element:(
-         <>
-          <UserNavbar />
-         <MenuDummy/>
-         </>
-      )
-    },
-    {
       path:"/userChat",  
       element:(
          <>
@@ -245,12 +236,20 @@ const UserRoute = {
          </>
       )
     },
+    { 
+      path:'/forgot-password',
+      element: (
+        <>
+        <ForgotPassword/>
+        </>
+        )
+      },
     {
       path:"/dummy",
       element:(
          <>
           <UserNavbar />
-         <Dummy/>
+          <Dummy/>
          </>
       )
     },

@@ -52,7 +52,6 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your email"
             value={email}
             onChange={(e)=>setEmail(e.target.value)}
-            // required
           />
         </div>
         <div className="mb-4">
@@ -67,7 +66,6 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             placeholder="Enter your password"
             value={password}
             onChange={(e)=>setPassword(e.target.value)}
-            // required
           />
         </div>
         <div className="text-center">
@@ -78,7 +76,12 @@ const handleSubmit = async (e: SyntheticEvent)=>{
             Login
           </button>
           <div className="text-sm md:flex md:justify-between mt-2">
-              
+          <Link
+                to="/restaurent/forgot-password"
+                className=" btn font-medium text-black-600 hover:text-black-900 flex justify-center"
+              >
+                Forgot Your Password
+              </Link>
               <Link
                 to="/restaurent/signup"
                 className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"

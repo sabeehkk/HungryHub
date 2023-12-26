@@ -16,7 +16,9 @@ import IsLogout from "../middleware/restaurent/isLogout.tsx" ;
 import IsLogged from "../middleware/restaurent/isLogged";
 import OrderManagement from '../Components/Restaurant/orderManagement.tsx';
 import OrderMoreViewPage from '../Components/Restaurant/orderMoreViewPage.tsx'
-import RestaurentProfile from '../Components/Restaurant/restaurentProfile.tsx'
+import RestaurentProfile from '../Components/Restaurant/restaurentProfile.tsx';
+import ForgotPassword from '../Pages/Restaurent/forgotPassword.tsx';
+
 import Dummy from '../utils/dummy.tsx'
 
 const RestaurantAppLayout = () => {
@@ -146,6 +148,14 @@ const RestaurentRoute = {
             </>
           )
         },
+        { 
+          path:'/forgot-password',
+          element: (
+            <>
+            <ForgotPassword/>
+            </>
+            )
+          },
         {
           path:"dummy",
           element:(
@@ -157,13 +167,3 @@ const RestaurentRoute = {
   ],
 };
 export default RestaurentRoute;
-
-
-     // {
-        //   path:"addCategory",
-        //   element :(
-        //     <>
-        //     <Category/>
-        //     </>
-        //   )
-        // },

@@ -6,6 +6,9 @@ import {
   googleLogin,
   verifySignup,
   verifyOtp,
+  forgotPassword,
+  otpVerification,
+  resetPassword
 } from "../controller/user/AuthController.js";
 
 import {
@@ -71,6 +74,9 @@ router.patch('/rating',doRating)
 router.patch('/review',doReview)
 router.post('/saveChat',saveChat)
 router.get('/getchat',getChat)
+router.post('/forgot-password',forgotPassword)
+router.post('/forgot-password/otp',otpVerification)
+router.post('/forgot-password/reset-password',resetPassword)
 
 
 

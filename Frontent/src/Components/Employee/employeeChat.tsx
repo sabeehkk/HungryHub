@@ -20,7 +20,6 @@ function EmployeeChat() {
     socket.on("receiveMessage", () => {
       const id = location.state;
       userAxios.get(`/getchat?id=${id}`).then((res) => {
-        console.log(res.data, "incoming datas");
         setChatPerson(res.data.findChat[0].chat);
       });
     });
@@ -100,7 +99,7 @@ function EmployeeChat() {
         </div>
         <div className="hidden lg:col-span-2 lg:block">
           <div className="w-full">
-            <div className="relative flex items-center p-1 border-b border-gray-300">
+            <div className="relative bg-gray-100 flex items-center p-3 border-b border-gray-300">
               <img
                 className="object-cover w-10 h-10 rounded-full"
                 src="https://cdn.pixabay.com/photo/2018/09/12/12/14/man-3672010__340.jpg"
@@ -117,13 +116,13 @@ function EmployeeChat() {
                   <>
                     {val.user == "" ? (
                       <li key={index} className="flex justify-end">
-                        <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                        <div className="relative bg-blue-200 max-w-xl px-4 py-2 text-gray-700 rounded shadow">
                           <span className="block">{val.employee}</span>
                         </div>
                       </li>
                     ) : (
                       <li key={index} className="flex justify-start">
-                        <div className="relative max-w-xl px-4 py-2 text-gray-700 rounded shadow">
+                        <div className="relative bg-blue-200 max-w-xl px-4 py-2 text-gray-700 rounded shadow">
                           <span className="block">{val.user}</span>
                         </div>
                       </li>

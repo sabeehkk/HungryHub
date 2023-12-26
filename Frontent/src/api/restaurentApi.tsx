@@ -31,7 +31,6 @@ export const uploadFoodImage = async (img) => {
     await restaurentAxios.post(`/edit-car/${foodId}`, foodDetails);
   };
 
-
   export const updateRestoProfileImage = async (userId, url) => {
     await restaurentAxios.patch(`/profile/${userId}/edit/profilePhoto`, { url: url });
     return true;
@@ -57,3 +56,25 @@ export const uploadFoodImage = async (img) => {
       return ErrorMessage("Failed to upload the image");
     }
   };
+
+  export const forgotPassword = async (email) => {
+    const response = await restaurentAxios.post("/forgot-password", { email });
+    return response.data?.message;
+  };
+  
+  export const forgotPasswordOtpVerification = async (otp) => {
+    const response = await restaurentAxios.post("/forgot-password/otp", { otp });
+    return response.data?.message;
+  };
+  
+  export const resetPassword = async (email, password) => {
+    try {
+      const response = await restaurentAxios.post("/forgot-password/reset-password", {
+        email,
+        password,
+      });
+      return response.data?.message;
+    } catch (error) {}
+  };
+  
+  

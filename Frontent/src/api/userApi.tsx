@@ -92,3 +92,23 @@ export const makePayment = async ({payment, addressIndex, cartData}) => {
   console.log(response.data,'response data in order'); 
   return response?.data?.url;
 };
+
+export const forgotPassword = async (email) => {
+  const response = await userAxios.post("/forgot-password", { email });
+  return response.data?.message;
+};
+
+export const forgotPasswordOtpVerification = async (otp) => {
+  const response = await userAxios.post("/forgot-password/otp", { otp });
+  return response.data?.message;
+};
+
+export const resetPassword = async (email, password) => {
+  try {
+    const response = await userAxios.post("/forgot-password/reset-password", {
+      email,
+      password,
+    });
+    return response.data?.message;
+  } catch (error) {}
+};
