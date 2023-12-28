@@ -25,12 +25,9 @@ import SuccessPage from '../Components/User/OrderSuccess.tsx';
 import OrderFail from '../payment/paymentFiail.tsx'
 import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
-import Chat from '../Components/chat/chat.tsx'
 import Userchat from '../Components/User/userChat.tsx'
 import ForgotPassword from '../Pages/User/forgotPassword.tsx';
-import Search from '../Components/User/search.tsx'
 const UserAppLayout = () => {
-  
   return (
     <>
       <UserNavbar/>
@@ -39,7 +36,6 @@ const UserAppLayout = () => {
   );
 };
 const UserAuthAppLayout = () => {
-  
   return (
     <>
       <Outlet />
@@ -48,8 +44,6 @@ const UserAuthAppLayout = () => {
     </>
   );
 };
-
-
 const UserRoute = {
   path: "/",
   // errorElement: <ErrorPage path={"/"} />,
@@ -220,15 +214,6 @@ const UserRoute = {
       ),
     },
     {
-      path:"/chat",
-      element:(
-        <>
-        <UserNavbar/>
-        <Chat role={"user"}/>
-        </>
-      )
-    },
-    {
       path:"/userChat",  
       element:(
          <>
@@ -245,15 +230,6 @@ const UserRoute = {
         </>
         )
       },
-
-    // {
-    //   path: "/search",
-    //   element: (
-    //     <>
-    //     <Search />
-    //     </>
-    //   ),
-    // }
   ],
 };
 

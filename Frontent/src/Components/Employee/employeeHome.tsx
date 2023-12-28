@@ -9,7 +9,7 @@ import Chart from '../../assets/chart';
 
 const RestaurantDashboard = () => {
   const [dashBordDatas,setDashBoardDatas] = useState()
-  const [orderCount,setOrderCount]= useState()
+  const [orderCount,setOrderCount]= useState([])
 const employee = useSelector((state) => state.employeeAuth);
 
   useEffect(()=>{
@@ -18,20 +18,22 @@ const employee = useSelector((state) => state.employeeAuth);
         }else{
      employeeAxios.get(`/dashboardData?id=${employee.employee?._id}`).then((response)=>{
       setDashBoardDatas(response.data)
-      console.log(response.data,'dashboardData');
      })
     }
   },[])
 
-  useEffect(()=>{
+ 
+  useEffect(() => {
     employeeAxios
-    .get(`/getordersempl/?id=${employee?.employee?._id}`)
-    .then((response) => {
-      setOrderCount(response.data);
-      console.log(response.data,'orderCount');
-      
-    });
-  },[])
+      .get(`/getordersempl/?id=${employee?.employee?._id}`)
+      .then((response) => {
+        const employeeOrders = response.data.ordersDetails.filter(
+          (order) => order.employeeId=== employee.employee._id
+        );
+        setOrderCount(employeeOrders.length)
+      });
+  }, [employee]);
+ 
   return (
     <div className="container mx-auto p-4">
       <div className="w-full p-5 md:flex bg-off-White shadow-md">
@@ -63,6 +65,8 @@ const employee = useSelector((state) => state.employeeAuth);
             <div className=''>
             <h3 className="text-2xl font-semibold text-off-White text-center">
               {/* {dashBordDatas?.totalOrders[0]?.totalOrders} */}
+              {orderCount}
+           
             </h3>
             <h3 className="font-semibold text-off-White text-center opacity-50">
              Total Orders
@@ -81,9 +85,9 @@ const employee = useSelector((state) => state.employeeAuth);
             <h3 className="text-2xl font-semibold text-off-White text-center">
               {/* {dashBordDatas?.totalUsers[0]?.totalUsers} */}
             </h3>
-            <h3 className="font-semibold text-off-White text-center opacity-50">
+            {/* <h3 className="font-semibold text-off-White text-center opacity-50">
              Total Users
-            </h3>
+            </h3> */}
             </div>
           </div>
         </div>

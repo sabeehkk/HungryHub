@@ -26,12 +26,10 @@ const UserNavbar = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(`${RESTAURENT_API}/productList`);
-      console.log(response); 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log("Fetched data:", data);
       setFoods(data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
