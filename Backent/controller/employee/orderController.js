@@ -87,3 +87,16 @@ export const saveChat = async (req, res) => {
     res.status(500).json({ success: false, error: "Internal Server Error" });
   }
 };
+
+export const dashboardData = async(req,res)=>{
+    try {
+      console.log(req.query,'dashboard');
+      const employeeId = new mongoose.Types.ObjectId(req.query.id);
+      const employee = await EmployeeModel.findById({_id:employeeId})
+      const totalEarnings = employee.ernings
+      console.log(totalEarnings,'totalEarnings');
+       await res.json({ success: true, totalEarnings: totalEarnings})
+    } catch (error) {
+      res.status(500).json({ success: false, error: "Internal Server Error"})
+    }
+}

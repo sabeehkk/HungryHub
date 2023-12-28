@@ -7,6 +7,8 @@ import { restaurentAxios } from "../../axios/axios";
 import { userAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
 import PAgination from "../../Components/pagination";
+import UserNavbar from "./userNavbar.js";
+
 
 function Menu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -182,6 +184,9 @@ function Menu() {
   
 
   return (
+    <>
+    <UserNavbar onSearchTermChange={setSearchTerm} />
+
     <div className="bg-gray-100 container mx-auto px-5 my-element ">
       <ProductDetailModal isOpen={isModalOpen} close={closeModal} item={item} />
       <div className="sm:px-24 px-3 md:px-32 lg:px-44 pt-3">
@@ -459,6 +464,8 @@ function Menu() {
         />
       </div>
     </div>
+    </>
+
   );
 }
 

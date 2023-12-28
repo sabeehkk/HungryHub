@@ -10,6 +10,7 @@ import Islogged from "../middleware/employee/isLogged.tsx";
 import Logout from "../Pages/Employee/logout.tsx";
 import DeliveryHistory from "../Components/Employee/deliveryHistory.tsx";
 import EmployeeChat from "../Components/Employee/employeeChat.tsx";
+import ForgotPassword from '../Pages/Restaurent/forgotPassword.tsx';
 
 const EmpoloyeeAppLayout = () => {
   return (
@@ -59,6 +60,14 @@ const EmployeeRoutes = {
         </>
       ),
     },
+    { 
+      path:'forgot-password',
+      element: (
+        <>
+        <ForgotPassword/>
+        </>
+        )
+      },
     {
       path: "/employee",
       element: <EmployeeAuthAppLayout />,
@@ -90,6 +99,7 @@ const EmployeeRoutes = {
             </>
           ),
         },
+        
       ],
     },
   ],

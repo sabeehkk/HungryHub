@@ -4,6 +4,7 @@ import ProductModel from '../../models/product.js';
 import UserModel from '../../models/user.js';
 import RestaurentModel from '../../models/restaurent.js';
 import ChatModel from '../../models/chat.js';
+import EmployyeModel from '../../models/employee.js'
 
 //viewOrders--------------------------------
 export const viewOrders = async (req,res)=>{
@@ -42,8 +43,11 @@ export const viewOrders = async (req,res)=>{
    }
 // updateDeliveryStatus--------------------------
 export const updateDeliveryStatus = async (req,res)=>{
+  console.log(req.body,'inside delivery status');
     try {
-        const { prodId, orderId, orderStatus } = req.body;
+        const { prodId, orderId, orderStatus,employeeId } = req.body;
+    // const restId = new mongoose.Types.ObjectId(req.query.id);
+
         let item_orderStatus;
         if (orderStatus === "Pending") {
           item_orderStatus = "Pending";
@@ -60,11 +64,24 @@ export const updateDeliveryStatus = async (req,res)=>{
           { _id:orderId, "item._id": prodId },
           {
             $set: {
-              "item.$.orderStatus": item_orderStatus,
+              "item.$.orderStatus":item_orderStatus,
             },
           }
         );
-        const order = await OrderModel.findOne({ _id:orderId });
+        if(item_orderStatus==='Delivered') {
+          const employeeEarnings = await EmployyeModel.findOneAndUpdate(
+            { _id: employeeId },
+            {
+              $inc: { ernings: orderStatus === "Delivered" ? 250 : 0 },
+            },
+            { new: true }
+          );
+        console.log(employeeEarnings,'employeeEarnings');
+
+        }
+     
+        
+            const order = await OrderModel.findOne({ _id:orderId });
         const allItemsDelivered = order.item.every(
           (item) => item.orderStatus === "Delivered"
         );
@@ -220,6 +237,7 @@ export const dashboardData = async(req,res)=>{
 }
 // splitOrder--------------------------
 export const splitOrder = async(req,res)=>{
+  console.log(req.body,'selected employee');
     try {
        const { orderId, employeeId } = req.body;
        const order = await OrderModel.findById(orderId);

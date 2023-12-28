@@ -1,5 +1,5 @@
 import React from "react";
-import Forgot from '../../Components/Restaurant/forgotPassword';
+import Forgot from '../../Components/Employee/forgotPassword';
 
 const ForgotPassword = () => {
   return (

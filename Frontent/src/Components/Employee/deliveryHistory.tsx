@@ -35,6 +35,7 @@ function DeliveryHistoryItem() {
           prodId: productId._id,
           orderId: orderId,
           orderStatus: orderStatus,
+          employeeId: employee.employee._id,
         })
         .then((response) => {
           setStatusUpdated(!is_statusUpdated);
@@ -46,7 +47,6 @@ function DeliveryHistoryItem() {
   const handleChat = (orderId: string) => {
     navigate(`/employee/employeeChat/?id=${orderId}`, { state: orderId });
   };
-
   return (
     <div>
       <h2 className="text-2xl font-bold mb-4">Delivery History</h2>

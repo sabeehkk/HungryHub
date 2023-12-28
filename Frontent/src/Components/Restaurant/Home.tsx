@@ -1,15 +1,16 @@
 import React, { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
-import { RiFileList3Fill } from 'react-icons/ri'
-import { FaShopify } from 'react-icons/fa'
-import { BiSolidUserAccount } from 'react-icons/bi'
+import { RiFileList3Fill } from 'react-icons/ri';
+import { FaShopify } from 'react-icons/fa';
+import { BiSolidUserAccount } from 'react-icons/bi';
 import { restaurentAxios } from '../../axios/axios';
-import PieChart from '../../assets/pieChart';
+import PieChart from '../../assets/pieChart'; 
 import Chart from '../../assets/chart';
 
 const RestaurantDashboard = () => {
   const [dashBordDatas,setDashBoardDatas] = useState()
 const restaurant = useSelector((state) => state.restaurentAuth);
+
 let result = restaurant.restaurent;
   const restId = result?._id;
 
@@ -21,6 +22,7 @@ let result = restaurant.restaurent;
       setDashBoardDatas(response.data)
       console.log(response.data,'dashboardData');
      })
+     
     }
   },[])
   return (
@@ -82,10 +84,6 @@ let result = restaurant.restaurent;
         <div className=''>
         <Chart totalSaleData={dashBordDatas?.totalSale}/>
         </div>
-        {/* <div className='md:w-1/3 mr-3'>
-        <PieChart/>
-        </div> */}
-
       </div>
     </div>
   );

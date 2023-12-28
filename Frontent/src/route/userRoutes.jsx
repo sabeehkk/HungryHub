@@ -27,17 +27,19 @@ import OrderHistory from '../Components/User/orderHistory.tsx'
 import OrderItemsPage from '../Components/User/orderItemsPage.tsx';
 import Chat from '../Components/chat/chat.tsx'
 import Userchat from '../Components/User/userChat.tsx'
-import Dummy from '../utils/dummy.tsx';
 import ForgotPassword from '../Pages/User/forgotPassword.tsx';
+import Search from '../Components/User/search.tsx'
 const UserAppLayout = () => {
+  
   return (
     <>
-      {/* <Navbar/> */}
+      <UserNavbar/>
       <Outlet />
     </>
   );
 };
 const UserAuthAppLayout = () => {
+  
   return (
     <>
       <Outlet />
@@ -46,6 +48,7 @@ const UserAuthAppLayout = () => {
     </>
   );
 };
+
 
 const UserRoute = {
   path: "/",
@@ -123,7 +126,7 @@ const UserRoute = {
           path: "/",
           element: (
             <>
-              <UserNavbar />
+              {/* <UserNavbar /> */}
               <Hero />
               <HeadlineCards />
               <Food />
@@ -136,8 +139,7 @@ const UserRoute = {
       path:"/filterShops",
       element:(
         <>
-              <UserNavbar />
-
+        <UserNavbar />
         <FilteredRestaurent/>
         </>
       )
@@ -146,7 +148,7 @@ const UserRoute = {
       path:"/menu/:restId",
       element:(
         <>
-          <UserNavbar />
+          {/* <UserNavbar /> */}
         <MenuPage/>
         </>
       )
@@ -156,7 +158,6 @@ const UserRoute = {
       element:(
         <>
           <IsLogged />
-
         <UserNavbar/>
         <CartPage/>
         </>
@@ -231,7 +232,7 @@ const UserRoute = {
       path:"/userChat",  
       element:(
          <>
-         <UserNavbar />
+         <UserNavbar  />
          <Userchat/>
          </>
       )
@@ -244,15 +245,15 @@ const UserRoute = {
         </>
         )
       },
-    {
-      path:"/dummy",
-      element:(
-         <>
-          <UserNavbar />
-          <Dummy/>
-         </>
-      )
-    },
+
+    // {
+    //   path: "/search",
+    //   element: (
+    //     <>
+    //     <Search />
+    //     </>
+    //   ),
+    // }
   ],
 };
 

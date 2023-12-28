@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ErrorMessage, SuccessMessage, validateEmail } from "../utils/util";
 import { useNavigate } from "react-router-dom";
 
+
 const ForgotPasswordFrame = ({ forgotPassword, forgotPasswordOtpVerification, resetPassword, role}) => {
 
   const [email, setEmail] = useState("");
@@ -52,12 +53,25 @@ const ForgotPasswordFrame = ({ forgotPassword, forgotPasswordOtpVerification, re
       setPassword("");
       setOtpPart(true);
       setPasswordSide(false);
-      if(role !=='user'){
-        navigate("/restaurent/login");
-      }else{
-        navigate("/login");
-      }
+    //   if(role !=='user'){
+    //     navigate("/restaurent/login");
+    //   }else{
+    //     navigate("/login");
+    //   }
+    // }
+
+    if (role === 'user') {
+      navigate("/login");
+    } else if (role === 'employee') {
+      console.log(role,'role inside employee');
+      
+      navigate("/employee/login");
+    } else if (role === 'restaurent') {
+      navigate("/restaurent/login");
+    } else {
+      console.error("Unknown role:", role);
     }
+  }
   };
 
   return (

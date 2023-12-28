@@ -7,8 +7,7 @@ import BillModal from "../../assets/billModa";
 import PAgination from "../../Components/pagination";
 import { USER_API } from "../../Constants/API";
 import { useNavigate } from "react-router-dom";
-import { ErrorMessage, SuccessMessage } from "../../utils/util";
-import { SwalAlert } from "../../utils/util";
+import { ErrorMessage, SuccessMessage,SwalAlert } from "../../utils/util";
 
 const baseUrl = USER_API;
 
@@ -25,7 +24,6 @@ function OrdersData() {
   let grandTotal = 0;
 
   const restaurant = useSelector((state) => state.restaurentAuth);
-  console.log(restaurant, "restaruent datass in management");
 
   useEffect(() => {
     if (!restaurant.restaurent || !restaurant.restaurent._id) {
@@ -34,16 +32,12 @@ function OrdersData() {
       restaurentAxios
         .get(`/viewOrders?id=${restaurant.restaurent._id}`)
         .then((response) => {
-          console.log(response.data, "ordering datas in management");
 
           const items = response.data.orders;
           if (response.data.orders.length) {
             setOrderItem(items);
           } else {
-            toast.error("No orders", {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 1500,
-            });
+            ErrorMessage('No Orders')
           }
         })
         .catch((err) => {

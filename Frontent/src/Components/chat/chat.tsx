@@ -9,7 +9,6 @@ import Loading from "../loading";
 const VITE_USER_BACKEND_URLL = import.meta.env.VITE_USER_BACKEND_URLL;
 const socket = io(VITE_USER_BACKEND_URLL);
 console.log(socket,'socket datass');
-
 const Chat = ({ role }) => {
   console.log(role,'inside  chat rol')
   const { employee } = useSelector((state: any) => state?.employeeAuth);
@@ -25,9 +24,6 @@ const Chat = ({ role }) => {
   const [recieveMessage, setRecieveMessage] = useState(null);
   const [load, setLoad] = useState(true);
 
-  console.log(currentUserId,'curentuserid');
-  console.log(chats,'chatsssssssssss');
-  console.log(recieveMessage,'recived message');
   const getChats = async (id) => {
     console.log('inside getChats in chatPAGE', id);
     // ++++++++++++++++++++++++++++++

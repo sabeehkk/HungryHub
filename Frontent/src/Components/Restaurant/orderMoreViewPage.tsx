@@ -21,6 +21,8 @@ function OrdersItems() {
   const [orderStatus,setOrderStatus] = useState()
 
   const [selectEmployee, setSelectEmployee] = useState()
+  console.log(selectEmployee,'selectEmployee');
+  
   const { id } = useParams()
   let total = 0;
   const restaurant = useSelector((state) => state.restaurentAuth);
@@ -46,11 +48,13 @@ function OrdersItems() {
       prodId, 
       orderId:orderItem._id ,
       orderStatus,
+      
      }  
     restaurentAxios.patch("/updateDeliveryStatus", {
       prodId, 
       orderId:orderItem._id,
       orderStatus,
+      selectEmployee
     }).then((response) => {
       setStatusUpdated(!is_statusUpdated);
     });
@@ -161,7 +165,7 @@ function OrdersItems() {
                       className="bg-blue-500 border-none text-white cursor-pointer p-1 rounded"
                       value={ele.orderStatus}
                       onChange={(e) =>
-                        updateDeliveryStatus(ele._id, e.target.value)
+                        updateDeliveryStatus(ele._id, e.target.value )
                       }
                       disabled={ele.orderStatus === "Delivered"}
                     >

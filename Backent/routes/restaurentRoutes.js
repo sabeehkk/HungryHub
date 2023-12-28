@@ -1,6 +1,13 @@
 import express from "express";
 
-import { signup, login ,updateRestoProfilePhoto} from "../controller/restaurent/AuthControlle.js";
+import {
+  signup,
+  login,
+  updateRestoProfilePhoto,
+  forgotPassword,
+  otpVerification,
+  resetPassword,
+} from "../controller/restaurent/AuthControlle.js";
 import {
   ProductList,
   addProduct,
@@ -22,9 +29,12 @@ import {
   viewOrders,
   updateDeliveryStatus,
   dashboardData,
-  splitOrder
+  splitOrder,
 } from "../controller/restaurent/orderManagement.js";
-import { getOrderItems,cancelOrder } from "../controller/user/orderController.js";
+import {
+  getOrderItems,
+  cancelOrder,
+} from "../controller/user/orderController.js";
 const router = express.Router();
 
 router.post("/register", signup);
@@ -47,14 +57,12 @@ router.get("/getRestaurents", getRestaurents);
 router.get("/viewOrders", viewOrders);
 router.get("/getOrderIterms", getOrderItems);
 router.patch("/updateDeliveryStatus", updateDeliveryStatus);
-router.patch("/cancelOrder",cancelOrder)
-router.get('/dashboardData',dashboardData);
-router.post('/splitOrder',splitOrder)
-
-router.patch(
-  "/profile/:userId/edit/profilePhoto",
-  updateRestoProfilePhoto
-);
-
+router.patch("/cancelOrder", cancelOrder);
+router.get("/dashboardData", dashboardData);
+router.post("/splitOrder", splitOrder);
+router.patch("/profile/:userId/edit/profilePhoto", updateRestoProfilePhoto);
+router.post("/forgot-password", forgotPassword);
+router.post("/forgot-password/otp", otpVerification);
+router.post("/forgot-password/reset-password", resetPassword);
 
 export default router;

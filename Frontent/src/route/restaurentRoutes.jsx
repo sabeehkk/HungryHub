@@ -71,6 +71,14 @@ const RestaurentRoute = {
         </>
       ),
     },
+    { 
+      path:'forgot-password',
+      element: (
+        <>
+        <ForgotPassword/>
+        </>
+        )
+      },
     {
       path: "/restaurent",
       element: <RestaurentAuthAppLayout />,
@@ -147,15 +155,7 @@ const RestaurentRoute = {
             <RestaurentProfile/>
             </>
           )
-        },
-        { 
-          path:'/forgot-password',
-          element: (
-            <>
-            <ForgotPassword/>
-            </>
-            )
-          },
+        },  
         {
           path:"dummy",
           element:(

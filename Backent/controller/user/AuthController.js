@@ -151,7 +151,8 @@ export const verifySignup = async (req, res) => {
 // verifyOtp----------------------------
 export const verifyOtp = async (req, res) => {
   try {
-    const { digitone, digitTwo, digitThree, digitFour, digitFive, digitSix } =req.body;
+    const { digitone, digitTwo, digitThree, digitFour, digitFive, digitSix } =
+      req.body;
     const formOtp = `${digitone}${digitTwo}${digitThree}${digitFour}${digitFive}${digitSix}`;
     if (formOtp != copyOtp) {
       return res.status(401).json({ message: "Otp is Not valid " });
@@ -164,8 +165,7 @@ export const verifyOtp = async (req, res) => {
   }
 };
 
-export const forgotPassword =async (req,res)=>{
-  console.log(req.body,'inside forgot password');
+export const forgotPassword = async (req, res) => {
   const { email } = req.body;
   try {
     const result = await userModel.findOne({ email: email });
@@ -173,7 +173,7 @@ export const forgotPassword =async (req,res)=>{
     if (!result) {
       return res.status(404).json({ message: "Email is not matched" });
     }
-    
+
     if (result.status === false) {
       return res.status(400).json({
         message:
@@ -213,7 +213,7 @@ export const forgotPassword =async (req,res)=>{
   }
 };
 
-export const otpVerification =async (req,res)=>{
+export const otpVerification = async (req, res) => {
   try {
     console.log(req.body);
     const { otp } = req.body;
@@ -226,15 +226,12 @@ export const otpVerification =async (req,res)=>{
     console.error(error);
     return res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};
 
 export const resetPassword = async (req, res) => {
   try {
-    console.log(req.body,'inside reset password');
     const { password, email } = req.body;
     const saltRounds = parseInt(process.env.SALTROUNDS);
-    console.log(saltRounds,'salt rounds');
-
     if (!password || !email) {
       return res
         .status(400)

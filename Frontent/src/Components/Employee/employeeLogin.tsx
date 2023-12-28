@@ -73,6 +73,12 @@ function EmployeeLogin() {
               Login
             </button>
             <div className="text-sm md:flex md:justify-between mt-2">
+            <Link
+                to="/employee/forgot-password"
+                className=" btn font-medium text-black-600 hover:text-black-900 flex justify-center"
+              >
+                Forgot Your Password
+              </Link>
               <Link
                 to="/employee/signup"
                 className="btn font-medium text-black-600 hover:text-black-900 flex justify-center"
