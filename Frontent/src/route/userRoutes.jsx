@@ -46,7 +46,7 @@ const UserAuthAppLayout = () => {
 };
 const UserRoute = {
   path: "/",
-  // errorElement: <ErrorPage path={"/"} />,
+  errorElement: <ErrorPage path={"/"} />,
   element: <UserAuthAppLayout />,
   children: [
     {
@@ -120,7 +120,6 @@ const UserRoute = {
           path: "/",
           element: (
             <>
-              {/* <UserNavbar /> */}
               <Hero />
               <HeadlineCards />
               <Food />
@@ -142,7 +141,6 @@ const UserRoute = {
       path:"/menu/:restId",
       element:(
         <>
-          {/* <UserNavbar /> */}
         <MenuPage/>
         </>
       )

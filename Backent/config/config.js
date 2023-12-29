@@ -1,7 +1,7 @@
 import "dotenv/config";
 import mongoose from "mongoose";
 function dbConnect() {
-  const url = process.env.DATABASE;
+  const url = process.env.MONGOLABURL;
   mongoose
     .connect(url)
     .then(() => console.log("database connected"))

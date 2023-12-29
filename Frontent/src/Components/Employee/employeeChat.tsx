@@ -132,7 +132,7 @@ function EmployeeChat() {
               </ul>
             </div>
             <div className="flex items-center justify-between w-full p-3 border-t border-gray-300">
-              <button>
+              <button className="bg-blue-200 border-none">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-6 h-6 text-gray-500"
@@ -148,7 +148,7 @@ function EmployeeChat() {
                   />
                 </svg>
               </button>
-              <button>
+              <button className="bg-blue-200 border-none">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-5 h-5 text-gray-500"
@@ -172,7 +172,8 @@ function EmployeeChat() {
                 name="message"
                 required
               />
-              <button onClick={handleMessage} type="submit">
+              <button className="bg-blue-200 border-none"
+               onClick={handleMessage} type="submit">
                 <svg
                   className="w-5 h-5 text-gray-500 origin-center transform rotate-90"
                   xmlns="http://www.w3.org/2000/svg"
