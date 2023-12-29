@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/restaurent/authSlice";
@@ -11,7 +12,7 @@ import Loading from "../../Components/loading";
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 const RestaurentProfile = () => {
   const restaurant = useSelector((state: any) => state.restaurentAuth);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<any>(null);
   const [isDropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [load, setLoad] = useState<boolean>(true);
   const fileInputRef = useRef(null);
@@ -31,7 +32,6 @@ const RestaurentProfile = () => {
   };
   useEffect(() => {
     if (selectedImage) {
-      console.log(selectedImage, "selected imageee");
       const data = { profilePicture: selectedImage };
       dispatch(setProfile(data));
       setSelectedImage(null);

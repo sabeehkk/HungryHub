@@ -1,9 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import Pagination from "../Components/pagination";
 import {  Modal } from "antd";
-import { useNavigate } from "react-router-dom";
-import Navbar from "./adminSidebar";
 
 const demoImage =
   "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png";
@@ -19,7 +17,7 @@ function TabelFrame({
   size,
 }: AdminSideTableFrameProps) {
   const [showModal, setShowModal] = React.useState(false);
-  const [actionData, setActionData] = useState({});
+  const [actionData, setActionData] = useState<any>({});
 
   const handleClick = (id: string, status: string, message: string) => {
     handleAction(id, status, message);

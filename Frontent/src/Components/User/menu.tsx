@@ -9,6 +9,9 @@ import Pagination from "../../assets/pagination";
 import PAgination from "../../Components/pagination";
 import UserNavbar from "./userNavbar.js";
 
+interface UserNavbarProps {
+  onSearchTermChange: (term: string) => void;
+}
 
 function Menu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +27,6 @@ function Menu() {
   const [item, setsetItem] = useState();
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(filterdProducts,'filterdProducts');
   
   const [size, setSize] = useState(1);
 

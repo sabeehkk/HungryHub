@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-import StarRating from "./StarRating";
+import StarRating from "./starRating";
 
 // import UserAxios from "../Axios/UserAxios";
 
@@ -14,11 +15,11 @@ const OrderTrack = ({ isOpen, closeModal, orderItem ,address }) => {
   console.log(address,'address in track');
   
         
-  const [trackingStatus, setTrackingStatus] = useState([]);
+  const [trackingStatus, setTrackingStatus] = useState<any>([]);
   const [userRating, setUserRating] = useState(0);
   const [review, setReview] = useState("");
 
-  const user = useSelector((state) => state.userAuth);
+  const user = useSelector((state:any) => state.userAuth);
   useEffect(() => {
 
     const steps = ["Preparing...", "Packed", "Out of delivery", "Delivered"];

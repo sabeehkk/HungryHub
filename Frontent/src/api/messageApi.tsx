@@ -1,4 +1,3 @@
-import axios from "axios";
 import { messageAxios } from "../axios/axios";
 
 export const getMessageAPI = async (chatId) => {

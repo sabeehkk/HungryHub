@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidStarHalf } from "react-icons/bi";
@@ -7,9 +8,9 @@ import { restaurentAxios, userAxios } from "../../axios/axios";
  
 const FilteredRestaurents = () => {
   const navigate = useNavigate();
-  const [restaurants, setrestaurants] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [selectedOption, setSelectedOption] = useState([]);
+  const [restaurants, setrestaurants] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
+  const [selectedOption, setSelectedOption] = useState<any>([]);
   const { catName } = useParams();
   
   useEffect(() => {

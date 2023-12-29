@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -6,8 +7,8 @@ import { userAxios } from "../../axios/axios";
 import { ErrorMessage } from "../../utils/util";
 
 const ProductDetailModal = ({ isOpen, close, item }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedVariant, setSelectedVariant] = useState({});
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const [selectedVariant, setSelectedVariant] = useState<any>({});
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const navigate = useNavigate();
@@ -155,7 +156,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
                               Offer : {selectedVariant.offer} %
                             </h4>
                             <h4 className="text-sm font-medium text-gray-900">
-                              Offer Price : {selectedVariant.offerPrice}
+                              Offer Price : {selectedVariant.aofferPrice}
                             </h4>
                           </div>
                           <button

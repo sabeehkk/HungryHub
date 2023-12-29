@@ -1,4 +1,3 @@
-import axios from "axios";
 import { adminAxios } from "../axios/axios";
 import { ErrorMessage, SuccessMessage } from "../utils/util";
 import { SwalAlert } from "../utils/util";

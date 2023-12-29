@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import  { useState } from "react";
 import { useSelector } from "react-redux";
 
 function AddressModal({
@@ -14,9 +15,8 @@ function AddressModal({
 }) {
 //   const userId = useSelector((state) => state.user._id);
 //   const { userdata } = useSelector((state: any) => state.userAuth);
-const userdata = useSelector((state) => state.userAuth);
+const userdata = useSelector((state:any) => state.userAuth);
     const userId = userdata.user._id
-    console.log(userdata.user._id,'userid in address modal');
     
   const [errors, setErrors] = useState({
     street: "",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState} from 'react';
 import { useSelector } from "react-redux";
 import { RiFileList3Fill } from 'react-icons/ri';
@@ -8,8 +9,8 @@ import PieChart from '../../assets/pieChart';
 import Chart from '../../assets/chart';
 
 const RestaurantDashboard = () => {
-  const [dashBordDatas,setDashBoardDatas] = useState()
-const restaurant = useSelector((state) => state.restaurentAuth);
+  const [dashBordDatas,setDashBoardDatas] = useState<any>()
+const restaurant = useSelector((state:any) => state.restaurentAuth);
 
 let result = restaurant.restaurent;
   const restId = result?._id;

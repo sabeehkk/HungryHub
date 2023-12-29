@@ -1,17 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
-// import { chat, chatSave, socketCall } from "../../api/apiConnection/user";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAxios } from "../../axios/axios";
-// import { employeeAxios } from "../../axios/axios";
 import { io } from "socket.io-client";
 
 function EmployeeChat() {
   const data = import.meta.env.VITE_USER_BACKEND_URL;
   const socket = io(data);
-  const user = useSelector((state) => state.userAuth);
-  const [chatPerson, setChatPerson] = useState([]);
-  const [Userdetails, setUserdetails] = useState({});
+  const user = useSelector((state:any) => state.userAuth);
+  const [chatPerson, setChatPerson] = useState<any>([]);
+  const [Userdetails, setUserdetails] = useState<any>({});
 
   const location = useLocation();
   const messageRef = useRef();
@@ -33,7 +32,7 @@ function EmployeeChat() {
     };
   }, []);
   const handleMessage = () => {
-    const test = messageRef.current.value;
+    const test :string = messageRef.current?.value || '';
     const chat = {
       user: "",
       employee: test,

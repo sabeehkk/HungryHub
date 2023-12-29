@@ -6,9 +6,15 @@ import {
   BiSolidUserRectangle,
   BiFoodMenu,
 } from "react-icons/bi";
+interface MenuItem {
+  title: string;
+  icon: JSX.Element;
+  url: string;
+  gap?: boolean; // Add gap property as an optional boolean
+}
 const App = () => {
   const [open, setOpen] = useState(true);
-  const Menus = [
+  const Menus : MenuItem[] =  [
     {
       title: "Dashboard",
       icon: <BiSolidBarChartSquare />,

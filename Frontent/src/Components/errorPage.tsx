@@ -3,7 +3,7 @@ import { Link, useRouteError } from "react-router-dom";
 
 const ErrorPage = ({ path }) => {
   const props = path;
-  const error = useRouteError();
+  // const error = useRouteError();
   return (
     <div className="w-full h-screen flex flex-col lg:flex-row items-center justify-center space-y-16 lg:space-y-0 space-x-8 2xl:space-x-0">
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center lg:px-2 xl:px-0 text-center">
@@ -17,7 +17,7 @@ const ErrorPage = ({ path }) => {
           Sorry, the page you are looking for could not be found.
         </p>
         <p className="text-3xl text-white">
-          {error.statusText || error.message}
+          {/* {error.statusText || error.message} */}
         </p>
         <Link
           to={path}

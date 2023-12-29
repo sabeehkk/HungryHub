@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -12,7 +13,7 @@ import { ErrorMessage, SuccessMessage,SwalAlert } from "../../utils/util";
 const baseUrl = USER_API;
 
 function OrdersData() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [orderItem, setOrderItem] = useState([]);
   const [itemData, setItemDta] = useState({});
   const [is_chage, setChange] = useState(false);
@@ -23,7 +24,7 @@ function OrdersData() {
   let discount = 0;
   let grandTotal = 0;
 
-  const restaurant = useSelector((state) => state.restaurentAuth);
+  const restaurant = useSelector((state:any) => state.restaurentAuth);
 
   useEffect(() => {
     if (!restaurant.restaurent || !restaurant.restaurent._id) {
@@ -131,7 +132,6 @@ function OrdersData() {
                           className="px-6 py-2 whitespace-nowrap"
                           onClick={() => openModal(item)}
                         >
-                          {console.log(item)}
                           {ind + 1}
                         </td>
                         <td className="px-6 py-2 whitespace-nowrap">

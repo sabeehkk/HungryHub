@@ -59,13 +59,13 @@ export interface userInittalModel {
   }
   
   export interface profileEditModal {
-    private _id(
+        (
       data: {
         name: string;
         email: string;
         phoneNumber: string | number;
       },
-      _id: any
+      
     ): unknown;
     name: string;
 

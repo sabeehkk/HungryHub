@@ -13,8 +13,8 @@ import { RESTAURENT_API } from "../../Constants/API.js";
 
 interface Product {
   productName: string;
-  productPrice: number;
-  productImage?: string | null;
+  variants: number;
+  images?: string | null;
 }
 const UserNavbar = () => {
   const [nav, setNav] = useState(false);

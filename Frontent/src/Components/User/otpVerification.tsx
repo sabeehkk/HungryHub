@@ -1,12 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useState, useEffect } from "react";
 import { render } from "react-dom";
-import { verifyOtp } from "../../Components/User/UserREgister";
-import axios from "axios";
 
 
 const OtpVerification = ({handleSumbit}) => {
   const inputRef = useRef({});
-  const [otp, setOtp] = useState({
+  const [otp, setOtp] = useState<any>({
     digitone: "",
     digitTwo: "",
     digitThree: "",

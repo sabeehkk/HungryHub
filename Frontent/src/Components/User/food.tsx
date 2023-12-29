@@ -11,7 +11,6 @@ interface Product {
 function Food() {
   const [foods, setFoods] = useState<Product[]>([]);
   useEffect(() => {
-    // Fetch data when the component mounts
     fetchData();
   }, []);
   const fetchData = async () => {
@@ -22,8 +21,7 @@ function Food() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log("Fetched data:", data);
-      setFoods(data.data); // Assuming your data is wrapped in a 'data' property
+      setFoods(data.data); 
     } catch (error) {
       console.error("Error fetching data:", error);
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect, useRef } from "react";
@@ -21,7 +22,7 @@ const AddProduct: React.FC = () => {
   ]);
   const [load, setLoad] = useState(true);
   const navigate = useNavigate();
-  const restaurant = useSelector((state) => state.restaurentAuth);
+  const restaurant = useSelector((state:any) => state.restaurentAuth);
   const result = restaurant.restaurent;
 
   const validPrice = () => {

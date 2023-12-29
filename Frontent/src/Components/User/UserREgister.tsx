@@ -57,7 +57,6 @@ export default function Signup() {
     }
   };
   const handleSumbit = async (otp) => {
-    const result = Object.values(otp).join("");
     try {
       const result = await verifyOtp(otp);
       if (result.data.message == "success") {
@@ -72,10 +71,10 @@ export default function Signup() {
         await SignupApi(userData);
       }
       if (result.data.message == error) {
-        console.log(error?.message);
+        console.log(error.message);
       }
     } catch (error) {
-      ErrorMessage(errormessage);
+      ErrorMessage(error);
     }
   };
   return otpComponent ? (

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -50,7 +51,7 @@ const CategoryList = () => {
     categoryData();
   }, [is_deleted, showModal, page]);
 
-  const restaurant = useSelector((state) => state.restaurentAuth);
+  const restaurant = useSelector((state:any) => state.restaurentAuth);
   let result = restaurant.restaurent;
   const restId = result?._id;
 
@@ -60,7 +61,6 @@ const CategoryList = () => {
       params: { page },
     });
     const data = response.data;
-    console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
       const newSize = data.size < 1 ? 1 : data.size;
@@ -165,7 +165,7 @@ const CategoryList = () => {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="3" className="text-center py-4">
+                      <td  className="text-center py-4">
                         No categories found.
                       </td>
                     </tr>

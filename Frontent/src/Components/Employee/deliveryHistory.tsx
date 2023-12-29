@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Fragment, useEffect, useState } from "react";
 import { employeeAxios, userAxios } from "../../axios/axios";
 import { restaurentAxios } from "../../axios/axios";
@@ -6,8 +7,8 @@ import { ErrorMessage } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
 
 function DeliveryHistoryItem() {
-  const [deliveryHistory, setDeliveryHistory] = useState();
-  const employee = useSelector((state) => state.employeeAuth);
+  const [deliveryHistory, setDeliveryHistory] = useState<any>();
+  const employee = useSelector((state:any) => state.employeeAuth);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,9 +38,7 @@ function DeliveryHistoryItem() {
           orderStatus: orderStatus,
           employeeId: employee.employee._id,
         })
-        .then((response) => {
-          setStatusUpdated(!is_statusUpdated);
-        });
+      
     } else {
       return ErrorMessage("no data available");
     }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -13,20 +14,20 @@ function OrderItems() {
   let charges = 0;
   let discount = 0;
   let grandTotal = 0;
-  const [orderItem, setOrderItem] = useState();
-  const [is_chage, setChange] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [itemData, setItemDta] = useState({});
+  const [orderItem, setOrderItem] = useState<any>();
+  const [is_chage, setChange] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [itemData, setItemDta] = useState<any>({});
   const navigate = useNavigate();
   const { ordId } = useParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const handlePageChange = (page) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const handlePageChange = (page:any) => {
     setCurrentPage(page);
   };
   const itemsPerPage = 5;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const user = useSelector((state) => state.userAuth);
+  const user = useSelector((state:any) => state.userAuth);
   useEffect(() => {
     userAxios.get(`/orderItems?id=${ordId}`).then((response) => {
       const items = response?.data?.orderItems;

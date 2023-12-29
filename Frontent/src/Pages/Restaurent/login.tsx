@@ -1,4 +1,3 @@
-import React from 'react'
 import UserLogin from '../../Components/Restaurant/Login' ;
 import LoginFrame from '../../Components/loginFrame';
 

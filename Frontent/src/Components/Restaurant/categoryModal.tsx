@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { restaurentAxios } from "../../axios/axios";
@@ -12,7 +13,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
   editMode,
 }) => {
   const [categoryName, setCategoryName] = useState("");
-  const restaurent = useSelector((state) => state.restaurentAuth);
+  const restaurent = useSelector((state:any) => state.restaurentAuth);
   const restId = restaurent.restaurent?._id;
   const handleCategoryNameChange = (e) => {
     setCategoryName(e.target.value);
@@ -64,7 +65,7 @@ const CategoryModal: React.FC<CategoryModalProps> = ({
     >
       <div
         id="defaultModal"
-        tabIndex="-1"
+        
         aria-hidden="true"
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center h-screen bg-gray-300 bg-opacity-50"
       >

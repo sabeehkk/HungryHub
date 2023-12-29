@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import Swal from "sweetalert2";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PAgination from "../../Components/pagination";
 import { userAxios } from "../../axios/axios";
@@ -13,13 +12,10 @@ function Orders() {
   let grandTotal = 0;
   const [orderItem, setOrderItem] = useState([]);
   const [is_chage, setChange] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [itemData, setItemDta] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate()
-const user =useSelector((state)=>state.userAuth);
+const user =useSelector((state:any)=>state.userAuth);
 const itemsPerPage = 5;
 const totalPages = Math.ceil(orderItem.length / itemsPerPage);
 const startIndex = (currentPage - 1) * itemsPerPage;
@@ -33,18 +29,10 @@ const handlePageChange = (page) => {
     userAxios.get(`/getOrderHistory?id=${user.user._id}`).then((response) => {
       const items = response.data.orders;
       setOrderItem(items);
-      setIsLoading(false)
     });
   }, [is_chage]);
 
-  const openModal = (ele) => {
-    setIsModalOpen(true);
-    setItemDta(ele);
-  };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
   return (
     <div className="bg-gray-50 p-10 flex flex-col">
       <div className="flex items-center justify-center pb-2 text-2xl font-semibold italic underline">

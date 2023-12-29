@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAxios } from "../../axios/axios";
 import { io } from "socket.io-client";
+
 function UserChat() {
   const user = useSelector((state: any) => state.userAuth);
-  const [chatPerson, setChatPerson] = useState([]);
-  const [Userdetails, setUserdetails] = useState({});
+  const [chatPerson, setChatPerson] = useState<any>([]);
+  const [Userdetails, setUserdetails] = useState<any>({});
   const location = useLocation();
   const messageRef = useRef();
   const data = import.meta.env.VITE_USER_BACKEND_URL;
   const socket = io(data);
+  
   useEffect(() => {
     socket.on("receiveMessage", () => {
       const id = location.state;
@@ -28,7 +31,7 @@ function UserChat() {
     };
   }, []);
   const handleMessage = () => {
-    const test = messageRef.current.value;
+    const test :string = messageRef.current.value;
     const chat = {
       user: test,
       employee: "",

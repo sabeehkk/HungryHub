@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { SwalAlert } from "../../utils/util";
@@ -21,11 +22,9 @@ function OrdersItems() {
   const [orderStatus,setOrderStatus] = useState()
 
   const [selectEmployee, setSelectEmployee] = useState()
-  console.log(selectEmployee,'selectEmployee');
-  
   const { id } = useParams()
   let total = 0;
-  const restaurant = useSelector((state) => state.restaurentAuth);
+  const restaurant = useSelector((state:any) => state.restaurentAuth);
   useEffect(()=>{
     restaurentAxios.get(`/getOrderIterms?id=${id}`).then((response)=>{
       setOrderItem(response.data.orderItems)

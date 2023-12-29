@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +35,7 @@ const Checkout = (initPayment) => {
     postalCode: "",
   });
   const navigate = useNavigate();
-  const user = useSelector((state) => state.userAuth);
+  const user = useSelector((state:any) => state.userAuth);
   useEffect(() => {
     userAxios.get(`/getUserData?id=${user.user._id}`).then((response) => {
       setAddress(response?.data?.user?.Address);
