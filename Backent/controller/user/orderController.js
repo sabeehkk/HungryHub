@@ -10,6 +10,7 @@ export const stripe = new Stripe(process.env.STRIP_PRIVET_KEY);
 export const Order = async (req, res) => {
   try {
     const { payment, addressIndex, cartData } = req.body;
+    console.log(req.body,'inside order');
     const user = await UserModel.findOne({ _id: cartData.user });
     const address = user.Address[addressIndex];
     const cart = await CartModel.findOne({ _id: cartData._id }).populate(
