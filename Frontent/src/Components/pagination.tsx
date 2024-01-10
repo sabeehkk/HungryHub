@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 
-const Pagination = ({ size, filterPagination, currentPage }) => {
+const Pagination = ({ size, filterPagination, currentPage ,totalPages,onPageChange }) => {
   const limit = 1;
   return (
     <>
@@ -20,7 +21,7 @@ const Pagination = ({ size, filterPagination, currentPage }) => {
             </button>
           </li>
           {[...Array(size)].map((_, i) => {
-            let pageNumber = i + 1;
+            const pageNumber = i + 1;
 
             return (
               <li key={i}>

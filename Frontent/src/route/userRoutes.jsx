@@ -141,6 +141,7 @@ const UserRoute = {
       path:"/menu/:restId",
       element:(
         <>
+         <UserNavbar />
         <MenuPage/>
         </>
       )

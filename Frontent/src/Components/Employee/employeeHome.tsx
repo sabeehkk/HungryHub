@@ -5,8 +5,7 @@ import { RiFileList3Fill } from 'react-icons/ri'
 import { FaShopify } from 'react-icons/fa'
 import { BiSolidUserAccount } from 'react-icons/bi'
 import { employeeAxios } from '../../axios/axios';
-import PieChart from '../../assets/pieChart';
-import Chart from '../../assets/chart';
+
 
 const RestaurantDashboard = () => {
   const [dashBordDatas,setDashBoardDatas] = useState<any>()
@@ -83,12 +82,7 @@ const employee = useSelector((state:any) => state.employeeAuth);
             <BiSolidUserAccount className="h-20 w-16 text-green-500 "/> 
             </div>
             <div className=''>
-            <h3 className="text-2xl font-semibold text-off-White text-center">
-              {/* {dashBordDatas?.totalUsers[0]?.totalUsers} */}
-            </h3>
-            {/* <h3 className="font-semibold text-off-White text-center opacity-50">
-             Total Users
-            </h3> */}
+          
             </div>
           </div>
         </div>

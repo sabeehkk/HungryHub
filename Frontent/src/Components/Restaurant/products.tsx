@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -13,7 +15,7 @@ function Products() {
   const [size, setSize] = useState(1);
   const [page, setPage] = useState(1);
   const currentItems = product.slice();
-  const restaurant = useSelector((state) => state.restaurentAuth);
+  const restaurant = useSelector((state :any) => state.restaurentAuth);
   const restaurant_id = restaurant.restaurent?._id;
   const navigate = useNavigate();
 
@@ -162,8 +164,7 @@ function Products() {
             <PAgination
               currentPage={currentPage}
               filterPagination={filterPagination}
-              size={size}
-            />
+              size={size} totalPages={undefined} onPageChange={undefined}            />
           </div>
         </div>
       </div>

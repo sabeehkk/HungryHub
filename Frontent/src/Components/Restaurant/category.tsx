@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { restaurentAxios } from "../../axios/axios";
 
 const CategoryModal = ({ showModal}) => {
   const [categoryName, setCategoryName] = useState("");
-  const restaurent = useSelector((state) => state.restaurentAuth);
+  const restaurent = useSelector((state:any) => state.restaurentAuth);
   const restId = restaurent.restaurent._id;
   const handleAddCategory = () => {
     restaurentAxios

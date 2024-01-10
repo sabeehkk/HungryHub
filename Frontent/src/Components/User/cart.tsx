@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +15,8 @@ function Cart() {
   let discount = 0;
   let grandTotal = 0;
   const [cartItem, setCartItem] = useState([]);
-  const [cartId, setCartId] = useState({});
+  const [cartId, setCartId] = useState<any>({});
   const [is_chage, setChange] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const isInProductListing = true;
   const { user } = useSelector((state: any) => state.userAuth);
@@ -24,13 +25,12 @@ function Cart() {
       const items = response.data?.cartData?.items;
       setCartItem(items);
       setCartId(response.data.cartData);
-      setIsLoading(false)
     });
   }, [is_chage]);
   const handleChangeQuantity = (id, variant, action) => {
     userAxios.patch("/changeQuantity", {
       itemId: id,
-      cartId: cartId._id,
+      cartId: cartId._id ,
       action,
       variant,
     })
@@ -71,7 +71,7 @@ function Cart() {
         cartId: cartId._id,
         amount,
         grandTotal,
-      }).then((response) => {
+      }).then((response ) => {
         navigate("/checkout");
       });
     } else {
@@ -163,7 +163,7 @@ function Cart() {
     <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
       <div className="mb-2 flex justify-between">
         <p className="text-gray-700">Subtotal</p>
-        <p className="text-gray-700">{parseFloat(total).toFixed(2)}</p>
+        <p className="text-gray-700">{parseFloat(total as any).toFixed(2)}</p>
       </div>
       <div className="flex justify-between">
         <p className="text-gray-700">Shipping</p>
@@ -173,7 +173,7 @@ function Cart() {
       <div className="flex justify-between">
         <p className="text-lg font-bold">Grand Total</p>
         <div className="">
-          <p className="mb-1 text-lg font-bold">{parseFloat(grandTotal).toFixed(2)} </p>
+          <p className="mb-1 text-lg font-bold">{parseFloat(grandTotal as any).toFixed(2)} </p>
           <p className="text-sm text-gray-700">''</p>
         </div>
       </div>

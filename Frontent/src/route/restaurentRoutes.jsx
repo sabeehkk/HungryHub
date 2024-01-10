@@ -19,7 +19,6 @@ import OrderMoreViewPage from '../Components/Restaurant/orderMoreViewPage.tsx'
 import RestaurentProfile from '../Components/Restaurant/restaurentProfile.tsx';
 import ForgotPassword from '../Pages/Restaurent/forgotPassword.tsx';
 
-import Dummy from '../utils/dummy.tsx'
 
 const RestaurantAppLayout = () => {
   return (
@@ -156,12 +155,6 @@ const RestaurentRoute = {
             </>
           )
         },  
-        {
-          path:"dummy",
-          element:(
-            <Dummy/>  
-          )
-        },
       ],
     },
   ],

@@ -33,7 +33,7 @@ const RestaurentProfile = () => {
   useEffect(() => {
     if (selectedImage) {
       const data = { profilePicture: selectedImage };
-      dispatch(setProfile(data));
+      dispatch(setProfile(data as any));
       setSelectedImage(null);
     }
   }, [selectedImage, setProfile]);

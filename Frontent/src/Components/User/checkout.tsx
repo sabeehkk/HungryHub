@@ -11,7 +11,7 @@ const Checkout = (initPayment) => {
   const [payment, setPayment] = useState("COD");
   const [is_change, set_change] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cartData, setCartData] = useState();
+  const [cartData, setCartData] = useState<any>();
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(null);
   const users = useSelector((state: any) => state.userAuth);
 
@@ -193,8 +193,8 @@ const Checkout = (initPayment) => {
           <div className="">
             <div className="relative"></div>
             <label
-              for="billing-address"
-              class="mt-4 mb-2 block text-sm font-medium"
+              htmlFor="billing-address"
+              className="mt-4 mb-2 block text-sm font-medium"
             >
               Billing Address
             </label>
@@ -268,8 +268,7 @@ const Checkout = (initPayment) => {
                 onClose={() => setIsModalOpen(false)}
                 address={newAddress}
                 onSave={handleSaveAddress}
-                setNewAddress={setNewAddress}
-              />
+                setNewAddress={setNewAddress} isEditing={undefined} setEditedAddress={undefined} editedAddress={undefined} index={undefined}              />
             </div>
             {/* <!-- Total --> */}
             <div className="mt-6 border-t border-b py-2">

@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -72,7 +74,7 @@ function OrdersData() {
         .patch("/cancelorder", {
           itemId,
           orderId,
-          userId: user._id,
+          // userId: user._id,
         })
         .then((response) => {
           setChange(!is_chage);
@@ -175,8 +177,7 @@ function OrdersData() {
         <PAgination
           currentPage={currentPage}
           totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+          onPageChange={handlePageChange} size={undefined} filterPagination={undefined}        />
       </div>
     </div>
   );

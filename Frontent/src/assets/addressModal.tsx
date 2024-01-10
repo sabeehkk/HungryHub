@@ -13,8 +13,6 @@ function AddressModal({
   setNewAddress,
   index,
 }) {
-//   const userId = useSelector((state) => state.user._id);
-//   const { userdata } = useSelector((state: any) => state.userAuth);
 const userdata = useSelector((state:any) => state.userAuth);
     const userId = userdata.user._id
     
@@ -39,7 +37,6 @@ const userdata = useSelector((state:any) => state.userAuth);
     } else if (name === "postalCode" && value.trim() === "") {
       error = "Postal Code is required";
     }
-    // Update the errors state for the current field
     setErrors({ ...errors, [name]: error });
 
     if (isEditing) {
@@ -150,9 +147,9 @@ const userdata = useSelector((state:any) => state.userAuth);
           )}
         </div>
 
-        <div className="modal-footer p-3 bg-gray-800 items-center justify-center flex">
-          <button
-            className="text-cherry-Red font-bold text-lg py-2 px-4 rounded"
+        <div className="modal-footer p-3 bg-gray-800 items-center justify-center flex border-none">
+        <button
+            className="bg-gray-300 text-black border-none font-bold text-lg py-2 px-4 rounded"
             onClick={() => handleSave()}
             disabled={address === null}
           >

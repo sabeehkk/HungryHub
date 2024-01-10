@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import  { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setProfile } from "../../redux/user/authSlice";
@@ -9,26 +10,15 @@ import { userAxios } from "../../axios/axios";
 const demoImage = "https://startitindia.com/Uploads/1552200708454494651.jpg";
 import { BsFillTagsFill } from "react-icons/bs";
 
+
 const UserProfile=()=> {
   const { user } = useSelector((state: any) => state.userAuth);
   const [selectedImage, setSelectedImage] = useState(null);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState<any>({});
   const [load,setLoad] = useState(true)
-  const [address, setAddress] = useState([
-    {
-      street: "",
-      city: "",
-      state: "",
-      postalCode: "",
-    },
-  ]);
-  const [newAddress, setNewAddress] = useState({
-    street: "",
-    city: "",
-    state: "",
-    postalCode: "",
-  });
+
+
   const fileInputRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -53,7 +43,7 @@ const UserProfile=()=> {
   useEffect(() => {
     if (selectedImage) {
       const data = { profilePicture: selectedImage };
-      dispatch(setProfile(data));
+      dispatch(setProfile(data as any));
       setSelectedImage(null);
     }
   }, [selectedImage, setProfile]);
@@ -91,7 +81,7 @@ const UserProfile=()=> {
             </h2>
               <span className="mt-2 flex justify-center items-center">
             <BsFillTagsFill className="text-2xl text-green-600 mr-2"/>
-            <span className="text-1xl mr  font-bold text-black ">₹ :{userData.user?.Wallet}</span>
+            <span className="text-1xl mr  font-bold text-black ">₹ :{userData.user?.Wallet }</span>
           </span>
           </div>
           <div className="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">

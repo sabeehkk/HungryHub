@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +12,6 @@ import { SwalAlert } from "../../utils/util";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
-  const [is_deleted, setDeleted] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [categoryId, setCategoryId] = useState();
@@ -22,9 +23,6 @@ const CategoryList = () => {
   const [page, setPage] = useState(1);
 
   const navigate = useNavigate();
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
 
   const openModal = () => {
     setShowModal(true);
@@ -49,7 +47,7 @@ const CategoryList = () => {
   };
   useEffect(() => {
     categoryData();
-  }, [is_deleted, showModal, page]);
+  }, [ showModal, page]);
 
   const restaurant = useSelector((state:any) => state.restaurentAuth);
   let result = restaurant.restaurent;
@@ -148,7 +146,7 @@ const CategoryList = () => {
                             <button
                               className="p-1 w-20 ml-5 border border-transparent text-white rounded bg-blue-500 shadow-md hover:bg-blue-400"
                               onClick={() => {
-                                editCategory(item._id, item.name, item.image);
+                                editCategory(item._id, item.name);
                               }}
                             >
                               Edit
@@ -192,8 +190,7 @@ const CategoryList = () => {
               <PAgination
                 filterPagination={filterPagination}
                 currentPage={currentPage}
-                size={size}
-              />
+                size={size} totalPages={undefined} onPageChange={undefined}              />
             </div>
           </div>
         </div>

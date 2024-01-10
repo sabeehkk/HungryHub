@@ -29,12 +29,10 @@ const FilteredRestaurents = () => {
     const isCategorySelected = Boolean(cateName);
     if (isCategorySelected) {
       userAxios.get(`/getcatRestaurents?catName=${cateName}`).then((response) => {
-        console.log(response.data);
         setrestaurants(response.data);
       });
     } else {
       restaurentAxios.get('/getRestaurents').then((response) => {
-        console.log(response.data, 'restaurent information');
         setrestaurants(response.data);
       });
     }
@@ -121,7 +119,7 @@ const FilteredRestaurents = () => {
                 <div className="flex items-center justify-between">
                   <img
                     src={
-                      item.restaurent?.profilePicture || item.profilePicture
+                      item.restaurent?.profilePicture || item.profilePicture ||"https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     }
                     alt={item.name}
                     className="w-full h-44"
@@ -156,7 +154,7 @@ const FilteredRestaurents = () => {
                   <div className="flex items-center justify-start">
                     <img
                       src={
-                      item.restaurent?.profilePicture || item.profilePicture
+                      item.restaurent?.profilePicture || item.profilePicture || "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
                       }
                       alt={item.restaurent?.restaurantName}

@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { RESTAURENT_API } from "../../Constants/API.js";
 import { Link } from "react-router-dom";
-import { userAxios } from "../../axios/axios";
 import { AiFillClockCircle } from "react-icons/ai";
 import { ImLocation2 } from "react-icons/im";
 
 const HomePageRestaurent = () => {
-  const navigate = useNavigate();
   const [restaurants, setrestaurants] = useState([]);
-  const { catName } = useParams();
 
   useEffect(() => {
     fetchRestaurent();

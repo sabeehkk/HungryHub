@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const ProductDetailModal = ({ isOpen, close, item }) => {
   const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   const navigate = useNavigate();
-  const { user,isAuthenticated } = useSelector((state: any) => state.userAuth);
+  const { user } = useSelector((state: any) => state.userAuth);
   const handleVariandSelection = (ind) => {
     setSelectedVariant(item.product.variants[ind]);
     toggleDropdown();

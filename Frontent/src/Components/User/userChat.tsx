@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -10,7 +11,7 @@ function UserChat() {
   const [chatPerson, setChatPerson] = useState<any>([]);
   const [Userdetails, setUserdetails] = useState<any>({});
   const location = useLocation();
-  const messageRef = useRef();
+  const messageRef = useRef<HTMLInputElement | null>(null);
   const data = import.meta.env.VITE_USER_BACKEND_URL;
   const socket = io(data);
   
@@ -31,17 +32,21 @@ function UserChat() {
     };
   }, []);
   const handleMessage = () => {
-    const test :string = messageRef.current.value;
-    const chat = {
-      user: test,
-      employee: "",
-    };
-    userAxios
-      .post(`/saveChat`, { chat, orderId: location.state })
-      .then((response) => {
-        socket.emit("sentMessage");
-        const items = response?.data?.orderItems;
-      });
+    if(messageRef.current){
+      const test :string = messageRef.current.value;
+      const chat = {
+        user: test,
+        employee: "",
+      };
+      userAxios
+        .post(`/saveChat`, { chat, orderId: location.state })
+        .then((response) => {
+          socket.emit("sentMessage");
+          const items = response?.data?.orderItems;
+        });
+    }
+    
+  
   };
 
   return (

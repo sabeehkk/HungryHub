@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,24 +9,12 @@ import { userAxios } from "../../axios/axios";
 
 function Orders() {
   let total = 0;
-  let charges = 0;
-  let discount = 0;
-  let grandTotal = 0;
   const [orderItem, setOrderItem] = useState([]);
   const [is_chage, setChange] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const navigate = useNavigate()
 const user =useSelector((state:any)=>state.userAuth);
-const itemsPerPage = 5;
-const totalPages = Math.ceil(orderItem.length / itemsPerPage);
-const startIndex = (currentPage - 1) * itemsPerPage;
-const endIndex = startIndex + itemsPerPage;
-const currentItems = orderItem.slice(startIndex, endIndex);
 
-const handlePageChange = (page) => {
-  setCurrentPage(page);
-};
   useEffect(() => {
     userAxios.get(`/getOrderHistory?id=${user.user._id}`).then((response) => {
       const items = response.data.orders;
@@ -132,7 +122,7 @@ const handlePageChange = (page) => {
         </div>
       </div>
       <div className="float- mr-3 mt-3">
-     <PAgination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
+     <PAgination currentPage={undefined} size={undefined} filterPagination={undefined} totalPages={undefined} onPageChange={undefined}  />
    </div>
     </div>
    

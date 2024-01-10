@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -17,7 +18,7 @@ const AddProduct: React.FC = () => {
   const [errors, setErrors] = useState(false);
   const [categories, setCategories] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
-  const [variants, setVariants] = useState([
+  const [variants, setVariants] = useState<any>([
     { name: "", price: "", offer: "", offerPrice: "" },
   ]);
   const [load, setLoad] = useState(true);
@@ -72,10 +73,8 @@ const AddProduct: React.FC = () => {
   const restId = result?._id;
   console.log(restId, "restiddd");
   const categoryData = async () => {
-    console.log("inside categoryData");
     const response = await restaurentAxios.get(`/getCategory?id=${restId}`);
     const data = response.data;
-    console.log(data, "categorydatas");
     if (data) {
       setCategories(data.categoryData);
     }
@@ -353,7 +352,6 @@ const AddProduct: React.FC = () => {
                 {previewImages.length > 0 && (
                   <label htmlFor="profImage" className="w-1/4 p-2 block relative"></label>
                 )}
-                
               </div>
               <button
                 className= "bg-teal-500 text-white border-neutral-50  hover:text-black"

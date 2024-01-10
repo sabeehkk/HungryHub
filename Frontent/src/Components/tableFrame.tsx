@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import Pagination from "../Components/pagination";
-import {  Modal } from "antd";
 
 const demoImage =
   "https://mir-s3-cdn-cf.behance.net/project_modules/disp/ea7a3c32163929.567197ac70bda.png";
@@ -231,8 +231,7 @@ function TabelFrame({
           <Pagination
             currentPage={currentPage}
             filterPagination={filterPagination}
-            size={size}
-          />
+            size={size} totalPages={undefined} onPageChange={undefined}          />
         </div>
       </div>
     </>

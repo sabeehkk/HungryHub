@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BiSolidStarHalf } from "react-icons/bi";
@@ -8,6 +10,8 @@ import { userAxios } from "../../axios/axios";
 import Pagination from "../../assets/pagination";
 import PAgination from "../../Components/pagination";
 import UserNavbar from "./userNavbar.js";
+import { ErrorMessage } from "../../utils/util.js";
+import Loading from "../../Components/loading";
 
 interface UserNavbarProps {
   onSearchTermChange: (term: string) => void;
@@ -15,21 +19,19 @@ interface UserNavbarProps {
 
 function Menu() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [restData, setRestData] = useState();
+  const [restData, setRestData] = useState<any>();
   const [product, setProduct] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterdProducts, setFilterdProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [selectedPrice, setSelectedPrice] = useState();
+  const [selectedCategory, setSelectedCategory] = useState<any>();
+  const [selectedPrice, setSelectedPrice] = useState<any>();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isPriceDropdownOpen, setIsPriceDropdownOpen] = useState(false);
   const [item, setsetItem] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-
-  
+  const [load, setLoad] = useState(true);
   const [size, setSize] = useState(1);
-
   const price = [
     { fieled: "₹ : 0 - 50", startedAt: 0 },
     { fieled: "₹ : 50 - 100", startedAt: 50 },
@@ -38,12 +40,8 @@ function Menu() {
     { fieled: "₹ : 1000+", startedAt: 1000 },
   ];
 
-  console.log(product, "products in menu pages");
-  console.log(categories, "category in menu pages");
-
   const itemsPerPage = 5;
   const totalPages = Math.ceil(product?.length / itemsPerPage);
-
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = product?.slice(startIndex, endIndex);
@@ -82,8 +80,6 @@ function Menu() {
         const { data } = await restaurentAxios.get(
           `/getResProfile?id=${restId}`
         );
-        console.log(data, "restoProfile datas");
-
         if (data) {
           setRestData(data);
         }
@@ -99,21 +95,14 @@ function Menu() {
       .get(`/getRestaurentProduct?id=${restId}`)
       .then((response) => {
         setProduct(response.data.productData);
-        console.log(response.data.productData, "restoProducts");
-   
       })
       .catch((error) => {
-        toast.error(error.response?.data?.message, {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 1500,
-        });
+        ErrorMessage(error.response?.data?.message)
       });
   }, []);
 
   const categoryData = async () => {
     const { data } = await restaurentAxios.get(`/getCategory?id=${restId}`);
-    console.log(data.categoryData, "found category data");
-
     if (data) {
       setCategories(data.categoryData);
     } else {
@@ -137,11 +126,8 @@ function Menu() {
   }, [searchTerm]);
 
   const handleCategorySelection = (ind) => {
-    console.log('handleCategorySelection is called');
-    
     const selectedCat = categories[ind];
     setSelectedCategory(selectedCat);
-
     if (selectedCat) {
       const catId = selectedCat._id;
       const catProd = product.filter((product) => product.category === catId);
@@ -154,19 +140,16 @@ function Menu() {
 
   const handlePriceSelection = (indx) => {
     const priceSelected = price[indx];
-    setSelectedPrice(priceSelected);
+    setSelectedPrice(priceSelected as any);
     let nearestPrice;
     if (indx < price.length - 1) {
       nearestPrice = price[indx + 1].startedAt;
     } else {
       nearestPrice = 5000;
     }
-
     if (priceSelected) {
       const pricedProd = product?.map((variant) => {
-        
         const filteredVariants = variant.variants.filter((priceBetween) => {
-
           return (
             priceBetween.price >= priceSelected.startedAt &&
             priceBetween.price < nearestPrice
@@ -174,20 +157,21 @@ function Menu() {
         });
         return { ...variant, variants: filteredVariants };
       });
-      console.log(pricedProd,'selected product');
-
       togglePriceDropdown();
       setFilterdProducts(pricedProd);
     } else {
       setFilterdProducts([]);
     }
   };
-  console.log(currentItems,'current items');
-  
 
-  return (
+  useEffect(() => {
+    setLoad(false);
+  }, []);
+
+  return load ? (
+    <Loading />
+  ) : (
     <>
-    <UserNavbar onSearchTermChange={setSearchTerm} />
 
     <div className="bg-gray-100 container mx-auto px-5 my-element ">
       <ProductDetailModal isOpen={isModalOpen} close={closeModal} item={item} />
@@ -196,7 +180,7 @@ function Menu() {
           <div className="mb-10">
             <div className="flex justify-between items-baseline">
               <h3 className="ml-8 text-3xl font-bold italic text-black">
-                {restData?.restData.restaurantName}
+                {restData?.restData.restaurantName }
               </h3>
               <div className="border rounded-sm px-3  shadow-md bg-white">
                 <div className="flex ">
@@ -383,9 +367,6 @@ function Menu() {
             </div>
           </div>
         </div>
-        
-        {/* ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */}
-        {/* {filterdProducts === "" ? ( */}
         { !filterdProducts  || filterdProducts.length === 0 ?(
   currentItems?.map((prod) => (
     <div className="pb-2" key={prod._id}>
@@ -420,7 +401,6 @@ function Menu() {
      ))
        ) : filterdProducts?.length !== 0 ? (
           filterdProducts?.map((prod) => (
-            // {(console.log('ddddddddd'))}
             <div className="p-2" key={prod._id}>
               <div className="mb-10 sm:flex sm:justify-between block">
                 <div className="">
@@ -428,7 +408,6 @@ function Menu() {
                   <h4 className="text-lg text-gray-500">{prod.description}</h4>
                   <h4 className="text-lg text-gray-500">
                     Best Price :₹ {prod.variants[0]?.offerPrice}
-                    {/* Price :₹ {prod.variant} */}
                   </h4>
                 </div>
                 <div
@@ -460,10 +439,9 @@ function Menu() {
       </div>
       <div className="float-center  ">
         <PAgination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange} size={undefined} filterPagination={undefined}        />
       </div>
     </div>
     </>

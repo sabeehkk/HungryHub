@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 // import {data} from '../../Components/User/data.js'
 import { RESTAURENT_API } from "../../Constants/API.js";
 
 interface Product {
+  variants: any;
+  images: any;
   productName: string;
-  productPrice: number;
-  productImage?: string | null;
 }
 
 function Food() {

@@ -13,7 +13,7 @@ function EmployeeChat() {
   const [Userdetails, setUserdetails] = useState<any>({});
 
   const location = useLocation();
-  const messageRef = useRef();
+  const messageRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     socket.on("receiveMessage", () => {

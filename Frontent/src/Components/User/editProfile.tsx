@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { ErrorMessage, SuccessMessage,validateEmail } from "../../utils/util";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ const EditProfile = ({ data }) => {
   console.log(data,'Edit profile datas');
   
 
-  const [user, setUser] = useState<profileEditModal>({
+  const [user, setUser] = useState<any>({
     _id: data?._id || "",       
     name: data?.name || "",   
     email: data?.email || "",
@@ -64,7 +65,7 @@ const EditProfile = ({ data }) => {
     const response = await updateProfileData(data, user?._id);
     if (response) {
       SuccessMessage("Your profile has been successfully updated");
-      dispatch(updateData(data));
+      dispatch(updateData(data as any));
       navigate("/profile");
       return;
     }
