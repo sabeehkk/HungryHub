@@ -16,13 +16,13 @@ export const  getCategories =async(req,res) => {
             },
           ])
             .exec()
-            res.status(200).send({
+            res.status(200).json({
                 success:true,
                 categories
             })
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status(500).json({
             success:false,
             message:"Server Error"
         })
@@ -44,13 +44,13 @@ export const getRestWithCategory = async (req, res) => {
                 return true;
             }
         });
-        res.status(200).send({
+        res.status(200).json({
             success: true,
             restaurants,
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({
+        res.status(500).json({
             success: false,
             message: "Server Error"
         });

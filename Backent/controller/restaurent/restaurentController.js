@@ -42,7 +42,7 @@ export const addCategory = async (req, res) => {
       restaurent: restId,
     });
     if (existCategory) {
-      res.status(400).send({
+      res.status(400).json({
         error: true,
         message: "Category already exists",
       });
@@ -126,19 +126,19 @@ export const getRestaurentProducts = async (req,res)=>{
       const TotalSize = await ProductModel.countDocuments({isDeleted:false});
       const size = Math.ceil(TotalSize / LIMIT);
       if(productData.length>0){
-        res.status(200).send({
+        res.status(200).json({
           success:true,
           productData,size
         })
       }else{
-        res.status(404).send({
+        res.status(404).json({
           success:false,
           message:"Product Not Available"
         })
       }
     } catch (error) {
       console.log(error);
-      res.status(500).send({
+      res.status(500).json({
         success:false,
         message:"internal server Error"
       })
@@ -151,13 +151,13 @@ export const getProductData =async (req,res)=>{
       const {id } =req.query ;
       const foundProduct = await ProductModel.findOne({_id:id}).populate('category')
       if(foundProduct){
-        res.status(200).send({success:true,product:foundProduct})
+        res.status(200).json({success:true,product:foundProduct})
       }else{
-        res.status(400).send({success:false,message:"product not found"})
+        res.status(400).json({success:false,message:"product not found"})
       }
     } catch (error) {
       console.log(error);
-      res.status(500).send({success:false,message:"internal server error"})
+      res.status(500).json({success:false,message:"internal server error"})
     }
 }
 //updateProduct-----------------------------
@@ -171,19 +171,19 @@ export const updateProduct = async (req,res)=>{
           }
         }
        ).then(()=>{
-        res.status(200).send({
+        res.status(200).json({
           success:true,
           message:"Product Editted Successfully"
         })
        }).catch((err)=>{
-        res.status(404).send({
+        res.status(404).json({
           success:false,
           message:"something went wrong"
         })
        })
      } catch (error) {
       console.log(error);
-      res.status(500).send({
+      res.status(500).json({
         success:false,
         message:"internal server error"
       })
@@ -195,7 +195,7 @@ export const deleteProduct =async(req,res)=>{
        const {proId} = req.body ;
        const productToDelete = await ProductModel.findOne({ _id: proId });
     if (!productToDelete) {
-      return res.status(404).send({
+      return res.status(404).json({
         success: false,
         message: "Product not found",
       });
@@ -208,18 +208,18 @@ export const deleteProduct =async(req,res)=>{
       }
        )
        .then(()=>{
-        res.status(200).send({
+        res.status(200).json({
           success:true,
           message:"product Deleted "
         })
        }).catch(()=>{
-        res.status(404).send({
+        res.status(404).json({
           success:false,
           message:"something went wrong"
         })
        })
      } catch (error) {
-      res.status(500).send({
+      res.status(500).json({
         success:false,
         message:"Internal server error" ,
       })
@@ -273,7 +273,7 @@ export const deleteCategory = async(req,res)=>{
     const { catId } = req.body
     const isProduct = await ProductModel.find({'category._id':catId})
     if (isProduct.length > 0) {
-      return res.status(409).send({
+      return res.status(409).json({
         message: 'Category has associated products. Do you want to delete the products and the category?',
         confirmationRequired: true
       });
@@ -281,13 +281,13 @@ export const deleteCategory = async(req,res)=>{
     await CategoryModel.updateOne({_id:catId},{$set:{
       is_deleted:true
     }})
-    res.status(200).send({
+    res.status(200).json({
       success:true,
       message:"Category Deleted"
     })
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"Server error"
     })
@@ -299,19 +299,19 @@ export const getResProfile= async(req,res)=>{
     const restId = req.query.id
     const restData = await RestaurentModel.findOne({_id:restId})
     if(restData){
-      res.status(200).send({
+      res.status(200).json({
         success:true,
         restData,
       })
     }else{
-      res.status(404).send({
+      res.status(404).json({
         success:false,
         message:"Restaurant data Not found"
       })
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"Server error"
     })

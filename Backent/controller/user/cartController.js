@@ -24,7 +24,7 @@ export const addToCart =async (req,res)=>{
               },
             }
           );
-          res.status(200).send({
+          res.status(200).json({
             success: true,
             message: "product added to cart",
           });
@@ -41,7 +41,7 @@ export const addToCart =async (req,res)=>{
               },
             }
           );
-          res.status(200).send({
+          res.status(200).json({
             success: true,
             message: "product added to cart",
           });
@@ -59,7 +59,7 @@ export const addToCart =async (req,res)=>{
                   },
                 }
               );
-              res.status(200).send({
+              res.status(200).json({
                 success: true,
                 message: "product added to cart",
               });
@@ -76,7 +76,7 @@ export const addToCart =async (req,res)=>{
               },
           }
         );
-        res.status(200).send({
+        res.status(200).json({
           success: true,
           message: "product added to cart with updated restaurant",
         });
@@ -93,14 +93,14 @@ export const addToCart =async (req,res)=>{
             },
           ],
         })
-            res.status(200).send({
+            res.status(200).json({
             success:true,
             message:"product added to cart"
             })
       }
     } catch (error) {
       console.log(error);
-      res.status(500).send({
+      res.status(500).json({
         success: false,
         message: "Internal server error", 
       });
@@ -112,19 +112,19 @@ export const getCart = async (req,res)=>{
     const userId  = req.query.id
     const cartData = await CartModel.findOne({user:userId}).populate('items.productId')
     if(cartData){
-      res.status(200).send({
+      res.status(200).json({
         success:true,
         cartData
       })
     }else{
-      res.status(200).send({
+      res.status(200).json({
         success:false,
         message:"Your Cart is empty"
       })
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"Server error"
     })
@@ -154,13 +154,13 @@ export const changeQuantity =  async(req,res)=>{
         },
       })
     }
-    res.status(200).send({
+    res.status(200).json({
       success: true,
       message: "quantityChanged",
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -176,12 +176,12 @@ export const cartTotal = async (req,res)=>{
         grandTotal,
       }
     })
-    res.status(200).send({
+    res.status(200).json({
       success:true,
       message:"total updated"
     })
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"seerver error"
     })
@@ -196,12 +196,12 @@ export const cancelCartItem =async (req,res)=>{
          items: { productId: itemId, variant }
       }
     })
-    res.status(200).send({
+    res.status(200).json({
       success:true,
       message:"Item cancelled"
     })
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Internal server error",
     });

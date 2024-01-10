@@ -84,25 +84,25 @@ export const addAddress = async(req,res)=>{
         }
       )
       .then(() => {
-       res.status(201).send({
+       res.status(201).json({
        success: true,
        message: "Address added success",
           });
         })
         .catch(() => {
-          res.status(200).send({
+          res.status(200).json({
             success: false,
             message: "something went wrong",
           });
         });
     } else {
-      res.status(404).send({
+      res.status(404).json({
         success: false,
         message: "Max Address Limit is 3",
       });
     }
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "server error",
     });
@@ -113,18 +113,18 @@ export const getUserData =async (req,res)=>{
   try {
     const user = await userModel.findById(req.query.id);
     if (user) {
-      res.status(200).send({
+      res.status(200).json({
         success: true,
         user,
       });
     } else {
-      res.status(404).send({
+      res.status(404).json({
         success: false,
         message: "User data Not found",
       });
     }
   } catch (error) {
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "server error",
     });
@@ -142,7 +142,7 @@ export const editAddress =async (req, res) => {
         },
       }
     ).then((resp) => {
-      res.status(200).send({
+      res.status(200).json({
         success: true,
         message: "address edited success",
         resp,
@@ -150,7 +150,7 @@ export const editAddress =async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Internal server error ",
       error,
@@ -180,12 +180,12 @@ export const getChat = async (req,res) => {
     const orderId =new mongoose.Types.ObjectId(req.query.id);
     const findChat = await ChatModel.find({orderId:orderId}).populate('userId').populate('employeeId')
     if(findChat){
-      res.status(200).send({
+      res.status(200).json({
         success: true,
         findChat,
       });
     }else{
-      res.status(404).send({
+      res.status(404).json({
         success: false,
         message: "Chat not found",
       });

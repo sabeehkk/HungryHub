@@ -42,7 +42,7 @@ export const getEmplOrders= async (req, res) => {
   export const listEmployees = async (req, res) => {
     try {
        const listEmployees = await EmployeeModel.find({})
-       res.status(200).send({
+       res.status(200).json({
          success: true,
          listEmployees,
        });
@@ -57,12 +57,12 @@ export const getChat = async (req,res) => {
    const orderId =new mongoose.Types.ObjectId(req.query.id);
    const findChat = await ChatModel.find({orderId:orderId}).populate('employeeId').populate('userId');
    if(findChat){
-     res.status(200).send({
+     res.status(200).json({
        success: true,
        findChat,
      }) ;
    }else{
-     res.status(404).send({
+     res.status(404).json({
        success: false,
        message: "Chat not found",
      });

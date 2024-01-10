@@ -145,7 +145,7 @@ export const cancelOrder = async (req,res)=>{
             }
           );
         }
-        res.status(200).send({
+        res.status(200).json({
           success: true,
           message: "Item cancelled",
         });
@@ -156,20 +156,20 @@ export const cancelOrder = async (req,res)=>{
           );
         }
       } else {
-        res.status(400).send({
+        res.status(400).json({
           success: false,
           message: "Item not found or cannot be cancelled.",
         });
       }
     } else {
-      res.status(400).send({
+      res.status(400).json({
         success: false,
         message: "Order not found.",
       });
     }
   } catch (error) {
     console.error("Error cancelling item:", error);
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Internal server error",
     });
@@ -221,7 +221,7 @@ export const dashboardData = async(req,res)=>{
       }
     }
   ]);
-      res.status(200).send({
+      res.status(200).json({
         success:true,
         totalSale,
         totalUsers,
@@ -229,7 +229,7 @@ export const dashboardData = async(req,res)=>{
       })
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success:false,
       message:"server error"
     })
